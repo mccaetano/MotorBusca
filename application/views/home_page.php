@@ -15,7 +15,7 @@
 <link href="<?php echo base_url();?>assets/css/bootstrap.min.css"
 	rel="stylesheet">
 <style type="text/css">
-#Imovel {
+div#Imovel {
 	background-image:
 		"<?php echo base_url();?>assets/img/imoveis-a-venda-na-planta.jpg";
 }
@@ -60,42 +60,87 @@
 		<div class="container">
 			<ul class="nav nav-tabs nav-stacked">
 				<li><a href="#">
-						<div class="row-fluid">
+						<div class="row-fluid  Imovel">
 							<div class="span4">
-								<i class="icon-home"></i>Imóveis
+								<h1><img src="<?php echo base_url();?>assets/img/HomeHouse.png"> Imóveis</h1>
 							</div>
-							<div class="span8 text-right Imovel">
-								<i class="icon-chevron-right"></i>
-							</div>
-						</div>
-				</a></li>
-				<li><a href="#">
-						<div class="row-fluid">
-							<div class="span6">
-								<i class="icon-home"></i>Carros
-							</div>
-							<div class="span6 text-right">
-								<i class="icon-chevron-right"></i>
+							<div class="span8 text-right">
+								<?php form_open("#")?>
+									<fieldset>
+										<div class="input-append">
+										<input class="input-large" name="busca" type="text" placeholder="Preencha aqui o tipo de imóvel você procura">
+										<button class="btn">Buscar</button> 
+										</div>
+									</fieldset>
+								<?php form_close()?>
 							</div>
 						</div>
 				</a></li>
 				<li><a href="#">
 						<div class="row-fluid">
 							<div class="span6">
-								<i class="icon-home"></i>Caminhões
+								<h1><img src="<?php echo base_url();?>assets/img/HomeCar.png"> Carros</h1>
 							</div>
 							<div class="span6 text-right">
-								<i class="icon-chevron-right"></i>
+								<?php form_open("#")?>
+									<fieldset>
+										<div class="input-append">
+										<input class="input-large" name="busca" type="text" placeholder="Preencha aqui o tipo de Carro você procura">
+										<button class="btn">Buscar</button> 
+										</div>
+									</fieldset>
+								<?php form_close()?>
 							</div>
 						</div>
 				</a></li>
 				<li><a href="#">
 						<div class="row-fluid">
 							<div class="span6">
-								<i class="icon-home"></i>Motos
+								<h1><img src="<?php echo base_url();?>assets/img/HomeCargo.png"> Caminhões</h1>
 							</div>
 							<div class="span6 text-right">
-								<i class="icon-chevron-right"></i>
+								<?php form_open("#")?>
+									<fieldset>
+										<div class="input-append">
+										<input class="input-large" name="busca" type="text" placeholder="Preencha aqui o tipo de Caminhão você procura">
+										<button class="btn">Buscar</button> 
+										</div>
+									</fieldset>
+								<?php form_close()?>
+							</div>
+						</div>
+				</a></li>
+				<li><a href="#">
+						<div class="row-fluid">
+							<div class="span6">
+								<h1><img src="<?php echo base_url();?>assets/img/HomeMoto.png"></i> Motos</h1>
+							</div>
+							<div class="span6 text-right">
+								<?php form_open("#")?>
+									<fieldset>
+										<div class="input-append">
+										<input class="input-large" name="busca" type="text" placeholder="Preencha aqui o tipo de Moto você procura">
+										<button class="btn">Buscar</button> 
+										</div>
+									</fieldset>
+								<?php form_close()?>
+							</div>
+						</div>
+				</a></li>
+				<li><a href="#">
+						<div class="row-fluid">
+							<div class="span6">
+								<h1><img src="<?php echo base_url();?>assets/img/HomeBoat.png"></i> Nautica</h1>
+							</div>
+							<div class="span6 text-right">
+								<?php form_open("#")?>
+									<fieldset>
+										<div class="input-append">
+										<input class="input-large" name="busca" type="text" placeholder="Preencha aqui o tipo de Barco você procura">
+										<button class="btn">Buscar</button> 
+										</div>
+									</fieldset>
+								<?php form_close()?>
 							</div>
 						</div>
 				</a></li>
@@ -107,13 +152,13 @@
 					<div class="span4">
 						<p>
 							<img alt="Facebook Logo"
-								src="<?php echo base_url();?>assets/img/facebook48.png">Siganos
+								src="<?php echo base_url();?>assets/img/facebook48.png">Siga-nos
 							no facebook <a title="Facebook fanpage"
 								hre="http://www.facebook.com/pt/#MotorBusca">#Motorbusca</a>.
 						</p>
 						<p>
 							<img alt="Facebook Logo"
-								src="<?php echo base_url();?>assets/img/twitter48.png">Siganos
+								src="<?php echo base_url();?>assets/img/twitter48.png">Siga-nos
 							no Twitter <a title="Twitter Link"
 								hre="http://www.twitter.com/@MotorBusca">@Motorbusca</a>.
 						</p>
@@ -121,12 +166,18 @@
 					<div class="span2">
 						<div class="divider"></div>
 					</div>
-					<div class="span4">
-						<ul class="nav nav-list">
-							<li class="nav-header">List header</li>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Library</a></li>
-						</ul>
+					<div class="span2">
+						<p>
+							<a href="#">Sobre</a><br/>
+						 	<a href="#">Ajuda</a><br/>
+						 	<a href="#">Contato</a>
+						 </p>
+					</div>
+					<div class="span2">
+						<p>
+							<a href="#">Alerta</a><br/>
+						 	<a href="#">FAQ</a>
+						 </p>
 					</div>
 				</div>
 				<div class="row-fluid">
@@ -137,8 +188,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<p class="muted credit text-center">
-							Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a>
-							and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.
+							© 2013 MCCAETANO - Todos os direitos reservados | <a href="#">Termos de uso</a> | <a href="#">Privacidade</a> | <a href="#">Mapa do site</a>
 						</p>
 					</div>
 				</div>
