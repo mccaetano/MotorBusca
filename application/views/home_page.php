@@ -16,8 +16,9 @@
 	rel="stylesheet">
 <style type="text/css">
 #Imovel {
-	background-image: "<?php echo base_url();?>assets/img/imoveis-a-venda-na-planta.jpg";
-} 
+	background-image:
+		"<?php echo base_url();?>assets/img/imoveis-a-venda-na-planta.jpg";
+}
 </style>
 <!-- responsive -->
 <link href="<?php echo base_url();?>assets/css/bootstrap-responsive.css"
@@ -102,10 +103,46 @@
 		</div>
 		<footer>
 			<div class="well">
-				<p class="muted credit">
-					Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a>
-					and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.
-				</p>
+				<div class="row-fluid">
+					<div class="span4">
+						<p>
+							<img alt="Facebook Logo"
+								src="<?php echo base_url();?>assets/img/facebook48.png">Siganos
+							no facebook <a title="Facebook fanpage"
+								hre="http://www.facebook.com/pt/#MotorBusca">#Motorbusca</a>.
+						</p>
+						<p>
+							<img alt="Facebook Logo"
+								src="<?php echo base_url();?>assets/img/twitter48.png">Siganos
+							no Twitter <a title="Twitter Link"
+								hre="http://www.twitter.com/@MotorBusca">@Motorbusca</a>.
+						</p>
+					</div>
+					<div class="span2">
+						<div class="divider"></div>
+					</div>
+					<div class="span4">
+						<ul class="nav nav-list">
+							<li class="nav-header">List header</li>
+							<li><a href="#">Home</a></li>
+							<li><a href="#">Library</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<hr/>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<p class="muted credit text-center">
+							Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a>
+							and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.
+						</p>
+					</div>
+				</div>
+
 			</div>
 		</footer>
 	</div>
