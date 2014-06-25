@@ -1,6 +1,14 @@
+	<div class="well">
+		<p class="text-muted text-center">&copy; Motor de Busca todos os direitos reservados |
+		<a title="Termo de uso" href="">Termo de uso</a> | 
+		<a title="Mapa do Site" href="">Mapa do Site</a></p>
+		<p class="text-muted text-right"><small>powered MCCAETANO Soluções de TI</small></p> 
+	</div>
+	
+	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript">

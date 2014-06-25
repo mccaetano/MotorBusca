@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name=">
+<meta name="keywords" content="">
+<meta name="robots" content="index,follow">
+<link rel="shortcut icon" href="<?php echo base_url();?>assets/ico/favicon.ico">
+
 <title>Bootstrap 101 Template</title>
 
 <!-- Bootstrap -->
 <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap -->
+<link href="<?php echo base_url();?>assets/css/bootstrap-theme.min.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,4 +24,5 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body role="document">
+	<div class="container theme-showcase" role="main">
