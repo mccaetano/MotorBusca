@@ -26,3 +26,9 @@
 </head>
 <body role="document">
 	<div class="container theme-showcase" role="main">
+		<div class="row">
+			<div class="col-md-6"><a href="#" class="thumbnail">
+				<img data-src="holder.js/200x200" class="img-thumbnail" alt="Logo"></a>
+			</div>
+			<div class="col-md-6 text-right">Login</div>
+		</div>

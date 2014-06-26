@@ -72,10 +72,10 @@ $config['url_suffix'] = '';
 $config['language']	= 'portuguese';
 
 /* default language abbreviation */
-$config['language_abbr'] = "pt";
+$config['language_abbr'] = "pt-BR";
 
 /* set available language abbreviations */
-$config['lang_uri_abbr'] = array("pt" => "potuguese", "en" => "english");
+$config['lang_uri_abbr'] = array("pt-BR" => "potuguese", "en-US" => "english");
 
 /* hide the language segment (use cookie) */
 $config['lang_ignore'] = TRUE;
