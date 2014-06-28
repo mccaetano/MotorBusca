@@ -15,7 +15,7 @@
 |
 */
 /*$config['base_url']	= 'http://mccaetano.dev/MotorBusca/';*/
-$config['base_url']	= 'http://ec2-54-207-103-134.sa-east-1.compute.amazonaws.com/';
+$config['base_url']	= 'http://54.207.103.134/';
 
 /*
 |--------------------------------------------------------------------------
