@@ -41,10 +41,10 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
-//route example: http://domain.tld/en/controller => http://domain.tld/controller
-$route['(\w{2})/(.*)'] = '$2';
-$route['(\w{2})'] = $route['default_controller'];
-
-
-/* End of file routes.php */
-/* Location: ./application/config/routes.php */
+// example: '/en/about' -> use controller 'about'
+$route['^br/(.+)$'] = "$1";
+$route['^en/(.+)$'] = "$1";
+ 
+// '/en' and '/fr' -> use default controller
+$route['^br$'] = $route['default_controller'];
+$route['^en$'] = $route['default_controller'];
