@@ -1,8 +1,27 @@
 	<div class="well">
-		<p class="text-muted text-center">&copy; Motor de Busca todos os direitos reservados |
-		<a title="Termo de uso" href="">Termo de uso</a> | 
-		<a title="Mapa do Site" href="">Mapa do Site</a></p>
-		<p class="text-muted text-right"><small>powered MCCAETANO Soluções de TI</small></p> 
+		<div class="row">
+			<div class="col-md-6>
+				<a href="#">Siga-nos no facebook</a>
+				<a href="#">Siga-nos no Twitter</a>
+			</div>
+			<div class="col-md-6>
+				<div class="row">
+					<div class="col-md-6>
+						<a href="<?php echo base_url();?>perfil">Perfil</a>
+						<a href="<?php echo base_url();?>contato">Contato</a>
+						<a href="<?php echo base_url();?>anuncios">Anúncios</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12>
+				<p class="text-muted text-center">&copy; Motor de Busca todos os direitos reservados |
+				<a title="Termo de uso" href="">Termo de uso</a> | 
+				<a title="Mapa do Site" href="">Mapa do Site</a></p>
+				<p class="text-muted text-right"><small>powered MCCAETANO Soluções de TI</small></p>
+			</div>
+		</div> 
 	</div>
 	
 	</div>
