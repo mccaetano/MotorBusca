@@ -13,4 +13,11 @@ class Feeds extends CI_Controller {
     	$this->load->view('feeds_index');
     	$this->load->view('templates/footer');
     }
+    
+    function carregaanuncios() {
+    	$this->load->model("motor_anunctio");
+    	$lista = $this->motor_anuncio->listaTodos();
+    	
+    	
+    }
 }

@@ -48,9 +48,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
+$db['default']['hostname'] = 'motorbusca.cmgjgd5fm1ox.sa-east-1.rds.amazonaws.com';
+$db['default']['username'] = 'mbusca';
+$db['default']['password'] = 'mbusca123';
 $db['default']['database'] = '';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
@@ -58,7 +58,7 @@ $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
+$db['default']['char_set'] = 'iso-8859-1';
 $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
