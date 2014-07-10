@@ -13,4 +13,8 @@ class Feeds extends CI_Controller {
     	$this->load->view('feeds_index');
     	$this->load->view('templates/footer');
     }
+    
+    function carregaFeeds() {
+    	
+    }
 }
