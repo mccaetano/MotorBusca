@@ -24,11 +24,11 @@
 					</div>
 					<div class="form-group">
 						<label class="control-label">Nova Senha:</label> <input
-							class="form-control" type=""password"">
+							class="form-control" type="password">
 					</div>
 					<div class="form-group">
 						<label class="control-label">Repetir Nova Senha:</label> <input
-							class="form-control" type=""password"">
+							class="form-control" type="password">
 					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary">Alterar</button>

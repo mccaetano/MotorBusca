@@ -6,7 +6,7 @@
 <div class="list-group">
 	<a href="#" class="list-group-item">
 		<div class="row">
-			<div class="col-md-6"><h1>ImÃ³veis<h1></div>
+			<div class="col-md-6"><h1>Imóveis<h1></div>
 			<div class="col-md-6">
 				<form role="form" class="form-inline" action="<?php echo base_url() ?>pesquisa" method="post">
 					<fieldset>

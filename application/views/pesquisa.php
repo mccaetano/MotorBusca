@@ -7,14 +7,13 @@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="panel panel-default">
-					  <div class="panel-heading">ImÃ³veis</div>
+					  <div class="panel-heading">Imóveis</div>
 					  <div class="panel-body">
 					    <div class="input-group">
 							<input type="checkbox">Casa<br/>
 							<input type="checkbox">Apartamento<br/>
 							<input type="checkbox">Aluguel<br/>
-							<input type="checkbox">comercial<br/>
-							</label>
+							<input type="checkbox">comercial<br/>							
 						</div>
 					  </div>
 					</div>
