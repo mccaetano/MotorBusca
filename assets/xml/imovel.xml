@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<motorbusca>
+	<ad>
+		<id><![CDATA[...]]></id>
+		<url><![CDATA[...]]></url>
+		<title><![CDATA[...]]></title>
+		<type><![CDATA[...]]></type>
+		<content><![CDATA[...]]></content>
+		<price><![CDATA[...]]></price>
+		<property_type><![CDATA[...]]></property_type>
+		<floor_area unit="feet"><![CDATA[...]]></floor_area>
+		<plot_area unit="feet"><![CDATA[...]]></plot_area>
+		<rooms><![CDATA[...]]></rooms>
+		<bathrooms><![CDATA[...]]></bathrooms>
+		<is_furnished><![CDATA[...]]></is_furnished>
+		<condition><![CDATA[...]]></condition>
+		<parking><![CDATA[...]]></parking>
+		<floor_number><![CDATA[...]]></floor_number>
+		<orientation><![CDATA[...]]></orientation>
+		<is_new><![CDATA[...]]></is_new>
+		<year><![CDATA[...]]></year>
+		<region><![CDATA[...]]></region>
+		<city><![CDATA[...]]></city>
+		<city_area><![CDATA[...]]></city_area>
+		<address><![CDATA[...]]></address>
+		<postcode><![CDATA[...]]></postcode>
+		<by_owner><![CDATA[...]]></by_owner>
+		<agency><![CDATA[...]]></agency>
+		<latitude><![CDATA[...]]></latitude>
+		<longitude><![CDATA[...]]></longitude>
+		<virtual_tour><![CDATA[...]]></virtual_tour>
+		<date><![CDATA[...]]></date>
+		<expiration_date><![CDATA[...]]></expiration_date>
+		<foreclosure><![CDATA[...]]></foreclosure>
+		<mis_database><![CDATA[...]]></mis_database>
+		<pictures>
+			<picture>
+				<picture_url><![CDATA[...]]></picture_url>
+				<picture_title><![CDATA[...]]></picture_title>
+			</picture>
+			<picture>
+
+				<picture_url><![CDATA[...]]></picture_url>
+				<picture_title><![CDATA[...]]></picture_title>
+			</picture>
+		</pictures>
+	</ad>
+</motorbusca>

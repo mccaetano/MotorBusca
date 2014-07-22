@@ -1,0 +1,76 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="motorbusca">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ad">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="id"/>
+              <xs:element type="xs:string" name="url"/>
+              <xs:element type="xs:string" name="title"/>
+              <xs:element type="xs:string" name="type"/>
+              <xs:element type="xs:string" name="content"/>
+              <xs:element type="xs:string" name="price"/>
+              <xs:element type="xs:string" name="property_type"/>
+              <xs:element name="floor_area" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="unit"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="plot_area" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="unit"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="rooms" minOccurs="0"/>
+              <xs:element type="xs:string" name="bathrooms" minOccurs="0"/>
+              <xs:element type="xs:string" name="is_furnished" minOccurs="0"/>
+              <xs:element type="xs:string" name="condition"/>
+              <xs:element type="xs:string" name="parking"/>
+              <xs:element type="xs:string" name="floor_number"/>
+              <xs:element type="xs:string" name="orientation"/>
+              <xs:element type="xs:string" name="is_new"/>
+              <xs:element type="xs:string" name="year"/>
+              <xs:element type="xs:string" name="region"/>
+              <xs:element type="xs:string" name="city"/>
+              <xs:element type="xs:string" name="city_area"/>
+              <xs:element type="xs:string" name="address"/>
+              <xs:element type="xs:string" name="postcode"/>
+              <xs:element type="xs:string" name="by_owner" minOccurs="0"/>
+              <xs:element type="xs:string" name="agency" minOccurs="0"/>
+              <xs:element type="xs:string" name="latitude" minOccurs="0"/>
+              <xs:element type="xs:string" name="longitude" minOccurs="0"/>
+              <xs:element type="xs:string" name="virtual_tour" minOccurs="0"/>
+              <xs:element type="xs:string" name="date" minOccurs="0"/>
+              <xs:element type="xs:string" name="expiration_date" minOccurs="0"/>
+              <xs:element type="xs:string" name="foreclosure"/>
+              <xs:element type="xs:string" name="mis_database" minOccurs="0"/>
+              <xs:element name="pictures">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="picture" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="picture_url"/>
+                          <xs:element type="xs:string" name="picture_title"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
