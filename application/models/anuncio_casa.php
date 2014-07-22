@@ -4,7 +4,7 @@ class Anuncio_casa extends CI_Model {
 		parent::__construct();
 	}
 	
-	function adicionar($anuncio) {
+	function Adicionar($anuncio) {
 		$this->db->trans_begin();
 		$retorno = $this->db->insert('t_mb_anuncio_casa', $anuncio);
 		
