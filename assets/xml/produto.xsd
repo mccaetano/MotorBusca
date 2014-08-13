@@ -1,0 +1,44 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="trovit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ad" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="id"/>
+              <xs:element type="xs:string" name="title"/>
+              <xs:element type="xs:string" name="url"/>
+              <xs:element type="xs:string" name="content"/>
+              <xs:element type="xs:string" name="category"/>
+              <xs:element type="xs:string" name="price"/>
+              <xs:element type="xs:string" name="shipping_cost"/>
+              <xs:element type="xs:string" name="make"/>
+              <xs:element type="xs:string" name="model"/>
+              <xs:element type="xs:string" name="region"/>
+              <xs:element type="xs:string" name="city"/>
+              <xs:element type="xs:string" name="city_area"/>
+              <xs:element type="xs:string" name="address"/>
+              <xs:element type="xs:string" name="postcode"/>
+              <xs:element type="xs:string" name="date"/>
+              <xs:element type="xs:string" name="expiration_date"/>
+              <xs:element name="pictures">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="picture" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="picture_url"/>
+                          <xs:element type="xs:string" name="picture_title"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

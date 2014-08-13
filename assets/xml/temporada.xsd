@@ -1,0 +1,243 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="trovit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ad" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:element type="xs:string" name="id"/>
+              <xs:element type="xs:string" name="country"/>
+              <xs:element name="url">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="language">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="code" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="language">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="code" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="title">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="language">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="code" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="content">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="language">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="code" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="property_type"/>
+              <xs:element name="activities">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="language">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="code" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="transport_information">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="language">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="code" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="zone_information">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="language">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="code" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="address"/>
+              <xs:element type="xs:string" name="neighborhood"/>
+              <xs:element type="xs:string" name="city_area"/>
+              <xs:element type="xs:string" name="city"/>
+              <xs:element type="xs:string" name="region"/>
+              <xs:element type="xs:string" name="zone"/>
+              <xs:element type="xs:string" name="postcode"/>
+              <xs:element type="xs:string" name="latitude"/>
+              <xs:element type="xs:string" name="longitude"/>
+              <xs:element type="xs:string" name="orientation"/>
+              <xs:element type="xs:string" name="contact_email"/>
+              <xs:element name="rate">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="low_season"/>
+                    <xs:element type="xs:string" name="mid_season"/>
+                    <xs:element type="xs:string" name="high_season"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="period" use="optional"/>
+                  <xs:attribute type="xs:string" name="currency" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="extra_charges">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="language">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="code" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="payment_information">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="language">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="code" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="availability">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="month" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="value" use="optional"/>
+                            <xs:attribute type="xs:string" name="year" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="check_in_week_day"/>
+              <xs:element type="xs:string" name="check_in_time"/>
+              <xs:element type="xs:string" name="check_out_time"/>
+              <xs:element type="xs:string" name="minimum_stay"/>
+              <xs:element type="xs:string" name="max_people"/>
+              <xs:element type="xs:string" name="complete_rental"/>
+              <xs:element type="xs:string" name="online_reservation"/>
+              <xs:element type="xs:string" name="reservation_guarantee"/>
+              <xs:element name="floor_area">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="unit" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="rooms"/>
+              <xs:element type="xs:string" name="bedrooms"/>
+              <xs:element type="xs:string" name="bathrooms"/>
+              <xs:element type="xs:string" name="double_bed"/>
+              <xs:element type="xs:string" name="single_bed"/>
+              <xs:element type="xs:string" name="sofa_bed"/>
+              <xs:element type="xs:string" name="parking"/>
+              <xs:element type="xs:string" name="cleaning_service"/>
+              <xs:element type="xs:string" name="pets"/>
+              <xs:element type="xs:string" name="toaster"/>
+              <xs:element name="comments">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="comment" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="comment_title"/>
+                          <xs:element type="xs:string" name="comment_description"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="code" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="score" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="pictures">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="picture" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="picture_url"/>
+                          <xs:element type="xs:string" name="picture_title"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="date"/>
+              <xs:element type="xs:string" name="time"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

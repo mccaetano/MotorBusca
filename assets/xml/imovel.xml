@@ -1,47 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <motorbusca>
 	<ad>
-		<id><![CDATA[...]]></id>
-		<url><![CDATA[...]]></url>
-		<title><![CDATA[...]]></title>
-		<type><![CDATA[...]]></type>
-		<content><![CDATA[...]]></content>
-		<price><![CDATA[...]]></price>
-		<property_type><![CDATA[...]]></property_type>
-		<floor_area unit="feet"><![CDATA[...]]></floor_area>
-		<plot_area unit="feet"><![CDATA[...]]></plot_area>
-		<rooms><![CDATA[...]]></rooms>
-		<bathrooms><![CDATA[...]]></bathrooms>
-		<is_furnished><![CDATA[...]]></is_furnished>
-		<condition><![CDATA[...]]></condition>
-		<parking><![CDATA[...]]></parking>
-		<floor_number><![CDATA[...]]></floor_number>
-		<orientation><![CDATA[...]]></orientation>
-		<is_new><![CDATA[...]]></is_new>
-		<year><![CDATA[...]]></year>
-		<region><![CDATA[...]]></region>
-		<city><![CDATA[...]]></city>
-		<city_area><![CDATA[...]]></city_area>
-		<address><![CDATA[...]]></address>
-		<postcode><![CDATA[...]]></postcode>
-		<by_owner><![CDATA[...]]></by_owner>
-		<agency><![CDATA[...]]></agency>
-		<latitude><![CDATA[...]]></latitude>
-		<longitude><![CDATA[...]]></longitude>
-		<virtual_tour><![CDATA[...]]></virtual_tour>
-		<date><![CDATA[...]]></date>
-		<expiration_date><![CDATA[...]]></expiration_date>
-		<foreclosure><![CDATA[...]]></foreclosure>
-		<mis_database><![CDATA[...]]></mis_database>
+		<id><![CDATA[1]]></id>
+		<url><![CDATA[http://imovelonline.net]]></url>
+		<title><![CDATA[casa 3 quartos]]></title>
+		<type><![CDATA[Venda]]></type>
+		<content><![CDATA[casa 3 quartos 3 garagens ]]></content>
+		<price><![CDATA[350000.00]]></price>
+		<property_type><![CDATA[casa]]></property_type>
+		<floor_area unit="feet"><![CDATA[120]]></floor_area>
+		<plot_area unit="feet"><![CDATA[150]]></plot_area>
+		<rooms><![CDATA[3]]></rooms>
+		<bathrooms><![CDATA[3]]></bathrooms>
+		<is_furnished><![CDATA[0]]></is_furnished>
+		<condition><![CDATA[otimo estado]]></condition>
+		<parking><![CDATA[1]]></parking>
+		<floor_number><![CDATA[0]]></floor_number>
+		<orientation><![CDATA[leste]]></orientation>
+		<is_new><![CDATA[0]]></is_new>
+		<year><![CDATA[1975]]></year>
+		<region><![CDATA[São Paulo]]></region>
+		<city><![CDATA[São Paulo]]></city>
+		<city_area><![CDATA[Vl Aricanduva]]></city_area>
+		<address><![CDATA[Rua Antonio Lindouro da Silva,516]]></address>
+		<postcode><![CDATA[03506000]]></postcode>
+		<by_owner><![CDATA[1]]></by_owner>
+		<agency><![CDATA[]]></agency>
+		<latitude><![CDATA[-24.56658]]></latitude>
+		<longitude><![CDATA[-45.54666]]></longitude>
+		<virtual_tour><![CDATA[]]></virtual_tour>
+		<date><![CDATA[25/08/2014]]></date>
+		<expiration_date><![CDATA[30/08/2014]]></expiration_date>
+		<foreclosure><![CDATA[0]]></foreclosure>
+		<mis_database><![CDATA[]]></mis_database>
 		<pictures>
 			<picture>
-				<picture_url><![CDATA[...]]></picture_url>
-				<picture_title><![CDATA[...]]></picture_title>
+				<picture_url><![CDATA[http://localhost]]></picture_url>
+				<picture_title><![CDATA[imagem1]]></picture_title>
 			</picture>
 			<picture>
-
-				<picture_url><![CDATA[...]]></picture_url>
-				<picture_title><![CDATA[...]]></picture_title>
+				<picture_url><![CDATA[http://localhost]]></picture_url>
+				<picture_title><![CDATA[imagem2]]></picture_title>
+			</picture>
+		</pictures>
+	</ad>
+	<ad>
+		<id><![CDATA[2]]></id>
+		<url><![CDATA[http://imovelonline.net]]></url>
+		<title><![CDATA[casa 3 quartos]]></title>
+		<type><![CDATA[Venda]]></type>
+		<content><![CDATA[casa 3 quartos 3 garagens ]]></content>
+		<price><![CDATA[350000.00]]></price>
+		<property_type><![CDATA[casa]]></property_type>
+		<floor_area unit="meters"><![CDATA[120]]></floor_area>
+		<plot_area unit="meters"><![CDATA[150]]></plot_area>
+		<rooms><![CDATA[3]]></rooms>
+		<bathrooms><![CDATA[3]]></bathrooms>
+		<is_furnished><![CDATA[0]]></is_furnished>
+		<condition><![CDATA[otimo estado]]></condition>
+		<parking><![CDATA[1]]></parking>
+		<floor_number><![CDATA[0]]></floor_number>
+		<orientation><![CDATA[leste]]></orientation>
+		<is_new><![CDATA[0]]></is_new>
+		<year><![CDATA[1975]]></year>
+		<region><![CDATA[São Paulo]]></region>
+		<city><![CDATA[São Paulo]]></city>
+		<city_area><![CDATA[Vl Aricanduva]]></city_area>
+		<address><![CDATA[Rua Antonio Lindouro da Silva,516]]></address>
+		<postcode><![CDATA[03506000]]></postcode>
+		<by_owner><![CDATA[1]]></by_owner>
+		<agency><![CDATA[]]></agency>
+		<latitude><![CDATA[-24.56658]]></latitude>
+		<longitude><![CDATA[-45.54666]]></longitude>
+		<virtual_tour><![CDATA[]]></virtual_tour>
+		<date><![CDATA[25/08/2014]]></date>
+		<expiration_date><![CDATA[30/08/2014]]></expiration_date>
+		<foreclosure><![CDATA[0]]></foreclosure>
+		<mis_database><![CDATA[]]></mis_database>
+		<pictures>
+			<picture>
+				<picture_url><![CDATA[http://localhost]]></picture_url>
+				<picture_title><![CDATA[imagem1]]></picture_title>
+			</picture>
+			<picture>
+				<picture_url><![CDATA[http://localhost]]></picture_url>
+				<picture_title><![CDATA[imagem2]]></picture_title>
 			</picture>
 		</pictures>
 	</ad>

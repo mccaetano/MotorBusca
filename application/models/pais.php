@@ -1,0 +1,26 @@
+<?php
+class Pais extends CI_Model {
+	function __construct() {
+		parent::__construct();
+	}
+	
+	function Adicionar($pais) {
+		$this->db->trans_begin();
+		$retorno = $this->db->insert('t_mb_pais', $pais);
+	
+		$this->db->trans_commit();
+		$this->db->cache_delete_all();
+	
+		return $retorno;
+	}
+	
+	function BuscaPais($nome_pais) {
+		$this->db->where("ps_descricao", $nome_pais);
+		$query = $this->db->get('t_mb_pais');
+		$retorno = $query->results();
+				
+		return $retorno;
+	}
+	
+	
+}
