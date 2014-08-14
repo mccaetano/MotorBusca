@@ -18,17 +18,19 @@ class Feeds extends CI_Controller {
 	}
 	function carregaanuncios() {
 		$this->load->model ( "motor_anuncio" );
-		$lista = $this->motor_anuncio->listaTodos ();
-		
 		$this->load->model ( "tipo_anuncio" );
 		
-		foreach ( $lista as $motor ) {
-			$tipoAnuncio = $this->tipo_anuncio->BuscaTipoAnuncio ( $motor->tan_id );
-			$xmlurl = urlencode ( base64_encode ( $motor->man_url_carga ) );
-			
-			$url = base_url () . $tipoAnuncio->tan_endereco_carga . "/" . $xmlurl;
-			
-			$this->curl_post_async ( $url, FALSE );
+		$lista = $this->motor_anuncio->listaTodos ();
+					
+		if ($lista != FALSE) {
+			foreach ( $lista as $motor ) {
+				$tipoAnuncio = $this->tipo_anuncio->BuscaTipoAnuncio ( $motor->tan_id );
+				$xmlurl = urlencode ( base64_encode ( $motor->man_url_carga ) );
+				
+				$url = $tipoAnuncio[0]->tan_endereco_carga . "/" . $xmlurl;
+				var_dump($url);
+				#$this->curl_post_async ( $url, FALSE );
+			}
 		}
 	}
 	function curl_post_async($url, $params = array()) {
@@ -66,11 +68,15 @@ class Feeds extends CI_Controller {
 		$xmlFile = base64_decode ( urldecode ( $xmlFile ) );
 		$xsd_document = base_url () . "assets/xml/imovel.xsd";
 		$dom = new DomDocument ();
-		var_dump ( base_url () . "assets/xml/imovel.xsd" );
-		if (! $dom->load ( $xmlFile ))
+		
+		if (! @$dom->load ( $xmlFile )) {
 			log_message ( 'error', 'Could not load XML file: ' . $xmlFile );
-		if (! $dom->schemaValidate ( $xsd_document ))
+			die('Could not load XML file: ' . $xmlFile);
+		}
+		if (! @$dom->schemaValidate ( $xsd_document )) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
+			die('XML file did not validate against schema: ' . $xsd_document);
+		}
 		
 		$xmlData = simplexml_load_file ( $xmlFile );
 		
@@ -89,68 +95,69 @@ class Feeds extends CI_Controller {
 				'ps_descricao' => 'Brasil'
 			);
 			
-			$estado = $this->estado->BuscaEstado($ad->region);
-			if ($estado === null) {
-				$this->estado->Adiciona(array(
+			$estado = $this->estado->BuscaEstado(mb_convert_encoding($ad->region, 'ISO-8859-1', 'auto'));
+			if ($estado === FALSE) {				
+				$this->estado->Adicionar(array(
+						'es_id' => NULL, 
 						't_mb_pais_ps_id' => $pais['ps_id'],
-						'es_descricao' => $ad->region
+						'es_descricao' => mb_convert_encoding($ad->region, 'ISO-8859-1', 'auto')
 				));
-				$estado = $this->estado->BuscaEstado($ad->region);
+				$estado = $this->estado->BuscaEstado(mb_convert_encoding($ad->region, 'ISO-8859-1', 'auto'));
 			}
 			
-			$cidade = $this->cidade->BuscaCiadde($ad->city);
-			if ($cidade === null) {
-				$this->cidade->Adiciona(array(
-					't_mb_estado_es_id' => $estado['es_id'],
-					'cd_descricao' => $ad->city
+			$cidade = $this->cidade->BuscaCiadde(mb_convert_encoding($ad->city, 'ISO-8859-1', 'auto'));
+			if ($cidade === FALSE) {
+				$this->cidade->Adicionar(array(
+					't_mb_estado_es_id' => $estado[0]->es_id,
+					'cd_descricao' => mb_convert_encoding($ad->city, 'ISO-8859-1', 'auto')
 				));
-				$cidade = $this->cidade->BuscaCiadde($ad->city);
+				$cidade = $this->cidade->BuscaCiadde(mb_convert_encoding($ad->city, 'ISO-8859-1', 'auto'));
 			}
 			
-			$propriedade_tipo = $this->tipo_imovel->BuscaTipoImovel($ad->property_type);
-			if ($propriedade_tipo === null) {
-				$this->tipo_imovel->Adiciona(array(
-						'pt_descricao' => $ad->property_type
+			$propriedade_tipo = $this->tipo_imovel->BuscaTipoImovel(mb_convert_encoding($ad->property_type, 'ISO-8859-1', 'auto'));
+			if ($propriedade_tipo === FALSE) {
+				$this->tipo_imovel->Adicionar(array(
+						'pt_descricao' => mb_convert_encoding($ad->property_type, 'ISO-8859-1', 'auto')
 				));
-				$propriedade_tipo = $this->tipo_imovel->BuscaTipoImovel($ad->property_type);
+				$propriedade_tipo = $this->tipo_imovel->BuscaTipoImovel(mb_convert_encoding($ad->property_type, 'ISO-8859-1', 'auto'));
 			}
 			
 			
 			$row = array (
-					'ac_id_anuncio' => $ad->id,
-					'ac_url' => $ad->url,
-					'ac_mobile_url' => $ad->url,
-					'ac_title' => $ad->title,
+					'ac_id_anuncio' => mb_convert_encoding($ad->id, 'ISO-8859-1', 'auto'),
+					'ac_url' => mb_convert_encoding($ad->url, 'ISO-8859-1', 'auto'),
+					'ac_mobile_url' => mb_convert_encoding($ad->url, 'ISO-8859-1', 'auto'),
+					'ac_title' => mb_convert_encoding($ad->title, 'ISO-8859-1', 'auto'),
 					'pct_id' => 1,
-					'ac_descricao' => $ad->content,
-					'ac_preco' => $ad->price,
-					'pt_id' => $propriedade_tipo['pt_id'],
-					'pc_endereco' => $ad->address,
-					'pc_andar' => $ad->floor_number,
-					'pc_bairro' => $ad->city_area,
-					'pc_complemento' => $ad->region,
-					'cd_id' => $cidade['cd_id'],
-					'pc_caixa_postal' => $ad->postcode,
-					'pc_latitude' => $ad->latitude,
-					'pc_longitude' => $ad->longitude,
-					'pc_orientacao' => $ad->orientation,
-					'pc_agencia' => $ad->agency,
-					'pc_mls_database' => $ad->mis_database,
-					'pc_area_terreno' => $ad->floor_area,
-					'pc_area_construida' => $ad->plot_area,
-					'pc_quartos' => $ad->rooms,
-					'pc_banheiros' => $ad->bathrooms,
-					'pc_condicao' => $ad->condition,
-					'pc_ano' => $ad->year,
-					'pc_2D_tour' => $ad->virtual_tour,
-					'pc_perc_eco' => $ad->eco_score,
-					'pc_data_inclusao' => $ad->date,
-					'pc_data_expiracao' => $ad->expiration_date,
-					'pc_diretro_proprietario' => $ad->by_owner,
-					'pc_garagem' => $ad->parking,
-					'pc_finalizado' => $ad->is_furnished,
-					'pc_mobiliado' => $ad->foreclosure,
-					'pc_novo' => $ad->is_new 
+					'ac_descricao' => mb_convert_encoding($ad->content, 'ISO-8859-1', 'auto'),
+					'ac_preco' => mb_convert_encoding($ad->price, 'ISO-8859-1', 'auto'),
+					'pt_id' => (string)$propriedade_tipo[0]->pt_id,
+					'pc_endereco' => mb_convert_encoding($ad->address, 'ISO-8859-1', 'auto'),
+					'pc_andar' => mb_convert_encoding($ad->floor_number, 'ISO-8859-1', 'auto'),
+					'pc_bairro' => mb_convert_encoding($ad->city_area, 'ISO-8859-1', 'auto'),
+					'pc_complemento' => mb_convert_encoding($ad->region, 'ISO-8859-1', 'auto'),
+					'cd_id' => (string)$cidade[0]->cd_id,
+					'pc_caixa_postal' => mb_convert_encoding($ad->postcode, 'ISO-8859-1', 'auto'),
+					'pc_latitude' => mb_convert_encoding($ad->latitude, 'ISO-8859-1', 'auto'),
+					'pc_longitude' => mb_convert_encoding($ad->longitude, 'ISO-8859-1', 'auto'),
+					'pc_orientacao' => mb_convert_encoding($ad->orientation, 'ISO-8859-1', 'auto'),
+					'pc_agencia' => mb_convert_encoding($ad->agency, 'ISO-8859-1', 'auto'),
+					'pc_mls_database' => mb_convert_encoding($ad->mis_database, 'ISO-8859-1', 'auto'),
+					'pc_area_terreno' => mb_convert_encoding($ad->floor_area, 'ISO-8859-1', 'auto'),
+					'pc_area_construida' => mb_convert_encoding($ad->plot_area, 'ISO-8859-1', 'auto'),
+					'pc_quartos' => mb_convert_encoding($ad->rooms, 'ISO-8859-1', 'auto'),
+					'pc_banheiros' => mb_convert_encoding($ad->bathrooms, 'ISO-8859-1', 'auto'),
+					'pc_condicao' => mb_convert_encoding($ad->condition, 'ISO-8859-1', 'auto'),
+					'pc_ano' => mb_convert_encoding($ad->year, 'ISO-8859-1', 'auto'),
+					'pc_2D_tour' => mb_convert_encoding($ad->virtual_tour, 'ISO-8859-1', 'auto'),
+					'pc_perc_eco' => mb_convert_encoding($ad->eco_score, 'ISO-8859-1', 'auto'),
+					'pc_data_inclusao' => mb_convert_encoding($ad->date, 'ISO-8859-1', 'auto'),
+					'pc_data_expiracao' => mb_convert_encoding($ad->expiration_date, 'ISO-8859-1', 'auto'),
+					'pc_diretro_proprietario' => mb_convert_encoding($ad->by_owner, 'ISO-8859-1', 'auto'),
+					'pc_garagem' => mb_convert_encoding($ad->parking, 'ISO-8859-1', 'auto'),
+					'pc_finalizado' => mb_convert_encoding($ad->is_furnished, 'ISO-8859-1', 'auto'),
+					'pc_mobiliado' => mb_convert_encoding($ad->foreclosure, 'ISO-8859-1', 'auto'),
+					'pc_novo' => mb_convert_encoding($ad->is_new, 'ISO-8859-1', 'auto') 
 			);
 			$lista = $this->anuncio_casa->Adicionar ( $row );
 		}

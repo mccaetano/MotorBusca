@@ -5,6 +5,7 @@ class Estado extends CI_Model {
 	}
 	
 	function Adicionar($estado) {
+		var_dump($estado);
 		$this->db->trans_begin();
 		$retorno = $this->db->insert('t_mb_estado', $estado);
 	
@@ -17,8 +18,12 @@ class Estado extends CI_Model {
 	function BuscaEstado($nome_estado) {
 		$this->db->where("es_descricao", $nome_estado);
 		$query = $this->db->get('t_mb_estado');
-		$retorno = $query->results();
-				
+		$retorno = $query->result();
+
+		if ($query->num_rows() <= 0) {
+			return FALSE;
+		}
+		
 		return $retorno;
 	}
 	

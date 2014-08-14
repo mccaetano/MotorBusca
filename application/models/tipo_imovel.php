@@ -17,8 +17,12 @@ class Tipo_Imovel extends CI_Model {
 	function BuscaTipoImovel($nome_tipo) {
 		$this->db->where("pt_descricao", $nome_tipo);
 		$query = $this->db->get('t_mb_propriedade_tipo');
-		$retorno = $query->results();
-				
+		$retorno = $query->result();
+
+		if ($query->num_rows() <= 0) {
+			return FALSE;
+		}
+			
 		return $retorno;
 	}
 	

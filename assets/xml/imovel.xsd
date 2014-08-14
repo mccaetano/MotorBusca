@@ -2,7 +2,7 @@
   <xs:element name="motorbusca">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="ad">
+        <xs:element name="ad" maxOccurs="unbounded">
           <xs:complexType>
             <xs:sequence>
               <xs:element type="xs:string" name="id"/>

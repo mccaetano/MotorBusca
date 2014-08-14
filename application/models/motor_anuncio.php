@@ -5,10 +5,10 @@ class Motor_anuncio extends CI_Model {
 	}
 	
 	function listaTodos() {
-		$query = $this-db-get("t_mb_motor_anuncio");
+		$query = $this->db->get("t_mb_motor_anuncio");
 		$result = $query->result();
 		
-		if ($result === FALSE) {
+		if ($query->num_rows() <= 0) {
 			return FALSE;
 		}
 		

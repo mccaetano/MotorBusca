@@ -17,8 +17,11 @@ class Cidade extends CI_Model {
 	function BuscaCiadde($nome_cidade) {
 		$this->db->where("cd_descricao", $nome_cidade);
 		$query = $this->db->get('t_mb_cidade');
-		$retorno = $query->results();
-				
+		$retorno = $query->result();
+
+		if ($query->num_rows() <= 0) {
+			return FALSE;
+		}		
 		return $retorno;
 	}
 	

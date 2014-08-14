@@ -7,10 +7,10 @@ class Tipo_anuncio extends CI_Model {
 	function BuscaTipoAnuncio($tan_id = FALSE) {
 		
 		$this->db->where("tan_id", $tan_id);
-		$query = $this-db-get("t_mb_tipo_anuncio");
+		$query = $this->db->get("t_mb_tipo_anuncio");
 		$result = $query->result();
 
-		if ($result === FALSE) {
+		if ($query->num_rows() <= 0) {
 			return FALSE;
 		}
 
