@@ -204,6 +204,8 @@ class Feeds extends CI_Controller {
 		}
 	}
 	function autoXML($xmlFile = FALSE) {
+		set_time_limit ( 0 );
+		
 		if (! $xmlFile) {
 			log_message ( 'error', "xml não enviado" );
 			show_404 ( base_url ( "feeds/autoXML" ) );
@@ -226,8 +228,74 @@ class Feeds extends CI_Controller {
 		$xmlData = simplexml_load_file ( $xmlFile );
 		
 		$this->load->model ( "anuncio_auto" );
+		$this->load->model ( "carro_tipo" );
+		$this->load->model ( "estado" );
+		$this->load->model ( "pais" );
+		$this->load->model ( "cidade" );
 		
 		foreach ( $xmlData as $ad ) {
+			$pais = array (
+					'ps_id' => 1,
+					'ps_descricao' => 'Brasil'
+			);
+				
+			$estado = $this->estado->BuscaEstado ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
+			if ($estado === FALSE) {
+				$this->estado->Adicionar ( array (
+						'es_id' => NULL,
+						't_mb_pais_ps_id' => $pais ['ps_id'],
+						'es_descricao' => mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' )
+				) );
+				$estado = $this->estado->BuscaEstado ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
+			}
+				
+			$cidade = $this->cidade->BuscaCiadde ( mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) );
+			if ($cidade === FALSE) {
+				$this->cidade->Adicionar ( array (
+						't_mb_estado_es_id' => $estado [0]->es_id,
+						'cd_descricao' => mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' )
+				) );
+				$cidade = $this->cidade->BuscaCiadde ( mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) );
+			}
+				
+			$carro_tipo = $this->tipo_imovel->BuscaCarroTipo ( mb_convert_encoding ( $ad->car_type, 'ISO-8859-1', 'auto' ) );
+			if ($carro_tipo === FALSE) {
+				$this->tipo_imovel->Adicionar ( array (
+						'crt_descricao' => mb_convert_encoding ( $ad->car_type, 'ISO-8859-1', 'auto' )
+				) );
+				$carro_tipo = $this->tipo_imovel->BuscaCarroTipo ( mb_convert_encoding ( $ad->car_type, 'ISO-8859-1', 'auto' ) );
+			}
+				
+			$anuncio_casa_tipo = $this->anuncio_casa_tipo->BuscaAnuncioCasaTipo ( mb_convert_encoding ( $ad->type, 'ISO-8859-1', 'auto' ) );
+			if ($anuncio_casa_tipo === FALSE) {
+				$this->anuncio_casa_tipo->Adicionar ( array (
+						'pct_descricao' => mb_convert_encoding ( $ad->type, 'ISO-8859-1', 'auto' )
+				) );
+				$anuncio_casa_tipo = $this->anuncio_casa_tipo->BuscaAnuncioCasaTipo ( mb_convert_encoding ( $ad->type, 'ISO-8859-1', 'auto' ) );
+			}
+				
+			$data_inclusao = DateTime::createFromFormat ( "d/m/Y", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			if ($data_inclusao === FALSE) {
+				$data_inclusao = DateTime::createFromFormat ( "Y/m/d", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			if ($data_inclusao === FALSE) {
+				$data_inclusao = DateTime::createFromFormat ( "d/m/Y H:i:s", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			if ($data_inclusao === FALSE) {
+				$data_inclusao = DateTime::createFromFormat ( "Y/m/d H:i:s", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+				
+			$data_expiracao = DateTime::createFromFormat ( "d/m/Y", mb_convert_encoding ( $ad->expiration_date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			if ($data_expiracao === FALSE) {
+				$data_expiracao = DateTime::createFromFormat ( "Y/m/d", mb_convert_encoding ( $ad->expiration_date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			if ($data_expiracao === FALSE) {
+				$data_expiracao = DateTime::createFromFormat ( "d/m/Y H:i:s", mb_convert_encoding ( $ad->expiration_date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			if ($data_expiracao === FALSE) {
+				$data_expiracao = DateTime::createFromFormat ( "Y/m/d H:i:s", mb_convert_encoding ( $ad->expiration_date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			
 			$row = array (
 					'aa_anuncio_id' => mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ),
 					'aa_url' => mb_convert_encoding ( $ad->url, 'ISO-8859-1', 'auto' ),
