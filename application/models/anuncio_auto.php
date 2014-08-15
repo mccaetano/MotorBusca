@@ -1,12 +1,12 @@
 <?php
-class Anuncio_casa extends CI_Model {
+class Anuncio_auto extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
 	
 	function Adicionar($anuncio) {
 		$this->db->trans_begin();
-		$retorno = $this->db->insert('t_mb_anuncio_casa', $anuncio);
+		$retorno = $this->db->insert('t_mb_anuncio_auto', $anuncio);
 		
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
@@ -14,10 +14,10 @@ class Anuncio_casa extends CI_Model {
 		return $retorno;
 	}
 	
-	function Alterar($anuncio, $ac_id) {
+	function Alterar($anuncio, $ad_id) {
 		$this->db->trans_begin();
-		$this->db->where("ac_id", $ac_id);
-		$retorno = $this->db->update('t_mb_anuncio_casa', $anuncio);
+		$this->db->where("ad_id", $ac_id);
+		$retorno = $this->db->update('t_mb_anuncio_auto', $anuncio);
 	
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
@@ -25,9 +25,9 @@ class Anuncio_casa extends CI_Model {
 		return $retorno;
 	}
 	
-	function BuscaAnuncioCasa($id) {
-		$this->db->where("ac_id_anuncio", $id);
-		$query = $this->db->get('t_mb_anuncio_casa');
+	function BuscaAnuncioCasa($titulo) {
+		$this->db->where("aa_title", $titulo);
+		$query = $this->db->get('t_mb_anuncio_auto');
 		$retorno = $query->result();
 	
 		if ($query->num_rows() <= 0) {

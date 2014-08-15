@@ -47,11 +47,11 @@
 	<ad>
 		<id><![CDATA[2]]></id>
 		<url><![CDATA[http://imovelonline.net]]></url>
-		<title><![CDATA[casa 3 quartos]]></title>
+		<title><![CDATA[casa 3 quartos 3]]></title>
 		<type><![CDATA[Venda]]></type>
 		<content><![CDATA[casa 3 quartos 3 garagens ]]></content>
 		<price><![CDATA[350000.00]]></price>
-		<property_type><![CDATA[casa]]></property_type>
+		<property_type><![CDATA[apartamento]]></property_type>
 		<floor_area unit="meters"><![CDATA[120]]></floor_area>
 		<plot_area unit="meters"><![CDATA[150]]></plot_area>
 		<rooms><![CDATA[3]]></rooms>
@@ -59,7 +59,7 @@
 		<is_furnished><![CDATA[0]]></is_furnished>
 		<condition><![CDATA[otimo estado]]></condition>
 		<parking><![CDATA[1]]></parking>
-		<floor_number><![CDATA[0]]></floor_number>
+		<floor_number><![CDATA[45]]></floor_number>
 		<orientation><![CDATA[leste]]></orientation>
 		<is_new><![CDATA[0]]></is_new>
 		<year><![CDATA[1975]]></year>
@@ -74,7 +74,7 @@
 		<longitude><![CDATA[-45.54666]]></longitude>
 		<virtual_tour><![CDATA[]]></virtual_tour>
 		<date><![CDATA[25/08/2014]]></date>
-		<expiration_date><![CDATA[30/08/2014]]></expiration_date>
+		<expiration_date><![CDATA[25/08/2014]]></expiration_date>
 		<foreclosure><![CDATA[0]]></foreclosure>
 		<mis_database><![CDATA[]]></mis_database>
 		<pictures>
