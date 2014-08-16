@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<motorbusca>
+	<ad>
+		<id><![CDATA[1]]></id>
+		<url><![CDATA[http://localhost/motorbusca/carro1]]></url>
+		<title><![CDATA[fusca azul]]></title>
+		<content><![CDATA[fusca unico dono azul otimo estado]]></content>
+		<price><![CDATA[13500]]></price>
+		<make><![CDATA[woksvagem]]></make>
+		<model><![CDATA[fusca 1300]]></model>
+		<color><![CDATA[azul]]></color>
+		<year><![CDATA[1967]]></year>
+		<fuel><![CDATA[gasolina]]></fuel>
+		<doors><![CDATA[2]]></doors>
+		<seats><![CDATA[5]]></seats>
+		<gears><![CDATA[4]]></gears>
+		<car_type><![CDATA[carro]]></car_type>
+		<mileage unit="km"><![CDATA[98650]]></mileage>
+		<transmission><![CDATA[manual]]></transmission>
+		<cylinders><![CDATA[4]]></cylinders>
+		<engine_size unit=""><![CDATA[1300]]></engine_size>
+		<power unit="cc"><![CDATA[1300]]></power>
+		<fuel_consumption><![CDATA[]]></fuel_consumption>
+		<co2_emissions unit="g/mi"><![CDATA[]]></co2_emissions>
+		<eco_score><![CDATA[]]></eco_score>
+		<is_new><![CDATA[0]]></is_new>
+		<warranty><![CDATA[s/n]]></warranty>
+		<dealer><![CDATA[]]></dealer>
+		<region><![CDATA[são paulo]]></region>
+		<city><![CDATA[guara]]></city>
+		<city_area><![CDATA[centro]]></city_area>
+		<postcode><![CDATA[14580]]></postcode>
+		<date><![CDATA[15/09/2014]]></date>
+		<expiration_date><![CDATA[30/11/2014]]></expiration_date>
+		<pictures>
+			<picture>
+				<picture_url><![CDATA[http://localhost/motorbusca/carro1/foto1]]></picture_url>
+				<picture_title><![CDATA[foto principal]]></picture_title>
+			</picture>
+			<picture>
+				<picture_url><![CDATA[http://localhost/motorbusca/carro1/foto2]]></picture_url>
+				<picture_title><![CDATA[foto2]]></picture_title>
+			</picture>
+			<picture>
+				<picture_url><![CDATA[http://localhost/motorbusca/carro1/foto3]]></picture_url>
+				<picture_title><![CDATA[foto3]]></picture_title>
+			</picture>
+		</pictures>
+	</ad>
+	<ad>
+		<id><![CDATA[2]]></id>
+		<url><![CDATA[http://localhost/motorbusca/carro2]]></url>
+		<title><![CDATA[gol bolinha]]></title>
+		<content><![CDATA[gol bolinha unico dono]]></content>
+		<price><![CDATA[15600]]></price>
+		<make><![CDATA[woksvagem]]></make>
+		<model><![CDATA[Gol LX 1.8]]></model>
+		<color><![CDATA[preto]]></color>
+		<year><![CDATA[2001]]></year>
+		<fuel><![CDATA[gasolina]]></fuel>
+		<doors><![CDATA[4]]></doors>
+		<seats><![CDATA[5]]></seats>
+		<gears><![CDATA[5]]></gears>
+		<car_type><![CDATA[carro]]></car_type>
+		<mileage><![CDATA[78500]]></mileage>
+		<transmission><![CDATA[manual]]></transmission>
+		<cylinders><![CDATA[4]]></cylinders>
+		<engine_size><![CDATA[1800]]></engine_size>
+		<power><![CDATA[1.8]]></power>
+		<is_new><![CDATA[0]]></is_new>
+		<warranty><![CDATA[s/n]]></warranty>
+		<dealer><![CDATA[monte car automoveis]]></dealer>
+		<region><![CDATA[minas gerais]]></region>
+		<city><![CDATA[uberaba]]></city>
+		<city_area><![CDATA[centro]]></city_area>
+		<postcode><![CDATA[15203]]></postcode>
+		<date><![CDATA[06/05/2014]]></date>
+		<expiration_date><![CDATA[30/12/2014]]></expiration_date>
+		<pictures>
+			<picture>
+				<picture_url><![CDATA[http://localhost/motorbusca/carro2/foto1]]></picture_url>
+				<picture_title><![CDATA[foto principal]]></picture_title>
+			</picture>
+			<picture>
+				<picture_url><![CDATA[http://localhost/motorbusca/carro2/foto2]]></picture_url>
+				<picture_title><![CDATA[foto2]]></picture_title>
+			</picture>
+		</pictures>
+	</ad>	
+</motorbusca>

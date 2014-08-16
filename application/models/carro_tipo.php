@@ -4,9 +4,10 @@ class Carro_tipo extends CI_Model {
 		parent::__construct();
 	}
 	
-	function Adicionar($carro_tipo) {
+	function Adicionar($row) {
 		$this->db->trans_begin();
-		$retorno = $this->db->insert('t_mb_carro_tipo', $carro_tipo);
+		$this->db->insert('t_mb_carro_tipo', $row);
+		$retorno = mysql_insert_id();
 	
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();

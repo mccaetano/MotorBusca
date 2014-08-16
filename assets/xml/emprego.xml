@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<motorbusca>
+	<ad>
+		<id><![CDATA[1]]></id>
+		<title><![CDATA[analista de sistemas]]></title>
+		<url><![CDATA[http://localhost/emprego1]]></url>
+		<content><![CDATA[analista de sistemas válido para acentos]]></content>
+		<city><![CDATA[ituverava]]></city>
+		<city_area><![CDATA[centro]]></city_area>
+		<region><![CDATA[são paulo]]></region>
+		<postcode><![CDATA[14680]]></postcode>
+		<experience><![CDATA[3 anos de analise de sistemas]]></experience>
+		<telecommute><![CDATA[1]]></telecommute>
+		<requirements><![CDATA[SQL JAVA PHP]]></requirements>
+		<studies><![CDATA[Superior Completo]]></studies>
+		<salary><![CDATA[a Combinar]]></salary>
+		<working_hours><![CDATA[integral]]></working_hours>
+		<contract><![CDATA[CLT]]></contract>
+		<category><![CDATA[Pleno]]></category>
+		<company><![CDATA[não informada]]></company>
+		<date><![CDATA[15/08/2014]]></date>
+		<expiration_date><![CDATA[15/10/2014]]></expiration_date>
+	</ad>
+	<ad>
+		<id><![CDATA[2]]></id>
+		<title><![CDATA[Administrador de Banco de Dados]]></title>
+		<url><![CDATA[http://localhost/emprego2]]></url>
+		<content><![CDATA[Administrador de banco de dados Progress]]></content>
+		<city><![CDATA[são paulo]]></city>
+		<city_area><![CDATA[item bibi]]></city_area>
+		<region><![CDATA[são paulo]]></region>
+		<postcode><![CDATA[03506200]]></postcode>
+		<experience><![CDATA[1 anos de progress]]></experience>
+		<telecommute><![CDATA[0]]></telecommute>
+		<requirements><![CDATA[Progress ABL ]]></requirements>
+		<studies><![CDATA[Superior Completo]]></studies>
+		<salary><![CDATA[4580]]></salary>
+		<working_hours><![CDATA[integral]]></working_hours>
+		<contract><![CDATA[PJ]]></contract>
+		<category><![CDATA[Senior]]></category>
+		<company><![CDATA[HDI]]></company>
+		<date><![CDATA[01/08/2014]]></date>
+		<expiration_date><![CDATA[25/11/2014]]></expiration_date>
+	</ad>
+</motorbusca>

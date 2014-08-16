@@ -6,8 +6,9 @@ class Anuncio_casa_Tipo extends CI_Model {
 	
 	function Adicionar($pesquisa_casa_tipo) {
 		$this->db->trans_begin();
-		$retorno = $this->db->insert('t_mb_pesquisa_casa_tipo', $pesquisa_casa_tipo);
-	
+		$this->db->insert('t_mb_pesquisa_casa_tipo', $pesquisa_casa_tipo);
+		$retorno = mysql_insert_id();
+		
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
 	

@@ -1,27 +1,30 @@
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="trovit">
+  <xs:element name="motorbusca">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="ad" maxOccurs="unbounded" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
-              <xs:element type="xs:string" name="id"/>
-              <xs:element type="xs:string" name="title"/>
-              <xs:element type="xs:string" name="url"/>
-              <xs:element type="xs:string" name="content"/>
-              <xs:element type="xs:string" name="city"/>
-              <xs:element type="xs:string" name="city_area"/>
-              <xs:element type="xs:string" name="region"/>
-              <xs:element type="xs:string" name="postcode"/>
-              <xs:element type="xs:string" name="experience"/>
-              <xs:element type="xs:string" name="requirements"/>
-              <xs:element type="xs:string" name="studies"/>
-              <xs:element type="xs:string" name="salary"/>
-              <xs:element type="xs:string" name="working_hours"/>
-              <xs:element type="xs:string" name="contract"/>
-              <xs:element type="xs:string" name="category"/>
-              <xs:element type="xs:string" name="company"/>
-              <xs:element type="xs:string" name="date"/>
+              <xs:element type="xs:string" minOccurs="0" name="id"/>
+              <xs:element type="xs:string" minOccurs="0" name="title"/>
+              <xs:element type="xs:string" minOccurs="0" name="url"/>
+              <xs:element type="xs:string" minOccurs="0" name="content"/>
+              <xs:element type="xs:string" minOccurs="0" name="mobile_url"/>
+              <xs:element type="xs:string" minOccurs="0" name="city"/>
+              <xs:element type="xs:string" minOccurs="0" name="city_area"/>
+              <xs:element type="xs:string" minOccurs="0" name="region"/>
+              <xs:element type="xs:string" minOccurs="0" name="postcode"/>
+              <xs:element type="xs:string" minOccurs="0" name="experience"/>
+              <xs:element type="xs:string" minOccurs="0" name="requirements"/>
+              <xs:element type="xs:string" minOccurs="0" name="studies"/>
+              <xs:element type="xs:string" minOccurs="0" name="salary"/>
+              <xs:element type="xs:string" minOccurs="0" name="working_hours"/>
+              <xs:element type="xs:string" minOccurs="0" name="telecommute"/>
+              <xs:element type="xs:string" minOccurs="0" name="contract"/>
+              <xs:element type="xs:string" minOccurs="0" name="category"/>
+              <xs:element type="xs:string" minOccurs="0" name="company"/>
+              <xs:element type="xs:string" minOccurs="0" name="date"/>
+              <xs:element type="xs:string" minOccurs="0" name="expiration_date"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
