@@ -1,41 +1,58 @@
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="trovit">
+  <xs:element name="motorbusca">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="ad" maxOccurs="unbounded" minOccurs="0">
           <xs:complexType>
-            <xs:sequence>
+            <xs:all>
               <xs:element type="xs:string" name="id"/>
               <xs:element type="xs:string" name="title"/>
               <xs:element type="xs:string" name="url"/>
               <xs:element type="xs:string" name="content"/>
-              <xs:element type="xs:string" name="category"/>
-              <xs:element type="xs:string" name="price"/>
-              <xs:element type="xs:string" name="shipping_cost"/>
-              <xs:element type="xs:string" name="make"/>
-              <xs:element type="xs:string" name="model"/>
-              <xs:element type="xs:string" name="region"/>
-              <xs:element type="xs:string" name="city"/>
-              <xs:element type="xs:string" name="city_area"/>
-              <xs:element type="xs:string" name="address"/>
-              <xs:element type="xs:string" name="postcode"/>
-              <xs:element type="xs:string" name="date"/>
-              <xs:element type="xs:string" name="expiration_date"/>
-              <xs:element name="pictures">
+              <xs:element type="xs:string" name="category" minOccurs="0"/>
+              <xs:element type="xs:string" name="mobile_url" minOccurs="0"/>
+              <xs:element name="price" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="currency" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="shipping_cost" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="currency" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="make" minOccurs="0"/>
+              <xs:element type="xs:string" name="model" minOccurs="0"/>
+              <xs:element type="xs:string" name="region" minOccurs="0"/>
+              <xs:element type="xs:string" name="city" minOccurs="0"/>
+              <xs:element type="xs:string" name="city_area" minOccurs="0"/>
+              <xs:element type="xs:string" name="address" minOccurs="0"/>
+              <xs:element type="xs:string" name="postcode" minOccurs="0"/>
+              <xs:element type="xs:string" name="date" minOccurs="0"/>
+              <xs:element type="xs:string" name="expiration_date" minOccurs="0"/>
+              <xs:element name="pictures" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="picture" maxOccurs="unbounded" minOccurs="0">
                       <xs:complexType>
-                        <xs:sequence>
-                          <xs:element type="xs:string" name="picture_url"/>
-                          <xs:element type="xs:string" name="picture_title"/>
-                        </xs:sequence>
+                        <xs:all>
+                          <xs:element type="xs:string" name="picture_url" minOccurs="0"/>
+                          <xs:element type="xs:string" name="picture_title" minOccurs="0"/>
+                        </xs:all>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-            </xs:sequence>
+            </xs:all>
           </xs:complexType>
         </xs:element>
       </xs:sequence>

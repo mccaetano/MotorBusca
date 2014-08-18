@@ -4,7 +4,7 @@
       <xs:sequence>
         <xs:element name="ad" maxOccurs="unbounded">
           <xs:complexType>
-            <xs:sequence>
+            <xs:all>
               <xs:element type="xs:string" name="id"/>
               <xs:element type="xs:string" name="url"/>
               <xs:element type="xs:string" name="title"/>
@@ -67,7 +67,7 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-            </xs:sequence>
+            </xs:all>
           </xs:complexType>
         </xs:element>
       </xs:sequence>

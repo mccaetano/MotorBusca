@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<motorbusca>
+	<ad>
+		<id><![CDATA[1876]]></id>
+		<url><![CDATA[http://www.seudominio.com.br/1876]]></url>
+		<title><![CDATA[TV Plasma lg 32 polegadas]]></title>
+		<content><![CDATA[Vendo TV Plasma lg 32 polegadas.]]></content>
+		<category><![CDATA[video]]></category>
+		<price currency="BRL"><![CDATA[346]]></price>
+		<shipping_cost currency="BRL"><![CDATA[10]]></shipping_cost>
+		<make><![CDATA[LG]]></make>
+		<region><![CDATA[Rio de Janeiro]]></region>
+		<city><![CDATA[Rio de Janeiro]]></city>
+		<city_area><![CDATA[Flamengo]]></city_area>
+		<date><![CDATA[31/08/2010 18:20]]></date>
+		<pictures>
+			<picture>
+				<picture_url><![CDATA[http://www.seudominio.com.br/image1.jpg]]></picture_url>
+				<picture_title><![CDATA[front]]></picture_title>
+			</picture>
+			<picture>
+				<picture_url><![CDATA[http://www.seudominio.com.br/image2.jpg]]></picture_url>
+				<picture_title><![CDATA[back]]></picture_title>
+			</picture>
+		</pictures>
+	</ad>
+	<ad>
+		<id><![CDATA[1542a]]></id>
+		<url><![CDATA[http://www.seudominio.com.br/1542a]]></url>
+		<title><![CDATA[Radio Relogio 5pol]]></title>
+		<content><![CDATA[Vendo Radio Relogio 5pol.]]></content>
+		<category><![CDATA[radio]]></category>
+		<price currency="BRL"><![CDATA[54]]></price>
+		<shipping_cost currency="BRL"><![CDATA[10]]></shipping_cost>
+		<make><![CDATA[SAMSUNG]]></make>
+		<region><![CDATA[São Paulo]]></region>
+		<city><![CDATA[Ibiuna]]></city>
+		<city_area><![CDATA[vila industrial]]></city_area>
+		<date><![CDATA[31/08/2014 18:20]]></date>
+		<pictures>
+			<picture>
+				<picture_url><![CDATA[http://www.seudominio.com.br/image454.jpg]]></picture_url>
+				<picture_title><![CDATA[frente]]></picture_title>
+			</picture>
+			<picture>
+				<picture_url><![CDATA[http://www.seudominio.com.br/image415.jpg]]></picture_url>
+				<picture_title><![CDATA[lateral]]></picture_title>
+			</picture>
+			<picture>
+				<picture_url><![CDATA[http://www.seudominio.com.br/image405.jpg]]></picture_url>
+				<picture_title><![CDATA[fundo]]></picture_title>
+			</picture>
+		</pictures>
+	</ad>
+</motorbusca>

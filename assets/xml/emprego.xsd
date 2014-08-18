@@ -1,34 +1,35 @@
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="motorbusca">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element name="ad" maxOccurs="unbounded" minOccurs="0">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element type="xs:string" minOccurs="0" name="id"/>
-              <xs:element type="xs:string" minOccurs="0" name="title"/>
-              <xs:element type="xs:string" minOccurs="0" name="url"/>
-              <xs:element type="xs:string" minOccurs="0" name="content"/>
-              <xs:element type="xs:string" minOccurs="0" name="mobile_url"/>
-              <xs:element type="xs:string" minOccurs="0" name="city"/>
-              <xs:element type="xs:string" minOccurs="0" name="city_area"/>
-              <xs:element type="xs:string" minOccurs="0" name="region"/>
-              <xs:element type="xs:string" minOccurs="0" name="postcode"/>
-              <xs:element type="xs:string" minOccurs="0" name="experience"/>
-              <xs:element type="xs:string" minOccurs="0" name="requirements"/>
-              <xs:element type="xs:string" minOccurs="0" name="studies"/>
-              <xs:element type="xs:string" minOccurs="0" name="salary"/>
-              <xs:element type="xs:string" minOccurs="0" name="working_hours"/>
-              <xs:element type="xs:string" minOccurs="0" name="telecommute"/>
-              <xs:element type="xs:string" minOccurs="0" name="contract"/>
-              <xs:element type="xs:string" minOccurs="0" name="category"/>
-              <xs:element type="xs:string" minOccurs="0" name="company"/>
-              <xs:element type="xs:string" minOccurs="0" name="date"/>
-              <xs:element type="xs:string" minOccurs="0" name="expiration_date"/>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="motorbusca">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ad" maxOccurs="unbounded" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<xs:element type="xs:string" name="id" minOccurs="0" />
+							<xs:element type="xs:string" name="title" minOccurs="0" />
+							<xs:element type="xs:string" name="url" minOccurs="0" />
+							<xs:element type="xs:string" name="content" minOccurs="0" />
+							<xs:element type="xs:string" name="mobile_url" minOccurs="0" />
+							<xs:element type="xs:string" name="city" minOccurs="0" />
+							<xs:element type="xs:string" name="city_area" minOccurs="0" />
+							<xs:element type="xs:string" name="region" minOccurs="0" />
+							<xs:element type="xs:string" name="postcode" minOccurs="0" />
+							<xs:element type="xs:string" name="experience" minOccurs="0" />
+							<xs:element type="xs:string" name="requirements" minOccurs="0" />
+							<xs:element type="xs:string" name="studies" minOccurs="0" />
+							<xs:element type="xs:string" name="salary" minOccurs="0" />
+							<xs:element type="xs:string" name="working_hours" minOccurs="0" />
+							<xs:element type="xs:string" name="telecommute" minOccurs="0" />
+							<xs:element type="xs:string" name="contract" minOccurs="0" />
+							<xs:element type="xs:string" name="category" minOccurs="0" />
+							<xs:element type="xs:string" name="company" minOccurs="0" />
+							<xs:element type="xs:string" name="date" minOccurs="0" />
+							<xs:element type="xs:string" name="expiration_date" minOccurs="0" />
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>

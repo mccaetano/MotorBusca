@@ -194,7 +194,7 @@ class Feeds extends CI_Controller {
 					'pc_mobiliado' => mb_convert_encoding ( $ad->foreclosure, 'ISO-8859-1', 'auto' ),
 					'pc_novo' => mb_convert_encoding ( $ad->is_new, 'ISO-8859-1', 'auto' ) 
 			);
-			$anuncio_casa = $this->anuncio_casa->BuscaAnuncioCasa ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );
+			$anuncio_casa = $this->anuncio_casa->BuscaPorAnuncioID ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );
 			
 			if ($anuncio_casa === FALSE) {
 				$anuncio_casa_id = $this->anuncio_casa->Adicionar ( $row );
@@ -368,7 +368,7 @@ class Feeds extends CI_Controller {
 					'aa_data_expiracao' => $data_expiracao->format ( "Y-m-d H:i:s" ) 
 			);
 			
-			$anuncio_auto = $this->anuncio_auto->BuscaAnuncioAuto ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );
+			$anuncio_auto = $this->anuncio_auto->BuscaPorAnuncioID ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );
 			
 			if ($anuncio_auto === FALSE) {
 				$anuncio_auto_id = $this->anuncio_auto->Adicionar ( $row );
@@ -391,7 +391,7 @@ class Feeds extends CI_Controller {
 		
 		if (! $xmlFile) {
 			log_message ( 'error', "xml não enviado" );
-			show_404 ( base_url ( "feeds/autoXML" ) );
+			show_404 ( base_url ( "feeds/empregoXML" ) );
 			return;
 		}
 		
@@ -403,7 +403,7 @@ class Feeds extends CI_Controller {
 			log_message ( 'error', 'Could not load XML file: ' . $xmlFile );
 			die ( 'Could not load XML file: ' . $xmlFile );
 		}
-		if (! $dom->schemaValidate ( $xsd_document )) {
+		if (! @$dom->schemaValidate ( $xsd_document )) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
 			die ( 'XML file did not validate against schema: ' . $xsd_document );
 		}
@@ -522,7 +522,10 @@ class Feeds extends CI_Controller {
 			}
 		}
 	}
+	
 	function produtoXML($xmlFile = FALSE) {
+		set_time_limit ( 0 );
+		
 		if (! $xmlFile) {
 			log_message ( 'error', "xml não enviado" );
 			show_404 ( base_url ( "feeds/produtoXML" ) );
@@ -532,41 +535,122 @@ class Feeds extends CI_Controller {
 		$xmlFile = base64_decode ( urldecode ( $xmlFile ) );
 		$xsd_document = base_url () . "assets/xml/produto.xsd";
 		$dom = new DomDocument ();
-		var_dump ( base_url () . "assets/xml/auto.xsd" );
-		if (! $dom->load ( $xmlFile ))
+		
+		if (! @$dom->load ( $xmlFile )) {
 			log_message ( 'error', 'Could not load XML file: ' . $xmlFile );
-		if (! $dom->schemaValidate ( $xsd_document ))
+			die ( 'Could not load XML file: ' . $xmlFile );
+		}
+		if (! $dom->schemaValidate ( $xsd_document )) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
+			die ( 'XML file did not validate against schema: ' . $xsd_document );
+		}
 		
 		$xmlData = simplexml_load_file ( $xmlFile );
 		
 		$this->load->model ( "anuncio_produto" );
+		$this->load->model ( "produto_fotos" );
+		$this->load->model ( "produto_categoria" );
+		$this->load->model ( "estado" );
+		$this->load->model ( "pais" );
+		$this->load->model ( "cidade" );
 		
 		foreach ( $xmlData as $ad ) {
-			$row = array (
-					'apr_id' => '',
-					'apr_titulo' => '',
-					'apr_url' => '',
-					'apr_descricao' => '',
-					'apr_url_movel' => '',
-					't_mb_anuncio_produtocol' => '',
-					'prc_id' => '',
-					'apr_preco' => '',
-					'apr_taxa_envio' => '',
-					'apr_marca' => '',
-					'apr_modelo' => '',
-					'apr_caixapostal' => '',
-					'cd_id' => '',
-					'es_id' => '',
-					'ps_id' => '',
-					'apr_Endereco' => '',
-					'apr_bairro' => '',
-					'apr_data_criacao' => '',
-					'apr_data_expiracao' => '' 
+			$pais = array (
+					'ps_id' => 1,
+					'ps_descricao' => 'Brasil' 
 			);
-			$lista = $this->anuncio_produto->Adicionar ( $row );
+			
+			$estado = $this->estado->BuscaEstado ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
+			if ($estado === FALSE) {
+				$this->estado->Adicionar ( array (
+						'es_id' => NULL,
+						't_mb_pais_ps_id' => $pais ['ps_id'],
+						'es_descricao' => mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) 
+				) );
+				$estado = $this->estado->BuscaEstado ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
+			}
+			
+			$cidade = $this->cidade->BuscaCiadde ( mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) );
+			if ($cidade === FALSE) {
+				$this->cidade->Adicionar ( array (
+						't_mb_estado_es_id' => $estado [0]->es_id,
+						'cd_descricao' => mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) 
+				) );
+				$cidade = $this->cidade->BuscaCiadde ( mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) );
+			}
+			
+			$produto_categoria = $this->produto_categoria->BuscaPorDescricao ( mb_convert_encoding ( $ad->category, 'ISO-8859-1', 'auto' ) );
+			if ($produto_categoria === FALSE) {
+				$this->produto_categoria->Adicionar ( array (
+						'prc_descricao' => mb_convert_encoding ( $ad->category, 'ISO-8859-1', 'auto' ) 
+				) );
+				$produto_categoria = $this->produto_categoria->BuscaPorDescricao ( mb_convert_encoding ( $ad->category, 'ISO-8859-1', 'auto' ) );
+			}
+			
+			$data_inclusao = DateTime::createFromFormat ( "d/m/Y", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			if ($data_inclusao === FALSE) {
+				$data_inclusao = DateTime::createFromFormat ( "Y/m/d", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			if ($data_inclusao === FALSE) {
+				$data_inclusao = DateTime::createFromFormat ( "d/m/Y H:i:s", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			if ($data_inclusao === FALSE) {
+				$data_inclusao = DateTime::createFromFormat ( "Y/m/d H:i:s", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			
+			$data_expiracao = DateTime::createFromFormat ( "d/m/Y", mb_convert_encoding ( $ad->expiration_date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			if ($data_expiracao === FALSE) {
+				$data_expiracao = DateTime::createFromFormat ( "Y/m/d", mb_convert_encoding ( $ad->expiration_date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			if ($data_expiracao === FALSE) {
+				$data_expiracao = DateTime::createFromFormat ( "d/m/Y H:i:s", mb_convert_encoding ( $ad->expiration_date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			if ($data_expiracao === FALSE) {
+				$data_expiracao = DateTime::createFromFormat ( "Y/m/d H:i:s", mb_convert_encoding ( $ad->expiration_date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
+			}
+			
+			$row = array (
+					'apr_anuncio_id' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
+					'apr_url' => mb_convert_encoding ( $ad->url, 'ISO-8859-1', 'auto' ),
+					'apr_titulo' => mb_convert_encoding ( $ad->title, 'ISO-8859-1', 'auto' ),
+					'apr_descricao' => mb_convert_encoding ( $ad->content, 'ISO-8859-1', 'auto' ),
+					'prc_id' => ( string ) $produto_categoria [0]->prc_id,
+					'apr_url_movel' => mb_convert_encoding ( $ad->mobile_url, 'ISO-8859-1', 'auto' ),
+					'apr_preco' => mb_convert_encoding ( $ad->price, 'ISO-8859-1', 'auto' ),
+					'apr_preco_moeda' => mb_convert_encoding ( $ad->price['currency'], 'ISO-8859-1', 'auto' ),
+					'apr_taxa_envio' => mb_convert_encoding ( $ad->shipping_cost, 'ISO-8859-1', 'auto' ),
+					'apr_taxa_envio_moeda' => mb_convert_encoding ( $ad->shipping_cost['currency'], 'ISO-8859-1', 'auto' ),
+					'apr_marca' => mb_convert_encoding ( $ad->make, 'ISO-8859-1', 'auto' ),
+					'apr_modelo' => mb_convert_encoding ( $ad->model, 'ISO-8859-1', 'auto' ),
+					'apr_caixapostal' => mb_convert_encoding ( $ad->postcode, 'ISO-8859-1', 'auto' ),
+					'cd_id' => ( string ) $cidade [0]->cd_id,
+					'es_id' => ( string ) $estado [0]->es_id,
+					'ps_id' => $pais ["ps_id"],
+					'apr_Endereco' => mb_convert_encoding ( $ad->address, 'ISO-8859-1', 'auto' ),
+					'apr_bairro' => mb_convert_encoding ( $ad->city_area, 'ISO-8859-1', 'auto' ),
+					'apr_data_criacao' => $data_inclusao ? $data_inclusao->format ( "Y-m-d H:i:s" ) : null,
+					'apr_data_expiracao' => $data_expiracao ? $data_expiracao->format ( "Y-m-d H:i:s" ) : null 
+			);
+			
+			$anuncio_produto = $this->anuncio_produto->BuscaPorAnuncioID ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );
+				
+			if ($anuncio_produto === FALSE) {
+				$anuncio_produto_id = $this->anuncio_produto->Adicionar ( $row );
+
+				foreach ( $ad->pictures->picture as $picture ) {
+					$row = array (
+							'prf_titulo' => mb_convert_encoding ( $picture->picture_url, 'ISO-8859-1', 'auto' ),
+							'prf_url' => mb_convert_encoding ( $picture->picture_title, 'ISO-8859-1', 'auto' ),
+							'apr_id' => ( string ) $anuncio_produto_id
+					);
+					$this->produto_fotos->Adicionar ( $row );
+				}
+			} else {
+				$this->anuncio_produto->Alterar ( $row, ( string ) $anuncio_produto [0]->apr_id );
+			}
 		}
 	}
+	
 	function temporadaXML($xmlFile = FALSE) {
 		if (! $xmlFile) {
 			log_message ( 'error', "xml não enviado" );

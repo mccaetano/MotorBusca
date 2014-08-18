@@ -17,7 +17,7 @@ class Anuncio_auto extends CI_Model {
 	
 	function Alterar($row, $id) {
 		$this->db->trans_begin();
-		$this->db->where("ad_id", $id);
+		$this->db->where("aa_id", $id);
 		$retorno = $this->db->update('t_mb_anuncio_auto', $row);
 	
 		$this->db->trans_commit();
@@ -26,8 +26,8 @@ class Anuncio_auto extends CI_Model {
 		return $retorno;
 	}
 	
-	function BuscaAnuncioAuto($titulo) {
-		$this->db->where("aa_titulo", $titulo);
+	function BuscaPorAnuncioID($anuncio_id) {
+		$this->db->where("aa_anuncio_id", $anuncio_id);
 		$query = $this->db->get('t_mb_anuncio_auto');
 		$retorno = $query->result();
 	

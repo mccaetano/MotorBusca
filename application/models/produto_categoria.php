@@ -1,14 +1,14 @@
 <?php
-class Emprego_contrato extends CI_Model {
+class Produto_Categoria extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
 	
 	function Adicionar($row) {
 		$this->db->trans_begin();
-		$this->db->insert('t_mb_emprego_contrato', $row);
+		$this->db->insert('t_mb_produto_categoria', $row);
 		$retorno = mysql_insert_id();
-	
+		
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
 	
@@ -16,8 +16,8 @@ class Emprego_contrato extends CI_Model {
 	}
 	
 	function BuscaPorDescricao($descricao) {
-		$this->db->where("emc_descricao", $descricao);
-		$query = $this->db->get('t_mb_emprego_contrato');
+		$this->db->where("prc_descricao", $descricao);
+		$query = $this->db->get('t_mb_produto_categoria');
 		$retorno = $query->result();
 
 		if ($query->num_rows() <= 0) {
