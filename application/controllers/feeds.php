@@ -192,7 +192,8 @@ class Feeds extends CI_Controller {
 					'pc_garagem' => mb_convert_encoding ( $ad->parking, 'ISO-8859-1', 'auto' ),
 					'pc_finalizado' => mb_convert_encoding ( $ad->is_furnished, 'ISO-8859-1', 'auto' ),
 					'pc_mobiliado' => mb_convert_encoding ( $ad->foreclosure, 'ISO-8859-1', 'auto' ),
-					'pc_novo' => mb_convert_encoding ( $ad->is_new, 'ISO-8859-1', 'auto' ) 
+					'pc_novo' => mb_convert_encoding ( $ad->is_new, 'ISO-8859-1', 'auto' ),
+					'tan_id' => 1
 			);
 			$anuncio_casa = $this->anuncio_casa->BuscaPorAnuncioID ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );
 			
@@ -365,7 +366,8 @@ class Feeds extends CI_Controller {
 					'aa_caixa_postal' => mb_convert_encoding ( $ad->postcode, 'ISO-8859-1', 'auto' ),
 					'aa_bairro' => mb_convert_encoding ( $ad->city_area, 'ISO-8859-1', 'auto' ),
 					'aa_data_criacao' => $data_inclusao->format ( "Y-m-d H:i:s" ),
-					'aa_data_expiracao' => $data_expiracao->format ( "Y-m-d H:i:s" ) 
+					'aa_data_expiracao' => $data_expiracao->format ( "Y-m-d H:i:s" ) ,
+					'tan_id' => 2
 			);
 			
 			$anuncio_auto = $this->anuncio_auto->BuscaPorAnuncioID ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );
@@ -510,7 +512,8 @@ class Feeds extends CI_Controller {
 					'ect_id' => ( string ) $emprego_categoria [0]->ect_id,
 					'aem_empresa' => mb_convert_encoding ( $ad->company, 'ISO-8859-1', 'auto' ),
 					'aem_data_criacao' => $data_inclusao->format ( "Y-m-d H:i:s" ),
-					'aem_data_expiracao' => $data_expiracao->format ( "Y-m-d H:i:s" ) 
+					'aem_data_expiracao' => $data_expiracao->format ( "Y-m-d H:i:s" ),
+					'tan_id' => 3
 			);
 			
 			$anuncio_emprego = $this->anuncio_emprego->BuscaPorAnuncioID ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );
@@ -629,7 +632,8 @@ class Feeds extends CI_Controller {
 					'apr_Endereco' => mb_convert_encoding ( $ad->address, 'ISO-8859-1', 'auto' ),
 					'apr_bairro' => mb_convert_encoding ( $ad->city_area, 'ISO-8859-1', 'auto' ),
 					'apr_data_criacao' => $data_inclusao ? $data_inclusao->format ( "Y-m-d H:i:s" ) : null,
-					'apr_data_expiracao' => $data_expiracao ? $data_expiracao->format ( "Y-m-d H:i:s" ) : null 
+					'apr_data_expiracao' => $data_expiracao ? $data_expiracao->format ( "Y-m-d H:i:s" ) : null,
+					'tan_id' => 4 
 			);
 			
 			$anuncio_produto = $this->anuncio_produto->BuscaPorAnuncioID ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );

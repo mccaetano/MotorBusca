@@ -27,6 +27,11 @@ class Home extends CI_Controller {
     	$this->load->view('home');
 		$this->load->view('templates/footer');
 	}
+	
+	public function template()
+	{
+		$this->load->view('admin/template');		
+	}
 }
 
 /* End of file welcome.php */
