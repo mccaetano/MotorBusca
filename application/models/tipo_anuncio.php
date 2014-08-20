@@ -16,4 +16,16 @@ class Tipo_anuncio extends CI_Model {
 
 		return $result;
 	}
+	
+	function BuscaTodos() {
+		
+		$query = $this->db->get("t_mb_tipo_anuncio");
+		$result = $query->result();
+	
+		if ($query->num_rows() <= 0) {
+			return FALSE;
+		}
+	
+		return $result;
+	}
 }

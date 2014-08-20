@@ -37,5 +37,16 @@ class Perfil_Acesso extends CI_Model {
 		return $retorno;
 	}
 	
+	function BuscaPorId($id) {
+		$this->db->where("pra_id", $id);
+		$query = $this->db->get('t_mb_perfil_acesso');
+		$retorno = $query->result();
+
+		if ($query->num_rows() <= 0) {
+			return FALSE;
+		}		
+		return $retorno;
+	}
+	
 	
 }

@@ -57,6 +57,10 @@ html,body {
 .container .credit {
 	margin: 20px 0;
 }
+
+.pull-center {
+	text-align: center;
+}
 </style>
 
 <link href="<?php echo base_url();?>assets/css/bootstrap-responsive.css"

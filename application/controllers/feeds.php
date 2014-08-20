@@ -20,7 +20,7 @@ class Feeds extends CI_Controller {
 		$this->load->model ( "motor_anuncio" );
 		$this->load->model ( "tipo_anuncio" );
 		
-		$lista = $this->motor_anuncio->listaTodos ();
+		$lista = $this->motor_anuncio->BuscaTodos ();
 		
 		if ($lista != FALSE) {
 			foreach ( $lista as $motor ) {

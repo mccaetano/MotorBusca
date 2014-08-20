@@ -1,5 +1,5 @@
 <div class="row-fluid">
-	<div class="span8"><h1>Cadastro de Perfil</h1></div>
+	<div class="span8"><h1>Novo Perfil</h1></div>
 	<div class="span2 pull-right"><a  class="btn btn-inverse" href="<?php echo base_url();?>admin/perfil/lista">voltar</a>
 	</div>
 </div>
@@ -44,7 +44,9 @@
 			    <label class="control-label" for="iAcesso">Acesso:</label>
 			    <div class="controls">
 			    	<select id="iAcesso" name="iAcesso">
-			    		<option value=""></option>
+			    		<?php if ($perfil_acessos) { foreach ($perfil_acessos as $perfil_acesso) {?>
+			    		<option value="<?php echo $perfil_acesso->pra_id; ?>" <?php echo set_select('iAcesso', $perfil_acesso->pra_id); ?>><?php echo $perfil_acesso->pra_descricao; ?></option>
+			    		<?php }} ?>
 			    	</select>
 			    </div>
 		  	</div>

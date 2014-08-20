@@ -3,31 +3,31 @@
 	<hr>
 </div>	
 <div class="hero-unit">
-	<div class="row-fluid pull-center">
-		<div class="span2">
-			<a>
-				<img alt="Casa" src="<?php echo base_url();?>assets/img/Imoveis.png">
+	<div class="row-fluid">
+		<div class="span2  pull-center">
+			<a href="#">
+				<img alt="Casa" src="<?php echo base_url();?>assets/img/Imoveis.jpg">
 				Casa
 			</a>
 		</div>
-		<div class="span2">
-			<a>
-				<img alt="Casa" src="<?php echo base_url();?>assets/img/Carros.png">
+		<div class="span2 pull-center">
+			<a href="#">
+				<img alt="Casa" src="<?php echo base_url();?>assets/img/Carros.jpg">
 				Autos
 			</a></div>
-		<div class="span2">
-			<a>
-				<img alt="Casa" src="<?php echo base_url();?>assets/img/">
+		<div class="span2 pull-center">
+			<a href="#">
+				<img alt="Casa" src="<?php echo base_url();?>assets/img/Empregos.jpg">
 				Emprego
 			</a></div>
-		<div class="span2">
-			<a>
-				<img alt="Casa" src="<?php echo base_url();?>assets/img/Produtos.png">
+		<div class="span2 pull-center">
+			<a href="#">
+				<img alt="Casa" src="<?php echo base_url();?>assets/img/Produtos.jpg">
 				Produto
 			</a></div>
-		<div class="span2">
-			<a>
-				<img alt="Casa" src="<?php echo base_url();?>assets/img/Temporadas.png">
+		<div class="span2 pull-center">
+			<a href="#">
+				<img alt="Casa" src="<?php echo base_url();?>assets/img/Temporadas.jpg">
 				Temporada
 			</a></div>
 	</div>

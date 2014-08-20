@@ -37,5 +37,18 @@ class MbPerfil extends CI_Model {
 		return $retorno;
 	}
 	
+
+
+	function BuscaPorID($id) {
+		$this->db->where("id_perfil", $id);
+		$query = $this->db->get('t_mb_perfil');
+		$retorno = $query->result();
+	
+		if ($query->num_rows() <= 0) {
+			return FALSE;
+		}
+		return $retorno;
+	}
+	
 	
 }
