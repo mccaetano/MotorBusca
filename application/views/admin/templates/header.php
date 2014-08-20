@@ -94,8 +94,8 @@ html,body {
 							<ul class="nav">
 								<li <?php echo  $ativo == "home" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin">Home</a></li>
 								<li <?php echo  $ativo == "perfil" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/perfil/lista">Perfil</a></li>
-								<li <?php echo  $ativo == "feeds" ? "class=\"active\"" : "" ?>><a href="#">Feeds</a></li>
-								<li <?php echo  $ativo == "alertas" ? "class=\"active\"" : "" ?>><a href="#">Alertas</a></li>
+								<li <?php echo  $ativo == "feeds" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/motorfeeds/lista">Feeds</a></li>
+								<li <?php echo  $ativo == "alertas" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/alertas/lista">Alertas</a></li>
 							</ul>
 						</div>
 					</div>

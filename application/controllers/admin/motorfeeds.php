@@ -13,7 +13,7 @@ class MotorFeeds extends CI_Controller {
     	
     	
     	$data = array(
-    		'ativo' => 'motor',
+    		'ativo' => 'feeds',
     		'motor' => $lista
     	);
     	$this->load->view('admin/templates/header', $data);
@@ -46,7 +46,7 @@ class MotorFeeds extends CI_Controller {
     	$lista = $this->tipo_anuncio->BuscaTodos ();
     	
     	$data = array(
-    		'ativo' => 'perfil',
+    		'ativo' => 'feeds',
     		'tipoanuncio' => $lista
     	);
     	$this->load->view('admin/templates/header', $data);
@@ -75,12 +75,12 @@ class MotorFeeds extends CI_Controller {
     	}
     	
     	$lista = $this->tipo_anuncio->BuscaTodos ();    	
-    	$perfil = $this->motor_anuncio->BuscaPorID ($id);
+    	$feeds = $this->motor_anuncio->BuscaPorID ($id);
     	
     	$data = array(
-    		'ativo' => 'perfil',
+    		'ativo' => 'feeds',
     		'tipoanuncio' => $lista,
-    		'anuncio' => $perfil[0]
+    		'anuncio' => $feeds[0]
     	);
     	$this->load->view('admin/templates/header', $data);
     	$this->load->view('admin/motor_alteracao', $data);
