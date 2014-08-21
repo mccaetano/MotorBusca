@@ -1,5 +1,6 @@
 RewriteEngine on
-RewriteBase /MotorBusca/
+#RewriteBase /MotorBusca/
+RewriteBase /
 RewriteCond $1 !^(index\.php|images|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
