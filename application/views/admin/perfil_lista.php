@@ -28,7 +28,7 @@
 				<td><?php echo $perfil->id_perfil; ?></td>
 				<td><?php echo $perfil->nome_completo; ?></td>
 				<td><?php echo $perfil->email; ?></td>
-				<td><?php echo DateTime::createFromFormat("Y-m-d H:i:s", $perfil->data_nascimento)->format("d/m/Y"); ?></td>
+				<td><?php echo mdate('%d/%m/%Y', $perfil->data_nascimento); ?></td>
 				<td><?php echo $perfil->ativo == 1 ? 'sim' : 'não';  ?></td>
 				<td><?php echo $perfil->t_mb_perfil_acesso_pra_id; ?></td>
 				<td><a class="btn" href="<?php echo base_url();?>admin/perfil/alteracao/<?php echo $perfil->id_perfil; ?>">Alterar</a>&nbsp;<a

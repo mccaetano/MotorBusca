@@ -1,5 +1,5 @@
 <?php
-class MbPerfil extends CI_Model {
+class Mbperfil extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
