@@ -8,7 +8,7 @@ class Perfil extends CI_Controller {
     
     function lista() {
     	
-    	$this->load->model ( "mbPerfil" , "perfil");
+    	$this->load->model ( "mbperfil" , "perfil");
     	$lista = $this->perfil->BuscaTodos ();
     	
     	
@@ -25,7 +25,7 @@ class Perfil extends CI_Controller {
     	$method =  (string)$_SERVER["REQUEST_METHOD"];
     	
     	
-    	$this->load->model ( "mbPerfil", "perfil" );
+    	$this->load->model ( "mbperfil", "perfil" );
     	$this->load->model ( "perfil_acesso");
     	
     	if ($method == "POST") {
@@ -64,7 +64,7 @@ class Perfil extends CI_Controller {
     function alteracao($id = FALSE) {
     	$method =  (string)$_SERVER["REQUEST_METHOD"];
     	
-    	$this->load->model ( "mbPerfil", "perfil" );
+    	$this->load->model ( "mbperfil", "perfil" );
     	$this->load->model ( "perfil_acesso" );
     	
     	if ($method == "POST") {
@@ -96,7 +96,7 @@ class Perfil extends CI_Controller {
     
     function exclusao($id = FALSE) {
     	 
-    	$this->load->model ( "mbPerfil", "perfil" );
+    	$this->load->model ( "mbperfil", "perfil" );
     	
     	$this->perfil->Excluir ($row, $id);
     	redirect("admin/perfil/lista");
