@@ -8,7 +8,8 @@ class MotorFeeds extends CI_Controller {
 		parent::__construct ();
 		$this->load->helper ( array (
 				'form' ,
-				'date'
+				'date', 
+				'url'
 		) );
 	}
 	function lista() {
