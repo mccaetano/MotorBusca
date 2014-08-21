@@ -6,7 +6,7 @@
 <div class="clear"></div>
 
 <hr>
-
+<?php echo validation_errors('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>', '</div>') ?>
 <div class="well">
 	<form action="<?php echo base_url();?>admin/perfil/novo" class="form-horizontal" method="post">	
 		<fieldset>
@@ -19,7 +19,7 @@
 		  	<div class="control-group">
 			    <label class="control-label" for="iEmail">Email:</label>
 			    <div class="controls">
-			      <input type="text" id="iEmail" name="iEmail" placeholder="Email" value="<?php echo set_value("iEmail"); ?>">
+			      <input type="email" id="iEmail" name="iEmail" placeholder="Email" value="<?php echo set_value("iEmail"); ?>">
 			    </div>
 		  	</div>
 		  	<div class="control-group">

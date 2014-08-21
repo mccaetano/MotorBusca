@@ -25,7 +25,7 @@
 		  	<div class="control-group">
 			    <label class="control-label" for="iURL">URL Arquivo:</label>
 			    <div class="controls">
-			      <input type="text" id="iURL" name="iURL" placeholder="URL de arquivo XML" value="<?php echo set_value("iURL"); ?>">
+			      <input type="url" id="iURL" name="iURL" placeholder="URL de arquivo XML" value="<?php echo set_value("iURL"); ?>">
 			    </div>
 		  	</div>
 		  	<div class="control-group">

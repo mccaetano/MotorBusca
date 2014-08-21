@@ -51,7 +51,7 @@ html,body {
 /* Not required for template or sticky footer method. */
 .container {
 	width: auto;
-	max-width: 680px;
+	max-width: 1170px;
 }
 
 .container .credit {

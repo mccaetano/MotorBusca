@@ -1,4 +1,5 @@
-			<div id="push"></div>
+				<div id="push"></div>
+			</div>
 		</div>
 
 		<div id="footer">
@@ -9,7 +10,7 @@
 			</div>
 		</div>
 
-		<script src="<?php echo base_url();?>assets/js/jquery.js"></script>
+		<script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
 		<script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

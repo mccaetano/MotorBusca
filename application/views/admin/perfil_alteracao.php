@@ -19,13 +19,13 @@
 		  	<div class="control-group">
 			    <label class="control-label" for="iEmail">Email:</label>
 			    <div class="controls">
-			      <input type="text" id="iEmail" name="iEmail" placeholder="Email" value="<?php echo $perfil->email; ?>">
+			      <input type="email" id="iEmail" name="iEmail" placeholder="Email" value="<?php echo $perfil->email; ?>">
 			    </div>
 		  	</div>
 		  	<div class="control-group">
 			    <label class="control-label" for="iDataNascimento">Data Nascimento:</label>
 			    <div class="controls">
-			      <input type="date" id="iDataNascimento" name="iDataNascimento" placeholder="Data de Nascimento" value="<?php  $dataNascimento = new DateTime($perfil->data_nascimento); echo $dataNascimento->format('d/m/Y'); ?>">
+			      <input type="date" id="iDataNascimento" name="iDataNascimento" placeholder="Data de Nascimento" value="<?php $data = new DateTime($perfil->data_nascimento); echo $data->format('Y-m-d'); ?>">
 			    </div>
 		  	</div>
 		  	<div class="control-group">

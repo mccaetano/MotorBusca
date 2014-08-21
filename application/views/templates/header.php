@@ -37,7 +37,7 @@ html,body {
 }
 
 /* Lastly, apply responsive CSS fixes as necessary */
-@media ( max-width : 1200px) {
+@media ( max-width : 1170px) {
 	#footer {
 		margin-left: -20px;
 		margin-right: -20px;
@@ -51,7 +51,13 @@ html,body {
 /* Not required for template or sticky footer method. */
 .container {
 	width: auto;
-	max-width: 680px;
+	max-width: 1170px;
+}
+
+.hero-unit {
+	width: auto;
+	text-align: center;
+	padding-left: 150px; 
 }
 
 .container .credit {

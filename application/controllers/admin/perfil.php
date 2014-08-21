@@ -3,7 +3,7 @@
 class Perfil extends CI_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->helper(array('form'));
+        $this->load->helper(array('form','url'));
     }
     
     function lista() {
@@ -24,22 +24,29 @@ class Perfil extends CI_Controller {
     function novo() {
     	$method =  (string)$_SERVER["REQUEST_METHOD"];
     	
+    	
     	$this->load->model ( "mbPerfil", "perfil" );
     	$this->load->model ( "perfil_acesso");
     	
     	if ($method == "POST") {
-    		$row = array(
-    			'nome_completo' => $this->input->post('iNome'),
-    			'email' => $this->input->post('iEmail'),
-    			'data_nascimento' => $this->input->post('iDataNascimento'),
-    			'senha' => base64_encode($this->input->post('iSenha')),
-    			'ativo' => $this->input->post('iAtivo') == 'on' ? '1' : '0',
-    			't_mb_perfil_acesso_pra_id' => $this->input->post('iAcesso')
-    		);
+    		$this->load->library('form_validation');
     		
-    		$this->perfil->Adicionar ($row);
+    		$this->form_validation->set_rules('iURL', 'Url de Acesso', 'prep_url');
     		
-    		redirect("admin/perfil/lista");
+    		if ($this->form_validation->run() == true) {    		
+	    		$row = array(
+	    			'nome_completo' => $this->input->post('iNome'),
+	    			'email' => $this->input->post('iEmail'),
+	    			'data_nascimento' => $this->input->post('iDataNascimento'),
+	    			'senha' => base64_encode($this->input->post('iSenha')),
+	    			'ativo' => $this->input->post('iAtivo') == 'on' ? '1' : '0',
+	    			't_mb_perfil_acesso_pra_id' => $this->input->post('iAcesso')
+	    		);
+	    		
+	    		$this->perfil->Adicionar ($row);
+	    		
+	    		redirect("admin/perfil/lista");
+    		}
     	}
     	
     	
@@ -85,5 +92,14 @@ class Perfil extends CI_Controller {
     	$this->load->view('admin/templates/header', $data);
     	$this->load->view('admin/perfil_alteracao', $data);
     	$this->load->view('admin/templates/footer', $data);
+    }
+    
+    function exclusao($id = FALSE) {
+    	 
+    	$this->load->model ( "mbPerfil", "perfil" );
+    	
+    	$this->perfil->Excluir ($row, $id);
+    	redirect("admin/perfil/lista");
+    	    	
     }
 }

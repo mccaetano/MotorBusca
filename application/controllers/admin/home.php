@@ -1,10 +1,10 @@
-<?php if ( ! defined('BASEPATH')) { exit('No direct script access allowed');}
+<?php 
+if ( ! defined('BASEPATH')) { exit('No direct script access allowed');}
 
-class Home extends CI_Controller {
+class home extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper(array('form'));
-        $this->lang->load("home", "portuguese");
     }
 	/**
 	 * Index Page for this controller.
@@ -23,21 +23,12 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('templates/header');
-    	$this->load->view('home');
-		$this->load->view('templates/footer');
-	}
-	
-	public function admin()
-	{
-		$this->load->view('admin/templates/header');
-		$this->load->view('admin/home_admin');
-		$this->load->view('admin/templates/footer');
-	}
-	
-	public function template()
-	{
-		$this->load->view('admin/template');		
+		$data = array(
+				'ativo' => ''
+		);
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/home_admin', $data);
+		$this->load->view('admin/templates/footer', $data);
 	}
 }
 

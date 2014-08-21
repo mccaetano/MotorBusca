@@ -19,12 +19,22 @@ class Motor_anuncio extends CI_Model {
 		$this->db->trans_begin();
 		$this->db->where("man_id", $id);
 		$this->db->update('t_mb_motor_anuncio', $row);
-		$retorno = mysql_insert_id();
 	
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
 	
-		return $retorno;
+		return $id;
+	}
+
+	function Excluir($row, $id) {
+		$this->db->trans_begin();
+		$this->db->where("man_id", $id);
+		$this->db->delete('t_mb_motor_anuncio');
+	
+		$this->db->trans_commit();
+		$this->db->cache_delete_all();
+	
+		return $id;
 	}
 	
 	function BuscaTodos() {

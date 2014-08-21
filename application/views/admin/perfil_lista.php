@@ -10,7 +10,7 @@
 <hr>
 
 <div class="well">
-	<table class="table table-bordered">
+	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -32,7 +32,7 @@
 				<td><?php echo $perfil->ativo == 1 ? 'sim' : 'não';  ?></td>
 				<td><?php echo $perfil->t_mb_perfil_acesso_pra_id; ?></td>
 				<td><a class="btn" href="<?php echo base_url();?>admin/perfil/alteracao/<?php echo $perfil->id_perfil; ?>">Alterar</a>&nbsp;<a
-					class="btn btn-danger" href="#">Excluir</a></td>
+					class="btn btn-danger" href="<?php echo base_url();?>admin/perfil/exclusao/<?php echo $perfil->id_perfil; ?>">Excluir</a></td>
 			</tr>
 			<?php } } ?>
 		</tbody>

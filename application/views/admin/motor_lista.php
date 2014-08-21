@@ -12,7 +12,7 @@
 <hr>
 
 <div class="well">
-	<table class="table table-bordered">
+	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -36,7 +36,7 @@
 				<td><?php echo $feed->tan_id; ?></td>
 				<td><a class="btn"
 					href="<?php echo base_url();?>admin/motorfeeds/alteracao/<?php echo $feed->man_id; ?>">Alterar</a>&nbsp;<a
-					class="btn btn-danger" href="#">Excluir</a></td>
+					class="btn btn-danger" href="<?php echo base_url();?>admin/motorfeeds/exclusao/<?php echo $feed->man_id; ?>">Excluir</a></td>
 			</tr>
 			<?php } } ?>
 		</tbody>

@@ -19,12 +19,22 @@ class MbPerfil extends CI_Model {
 		$this->db->trans_begin();
 		$this->db->where("id_perfil", $id);
 		$this->db->update('t_mb_perfil', $row);
-		$retorno = mysql_insert_id();
 	
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
 	
-		return $retorno;
+		return $id;
+	}
+	
+	function Excluir($row, $id) {
+		$this->db->trans_begin();
+		$this->db->where("id_perfil", $id);
+		$this->db->delete('t_mb_perfil', $row);
+	
+		$this->db->trans_commit();
+		$this->db->cache_delete_all();
+	
+		return $id;
 	}
 	
 	function BuscaTodos() {
