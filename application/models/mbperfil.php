@@ -47,8 +47,6 @@ class Mbperfil extends CI_Model {
 		return $retorno;
 	}
 	
-
-
 	function BuscaPorID($id) {
 		$this->db->where("id_perfil", $id);
 		$query = $this->db->get('t_mb_perfil');
@@ -59,6 +57,15 @@ class Mbperfil extends CI_Model {
 		}
 		return $retorno;
 	}
+
+	function ListaPerfil() {
+		$query = $this->db->get('v_mb_perfil');
+		$retorno = $query->result();
 	
+		if ($query->num_rows() <= 0) {
+			return FALSE;
+		}
+		return $retorno;
+	}
 	
 }

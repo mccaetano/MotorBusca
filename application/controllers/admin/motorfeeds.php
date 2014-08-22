@@ -14,7 +14,7 @@ class MotorFeeds extends CI_Controller {
 	}
 	function lista() {
 		$this->load->model ( "motor_anuncio" );
-		$lista = $this->motor_anuncio->BuscaTodos ();
+		$lista = $this->motor_anuncio->ListaTodos ();
 		
 		$data = array (
 				'ativo' => 'feeds',

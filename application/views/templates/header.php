@@ -67,6 +67,14 @@ html,body {
 .pull-center {
 	text-align: center;
 }
+
+.pesquisa_google {
+	height: 500px;
+	border: 1px solid blue;
+	clip: auto;
+	overflow: hidden;
+}
+
 </style>
 
 <link href="<?php echo base_url();?>assets/css/bootstrap-responsive.css"

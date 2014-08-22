@@ -23,14 +23,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php if ($perfis) { foreach ($perfis as $perfil) { var_dump($perfil->data_nascimento); ?>
+			<?php if ($perfis) { foreach ($perfis as $perfil) { ?>
 			<tr>
 				<td><?php echo $perfil->id_perfil; ?></td>
 				<td><?php echo $perfil->nome_completo; ?></td>
 				<td><?php echo $perfil->email; ?></td>				
 				<td><?php $data = DateTime::createFromFormat("Y-m-d H:i:s", $perfil->data_nascimento);  echo  $data === FALSE ?  '' : $data->format("d/m/Y"); ?></td>
 				<td><?php echo $perfil->ativo == 1 ? 'sim' : 'não';  ?></td>
-				<td><?php echo $perfil->t_mb_perfil_acesso_pra_id; ?></td>
+				<td><?php echo $perfil->pra_descricao; ?></td>
 				<td><a class="btn" href="<?php echo base_url();?>admin/perfil/alteracao/<?php echo $perfil->id_perfil; ?>">Alterar</a>&nbsp;<a
 					class="btn btn-danger" href="<?php echo base_url();?>admin/perfil/exclusao/<?php echo $perfil->id_perfil; ?>">Excluir</a></td>
 			</tr>

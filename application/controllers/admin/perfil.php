@@ -13,7 +13,7 @@ class Perfil extends CI_Controller {
     function lista() {
     	
     	$this->load->model ( "mbperfil" , "perfil");
-    	$lista = $this->perfil->BuscaTodos ();
+    	$lista = $this->perfil->ListaPerfil ();
     	
     	
     	$data = array(

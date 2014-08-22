@@ -47,8 +47,17 @@ class Motor_anuncio extends CI_Model {
 		
 		return $result;		
 	}
-	
 
+	function ListaTodos() {
+		$query = $this->db->get("v_mb_motor_anuncio");
+		$result = $query->result();
+	
+		if ($query->num_rows() <= 0) {
+			return FALSE;
+		}
+	
+		return $result;
+	}
 
 	function BuscaPorId($id) {
 		$this->db->where("man_id", $id);
