@@ -27,5 +27,15 @@ class Tipo_Imovel extends CI_Model {
 		return $retorno;
 	}
 	
+	function ListaTodos() {
+		$query = $this->db->get('t_mb_propriedade_tipo');
+		$retorno = $query->result();
+	
+		if ($query->num_rows() <= 0) {
+			return FALSE;
+		}
+			
+		return $retorno;
+	}
 	
 }

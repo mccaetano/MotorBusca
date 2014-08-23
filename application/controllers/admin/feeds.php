@@ -29,7 +29,7 @@ class Feeds extends CI_Controller {
 				
 				$url = $tipoAnuncio [0]->tan_endereco_carga . "/" . $xmlurl;
 				var_dump ( $url );
-				// this->curl_post_async ( $url, FALSE );
+				$this->curl_post_async ( $url, FALSE );
 			}
 		}
 	}
@@ -656,30 +656,6 @@ class Feeds extends CI_Controller {
 	}
 	
 	function temporadaXML($xmlFile = FALSE) {
-		if (! $xmlFile) {
-			log_message ( 'error', "xml não enviado" );
-			show_404 ( base_url ( "feeds/temporadaXML" ) );
-			return;
-		}
 		
-		$xmlFile = base64_decode ( urldecode ( $xmlFile ) );
-		$xsd_document = base_url () . "assets/xml/temporada.xsd";
-		$dom = new DomDocument ();
-		var_dump ( base_url () . "assets/xml/temporada.xsd" );
-		if (! $dom->load ( $xmlFile ))
-			log_message ( 'error', 'Could not load XML file: ' . $xmlFile );
-		if (! $dom->schemaValidate ( $xsd_document ))
-			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
-		
-		$xmlData = simplexml_load_file ( $xmlFile );
-		
-		$this->load->model ( "anuncio_temporada" );
-		
-		foreach ( $xmlData as $ad ) {
-			$row = array (
-					'apr_id, apr_titulo, apr_url, apr_descricao, apr_url_movel, t_mb_anuncio_produtocol, prc_id, apr_preco, apr_taxa_envio, apr_marca, apr_modelo, apr_caixapostal, cd_id, es_id, ps_id, apr_Endereco, apr_bairro, apr_data_criacao, apr_data_expiracao' => '' 
-			);
-			$lista = $this->anuncio_temporada->Adicionar ( $row );
-		}
 	}
 }
