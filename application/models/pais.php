@@ -19,7 +19,12 @@ class Pais extends CI_Model {
 		$this->db->where("ps_descricao", $nome_pais);
 		$query = $this->db->get('t_mb_pais');
 		$retorno = $query->results();
-				
+
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+		
 		return $retorno;
 	}
 	

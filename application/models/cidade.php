@@ -20,9 +20,26 @@ class Cidade extends CI_Model {
 		$query = $this->db->get('t_mb_cidade');
 		$retorno = $query->result();
 
-		if ($query->num_rows() <= 0) {
-			return FALSE;
-		}		
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+		
+		return $retorno;
+	}
+	
+
+
+	function BuscaPorEstado($es_id) {
+		$this->db->where("t_mb_estado_es_id", $es_id);
+		$query = $this->db->get('t_mb_cidade');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+		
 		return $retorno;
 	}
 	
@@ -30,9 +47,11 @@ class Cidade extends CI_Model {
 		$query = $this->db->get('t_mb_cidade');
 		$retorno = $query->result();
 	
-		if ($query->num_rows() <= 0) {
-			return FALSE;
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
 		}
+		$query->free_result();
+		
 		return $retorno;
 	}
 }

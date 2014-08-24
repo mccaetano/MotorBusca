@@ -41,9 +41,10 @@ class Motor_anuncio extends CI_Model {
 		$query = $this->db->get("t_mb_motor_anuncio");
 		$result = $query->result();
 		
-		if ($query->num_rows() <= 0) {
-			return FALSE;
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
 		}
+		$query->free_result();
 		
 		return $result;		
 	}
@@ -52,9 +53,10 @@ class Motor_anuncio extends CI_Model {
 		$query = $this->db->get("v_mb_motor_anuncio");
 		$result = $query->result();
 	
-		if ($query->num_rows() <= 0) {
-			return FALSE;
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
 		}
+		$query->free_result();
 	
 		return $result;
 	}
@@ -64,9 +66,10 @@ class Motor_anuncio extends CI_Model {
 		$query = $this->db->get("t_mb_motor_anuncio");
 		$result = $query->result();
 	
-		if ($query->num_rows() <= 0) {
-			return FALSE;
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
 		}
+		$query->free_result();
 	
 		return $result;
 	}

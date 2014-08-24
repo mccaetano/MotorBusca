@@ -20,9 +20,10 @@ class Emprego_contrato extends CI_Model {
 		$query = $this->db->get('t_mb_emprego_contrato');
 		$retorno = $query->result();
 
-		if ($query->num_rows() <= 0) {
-			return FALSE;
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
 		}
+		$query->free_result();
 			
 		return $retorno;
 	}

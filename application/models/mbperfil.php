@@ -41,9 +41,10 @@ class Mbperfil extends CI_Model {
 		$query = $this->db->get('t_mb_perfil');
 		$retorno = $query->result();
 
-		if ($query->num_rows() <= 0) {
-			return FALSE;
-		}		
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
 		return $retorno;
 	}
 	
@@ -52,9 +53,10 @@ class Mbperfil extends CI_Model {
 		$query = $this->db->get('t_mb_perfil');
 		$retorno = $query->result();
 	
-		if ($query->num_rows() <= 0) {
-			return FALSE;
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
 		}
+		$query->free_result();
 		return $retorno;
 	}
 
@@ -62,9 +64,10 @@ class Mbperfil extends CI_Model {
 		$query = $this->db->get('v_mb_perfil');
 		$retorno = $query->result();
 	
-		if ($query->num_rows() <= 0) {
-			return FALSE;
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
 		}
+		$query->free_result();
 		return $retorno;
 	}
 	

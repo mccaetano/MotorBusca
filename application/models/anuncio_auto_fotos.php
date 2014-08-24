@@ -30,9 +30,10 @@ class Anuncio_auto_fotos extends CI_Model {
 		$query = $this->db->get('t_mb_carros_fotos');
 		$retorno = $query->result();
 	
-		if ($query->num_rows() <= 0) {
-			return FALSE;
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
 		}
+		$query->free_result();
 			
 		return $retorno;
 	}

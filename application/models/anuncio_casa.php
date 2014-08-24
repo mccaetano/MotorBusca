@@ -30,9 +30,24 @@ class Anuncio_casa extends CI_Model {
 		$query = $this->db->get('t_mb_anuncio_casa');
 		$retorno = $query->result();
 	
-		if ($query->num_rows() <= 0) {
-			return FALSE;
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
 		}
+		$query->free_result();
+			
+		return $retorno;
+	}
+	
+
+
+	function AnuncioPesquisa($params) {
+		$query = $this->db->query("CALL p_mb_anuncio_casa_pesquisa('sdfsfsdfsdf',NULL,NULL,NULL,NULL,NULL,NULL, NULL)");
+		$retorno = $query->row_array();
+		
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
 			
 		return $retorno;
 	}
