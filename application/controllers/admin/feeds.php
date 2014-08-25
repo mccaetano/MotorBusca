@@ -27,19 +27,19 @@ class Feeds extends CI_Controller {
 				$tipoAnuncio = $this->tipo_anuncio->BuscaTipoAnuncio ( $motor->tan_id );
 				$xmlurl = urlencode ( base64_encode ( $motor->man_url_carga ) );
 				
-				$url = $tipoAnuncio [0]->tan_endereco_carga . "/" . $xmlurl;
-				var_dump ( $url );
+				$url = base_url() . $tipoAnuncio [0]->tan_endereco_carga . $xmlurl;
 				$this->curl_post_async ( $url, FALSE );
 			}
 		}
 	}
 	function curl_post_async($url, $params = array()) {
 		$post_params = array ();
-		
-		foreach ( $params as $key => &$val ) {
-			if (is_array ( $val ))
-				$val = implode ( ',', $val );
-			$post_params [] = $key . '=' . urlencode ( $val );
+		if ($params) {
+			foreach ( $params as $key => &$val ) {
+				if (is_array ( $val ))
+					$val = implode ( ',', $val );
+				$post_params [] = $key . '=' . urlencode ( $val );
+			}
 		}
 		$post_string = implode ( '&', $post_params );
 		
