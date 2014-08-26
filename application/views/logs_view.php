@@ -8,7 +8,7 @@
 	<div>
     <?php
 				$ff = $log_path . 'log-' . date ( 'Y-m-d' ) . '.php';
-				var_dump($ff);
+				
 				if (file_exists ( $ff )) {
 					// get file in a string
 					$ff = highlight_file ( $ff, TRUE );
