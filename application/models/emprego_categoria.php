@@ -7,7 +7,7 @@ class Emprego_categoria extends CI_Model {
 	function Adicionar($row) {
 		$this->db->trans_begin();
 		$this->db->insert('t_mb_emprego_categoria', $row);
-		$retorno = mysql_insert_id();
+		$retorno = $this->db->insert_id();
 	
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();

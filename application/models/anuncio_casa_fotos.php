@@ -7,7 +7,8 @@ class Anuncio_casa_fotos extends CI_Model {
 	function Adicionar($row) {
 		$this->db->trans_begin();
 		$this->db->insert('t_mb_anuncio_casa_fotos', $row);
-		$retorno = mysql_insert_id();
+		$retorno = $this->db->insert_id();
+		
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
 		

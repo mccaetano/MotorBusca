@@ -7,7 +7,7 @@ class Estado extends CI_Model {
 	function Adicionar($estado) {
 		$this->db->trans_begin();
 		$this->db->insert('t_mb_estado', $estado);
-		$retorno = mysql_insert_id();
+		$retorno = $this->db->insert_id();
 		
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
