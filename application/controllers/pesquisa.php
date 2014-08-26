@@ -83,8 +83,9 @@ class Pesquisa extends CI_Controller {
 			$preco_in = NULL;
 			$preco_out = NULL;
 			if ($this->input->post('iPreco') != 'null') {
-				$preco_in = explode(",", $this->input->post('iPreco'))[0];
-				$preco_out = explode(",", $this->input->post('iPreco'))[1];
+				$precos = explode(",", $this->input->post('iPreco'));
+				$preco_in = $precos[0];
+				$preco_out = $precos[1];
 			}
 			$params = array(
 				$this->input->post('iPesquisa') == 'null' ? null : $this->input->post('iPesquisa'),
