@@ -30,7 +30,7 @@ class Pesquisa extends CI_Controller {
 				$preco_out = $precos[1];
 			}
 			$params = array(
-				$this->input->post('iPesquisa') == 'null' ? null : $this->input->post('iPesquisa'),
+				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
 				$this->input->post('iContratoTipo') == 'null' ? null : $this->input->post('iContratoTipo'),
 				$this->input->post('iCasaTipo') == 'null' ? null : $this->input->post('iCasaTipo'),
 				$this->input->post('iEstado') == 'null' ? null : $this->input->post('iEstado'),
