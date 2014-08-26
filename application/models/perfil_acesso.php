@@ -7,7 +7,7 @@ class Perfil_Acesso extends CI_Model {
 	function Adicionar($row) {
 		$this->db->trans_begin();
 		$this->db->insert('t_mb_perfil_acesso', $row);
-		$retorno = mysql_insert_id();
+		$retorno = $this->db->insert_id();
 	
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
@@ -18,8 +18,7 @@ class Perfil_Acesso extends CI_Model {
 	function Alterar($row, $id) {
 		$this->db->trans_begin();
 		$this->db->where("pra_id", $id);
-		$this->db->update('t_mb_perfil_acesso', $row);
-		$retorno = mysql_insert_id();
+		$retorno = $this->db->update('t_mb_perfil_acesso', $row);
 	
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();

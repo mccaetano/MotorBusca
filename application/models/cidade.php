@@ -7,7 +7,7 @@ class Cidade extends CI_Model {
 	function Adicionar($cidade) {
 		$this->db->trans_begin();
 		$this->db->insert('t_mb_cidade', $cidade);
-		$retorno = mysql_insert_id();
+		$retorno = $this->db->insert_id();
 	
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();

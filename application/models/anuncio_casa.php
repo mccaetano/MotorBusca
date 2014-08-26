@@ -7,7 +7,7 @@ class Anuncio_casa extends CI_Model {
 	function Adicionar($row) {
 		$this->db->trans_begin();
 		$this->db->insert('t_mb_anuncio_casa', $row);
-		$retorno = mysql_insert_id();
+		$retorno = $this->db->insert_id();
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
 		
@@ -41,7 +41,7 @@ class Anuncio_casa extends CI_Model {
 
 
 	function AnuncioPesquisa($params) {
-		$query = $this->db->query("CALL p_mb_anuncio_casa_pesquisa('sdfsfsdfsdf',NULL,NULL,NULL,NULL,NULL,NULL, NULL)");
+		$query = $this->db->query("CALL p_mb_anuncio_casa_pesquisa(?,?,?,?,?,?,?,?)", $params);
 		$retorno = $query->result();
 		
 		if (($query) && $query->num_rows() <= 0) {

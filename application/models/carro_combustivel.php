@@ -7,7 +7,7 @@ class Carro_combustivel extends CI_Model {
 	function Adicionar($row) {
 		$this->db->trans_begin();
 		$this->db->insert('t_mb_carro_combustivel', $row);
-		$retorno = mysql_insert_id();
+		$retorno = $this->db->insert_id();
 		
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();

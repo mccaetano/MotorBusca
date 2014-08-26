@@ -7,7 +7,7 @@ class Pais extends CI_Model {
 	function Adicionar($pais) {
 		$this->db->trans_begin();
 		$this->db->insert('t_mb_pais', $pais);
-		$retorno = mysql_insert_id();
+		$retorno = $this->db->insert_id();
 	
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
