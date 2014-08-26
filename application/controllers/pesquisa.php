@@ -11,7 +11,7 @@ class Pesquisa extends CI_Controller {
 	
 	function imovel() {
 		$method =  (string)$_SERVER["REQUEST_METHOD"];
-		var_dump($method);
+		
 		$this->load->model ( "anuncio_casa" );
 		$this->load->model ( "tipo_imovel" );
 		$this->load->model ( "pesquisa_tipo_casa" );
