@@ -38,4 +38,16 @@ class Anuncio_emprego extends CI_Model {
 			
 		return $retorno;
 	}
+	
+	function AnuncioPesquisa($params) {
+		$query = $this->db->query("CALL p_mb_anuncio_emprego_pesquisa(?,?,?,?,?,?,?)", $params);
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
 }

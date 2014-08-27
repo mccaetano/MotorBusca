@@ -88,7 +88,7 @@ class Pesquisa extends CI_Controller {
 				$preco_out = $precos[1];
 			}
 			$params = array(
-				$this->input->post('iPesquisa') == 'null' ? null : $this->input->post('iPesquisa'),
+				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
 				$this->input->post('iCarroTipo') == 'null' ? null : $this->input->post('iCarroTipo'),
 				$this->input->post('iCarroMarca') == 'null' ? null : $this->input->post('iCarroMarca'),
 				$this->input->post('iCarroModelo') == 'null' ? null : $this->input->post('iCarroModelo'),
@@ -128,22 +128,108 @@ class Pesquisa extends CI_Controller {
 	}
 	
 	function emprego() {
+		$method =  (string)$_SERVER["REQUEST_METHOD"];
+		
+		$this->load->model ( "anuncio_emprego" );
+		$this->load->model ( "emprego_contrato" );
+		$this->load->model ( "emprego_categoria" );
+		$this->load->model ( "emprego_periodo" );
+		$this->load->model ( "pais" );
+		$this->load->model ( "estado" );
+		$this->load->model ( "cidade" );
+
+		$pesquisa_resultado = FALSE;
+		$estado_id = 0;
+		if ($method == "POST") {
+			$estado_id = $this->input->post('iEstado');
+			$params = array(
+				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
+				$this->input->post('iContrato') == 'null' ? null : $this->input->post('iContrato'),
+				$this->input->post('iCategira') == 'null' ? null : $this->input->post('iCategira'),
+				$this->input->post('iPeriodo') == 'null' ? null : $this->input->post('iPeriodo'),
+				$this->input->post('iPais') == 'null' ? null : $this->input->post('iPais'),
+				$this->input->post('iEstado') == 'null' ? null : $this->input->post('iEstado'),
+				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade')
+			);
+			
+			$pesquisa_resultado = $this->anuncio_emprego->AnuncioPesquisa ($params);
+		}
+		
+		$emprego_contrato = $this->emprego_contrato->ListaTodos ();
+		$emprego_categoria = $this->emprego_categoria->ListaTodos ();
+		$emprego_periodo = $this->emprego_periodo->ListaTodos ();
+		$pais = $this->pais->ListaTodos ();
+		$estado = $this->estado->ListaTodos ();
+		$cidade = $this->cidade->BuscaPorEstado ($estado_id);
+		
 		$data = array(
 			'tipo' => 3,
-			'tipo_descricao' => "Emprego"
-		);
+			'tipo_descricao' => "Emprego",
+			'emprego_contrato' =>	$emprego_contrato,
+			'emprego_categoria' =>  $emprego_categoria,
+			'emprego_periodo' =>  $emprego_periodo,
+			'pais' => $pais,
+			'estado' => $estado,
+			'cidade' => $cidade,
+			'pesquisa_resultado' => $pesquisa_resultado
+		); 
 		$this->load->view('templates/header', $data);
-		$this->load->view('pesquisa', $data);
+		$this->load->view('pesquisa_header', $data);
+		$this->load->view('pesquisa_emprego_filtro', $data);
+		$this->load->view('pesquisa_search', $data);
+		$this->load->view('pesquisa_emprego_resultado', $data);
+		$this->load->view('pesquisa_footer', $data);
 		$this->load->view('templates/footer', $data);
 	}
 	
 	function produto() {
+		$method =  (string)$_SERVER["REQUEST_METHOD"];
+		
+		$this->load->model ( "anuncio_produto" );
+		$this->load->model ( "produto_categoria" );
+		$this->load->model ( "produto_marca" );
+		$this->load->model ( "produto_modelo" );
+		$this->load->model ( "estado" );
+		$this->load->model ( "cidade" );
+
+		$pesquisa_resultado = FALSE;
+		$estado_id = 0;
+		if ($method == "POST") {
+			$estado_id = $this->input->post('iEstado');
+			$params = array(
+				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
+				$this->input->post('iCategoria') == 'null' ? null : $this->input->post('iCategoria'),
+				$this->input->post('iMarca') == 'null' ? null : $this->input->post('iMarca'),
+				$this->input->post('iModelo') == 'null' ? null : $this->input->post('iModelo'),
+				$this->input->post('iEstado') == 'null' ? null : $this->input->post('iEstado'),
+				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade')
+			);
+			
+			$pesquisa_resultado = $this->anuncio_produto->AnuncioPesquisa ($params);
+		}
+		
+		$produto_categoria = $this->produto_categoria->ListaTodos ();
+		$produto_marca = $this->produto_marca->ListaTodos ();
+		$produto_modelo = $this->produto_modelo->ListaTodos ();
+		$estado = $this->estado->ListaTodos ();
+		$cidade = $this->cidade->BuscaPorEstado ($estado_id);
+		
 		$data = array(
 			'tipo' => 4,
-			'tipo_descricao' => "Produto"
-		);
+			'tipo_descricao' => "Produto",
+			'produto_categoria' =>	$produto_categoria,
+			'produto_marca' =>  $produto_marca,
+			'produto_modelo' =>  $produto_modelo,
+			'estado' => $estado,
+			'cidade' => $cidade,
+			'pesquisa_resultado' => $pesquisa_resultado
+		); 
 		$this->load->view('templates/header', $data);
-		$this->load->view('pesquisa', $data);
+		$this->load->view('pesquisa_header', $data);
+		$this->load->view('pesquisa_produto_filtro', $data);
+		$this->load->view('pesquisa_search', $data);
+		$this->load->view('pesquisa_produto_resultado', $data);
+		$this->load->view('pesquisa_footer', $data);
 		$this->load->view('templates/footer', $data);
 	}
 

@@ -2,7 +2,7 @@
 		</div>
 	</div>
 	<div class="span2">
-		<div class="well">
+		<!-- <div class="well"> -->
 		<script async
 			src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<!-- responsive_homepage -->
@@ -12,7 +12,7 @@
 		<script>
 				(adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
-		</div>
+		<!-- </div> -->
 	</div>
 </div>
 

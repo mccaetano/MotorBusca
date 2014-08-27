@@ -3,7 +3,7 @@
 <a href="<?php echo $row->ac_url; ?>">
 <div class="row-fluid">
 	<div class="span2">
-		<img alt="<?php echo $row->acf_titulo; ?>" src="<?php echo $row->acf_url; ?>">
+		<img alt="<?php echo $row->acf_titulo; ?>" src="<?php echo $row->acf_url; ?>" width="150" height="150">
 	</div>
 	<div class="span10">
 		<div class="row">

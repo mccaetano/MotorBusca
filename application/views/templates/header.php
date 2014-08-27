@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
 <title>Adminsitração do Motor de Busca</title>
-<meta name="description" content="Administração do Motor de Busca">
+<meta name="description" content="Motor de Busca">
+<meta name="keywords" content="Carros, motos, anuncios, camimnhão casa, apartamento, emprego, venda, aluguel, auto">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="robots" content="index,follow">

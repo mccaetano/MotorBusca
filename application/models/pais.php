@@ -30,7 +30,7 @@ class Pais extends CI_Model {
 	
 	function ListaTodos() {
 		$query = $this->db->get('t_mb_pais');
-		$retorno = $query->results();
+		$retorno = $query->result();
 	
 		if (($query) && $query->num_rows() <= 0) {
 			$retorno = FALSE;

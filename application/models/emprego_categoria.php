@@ -28,6 +28,16 @@ class Emprego_categoria extends CI_Model {
 		return $retorno;
 	}
 	
+	function ListaTodos() {
+		$query = $this->db->get('t_mb_emprego_categoria');
+		$retorno = $query->result();
 	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+	
+		return $retorno;
+	}
 }
 

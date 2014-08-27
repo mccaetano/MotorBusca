@@ -553,6 +553,8 @@ class Feeds extends CI_Controller {
 		$this->load->model ( "anuncio_produto" );
 		$this->load->model ( "produto_fotos" );
 		$this->load->model ( "produto_categoria" );
+		$this->load->model ( "produto_marca" );
+		$this->load->model ( "produto_modelo" );
 		$this->load->model ( "estado" );
 		$this->load->model ( "pais" );
 		$this->load->model ( "cidade" );
@@ -589,6 +591,22 @@ class Feeds extends CI_Controller {
 				) );
 				$produto_categoria = $this->produto_categoria->BuscaPorDescricao ( mb_convert_encoding ( $ad->category, 'ISO-8859-1', 'auto' ) );
 			}
+
+			$produto_marca = $this->produto_marca->BuscaPorDescricao ( mb_convert_encoding ( $ad->make, 'ISO-8859-1', 'auto' ) );
+			if ($produto_marca === FALSE) {
+				$this->produto_marca->Adicionar ( array (
+						'pmr_descricao' => mb_convert_encoding ( $ad->make, 'ISO-8859-1', 'auto' )
+				) );
+				$produto_marca = $this->produto_marca->BuscaPorDescricao ( mb_convert_encoding ( $ad->make, 'ISO-8859-1', 'auto' ) );
+			}
+
+			$produto_modelo = $this->produto_modelo->BuscaPorDescricao ( mb_convert_encoding ( $ad->model, 'ISO-8859-1', 'auto' ) );
+			if ($produto_modelo === FALSE) {
+				$this->produto_modelo->Adicionar ( array (
+						'pmd_descricao' => mb_convert_encoding ( $ad->model, 'ISO-8859-1', 'auto' )
+				) );
+				$produto_modelo = $this->produto_modelo->BuscaPorDescricao ( mb_convert_encoding ( $ad->model, 'ISO-8859-1', 'auto' ) );
+			}
 			
 			$data_inclusao = DateTime::createFromFormat ( "d/m/Y", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
 			if ($data_inclusao === FALSE) {
@@ -623,8 +641,8 @@ class Feeds extends CI_Controller {
 					'apr_preco_moeda' => mb_convert_encoding ( $ad->price['currency'], 'ISO-8859-1', 'auto' ),
 					'apr_taxa_envio' => mb_convert_encoding ( $ad->shipping_cost, 'ISO-8859-1', 'auto' ),
 					'apr_taxa_envio_moeda' => mb_convert_encoding ( $ad->shipping_cost['currency'], 'ISO-8859-1', 'auto' ),
-					'apr_marca' => mb_convert_encoding ( $ad->make, 'ISO-8859-1', 'auto' ),
-					'apr_modelo' => mb_convert_encoding ( $ad->model, 'ISO-8859-1', 'auto' ),
+					'pmr_id' => ( string ) $produto_marca [0]->pmr_id,
+					'pmd_id' => ( string ) $produto_modelo [0]->pmd_id,
 					'apr_caixapostal' => mb_convert_encoding ( $ad->postcode, 'ISO-8859-1', 'auto' ),
 					'cd_id' => ( string ) $cidade [0]->cd_id,
 					'es_id' => ( string ) $estado [0]->es_id,
