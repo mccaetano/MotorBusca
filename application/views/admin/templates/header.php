@@ -96,6 +96,15 @@ html,body {
 								<li <?php echo  $ativo == "perfil" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/perfil/lista">Perfil</a></li>
 								<li <?php echo  $ativo == "feeds" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/motorfeeds/lista">Feeds</a></li>
 								<li <?php echo  $ativo == "alertas" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/alertas/lista">Alertas</a></li>
+								<li class="dropdown">
+								    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								      Cadastros
+								      <b class="caret"></b>
+								    </a>
+								    <ul class="dropdown-menu">
+								      <li><a href="<?php echo base_url();?>admin/pais">Paises</a></li>
+								    </ul>
+								 </li>
 							</ul>
 						</div>
 					</div>

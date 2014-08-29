@@ -59,6 +59,18 @@ class Mbperfil extends CI_Model {
 		$query->free_result();
 		return $retorno;
 	}
+	
+	function BuscaPorEMail($email) {
+		$this->db->where("email", $email);
+		$query = $this->db->get('t_mb_perfil');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+		return $retorno;
+	}
 
 	function ListaPerfil() {
 		$query = $this->db->get('v_mb_perfil');

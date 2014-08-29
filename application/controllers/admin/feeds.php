@@ -674,6 +674,36 @@ class Feeds extends CI_Controller {
 	}
 	
 	function temporadaXML($xmlFile = FALSE) {
+		set_time_limit ( 0 );
 		
+		if (! $xmlFile) {
+			log_message ( 'error', "xml não enviado" );
+			show_404 ( base_url ( "feeds/temporadaXML" ) );
+			return;
+		}
+		
+		$xmlFile = base64_decode ( urldecode ( $xmlFile ) );
+		$xsd_document = base_url () . "assets/xml/temporada.xsd";
+		$dom = new DomDocument ();
+		
+		if (! @$dom->load ( $xmlFile )) {
+			log_message ( 'error', 'Could not load XML file: ' . $xmlFile );
+			die ( 'Could not load XML file: ' . $xmlFile );
+		}
+		if (! $dom->schemaValidate ( $xsd_document )) {
+			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
+			die ( 'XML file did not validate against schema: ' . $xsd_document );
+		}
+		
+		$xmlData = simplexml_load_file ( $xmlFile );
+		
+		$this->load->model ( "anuncio_temporada" );
+		$this->load->model ( "produto_fotos" );
+		$this->load->model ( "produto_categoria" );
+		$this->load->model ( "produto_marca" );
+		$this->load->model ( "produto_modelo" );
+		$this->load->model ( "estado" );
+		$this->load->model ( "pais" );
+		$this->load->model ( "cidade" );
 	}
 }

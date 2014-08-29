@@ -23,8 +23,20 @@ class home extends CI_Controller {
 	 */
 	public function index()
 	{
+		if (!$this->auth->loggedin()) {
+			redirect('admin/login');
+		}
+		
+		// get current user id
+		$id = $this->auth->userid();
+		
+		// get user from database
+		$this->load->model('mbperfil', 'user_model');
+		$user = $this->user_model->BuscaPorID($id);
+				
 		$data = array(
-				'ativo' => ''
+				'ativo' => '',
+				'user' => $user
 		);
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/home_admin', $data);
