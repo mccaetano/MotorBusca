@@ -1,12 +1,12 @@
 <?php
-class Tipo_Imovel extends CI_Model {
+class Propriedade_tipo extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
 	
 	function Adicionar($tipo_Imovel) {
 		$this->db->trans_begin();
-		$this->db->insert('t_mb_tipo_imovel', $tipo_Imovel);
+		$this->db->insert('t_mb_propriedade_tipo', $tipo_Imovel);
 		$retorno = $this->db->insert_id();
 	
 		$this->db->trans_commit();
@@ -16,8 +16,8 @@ class Tipo_Imovel extends CI_Model {
 	}
 	
 	function BuscaTipoImovel($nome_tipo) {
-		$this->db->where("tpi_descricao", $nome_tipo);
-		$query = $this->db->get('t_mb_tipo_imovel');
+		$this->db->where("pt_descricao", $nome_tipo);
+		$query = $this->db->get('t_mb_propriedade_tipo');
 		$retorno = $query->result();
 
 		if (($query) && $query->num_rows() <= 0) {
@@ -29,7 +29,7 @@ class Tipo_Imovel extends CI_Model {
 	}
 	
 	function ListaTodos() {
-		$query = $this->db->get('t_mb_tipo_imovel');
+		$query = $this->db->get('t_mb_propriedade_tipo');
 		$retorno = $query->result();
 	
 		if (($query) && $query->num_rows() <= 0) {

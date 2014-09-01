@@ -21,7 +21,7 @@ class Login extends CI_Controller {
 		
 			if ($user) {
 				// compare passwords
-				if ($this->user_model->ChecaSenha($this->input->post('password'), base64_encode($user->senha))) {
+				if ($this->user_model->ChecaSenha($this->input->post('password'), $user[0]->senha)) {
 					// mark user as logged in
 					$this->auth->login($user['id'], $remember);
 					redirect('admin');

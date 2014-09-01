@@ -84,7 +84,7 @@ class Feeds extends CI_Controller {
 		
 		$this->load->model ( "anuncio_casa" );
 		$this->load->model ( "anuncio_casa_fotos" );
-		$this->load->model ( "tipo_imovel" );
+		$this->load->model ( "propriedade_tipo" );
 		$this->load->model ( "anuncio_casa_tipo" );
 		$this->load->model ( "estado" );
 		$this->load->model ( "pais" );
@@ -118,12 +118,12 @@ class Feeds extends CI_Controller {
 				$cidade = $this->cidade->BuscaCiadde ( mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) );
 			}
 			
-			$propriedade_tipo = $this->tipo_imovel->BuscaTipoImovel ( mb_convert_encoding ( $ad->property_type, 'ISO-8859-1', 'auto' ) );
+			$propriedade_tipo = $this->propriedade_tipo->BuscaTipoImovel ( mb_convert_encoding ( $ad->property_type, 'ISO-8859-1', 'auto' ) );
 			if ($propriedade_tipo === FALSE) {
-				$this->tipo_imovel->Adicionar ( array (
+				$this->propriedade_tipo->Adicionar ( array (
 						'pt_descricao' => mb_convert_encoding ( $ad->property_type, 'ISO-8859-1', 'auto' ) 
 				) );
-				$propriedade_tipo = $this->tipo_imovel->BuscaTipoImovel ( mb_convert_encoding ( $ad->property_type, 'ISO-8859-1', 'auto' ) );
+				$propriedade_tipo = $this->propriedade_tipo->BuscaTipoImovel ( mb_convert_encoding ( $ad->property_type, 'ISO-8859-1', 'auto' ) );
 			}
 			
 			$anuncio_casa_tipo = $this->anuncio_casa_tipo->BuscaAnuncioCasaTipo ( mb_convert_encoding ( $ad->type, 'ISO-8859-1', 'auto' ) );
@@ -698,12 +698,57 @@ class Feeds extends CI_Controller {
 		$xmlData = simplexml_load_file ( $xmlFile );
 		
 		$this->load->model ( "anuncio_temporada" );
-		$this->load->model ( "produto_fotos" );
-		$this->load->model ( "produto_categoria" );
-		$this->load->model ( "produto_marca" );
-		$this->load->model ( "produto_modelo" );
+		$this->load->model ( "temporada_fotos" );
+		$this->load->model ( "tipo_imovel" );
+		$this->load->model ( "temporada_disponibilidade" );
 		$this->load->model ( "estado" );
 		$this->load->model ( "pais" );
 		$this->load->model ( "cidade" );
+		
+		foreach ( $xmlData as $ad ) {
+			$pais = $this->pais->BuscaPais ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
+			if ($estado === FALSE) {
+				$this->pais->Adicionar ( array (
+						'ps_id' => NULL,
+						'ps_descricao' => mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' )
+				) );
+				$pais = $this->pais->BuscaPais ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
+			}
+				
+			$estado = $this->estado->BuscaEstado ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
+			if ($estado === FALSE) {
+				$this->estado->Adicionar ( array (
+						'es_id' => NULL,
+						't_mb_pais_ps_id' => $pais[0]->ps_id,
+						'es_descricao' => mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' )
+				) );
+				$estado = $this->estado->BuscaEstado ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
+			}
+				
+			$cidade = $this->cidade->BuscaCiadde ( mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) );
+			if ($cidade === FALSE) {
+				$this->cidade->Adicionar ( array (
+						't_mb_estado_es_id' => $estado [0]->es_id,
+						'cd_descricao' => mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' )
+				) );
+				$cidade = $this->cidade->BuscaCiadde ( mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) );
+			}
+			
+			$cidade = $this->cidade->BuscaCiadde ( mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) );
+			if ($cidade === FALSE) {
+				$this->cidade->Adicionar ( array (
+						't_mb_estado_es_id' => $estado [0]->es_id,
+						'cd_descricao' => mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' )
+				) );
+				$cidade = $this->cidade->BuscaCiadde ( mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) );
+			}
+				
+			$tipo_imovel = $this->tipo_imovel->BuscaTipoImovel ( mb_convert_encoding ( $ad->category, 'ISO-8859-1', 'auto' ) );
+			if ($tipo_imovel === FALSE) {
+				$this->tipo_imovel->Adicionar ( array (
+						'tpi_descricao' => mb_convert_encoding ( $ad->category, 'ISO-8859-1', 'auto' )
+				) );
+				$tipo_imovel = $this->tipo_imovel->BuscaTipoImovel ( mb_convert_encoding ( $ad->category, 'ISO-8859-1', 'auto' ) );
+			}
 	}
 }

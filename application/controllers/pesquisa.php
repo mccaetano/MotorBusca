@@ -13,7 +13,7 @@ class Pesquisa extends CI_Controller {
 		$method =  (string)$_SERVER["REQUEST_METHOD"];
 		
 		$this->load->model ( "anuncio_casa" );
-		$this->load->model ( "tipo_imovel" );
+		$this->load->model ( "propriedade_tipo" );
 		$this->load->model ( "pesquisa_tipo_casa" );
 		$this->load->model ( "estado" );
 		$this->load->model ( "cidade" );
@@ -43,7 +43,7 @@ class Pesquisa extends CI_Controller {
 			$pesquisa_resultado = $this->anuncio_casa->AnuncioPesquisa ($params);
 		}
 		
-		$tipo_imovel = $this->tipo_imovel->ListaTodos ();
+		$tipo_imovel = $this->propriedade_tipo->ListaTodos ();
 		$pesquisa_tipo_casa = $this->pesquisa_tipo_casa->ListaTodos ();
 		$estado = $this->estado->ListaTodos ();
 		$cidade = $this->cidade->BuscaPorEstado ($estado_id);

@@ -83,4 +83,15 @@ class Mbperfil extends CI_Model {
 		return $retorno;
 	}
 	
+	function ChecaSenha($senha, $usersenha) {
+		
+		$senha = base64_encode($senha);
+		
+		if ($senha === $usersenha) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }
