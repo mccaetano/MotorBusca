@@ -11,6 +11,17 @@ class Perfil extends CI_Controller {
     }
     
     function lista() {
+    	if (!$this->auth->loggedin()) {
+    		redirect('admin/login');
+    	}
+    	
+    	// get current user id
+    	$id = $this->auth->userid();
+    	
+    	// get user from database
+    	$this->load->model('mbperfil', 'user_model');
+    	$user = $this->user_model->BuscaPorID($id);
+    	
     	
     	$this->load->model ( "mbperfil" , "perfil");
     	$lista = $this->perfil->ListaPerfil ();
@@ -18,7 +29,8 @@ class Perfil extends CI_Controller {
     	
     	$data = array(
     		'ativo' => 'perfil',
-    		'perfis' => $lista
+    		'perfis' => $lista,
+    		'user' => $user
     	);
     	$this->load->view('admin/templates/header', $data);
     	$this->load->view('admin/perfil_lista', $data);
@@ -26,6 +38,18 @@ class Perfil extends CI_Controller {
     }
     
     function novo() {
+    	if (!$this->auth->loggedin()) {
+    		redirect('admin/login');
+    	}
+    	
+    	// get current user id
+    	$id = $this->auth->userid();
+    	
+    	// get user from database
+    	$this->load->model('mbperfil', 'user_model');
+    	$user = $this->user_model->BuscaPorID($id);
+    	
+    	
     	$method =  (string)$_SERVER["REQUEST_METHOD"];
     	
     	
@@ -58,7 +82,8 @@ class Perfil extends CI_Controller {
     	
     	$data = array(
     		'ativo' => 'perfil',
-    		'perfil_acessos' => $lista
+    		'perfil_acessos' => $lista,
+    		'user' => $user
     	);
     	$this->load->view('admin/templates/header', $data);
     	$this->load->view('admin/perfil_cadastro', $data);
@@ -66,6 +91,17 @@ class Perfil extends CI_Controller {
     }
     
     function alteracao($id = FALSE) {
+    	if (!$this->auth->loggedin()) {
+    		redirect('admin/login');
+    	}
+    	
+    	// get current user id
+    	$id = $this->auth->userid();
+    	
+    	// get user from database
+    	$this->load->model('mbperfil', 'user_model');
+    	$user = $this->user_model->BuscaPorID($id);
+    	
     	$method =  (string)$_SERVER["REQUEST_METHOD"];
     	
     	$this->load->model ( "mbperfil", "perfil" );
@@ -91,7 +127,8 @@ class Perfil extends CI_Controller {
     	$data = array(
     		'ativo' => 'perfil',
     		'perfil_acessos' => $lista,
-    		'perfil' => $perfil[0]
+    		'perfil' => $perfil[0],
+    		'user' => $user
     	);
     	$this->load->view('admin/templates/header', $data);
     	$this->load->view('admin/perfil_alteracao', $data);
@@ -99,7 +136,17 @@ class Perfil extends CI_Controller {
     }
     
     function exclusao($id = FALSE) {
-    	 
+    	if (!$this->auth->loggedin()) {
+    		redirect('admin/login');
+    	}
+    	
+    	// get current user id
+    	$id = $this->auth->userid();
+    	
+    	// get user from database
+    	$this->load->model('mbperfil', 'user_model');
+    	$user = $this->user_model->BuscaPorID($id);
+    	
     	$this->load->model ( "mbperfil", "perfil" );
     	
     	$this->perfil->Excluir ($row, $id);

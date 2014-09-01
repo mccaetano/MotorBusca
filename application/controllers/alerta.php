@@ -18,4 +18,24 @@ class Alerta extends CI_Controller {
     	$this->load->view('templates/footer', $data);
     }
     
+    function alteracao($tipoalerta) {
+    	 
+    	$data = array(
+    			"tipoalerta" => $tipoalerta
+    	);
+    	$this->load->view('templates/header', $data);
+    	$this->load->view('alerta_altera_usuario', $data);
+    	$this->load->view('templates/footer', $data);
+    }
+    
+    function lista() {
+    
+    	$data = array(
+    			"tipoalerta" => $tipoalerta
+    	);
+    	$this->load->view('templates/header', $data);
+    	$this->load->view('alerta_lista_usuario', $data);
+    	$this->load->view('templates/footer', $data);
+    }
+    
 }
