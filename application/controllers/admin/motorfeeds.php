@@ -26,6 +26,7 @@ class MotorFeeds extends CI_Controller {
 	function novo() {
 		$method = ( string ) $_SERVER ["REQUEST_METHOD"];
 		
+		$this->load->helper( "date" );
 		$this->load->model ( "motor_anuncio" );
 		$this->load->model ( "tipo_anuncio" );
 		
@@ -45,7 +46,7 @@ class MotorFeeds extends CI_Controller {
 			redirect ( "admin/motorfeeds/lista" );
 		}
 		
-		$lista = $this->tipo_anuncio->BuscaTodos ();
+		$lista = $this->tipo_anuncio->ListaTodos ();
 		
 		$data = array (
 				'ativo' => 'feeds',
@@ -74,7 +75,7 @@ class MotorFeeds extends CI_Controller {
 			redirect ( "admin/motorfeeds/lista" );
 		}
 		
-		$lista = $this->tipo_anuncio->BuscaTodos ();
+		$lista = $this->tipo_anuncio->ListaTodos ();
 		$feeds = $this->motor_anuncio->BuscaPorID ( $id );
 		
 		$data = array (

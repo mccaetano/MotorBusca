@@ -28,6 +28,19 @@ class Estado extends CI_Model {
 		return $retorno;
 	}
 	
+	function BuscaPorPais($ps_id) {
+		$this->db->where("t_mb_pais_ps_id", $ps_id);
+		$query = $this->db->get('t_mb_estado');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+	
+		return $retorno;
+	}
+	
 	function ListaTodos() {
 		$query = $this->db->get('t_mb_estado');
 		$retorno = $query->result();

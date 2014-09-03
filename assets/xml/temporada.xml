@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<motorbusca>
+	<ad>
+		<id><![CDATA[7004578]]></id>
+		<country><![CDATA[es]]></country>
+		<url><![CDATA[http://www.tupaginaweb.es/ad/7004578]]></url>
+		<title><![CDATA[Lindo apartamento de 2 quartos na praia]]></title>
+		<content><![CDATA[Lindo apartamento em Ubatuba]]></content>
+		<property_type><![CDATA[Apartment]]></property_type>
+		<address><![CDATA[Rua do Filhinho]]></address>
+		<neighborhood><![CDATA[Tenório]]></neighborhood>
+		<city><![CDATA[Ubatuba]]></city>
+		<region><![CDATA[São Paulo]]></region>
+		<postcode><![CDATA[11680-000]]></postcode>
+		<latitude><![CDATA[41.409583]]></latitude>
+		<longitude><![CDATA[2.187223]]></longitude>
+		<rate period="weekly" currency="BRL">
+			<min><![CDATA[400]]></min>
+			<max><![CDATA[600]]></max>
+		</rate>
+		<availability>
+			<month value="1" year="2011"><![CDATA[1110000000111000011111001100111]]></month>
+			<month value="2" year="2011"><![CDATA[1110000000111000011111001100]]></month>
+			<month value="3" year="2011"><![CDATA[0000000000111000011111001100111]]></month>
+			<month value="4" year="2011"><![CDATA[100110000011100001111100110011]]></month>
+		</availability>
+		<check_in_week_day><![CDATA[5]]></check_in_week_day>
+		<check_in_time><![CDATA[14:00]]></check_in_time>
+		<check_out_time><![CDATA[12:00]]></check_out_time>
+		<minimum_stay><![CDATA[2]]></minimum_stay>
+		<max_people><![CDATA[12]]></max_people>
+		<complete_rental><![CDATA[1]]></complete_rental>
+		<online_reservation><![CDATA[1]]></online_reservation>
+		<reservation_guarantee><![CDATA[1]]></reservation_guarantee>
+		<rooms><![CDATA[5]]></rooms>
+		<bedrooms><![CDATA[4]]></bedrooms>
+		<bathrooms><![CDATA[2]]></bathrooms>
+		<parking><![CDATA[0]]></parking>
+		<cleaning_service><![CDATA[0]]></cleaning_service>
+		<complete_rental><![CDATA[0]]></complete_rental>
+		<gay_friendly><![CDATA[0]]></gay_friendly>
+		<online_reservation><![CDATA[0]]></online_reservation>
+		<pets><![CDATA[0]]></pets>
+		<reservation_guarantee><![CDATA[0]]></reservation_guarantee>
+		<smoking><![CDATA[0]]></smoking>
+		<air_conditioning><![CDATA[0]]></air_conditioning>
+		<barbecue><![CDATA[0]]></barbecue>
+		<bed_linen><![CDATA[0]]></bed_linen>
+		<central_heating><![CDATA[0]]></central_heating>
+		<children_play_area><![CDATA[0]]></children_play_area>
+		<coffee_maker><![CDATA[0]]></coffee_maker>
+		<cooking_utensils><![CDATA[0]]></cooking_utensils>
+		<cot><![CDATA[0]]></cot>
+		<dishwasher><![CDATA[0]]></dishwasher>
+		<dryer><![CDATA[0]]></dryer>
+		<dvd><![CDATA[0]]></dvd>
+		<fan><![CDATA[0]]></fan>
+		<fireplace><![CDATA[0]]></fireplace>
+		<garden><![CDATA[0]]></garden>
+		<gym><![CDATA[0]]></gym>
+		<hairdryer><![CDATA[0]]></hairdryer>
+		<hi-fi><![CDATA[0]]></hi-fi>
+		<internet><![CDATA[0]]></internet>
+		<iron><![CDATA[0]]></iron>
+		<ironing_board><![CDATA[0]]></ironing_board>
+		<kitchen><![CDATA[0]]></kitchen>
+		<lift><![CDATA[0]]></lift>
+		<microwave><![CDATA[0]]></microwave>
+		<oven><![CDATA[0]]></oven>
+		<parking><![CDATA[0]]></parking>
+		<pool><![CDATA[0]]></pool>
+		<refrigerator><![CDATA[0]]></refrigerator>
+		<satellite_tv><![CDATA[0]]></satellite_tv>
+		<sauna><![CDATA[0]]></sauna>
+		<telephone><![CDATA[0]]></telephone>
+		<tennis_court><![CDATA[0]]></tennis_court>
+		<terrace><![CDATA[0]]></terrace>
+		<toaster><![CDATA[0]]></toaster>
+		<towels><![CDATA[0]]></towels>
+		<tv><![CDATA[0]]></tv>
+		<washing_machine><![CDATA[0]]></washing_machine>
+		<wheelchair_access><![CDATA[0]]></wheelchair_access>
+		<date><![CDATA[01/01/2011]]></date>
+		<expiration_date><![CDATA[01/01/2011]]></expiration_date>
+		<comments score="4">
+			<comment code="es">
+				<comment_title><![CDATA[Ótima localização]]></comment_title>
+				<comment_description><![CDATA[Bem localizado, tem comércio e padaria pertinho! Recomendamos]]></comment_description>
+			</comment>
+		</comments>
+		<distance_to>
+			<beach unit="meters"><![CDATA[500]]></beach>
+			<center unit="kilometers"><![CDATA[1]]></center>
+		</distance_to>
+		<pictures>
+			<picture>
+				<picture_url><![CDATA[http://www.seudomínio.com.br/image.jpg]]></picture_url>
+				<picture_title><![CDATA[salón]]></picture_title>
+			</picture>
+		</pictures>
+	</ad>
+</motorbusca>

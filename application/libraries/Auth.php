@@ -115,6 +115,7 @@ class Auth {
      * @return int
      */
     public function userid() {
+    	
         return $this->loggedin() ? $this->ci->session->userdata('auth_user') : FALSE;
     }
     

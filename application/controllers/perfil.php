@@ -10,7 +10,7 @@ class Perfil extends CI_Controller {
 		) );
     }
     
-    function alterar() {
+    function lista() {
     	if (!$this->auth->loggedin()) {
     		redirect('admin/login');
     	}
@@ -37,18 +37,7 @@ class Perfil extends CI_Controller {
     	$this->load->view('admin/templates/footer', $data);
     }
     
-    function novo() {
-    	if (!$this->auth->loggedin()) {
-    		redirect('admin/login');
-    	}
-    	
-    	// get current user id
-    	$id = $this->auth->userid();
-    	
-    	// get user from database
-    	$this->load->model('mbperfil', 'user_model');
-    	$user = $this->user_model->BuscaPorID($id);
-    	
+    function cadastro() {
     	
     	$method =  (string)$_SERVER["REQUEST_METHOD"];
     	
@@ -59,7 +48,8 @@ class Perfil extends CI_Controller {
     	if ($method == "POST") {
     		$this->load->library('form_validation');
     		
-    		$this->form_validation->set_rules('iURL', 'Url de Acesso', 'prep_url');
+    		$this->form_validation->set_rules('iEmail', 'Email é obtigatório', 'required');
+    		$this->form_validation->set_rules('iSenha', 'Senha', 'trim|required|xss_clean|max_length[10]|matches[icSenha]');
     		
     		if ($this->form_validation->run() == true) {    		
 	    		$row = array(
@@ -67,8 +57,8 @@ class Perfil extends CI_Controller {
 	    			'email' => $this->input->post('iEmail'),
 	    			'data_nascimento' => $this->input->post('iDataNascimento'),
 	    			'senha' => base64_encode($this->input->post('iSenha')),
-	    			'ativo' => $this->input->post('iAtivo') == 'on' ? '1' : '0',
-	    			't_mb_perfil_acesso_pra_id' => $this->input->post('iAcesso')
+	    			'ativo' => '1',
+	    			't_mb_perfil_acesso_pra_id' => '2'
 	    		);
 	    		
 	    		$this->perfil->Adicionar ($row);
@@ -82,12 +72,11 @@ class Perfil extends CI_Controller {
     	
     	$data = array(
     		'ativo' => 'perfil',
-    		'perfil_acessos' => $lista,
-    		'user' => $user
+    		'perfil_acessos' => $lista
     	);
-    	$this->load->view('admin/templates/header', $data);
-    	$this->load->view('admin/perfil_cadastro', $data);
-    	$this->load->view('admin/templates/footer', $data);
+    	$this->load->view('templates/header', $data);
+    	$this->load->view('perfil_cadastro', $data);
+    	$this->load->view('templates/footer', $data);
     }
     
     function alteracao($id = FALSE) {

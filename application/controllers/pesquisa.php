@@ -235,12 +235,52 @@ class Pesquisa extends CI_Controller {
 
 
 	function temporada() {
+		$method =  (string)$_SERVER["REQUEST_METHOD"];
+		
+		$this->load->model ( "anuncio_temporada" );
+		$this->load->model ( "tipo_imovel" );
+		$this->load->model ( "pais" );
+		$this->load->model ( "estado" );
+		$this->load->model ( "cidade" );
+		
+		$pesquisa_resultado = FALSE;
+		$pais_id = 1;
+		$estado_id = FALSE;
+		if ($method == "POST") {
+			$pais_id = $this->input->post('iPais');
+			$estado_id = $this->input->post('iEstado');;
+			$params = array(
+				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
+				$this->input->post('iTipoImovel') == 'null' ? null : $this->input->post('iTipoImovel'),
+				$this->input->post('iPais') == 'null' ? null : $this->input->post('iPais'),
+				$this->input->post('iEstado') == 'null' ? null : $this->input->post('iEstado'),
+				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade')
+			);
+			
+			$pesquisa_resultado = $this->anuncio_temporada->AnuncioPesquisa ($params);
+		}
+		
+		$tipo_imovel = $this->tipo_imovel->ListaTodos ();
+		$pais = $this->pais->ListaTodos ();
+		$estado = $this->estado->BuscaPorPais ($pais_id);
+		if (!$estado_id) { $estado_id = $estado[0]->es_id; }
+		$cidade = $this->cidade->BuscaPorEstado ($estado_id);
+		
 		$data = array(
 			'tipo' => 5,
-			'tipo_descricao' => "Temporada"
-		);
+			'tipo_descricao' => "Temporada",
+			'tipo_imovel' =>	$tipo_imovel,
+			'pais' =>  $pais,
+			'estado' => $estado,
+			'cidade' => $cidade,
+			'pesquisa_resultado' => $pesquisa_resultado
+		); 
 		$this->load->view('templates/header', $data);
-		$this->load->view('pesquisa', $data);
+		$this->load->view('pesquisa_header', $data);
+		$this->load->view('pesquisa_temporada_filtro', $data);
+		$this->load->view('pesquisa_search', $data);
+		$this->load->view('pesquisa_temporada_resultado', $data);
+		$this->load->view('pesquisa_footer', $data);
 		$this->load->view('templates/footer', $data);
 	}
 	

@@ -1,12 +1,12 @@
 <?php
-class Temporada_disponibilidade extends CI_Model {
+class Temporada_comentarios extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
 
 	function Adicionar($row) {
 		$this->db->trans_begin();
-		$this->db->insert('t_mb_temporada_disponibilidade', $row);
+		$this->db->insert('t_mb_temporada_comentarios', $row);
 		$retorno = $this->db->insert_id();
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
@@ -16,8 +16,8 @@ class Temporada_disponibilidade extends CI_Model {
 
 	function Alterar($row, $id) {
 		$this->db->trans_begin();
-		$this->db->where("tds_id", $id);
-		$retorno = $this->db->update('t_mb_temporada_disponibilidade', $row);
+		$this->db->where("tcm_id", $id);
+		$retorno = $this->db->update('t_mb_temporada_comentarios', $row);
 
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();
@@ -26,7 +26,7 @@ class Temporada_disponibilidade extends CI_Model {
 	}
 
 	function ListaTodos() {
-		$query = $this->db->get('t_mb_temporada_disponibilidade');
+		$query = $this->db->get('t_mb_temporada_comentarios');
 		$retorno = $query->result();
 
 		if (($query) && $query->num_rows() <= 0) {
@@ -38,8 +38,8 @@ class Temporada_disponibilidade extends CI_Model {
 	}
 	
 	function BuscaPorID($id) {
-		$this->db->where("tds_id", $id);
-		$query = $this->db->get('t_mb_temporada_disponibilidade');
+		$this->db->where("tcm_id", $id);
+		$query = $this->db->get('t_mb_temporada_comentarios');
 		$retorno = $query->result();
 	
 		if (($query) && $query->num_rows() <= 0) {

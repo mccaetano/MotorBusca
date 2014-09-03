@@ -32,3 +32,9 @@
 			</a></div>
 	</div>
 </div>
+<div class="hero-unit">
+	<h2>Seu Alerta de Anuncios</h2>
+	<a href="<?php base_url();?>alerta/cadastro">
+	<p>E agora você pode ter seu anuncio no seu email. Clique aqui e faça já seu cadastro</p>
+	</a>
+</div>

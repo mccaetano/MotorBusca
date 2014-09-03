@@ -17,7 +17,7 @@ class Tipo_anuncio extends CI_Model {
 		return $result;
 	}
 	
-	function BuscaTodos() {
+	function ListaTodos() {
 		
 		$query = $this->db->get("t_mb_tipo_anuncio");
 		$result = $query->result();

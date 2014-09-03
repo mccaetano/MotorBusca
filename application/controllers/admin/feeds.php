@@ -699,18 +699,18 @@ class Feeds extends CI_Controller {
 		$this->load->model ( "temporada_fotos" );
 		$this->load->model ( "tipo_imovel" );
 		$this->load->model ( "temporada_disponibilidade" );
+		$this->load->model ( "temporada_comentarios" );
 		$this->load->model ( "estado" );
 		$this->load->model ( "pais" );
 		$this->load->model ( "cidade" );
 		
 		foreach ( $xmlData as $ad ) {
-			$pais = $this->pais->BuscaPais ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
-			if ($estado === FALSE) {
+			$pais = $this->pais->BuscaPais ( mb_convert_encoding ( $ad->country, 'ISO-8859-1', 'auto' ) );
+			if ($pais === FALSE) {
 				$this->pais->Adicionar ( array (
-						'ps_id' => NULL,
-						'ps_descricao' => mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) 
+						'ps_descricao' => mb_convert_encoding ( $ad->country, 'ISO-8859-1', 'auto' ) 
 				) );
-				$pais = $this->pais->BuscaPais ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
+				$pais = $this->pais->BuscaPais ( mb_convert_encoding ( $ad->country, 'ISO-8859-1', 'auto' ) );
 			}
 			
 			$estado = $this->estado->BuscaEstado ( mb_convert_encoding ( $ad->region, 'ISO-8859-1', 'auto' ) );
@@ -732,13 +732,14 @@ class Feeds extends CI_Controller {
 				$cidade = $this->cidade->BuscaCiadde ( mb_convert_encoding ( $ad->city, 'ISO-8859-1', 'auto' ) );
 			}
 			
-			$tipo_imovel = $this->tipo_imovel->BuscaTipoImovel ( mb_convert_encoding ( $ad->category, 'ISO-8859-1', 'auto' ) );
+			$tipo_imovel = $this->tipo_imovel->BuscaTipoImovel ( mb_convert_encoding ( $ad->property_type, 'ISO-8859-1', 'auto' ) );
 			if ($tipo_imovel === FALSE) {
 				$this->tipo_imovel->Adicionar ( array (
-						'tpi_descricao' => mb_convert_encoding ( $ad->category, 'ISO-8859-1', 'auto' ) 
+						'tpi_descricao' => mb_convert_encoding ( $ad->property_type, 'ISO-8859-1', 'auto' ) 
 				) );
-				$tipo_imovel = $this->tipo_imovel->BuscaTipoImovel ( mb_convert_encoding ( $ad->category, 'ISO-8859-1', 'auto' ) );
+				$tipo_imovel = $this->tipo_imovel->BuscaTipoImovel ( mb_convert_encoding ( $ad->property_type, 'ISO-8859-1', 'auto' ) );
 			}
+			
 			$data_inclusao = DateTime::createFromFormat ( "d/m/Y", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
 			if ($data_inclusao === FALSE) {
 				$data_inclusao = DateTime::createFromFormat ( "Y/m/d", mb_convert_encoding ( $ad->date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
@@ -761,107 +762,118 @@ class Feeds extends CI_Controller {
 				$data_expiracao = DateTime::createFromFormat ( "Y/m/d H:i:s", mb_convert_encoding ( $ad->expiration_date, 'ISO-8859-1', 'auto' ), new DateTimeZone ( "America/Sao_Paulo" ) );
 			}
 			
+			
 			$row = array (
 					'atm_anuncio_id' => mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ),
-					'ps_id' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_url' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_titulo' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_descricao' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_url_movel' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'tpi_id' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_atividades' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_transporte' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_distancia_praia' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_distnacia_praia_unidade' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_distancia_centro' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_distancia_centro_unidade' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_descricao_regiao' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_endereco' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_bairro' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_area_local' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'cd_id' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'es_id' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_cep' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_zona_turistica' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_latitude' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_longitude' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_orientacao' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_agencia' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_contato_nome' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_contato_email' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_contato_telefone' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_preco_periodo' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_preco_alta' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_preco_baixa' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_preco_media' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_preco_moeda' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_cuto_extra' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_formas_pagamento' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_url_reserva' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_dia_entrada' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_hora_entrada' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_hora_saida' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_tempo_maximo' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_pessoas_maximo' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_area_construida' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_area_contruida_unidade' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_area_terreno' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_area_terreno_unidade' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_numero_comodos' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_numero_quartos' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_numero_banheiro' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_num_cama_casal' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_num_cama_solteiro' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_num_sofa_cama' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_data' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_data_expiracao' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_anuncio_particular' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_servico_limpeza' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_alojamento_completo' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_suporte_GLS' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_reserva_online' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_area_fumantes' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_churrasqueira' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_roupa_cama' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_ar_condicionado' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_aquecedor' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_playground' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_cafeteria' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_utensilios_cozinha' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_berco' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_lavaloucas' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_secadora' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_dvd' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_ventilador' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_chamine' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
-					'atm_academia_ginatica' => mb_convert_encoding ( $ad->x, 'ISO-8859-1', 'auto' ),
+					'ps_id' => $pais[0]->ps_id,
+					'atm_url' => mb_convert_encoding ( $ad->url, 'ISO-8859-1', 'auto' ),
+					'atm_titulo' => mb_convert_encoding ( $ad->title, 'ISO-8859-1', 'auto' ),
+					'atm_descricao' => mb_convert_encoding ( $ad->content, 'ISO-8859-1', 'auto' ),
+					'atm_url_movel' => mb_convert_encoding ( $ad->mobile_url, 'ISO-8859-1', 'auto' ),
+					'tpi_id' => $tipo_imovel[0]->tpi_id,
+					'atm_atividades' => mb_convert_encoding ( $ad->activitie, 'ISO-8859-1', 'auto' ),
+					'atm_transporte' => mb_convert_encoding ( $ad->transport_information, 'ISO-8859-1', 'auto' ),
+					'atm_distancia_praia' => mb_convert_encoding ( $ad->distance_to->beach, 'ISO-8859-1', 'auto' ),
+					'atm_distnacia_praia_unidade' => mb_convert_encoding ( $ad->distance_to->beach['meters'], 'ISO-8859-1', 'auto' ),
+					'atm_distancia_centro' => mb_convert_encoding ( $ad->distance_to->center, 'ISO-8859-1', 'auto' ),
+					'atm_distancia_centro_unidade' => mb_convert_encoding ( $ad->distance_to->center['meters'], 'ISO-8859-1', 'auto' ),
+					'atm_descricao_regiao' => mb_convert_encoding ( $ad->zone_information, 'ISO-8859-1', 'auto' ),
+					'atm_endereco' => mb_convert_encoding ( $ad->address, 'ISO-8859-1', 'auto' ),
+					'atm_bairro' => mb_convert_encoding ( $ad->neighborhood, 'ISO-8859-1', 'auto' ),
+					'atm_area_local' => mb_convert_encoding ( $ad->city_area, 'ISO-8859-1', 'auto' ),
+					'cd_id' => $cidade[0]->cd_id,
+					'es_id' => $estado[0]->es_id,
+					'atm_cep' => mb_convert_encoding ( $ad->postcode, 'ISO-8859-1', 'auto' ),
+					'atm_zona_turistica' => mb_convert_encoding ( $ad->zone, 'ISO-8859-1', 'auto' ),
+					'atm_latitude' => mb_convert_encoding ( $ad->latitude, 'ISO-8859-1', 'auto' ),
+					'atm_longitude' => mb_convert_encoding ( $ad->longitude, 'ISO-8859-1', 'auto' ),
+					'atm_orientacao' => mb_convert_encoding ( $ad->orientation, 'ISO-8859-1', 'auto' ),
+					'atm_agencia' => mb_convert_encoding ( $ad->agency, 'ISO-8859-1', 'auto' ),
+					'atm_contato_nome' => mb_convert_encoding ( $ad->contact_name, 'ISO-8859-1', 'auto' ),
+					'atm_contato_email' => mb_convert_encoding ( $ad->contact_email, 'ISO-8859-1', 'auto' ),
+					'atm_contato_telefone' => mb_convert_encoding ( $ad->contact_telephone, 'ISO-8859-1', 'auto' ),
+					'atm_preco_periodo' => mb_convert_encoding ( $ad->rate['period'], 'ISO-8859-1', 'auto' ),
+					'atm_preco_alta' => mb_convert_encoding ( $ad->rate->high_season, 'ISO-8859-1', 'auto' ),
+					'atm_preco_baixa' => mb_convert_encoding ( $ad->rate->low_season, 'ISO-8859-1', 'auto' ),
+					'atm_preco_media' => mb_convert_encoding ( $ad->rate->mid_season, 'ISO-8859-1', 'auto' ),
+					'atm_preco_moeda' => mb_convert_encoding ( $ad->rate['currency'], 'ISO-8859-1', 'auto' ),
+					'atm_cuto_extra' => mb_convert_encoding ( $ad->extra_charges, 'ISO-8859-1', 'auto' ),
+					'atm_formas_pagamento' => mb_convert_encoding ( $ad->payment_information, 'ISO-8859-1', 'auto' ),
+					'atm_url_reserva' => mb_convert_encoding ( $ad->booking_url, 'ISO-8859-1', 'auto' ),
+					'atm_dia_entrada' => mb_convert_encoding ( $ad->check_in_week_day, 'ISO-8859-1', 'auto' ),
+					'atm_hora_entrada' => mb_convert_encoding ( $ad->check_in_time, 'ISO-8859-1', 'auto' ),
+					'atm_hora_saida' => mb_convert_encoding ( $ad->check_out_time, 'ISO-8859-1', 'auto' ),
+					'atm_tempo_maximo' => mb_convert_encoding ( $ad->minimum_stay, 'ISO-8859-1', 'auto' ),
+					'atm_pessoas_maximo' => mb_convert_encoding ( $ad->max_people, 'ISO-8859-1', 'auto' ),
+					'atm_area_construida' => mb_convert_encoding ( $ad->floor_area, 'ISO-8859-1', 'auto' ),
+					'atm_area_contruida_unidade' => mb_convert_encoding ( $ad->floor_area['unit'], 'ISO-8859-1', 'auto' ),
+					'atm_area_terreno' => mb_convert_encoding ( $ad->plot_area, 'ISO-8859-1', 'auto' ),
+					'atm_area_terreno_unidade' => mb_convert_encoding ( $ad->plot_area['unit'], 'ISO-8859-1', 'auto' ),
+					'atm_numero_comodos' => mb_convert_encoding ( $ad->rooms, 'ISO-8859-1', 'auto' ),
+					'atm_numero_quartos' => mb_convert_encoding ( $ad->bedrooms, 'ISO-8859-1', 'auto' ),
+					'atm_numero_banheiro' => mb_convert_encoding ( $ad->bathrooms, 'ISO-8859-1', 'auto' ),
+					'atm_num_cama_casal' => mb_convert_encoding ( $ad->double_bed, 'ISO-8859-1', 'auto' ),
+					'atm_num_cama_solteiro' => mb_convert_encoding ( $ad->single_bed, 'ISO-8859-1', 'auto' ),
+					'atm_num_sofa_cama' => mb_convert_encoding ( $ad->sofa_bed, 'ISO-8859-1', 'auto' ),
+					'atm_data' => $data_inclusao ? $data_inclusao->format ( "Y-m-d H:i:s" ) : null,
+					'atm_data_expiracao' => $data_expiracao ? $data_expiracao->format ( "Y-m-d H:i:s" ) : null,
+					'atm_anuncio_particular' => mb_convert_encoding ( $ad->by_owner, 'ISO-8859-1', 'auto' ),
+					'atm_servico_limpeza' => mb_convert_encoding ( $ad->cleaning_service, 'ISO-8859-1', 'auto' ),
+					'atm_alojamento_completo' => mb_convert_encoding ( $ad->complete_rental, 'ISO-8859-1', 'auto' ),
+					'atm_suporte_GLS' => mb_convert_encoding ( $ad->gay_friendly, 'ISO-8859-1', 'auto' ),
+					'atm_reserva_online' => mb_convert_encoding ( $ad->online_reservation, 'ISO-8859-1', 'auto' ),
+					'atm_area_fumantes' => mb_convert_encoding ( $ad->smoking, 'ISO-8859-1', 'auto' ),
+					'atm_churrasqueira' => mb_convert_encoding ( $ad->barbecue, 'ISO-8859-1', 'auto' ),
+					'atm_roupa_cama' => mb_convert_encoding ( $ad->bed_linen, 'ISO-8859-1', 'auto' ),
+					'atm_ar_condicionado' => mb_convert_encoding ( $ad->air_conditioning, 'ISO-8859-1', 'auto' ),
+					'atm_aquecedor' => mb_convert_encoding ( $ad->central_heating, 'ISO-8859-1', 'auto' ),
+					'atm_playground' => mb_convert_encoding ( $ad->children_play_area, 'ISO-8859-1', 'auto' ),
+					'atm_cafeteria' => mb_convert_encoding ( $ad->coffee_maker, 'ISO-8859-1', 'auto' ),
+					'atm_utensilios_cozinha' => mb_convert_encoding ( $ad->cooking_utensils, 'ISO-8859-1', 'auto' ),
+					'atm_berco' => mb_convert_encoding ( $ad->cot, 'ISO-8859-1', 'auto' ),
+					'atm_lavaloucas' => mb_convert_encoding ( $ad->dishwasher, 'ISO-8859-1', 'auto' ),
+					'atm_secadora' => mb_convert_encoding ( $ad->dryer, 'ISO-8859-1', 'auto' ),
+					'atm_dvd' => mb_convert_encoding ( $ad->dvd, 'ISO-8859-1', 'auto' ),
+					'atm_ventilador' => mb_convert_encoding ( $ad->fan, 'ISO-8859-1', 'auto' ),
+					'atm_chamine' => mb_convert_encoding ( $ad->fireplace, 'ISO-8859-1', 'auto' ),
+					'atm_academia_ginatica' => mb_convert_encoding ( $ad->gym, 'ISO-8859-1', 'auto' ),
 					'tan_id' => 5 
 			);
 			
-			$anuncio_produto = $this->anuncio_temporada->BuscaPorAnuncioID ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );
+			$anuncio_temporada = $this->anuncio_temporada->BuscaPorAnuncioID ( mb_convert_encoding ( $ad->id, 'ISO-8859-1', 'auto' ) );
 			
-			if ($anuncio_produto === FALSE) {
-				$anuncio_produto_id = $this->anuncio_temporada->Adicionar ( $row );
+			if ($anuncio_temporada === FALSE) {
+				$anuncio_temporada_id = $this->anuncio_temporada->Adicionar ( $row );
 				
 				foreach ( $ad->pictures->picture as $picture ) {
 					$row = array (
 							'tft_titulo' => mb_convert_encoding ( $picture->picture_url, 'ISO-8859-1', 'auto' ),
 							'tft_url' => mb_convert_encoding ( $picture->picture_title, 'ISO-8859-1', 'auto' ),
-							'apr_id' => ( string ) $anuncio_produto_id 
+							'atm_id' => ( string ) $anuncio_temporada_id 
 					);
 					$this->temporada_fotos->Adicionar ( $row );
 				}
-				foreach ( $ad->availability as $dips ) {
+				
+				foreach ( $ad->availability->month as $dips ) {
 					$row = array (
-							'tds_mes' => mb_convert_encoding ( $dips->month, 'ISO-8859-1', 'auto' ),
-							'tds_valor' => mb_convert_encoding ( $dips->value, 'ISO-8859-1', 'auto' ),
-							'tds_ano' => mb_convert_encoding ( $dips->year, 'ISO-8859-1', 'auto' ),
-							'atm_id' => ( string ) $anuncio_produto_id
+							'tds_mes' => mb_convert_encoding ( $dips['value'], 'ISO-8859-1', 'auto' ),
+							'tds_valor' => mb_convert_encoding ( $dips, 'ISO-8859-1', 'auto' ),
+							'tds_ano' => mb_convert_encoding ( $dips['year'], 'ISO-8859-1', 'auto' ),
+							'atm_id' => ( string ) $anuncio_temporada_id
 					);
 					$this->temporada_disponibilidade->Adicionar ( $row );
 				}
+				
+				foreach ( $ad->comments->comment as $coment ) {
+					$row = array (
+							'atm_id' => ( string ) $anuncio_temporada_id,
+							'tcm_titulo' => mb_convert_encoding ((string) $coment->comment_title, 'ISO-8859-1', 'auto' ),
+							'tcm_descricao' => mb_convert_encoding ((string) $coment->comment_description, 'ISO-8859-1', 'auto' )
+					);
+					$this->temporada_comentarios->Adicionar ( $row );
+				}
 			} else {
-				$this->anuncio_temporada->Alterar ( $row, ( string ) $anuncio_produto [0]->atm_id );
+				$this->anuncio_temporada->Alterar ( $row, ( string ) $anuncio_temporada [0]->atm_id );
 			}
 		}
 	}

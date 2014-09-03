@@ -4,14 +4,26 @@
 
 		<div id="footer">
 			<div class="container">
-				<p class="muted credit">
-					&copy;Todos os direitos reservados a Motor de Busca.
-				</p>
+				<div class="row-fluid">
+					<div class="span6">
+						<p class="muted credit">
+						&copy;Todos os direitos reservados a Motor de Busca.
+						</p>
+					</div>
+					<div class="span4">
+						<p class="muted credit">
+						<a href="alerta/lista" >Alertas</a>&nbsp;|&nbsp;
+						<a href="#" >Termos</a>&nbsp;|&nbsp;
+						<a href="contato" >Contatos</a>
+						</p>
+					</div>
+				</div>				
 			</div>
 		</div>
 
 		<script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
 		<script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+		<script src="<?php echo base_url();?>assets/js/tabs.js"></script>
 		<script type="text/javascript">
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
