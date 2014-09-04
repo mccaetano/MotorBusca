@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<motorbusca>
+<trovit>
 	<ad>
 		<id><![CDATA[1]]></id>
 		<url><![CDATA[http://localhost/motorbusca/carro1]]></url>
@@ -87,4 +87,4 @@
 			</picture>
 		</pictures>
 	</ad>	
-</motorbusca>
+</trovit>
