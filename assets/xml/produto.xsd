@@ -1,5 +1,5 @@
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="motorbusca">
+  <xs:element name="trovit">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="ad" maxOccurs="unbounded" minOccurs="0">
