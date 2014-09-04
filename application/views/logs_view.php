@@ -23,7 +23,7 @@
 					echo '<p>' . anchor ( 'popup_view_errors/delete_log_file', 'Delete log file' ) . '</p>';
 				} else {
 					// notification
-					echo heading ( 'It&#39; gone: ' . $ff, 4 );
+					echo  '<p>It&#39; gone: ' . $ff.'</p>';
 				}
 				?>
   </div>
