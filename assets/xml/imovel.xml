@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<motorbusca>
+<trovit>
 	<ad>
 		<id><![CDATA[1]]></id>
 		<url><![CDATA[http://imovelonline.net]]></url>
@@ -88,4 +88,4 @@
 			</picture>
 		</pictures>
 	</ad>
-</motorbusca>
+</trovit>
