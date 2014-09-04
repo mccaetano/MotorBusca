@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<motorbusca>
+<trovit>
 	<ad>
 		<id><![CDATA[7004578]]></id>
 		<country><![CDATA[es]]></country>
@@ -99,4 +99,4 @@
 			</picture>
 		</pictures>
 	</ad>
-</motorbusca>
+</trovit>
