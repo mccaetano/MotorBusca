@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<motorbusca>
+<trovit>
 	<ad>
 		<id><![CDATA[1]]></id>
 		<title><![CDATA[analista de sistemas]]></title>
@@ -42,4 +42,4 @@
 		<date><![CDATA[01/08/2014]]></date>
 		<expiration_date><![CDATA[25/11/2014]]></expiration_date>
 	</ad>
-</motorbusca>
+</trovit>
