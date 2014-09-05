@@ -33,8 +33,10 @@ class Logs extends CI_Controller {
 		
 		$data = array(
 			'log_path' => $this->config->item ( 'log_path' ) == '' ? 'application/logs/' : $this->config->item ( 'log_path' )
-		);
-		$this->load->view('logs_view', $data);
+		);		
+		$this->load->view ( 'admin/templates/header', $data );
+		$this->load->view ( 'logs_view', $data);
+		$this->load->view ( 'admin/templates/footer', $data );
 		
 	}
 	
