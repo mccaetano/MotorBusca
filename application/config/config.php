@@ -193,7 +193,7 @@ $config['log_threshold'] = 4;
 | application/logs/ folder. Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = '';
+$config['log_path'] = '/srv/www/motorbusca/current/application/logs/';
 
 /*
 |--------------------------------------------------------------------------
