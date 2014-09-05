@@ -8,7 +8,7 @@
 	<hr>
 </div>
 
-<form action="#" method="post">
+<form name="frmPesquisa" action="<?php echo $url; ?>" method="post">
 	<fieldset>
 		<div class="row-fluid">
 			<div class="span2">

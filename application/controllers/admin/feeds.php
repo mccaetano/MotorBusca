@@ -19,7 +19,7 @@ class Feeds extends CI_Controller {
 	function carregaanuncios() {
 		$this->load->model ( "motor_anuncio" );
 		$this->load->model ( "tipo_anuncio" );
-		
+		log_message('info', 'iniciando carga de anuncios');
 		$lista = $this->motor_anuncio->BuscaTodos ();
 		
 		if ($lista != FALSE) {
@@ -60,6 +60,7 @@ class Feeds extends CI_Controller {
 	}
 	function imovelXML($xmlFile = FALSE) {
 		set_time_limit ( 0 );
+		log_message('info', 'Carregando imoveis para' . base64_decode ( urldecode ( $xmlFile ) ));
 		
 		if (! $xmlFile) {
 			log_message ( 'error', "xml não enviado" );
@@ -71,10 +72,14 @@ class Feeds extends CI_Controller {
 		$xsd_document = base_url () . "assets/xml/imovel.xsd";
 		$dom = new DomDocument ();
 		
-		if (! @$dom->load ( $xmlFile )) {
+		try {
+			$dom->load ( $xmlFile );
+		} catch (Exception $e) {
 			log_message ( 'error', 'Could not load XML file: ' . $xmlFile );
+			log_message ( 'error', $e->getMessage() );
 			die ( 'Could not load XML file: ' . $xmlFile );
 		}
+		
 		if (! @$dom->schemaValidate ( $xsd_document )) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
 			die ( 'XML file did not validate against schema: ' . $xsd_document );
@@ -215,6 +220,7 @@ class Feeds extends CI_Controller {
 	}
 	function autoXML($xmlFile = FALSE) {
 		set_time_limit ( 0 );
+		log_message('info', 'Carregando autos para' . base64_decode ( urldecode ( $xmlFile ) ));
 		
 		if (! $xmlFile) {
 			log_message ( 'error', "xml não enviado" );
@@ -390,6 +396,7 @@ class Feeds extends CI_Controller {
 	}
 	function empregoXML($xmlFile = FALSE) {
 		set_time_limit ( 0 );
+		log_message('info', 'Carregando empregos para' . base64_decode ( urldecode ( $xmlFile ) ));
 		
 		if (! $xmlFile) {
 			log_message ( 'error', "xml não enviado" );
@@ -527,6 +534,7 @@ class Feeds extends CI_Controller {
 	}
 	function produtoXML($xmlFile = FALSE) {
 		set_time_limit ( 0 );
+		log_message('info', 'Carregando produtos para' . base64_decode ( urldecode ( $xmlFile ) ));
 		
 		if (! $xmlFile) {
 			log_message ( 'error', "xml não enviado" );
@@ -673,6 +681,7 @@ class Feeds extends CI_Controller {
 	}
 	function temporadaXML($xmlFile = FALSE) {
 		set_time_limit ( 0 );
+		log_message('info', 'Carregando temporadas para' . base64_decode ( urldecode ( $xmlFile ) ));
 		
 		if (! $xmlFile) {
 			log_message ( 'error', "xml não enviado" );

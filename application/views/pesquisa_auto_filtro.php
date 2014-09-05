@@ -12,7 +12,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small><?php echo mb_convert_encoding($row->crt_descricao, "ISO-8859-1", "auto"); ?></small>
-					<input type="radio" id="iCarroTipo<?php echo $row->crt_id; ?>" name="iCarroTipo" value="<?php echo $row->crt_id; ?>" <?php echo set_radio('iCarroTipo', $row->crt_id); ?>>
+					<input onclick="javascript: frmPesquisa.submit();"  type="radio" id="iCarroTipo<?php echo $row->crt_id; ?>" name="iCarroTipo" value="<?php echo $row->crt_id; ?>" <?php echo set_radio('iCarroTipo', $row->crt_id); ?>>
 				</label>
 			</div>
 		</div>
@@ -23,7 +23,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>Indiferente</small>
-					<input type="radio" id="iCarroMarca" name="iCarroMarca" value="null" <?php echo set_radio('iCarroMarca', "null", TRUE); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCarroMarca" name="iCarroMarca" value="null" <?php echo set_radio('iCarroMarca', "null", TRUE); ?>>
 				</label>
 			</div>
 		</div>		
@@ -31,7 +31,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small><?php echo mb_convert_encoding($row->cmr_descricao, "ISO-8859-1", "auto"); ?></small>
-					<input type="radio" id="iCarroMarca<?php echo $row->cmr_id; ?>" name="iCarroMarca" value="<?php echo $row->cmr_id; ?>" <?php echo set_radio('iCarroMarca', $row->cmr_id); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCarroMarca<?php echo $row->cmr_id; ?>" name="iCarroMarca" value="<?php echo $row->cmr_id; ?>" <?php echo set_radio('iCarroMarca', $row->cmr_id); ?>>
 				</label>
 			</div>
 		</div>
@@ -42,7 +42,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>Indiferente</small>
-					<input type="radio" id="iCarroModelo" name="iCarroModelo" value="null" <?php echo set_radio('iCarroModelo', "null", TRUE); ?>>
+					<input type="radio" onclick="javascript: frmPesquisa.submit();" id="iCarroModelo" name="iCarroModelo" value="null" <?php echo set_radio('iCarroModelo', "null", TRUE); ?>>
 				</label>
 			</div>
 		</div>		
@@ -50,7 +50,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small><?php echo mb_convert_encoding($row->cmd_descricao, "ISO-8859-1", "auto"); ?></small>
-					<input type="radio" id="iCarroModelo<?php echo $row->cmd_id; ?>" name="iCarroModelo" value="<?php echo $row->cmd_id; ?>" <?php echo set_radio('iCarroModelo', $row->cmd_id); ?>>
+					<input type="radio" onclick="javascript: frmPesquisa.submit();" id="iCarroModelo<?php echo $row->cmd_id; ?>" name="iCarroModelo" value="<?php echo $row->cmd_id; ?>" <?php echo set_radio('iCarroModelo', $row->cmd_id); ?>>
 				</label>
 			</div>
 		</div>
@@ -61,7 +61,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>Indiferente</small>
-					<input type="radio" id="iEstado" name="iEstado" value="null" <?php echo set_radio('iEstado', "null", TRUE); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iEstado" name="iEstado" value="null" <?php echo set_radio('iEstado', "null", TRUE); ?>>
 				</label>
 			</div>
 		</div>				
@@ -69,7 +69,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small><?php echo mb_convert_encoding($row->es_descricao, "ISO-8859-1", "auto"); ?></small>
-					<input type="radio" id="iEstado<?php echo $row->es_id; ?>" name="iEstado" value="<?php echo $row->es_id; ?>" <?php echo set_radio('iEstado', $row->es_id); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iEstado<?php echo $row->es_id; ?>" name="iEstado" value="<?php echo $row->es_id; ?>" <?php echo set_radio('iEstado', $row->es_id); ?>>
 				</label>
 			</div>
 		</div>
@@ -80,7 +80,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>Indiferente</small>
-					<input type="radio" id="iCidade" name="iCidade" value="null" <?php echo set_radio('iCidade', "null", TRUE); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCidade" name="iCidade" value="null" <?php echo set_radio('iCidade', "null", TRUE); ?>>
 				</label>
 			</div>
 		</div>			
@@ -88,7 +88,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small><?php echo mb_convert_encoding($row->cd_descricao, "ISO-8859-1", "auto"); ?></small>
-					<input type="radio" id="iCidade<?php echo $row->cd_id; ?>" name="iCidade" value="<?php echo $row->cd_id; ?>" <?php echo set_radio('iCidade', $row->cd_id); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCidade<?php echo $row->cd_id; ?>" name="iCidade" value="<?php echo $row->cd_id; ?>" <?php echo set_radio('iCidade', $row->cd_id); ?>>
 				</label>
 			</div>
 		</div>
@@ -99,49 +99,49 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>Indiferente</small>
-					<input type="radio" id="iPreco" name="iPreco" value="null" <?php echo set_radio('iPreco', "null", TRUE); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPreco" name="iPreco" value="null" <?php echo set_radio('iPreco', "null", TRUE); ?>>
 				</label>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>10.000 - 80.000</small>
-					<input type="radio" id="iPreco1" name="iPreco" value="10000,80000" <?php echo set_radio('iPreco', "10000,80000"); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPreco1" name="iPreco" value="10000,80000" <?php echo set_radio('iPreco', "10000,80000"); ?>>
 				</label>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>80.000 - 100.000</small>
-					<input type="radio" id="iPreco2" name="iPreco" value="80000,100000" <?php echo set_radio('iPreco', "80000,100000"); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPreco2" name="iPreco" value="80000,100000" <?php echo set_radio('iPreco', "80000,100000"); ?>>
 				</label>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>100.000 - 200.000</small>
-					<input type="radio" id="iPreco3" name="iPreco" value="100000,200000" <?php echo set_radio('iPreco', "100000,200000"); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPreco3" name="iPreco" value="100000,200000" <?php echo set_radio('iPreco', "100000,200000"); ?>>
 				</label>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>200.000 - 300.000</small>
-					<input type="radio" id="iPreco4" name="iPreco" value="200000,300000" <?php echo set_radio('iPreco', "200000,300000"); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPreco4" name="iPreco" value="200000,300000" <?php echo set_radio('iPreco', "200000,300000"); ?>>
 				</label>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>300.000 - 400.000</small>
-					<input type="radio" id="iPreco5" name="iPreco" value="300000,400000" <?php echo set_radio('iPreco', "300000,400000"); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPreco5" name="iPreco" value="300000,400000" <?php echo set_radio('iPreco', "300000,400000"); ?>>
 				</label>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>400.000 - 500.000</small>
-					<input type="radio" id="iPreco6" name="iPreco" value="400000,500000" <?php echo set_radio('iPreco', "400000,500000"); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPreco6" name="iPreco" value="400000,500000" <?php echo set_radio('iPreco', "400000,500000"); ?>>
 				</label>
 			</div>
 		</div>
@@ -155,7 +155,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>700.000 - 1.000.000</small>
-					<input type="radio" id="iPreco8" name="iPreco" value="700000,1000000" <?php echo set_radio('iPreco', "700000,1000000"); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPreco8" name="iPreco" value="700000,1000000" <?php echo set_radio('iPreco', "700000,1000000"); ?>>
 				</label>
 			</div>
 		</div>
@@ -165,21 +165,21 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>Indiferente</small>
-					<input type="radio" id="iNovo" name="iNovo" value="null" <?php echo set_radio('iNovo', "null", TRUE); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iNovo" name="iNovo" value="null" <?php echo set_radio('iNovo', "null", TRUE); ?>>
 				</label>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>Usado</small>
-					<input type="radio" id="iNovo1" name="iNovo" value="1" <?php echo set_radio('iNovo', "1"); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iNovo1" name="iNovo" value="1" <?php echo set_radio('iNovo', "1"); ?>>
 				</label>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>Novo</small>
-					<input type="radio" id="iNovo2" name="iNovo" value="2" <?php echo set_radio('iNovo', "2"); ?>>
+					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iNovo2" name="iNovo" value="2" <?php echo set_radio('iNovo', "2"); ?>>
 				</label>
 			</div>
 		</div>

@@ -102,7 +102,8 @@ html,body {
 								      <b class="caret"></b>
 								    </a>
 								    <ul class="dropdown-menu">
-								      <li><a href="<?php echo base_url();?>admin/pais">Paises</a></li>
+								      <li><a href="<?php echo base_url();?>admin/logs/view">Logs</a></li>
+								      <li><a href="<?php echo base_url();?>admin/feeds/carregaanuncios">Rodar Carga de Feeds</a></li>
 								    </ul>
 								 </li>
 							</ul>

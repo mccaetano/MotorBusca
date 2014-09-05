@@ -5,21 +5,21 @@
         <xs:element name="ad" maxOccurs="unbounded" minOccurs="0">
           <xs:complexType>
             <xs:all>
-              <xs:element type="xs:string" name="id" minOccurs="0"/>
-              <xs:element type="xs:string" name="url" minOccurs="0"/>
-              <xs:element type="xs:string" name="title" minOccurs="0"/>
-              <xs:element type="xs:string" name="content" minOccurs="0"/>
-              <xs:element type="xs:string" name="price" minOccurs="0"/>
-              <xs:element type="xs:string" name="make" minOccurs="0"/>
-              <xs:element type="xs:string" name="model" minOccurs="0"/>
-              <xs:element type="xs:string" name="color" minOccurs="0"/>
-              <xs:element type="xs:string" name="year" minOccurs="0"/>
-              <xs:element type="xs:string" name="fuel" minOccurs="0"/>
-              <xs:element type="xs:string" name="doors" minOccurs="0"/>
-              <xs:element type="xs:string" name="seats" minOccurs="0"/>
-              <xs:element type="xs:string" name="gears" minOccurs="0"/>
-              <xs:element type="xs:string" name="car_type" minOccurs="0"/>
-              <xs:element name="mileage" minOccurs="0">
+              <xs:element type="xs:string" name="id"/>
+              <xs:element type="xs:string" name="url"/>
+              <xs:element type="xs:string" name="title"/>
+              <xs:element type="xs:string" name="content" minOccurs="0" nillable="true" />
+              <xs:element type="xs:string" name="price" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="make" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="model" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="color" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="year" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="fuel" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="doors" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="seats" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="gears" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="car_type" minOccurs="0" nillable="true"/>
+              <xs:element name="mileage" minOccurs="0" nillable="true">
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
@@ -28,9 +28,9 @@
                   </xs:simpleContent>
                 </xs:complexType>
               </xs:element>
-              <xs:element type="xs:string" name="transmission" minOccurs="0"/>
-              <xs:element type="xs:string" name="cylinders" minOccurs="0"/>
-              <xs:element name="engine_size" minOccurs="0">
+              <xs:element type="xs:string" name="transmission" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="cylinders" minOccurs="0" nillable="true"/>
+              <xs:element name="engine_size" minOccurs="0" nillable="true">
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
@@ -39,7 +39,7 @@
                   </xs:simpleContent>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="power" minOccurs="0">
+              <xs:element name="power" minOccurs="0" nillable="true">
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
@@ -48,8 +48,8 @@
                   </xs:simpleContent>
                 </xs:complexType>
               </xs:element>
-              <xs:element type="xs:string" name="fuel_consumption" minOccurs="0"/>
-              <xs:element name="co2_emissions" minOccurs="0">
+              <xs:element type="xs:string" name="fuel_consumption" minOccurs="0" nillable="true"/>
+              <xs:element name="co2_emissions" minOccurs="0" nillable="true">
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
@@ -58,24 +58,24 @@
                   </xs:simpleContent>
                 </xs:complexType>
               </xs:element>
-              <xs:element type="xs:string" name="eco_score" minOccurs="0"/>
-              <xs:element type="xs:string" name="is_new" minOccurs="0"/>
-              <xs:element type="xs:string" name="warranty" minOccurs="0"/>
-              <xs:element type="xs:string" name="dealer" minOccurs="0"/>
-              <xs:element type="xs:string" name="region" minOccurs="0"/>
-              <xs:element type="xs:string" name="city" minOccurs="0"/>
-              <xs:element type="xs:string" name="city_area" minOccurs="0"/>
-              <xs:element type="xs:string" name="postcode" minOccurs="0"/>
-              <xs:element type="xs:string" name="date" minOccurs="0"/>
-              <xs:element type="xs:string" name="expiration_date" minOccurs="0"/>
-              <xs:element name="pictures">
+              <xs:element type="xs:string" name="eco_score" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="is_new" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="warranty" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="dealer" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="region" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="city" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="city_area" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="postcode" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="date" minOccurs="0" nillable="true"/>
+              <xs:element type="xs:string" name="expiration_date" minOccurs="0" nillable="true"/>
+              <xs:element name="pictures" minOccurs="0" nillable="true">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="picture" maxOccurs="unbounded" minOccurs="0">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element type="xs:string" name="picture_url" minOccurs="0"/>
-                          <xs:element type="xs:string" name="picture_title" minOccurs="0"/>
+                          <xs:element type="xs:string" name="picture_url" minOccurs="0" nillable="true"/>
+                          <xs:element type="xs:string" name="picture_title" minOccurs="0" nillable="true"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
