@@ -32,6 +32,7 @@ class Logs extends CI_Controller {
 	{
 		
 		$data = array(
+				'ativo' => '',
 			'log_path' => $this->config->item ( 'log_path' ) == '' ? 'application/logs/' : $this->config->item ( 'log_path' )
 		);		
 		$this->load->view ( 'admin/templates/header', $data );
