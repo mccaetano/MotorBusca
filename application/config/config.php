@@ -14,9 +14,9 @@
 | path to your installation.
 |
 */
-#$config['base_url']	= 'http://mccaetano.dev/MotorBusca/';
+$config['base_url']	= 'http://mccaetano.dev/MotorBusca/';
 #$config['base_url']	= 'http://ec2-54-207-103-134.sa-east-1.compute.amazonaws.com/';
-$config['base_url']	= 'http://motorbusca.sytes.net/';
+#$config['base_url']	= 'http://motorbusca.sytes.net/';
 
 /*
 |--------------------------------------------------------------------------
@@ -193,7 +193,7 @@ $config['log_threshold'] = 4;
 | application/logs/ folder. Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = '/srv/www/motorbusca/current/application/logs/';
+$config['log_path'] = '';
 
 /*
 |--------------------------------------------------------------------------

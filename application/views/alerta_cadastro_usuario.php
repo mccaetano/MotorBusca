@@ -41,7 +41,28 @@
 						<div
 							class="tab-pane <?php echo $tipoalerta == 1 ? "active" : ""; ?>"
 							id="1">
-							<p>panel1</p>
+							<div class="control-group">
+								<label for="iImocelTipoContrato"><small>Tipo Contrato</small></label>
+								<div class="controls">
+									<select name="iImocelTipoContrato" id="iImocelTipoContrato">
+										<option value="" <?php echo set_select('iImocelTipoContrato', null); ?>>Indiferente</option>
+										<?php if ($pesquisa_tipo_casa) { foreach ($pesquisa_tipo_casa as $row) {?>
+										<option value="<?php echo $row->pct_id; ?>" <?php echo set_select('iImocelTipoContrato', $row->pct_id); ?>><?php echo $row->pct_descricao; ?></option>
+										<?php }} ?>
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label for="iImocelTipoImovel"><small>Tipo Imóvel</small></label>
+								<div class="controls">
+									<select name="iImocelTipoImovel" id="iImocelTipoImovel">
+										<option value="" <?php echo set_select('iImocelTipoImovel', null); ?>>Indiferente</option>
+										<?php if ($tipo_imovel) { foreach ($tipo_imovel as $row) {?>
+										<option value="<?php echo $row->pt_id; ?>" <?php echo set_select('iImocelTipoImovel', $row->pt_id); ?>><?php echo $row->pt_descricao; ?></option>
+										<?php }} ?>
+									</select>
+								</div>
+							</div>
 						</div>
 						<div
 							class="tab-pane <?php echo $tipoalerta == 2 ? "active" : ""; ?>"

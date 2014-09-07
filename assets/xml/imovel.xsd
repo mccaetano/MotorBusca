@@ -2,9 +2,9 @@
   <xs:element name="trovit">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="ad" maxOccurs="unbounded">
+        <xs:element name="ad" maxOccurs="unbounded" minOccurs="0" >
           <xs:complexType>
-            <xs:all>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
               <xs:element type="xs:string" name="id"/>
               <xs:element type="xs:string" name="url"/>
               <xs:element type="xs:string" name="title"/>
@@ -16,7 +16,7 @@
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
-                      <xs:attribute type="xs:string" name="unit" minOccurs="0" nillable="true"/>
+                      <xs:attribute type="xs:string" name="unit"/>
                     </xs:extension>
                   </xs:simpleContent>
                 </xs:complexType>
@@ -67,7 +67,7 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-            </xs:all>
+            </xs:choice>
           </xs:complexType>
         </xs:element>
       </xs:sequence>

@@ -1,10 +1,10 @@
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="trovit">
+<xs:element name="trovit">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="ad" maxOccurs="unbounded" minOccurs="0">
           <xs:complexType>
-            <xs:all>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
               <xs:element type="xs:string" name="id"/>
               <xs:element type="xs:string" name="url"/>
               <xs:element type="xs:string" name="title"/>
@@ -68,21 +68,21 @@
               <xs:element type="xs:string" name="postcode" minOccurs="0" nillable="true"/>
               <xs:element type="xs:string" name="date" minOccurs="0" nillable="true"/>
               <xs:element type="xs:string" name="expiration_date" minOccurs="0" nillable="true"/>
-              <xs:element name="pictures" minOccurs="0" nillable="true">
-                <xs:complexType>
+              <xs:element name="pictures">
+                <xs:complexType mixed="true">
                   <xs:sequence>
                     <xs:element name="picture" maxOccurs="unbounded" minOccurs="0">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element type="xs:string" name="picture_url" minOccurs="0" nillable="true"/>
-                          <xs:element type="xs:string" name="picture_title" minOccurs="0" nillable="true"/>
+                          <xs:element type="xs:anyURI" name="picture_url"/>
+                          <xs:element type="xs:string" name="picture_title"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-            </xs:all>
+            </xs:choice>
           </xs:complexType>
         </xs:element>
       </xs:sequence>

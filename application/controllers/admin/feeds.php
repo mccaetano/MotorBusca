@@ -88,9 +88,12 @@ class Feeds extends CI_Controller {
 			die ( 'Could not load XML file: ' . $xmlFile );
 		}
 		
-		if (! @$dom->schemaValidate ( $xsd_document )) {
+		try {
+			$dom->schemaValidate ( $xsd_document );
+		} catch (Exception $e) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
-			die ( 'XML file did not validate against schema: ' . $xsd_document );
+			log_message ( 'error', $e->getMessage() );
+			die ( 'XML file did not validate against schema: ' . $xsd_document . "/ " . $e->getMessage());
 		}
 		
 		$xmlData = simplexml_load_file ( $xmlFile );
@@ -240,13 +243,20 @@ class Feeds extends CI_Controller {
 		$xsd_document = base_url () . "assets/xml/auto.xsd";
 		$dom = new DomDocument ();
 		
-		if (! @$dom->load ( $xmlFile )) {
+		try {
+			$dom->load ( $xmlFile );
+		} catch (Exception $e) {
 			log_message ( 'error', 'Could not load XML file: ' . $xmlFile );
+			log_message ( 'error', $e->getMessage() );
 			die ( 'Could not load XML file: ' . $xmlFile );
 		}
-		if (! @$dom->schemaValidate ( $xsd_document )) {
+		
+		try {
+			$dom->schemaValidate ( $xsd_document );
+		} catch (Exception $e) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
-			die ( 'XML file did not validate against schema: ' . $xsd_document );
+			log_message ( 'error', $e->getMessage() );
+			die ( 'XML file did not validate against schema: ' . $xsd_document . "/ " . $e->getMessage());
 		}
 		
 		$xmlData = simplexml_load_file ( $xmlFile );
@@ -379,8 +389,8 @@ class Feeds extends CI_Controller {
 					'ps_id' => $pais ["ps_id"],
 					'aa_caixa_postal' => mb_convert_encoding ( $ad->postcode, 'ISO-8859-1', 'auto' ),
 					'aa_bairro' => mb_convert_encoding ( $ad->city_area, 'ISO-8859-1', 'auto' ),
-					'aa_data_criacao' => $data_inclusao->format ( "Y-m-d H:i:s" ),
-					'aa_data_expiracao' => $data_expiracao->format ( "Y-m-d H:i:s" ),
+					'aa_data_criacao' => $data_inclusao == FALSE ? null : $data_inclusao->format ( "Y-m-d H:i:s" ),
+					'aa_data_expiracao' => $data_expiracao == FALSE ? null : $data_expiracao->format ( "Y-m-d H:i:s" ),
 					'tan_id' => 2 
 			);
 			

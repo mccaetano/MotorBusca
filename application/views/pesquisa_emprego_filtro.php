@@ -11,7 +11,7 @@
 		<?php if ($emprego_contrato) { foreach ($emprego_contrato as $row) {?>
 		<div class="control-group">
 			<div class="controls">
-				<label class="radio"><small><?php echo mb_convert_encoding($row->emc_descricao, "ISO-8859-1", "auto"); ?></small>
+				<label class="radio"><small><?php echo $row->emc_descricao; ?></small>
 					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iContrato<?php echo $row->emc_id; ?>" name="iContrato" value="<?php echo $row->emc_id; ?>" <?php echo set_radio('iContrato', $row->emc_id); ?>>
 				</label>
 			</div>
@@ -30,7 +30,7 @@
 		<?php if ($emprego_categoria) { foreach ($emprego_categoria as $row) {?>
 		<div class="control-group">
 			<div class="controls">
-				<label class="radio"><small><?php echo mb_convert_encoding($row->ect_descricao, "ISO-8859-1", "auto"); ?></small>
+				<label class="radio"><small><?php echo $row->ect_descricao; ?></small>
 					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCategira<?php echo $row->ect_id; ?>" name="iCategira" value="<?php echo $row->ect_id; ?>" <?php echo set_radio('iCategira', $row->ect_id); ?>>
 				</label>
 			</div>
@@ -49,7 +49,7 @@
 		<?php if ($emprego_periodo) { foreach ($emprego_periodo as $row) {?>
 		<div class="control-group">
 			<div class="controls">
-				<label class="radio"><small><?php echo mb_convert_encoding($row->emp_descricao, "ISO-8859-1", "auto"); ?></small>
+				<label class="radio"><small><?php echo $row->emp_descricao; ?></small>
 					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPeriodo<?php echo $row->emp_id; ?>" name="iPeriodo" value="<?php echo $row->emp_id; ?>" <?php echo set_radio('iPeriodo', $row->emp_id); ?>>
 				</label>
 			</div>
@@ -68,7 +68,7 @@
 		<?php if ($pais) { foreach ($pais as $row) {?>
 		<div class="control-group">
 			<div class="controls">
-				<label class="radio"><small><?php echo mb_convert_encoding($row->ps_descricao, "ISO-8859-1", "auto"); ?></small>
+				<label class="radio"><small><?php echo $row->ps_descricao; ?></small>
 					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPais<?php echo $row->ps_id; ?>" name="iPais" value="<?php echo $row->ps_id; ?>" <?php echo set_radio('iPais', $row->ps_id); ?>>
 				</label>
 			</div>
@@ -106,7 +106,7 @@
 		<?php if ($cidade) { foreach ($cidade as $row) {?>
 		<div class="control-group">
 			<div class="controls">
-				<label class="radio"><small><?php echo mb_convert_encoding($row->cd_descricao, "ISO-8859-1", "auto"); ?></small>
+				<label class="radio"><small><?php echo $row->cd_descricao; ?></small>
 					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCidade<?php echo $row->cd_id; ?>" name="iCidade" value="<?php echo $row->cd_id; ?>" <?php echo set_radio('iCidade', $row->cd_id); ?>>
 				</label>
 			</div>

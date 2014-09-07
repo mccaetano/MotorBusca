@@ -11,7 +11,7 @@
 		<?php if ($pesquisa_tipo_casa) { foreach ($pesquisa_tipo_casa as $row) {?>
 		<div class="control-group">
 			<div class="controls">
-				<label class="radio"><small><?php echo mb_convert_encoding($row->pct_descricao, "ISO-8859-1", "auto"); ?></small>
+				<label class="radio"><small><?php echo $row->pct_descricao; ?></small>
 					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iContratoTipo<?php echo $row->pct_id; ?>" name="iContratoTipo" value="<?php echo $row->pct_id; ?>" <?php echo set_radio('iContratoTipo', $row->pct_id); ?>>
 				</label>
 			</div>
@@ -30,7 +30,7 @@
 		<?php if ($tipo_imovel) { foreach ($tipo_imovel as $row) {?>
 		<div class="control-group">
 			<div class="controls">
-				<label class="radio"><small><?php echo mb_convert_encoding($row->pt_descricao, "ISO-8859-1", "auto"); ?></small>
+				<label class="radio"><small><?php echo $row->pt_descricao; ?></small>
 					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCasaTipo<?php echo $row->pt_id; ?>" name="iCasaTipo" value="<?php echo $row->pt_id; ?>" <?php echo set_radio('iCasaTipo', $row->pt_id); ?>>
 				</label>
 			</div>
@@ -49,7 +49,7 @@
 		<?php if ($estado) { foreach ($estado as $row) {?>
 		<div class="control-group">
 			<div class="controls">
-				<label class="radio"><small><?php echo mb_convert_encoding($row->es_descricao, "ISO-8859-1", "auto"); ?></small>
+				<label class="radio"><small><?php echo $row->es_descricao; ?></small>
 					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iEstado<?php echo $row->es_id; ?>" name="iEstado" value="<?php echo $row->es_id; ?>" <?php echo set_radio('iEstado', $row->es_id); ?>>
 				</label>
 			</div>
@@ -68,7 +68,7 @@
 		<?php if ($cidade) { foreach ($cidade as $row) {?>
 		<div class="control-group">
 			<div class="controls">
-				<label class="radio"><small><?php echo mb_convert_encoding($row->cd_descricao, "ISO-8859-1", "auto"); ?></small>
+				<label class="radio"><small><?php echo $row->cd_descricao; ?></small>
 					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCidade<?php echo $row->cd_id; ?>" name="iCidade" value="<?php echo $row->cd_id; ?>" <?php echo set_radio('iCidade', $row->cd_id); ?>>
 				</label>
 			</div>
