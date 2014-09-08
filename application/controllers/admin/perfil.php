@@ -10,7 +10,7 @@ class Perfil extends CI_Controller {
 		) );
     }
     
-    function alterar() {
+    function lista() {
     	if (!$this->auth->loggedin()) {
     		redirect('admin/login');
     	}

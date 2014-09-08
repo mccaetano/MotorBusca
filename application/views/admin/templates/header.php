@@ -98,7 +98,7 @@ html,body {
 								<li <?php echo  $ativo == "alertas" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/alertas/lista">Alertas</a></li>
 								<li class="dropdown">
 								    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								      Cadastros
+								      Ações
 								      <b class="caret"></b>
 								    </a>
 								    <ul class="dropdown-menu">

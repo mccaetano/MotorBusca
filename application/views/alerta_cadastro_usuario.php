@@ -18,7 +18,7 @@
 </div>
 <hr>
 <div class="well">
-	<form action="<?php echo base_url();?>alerta/cadastro" method="post">
+	<form id="frmForm" name="frmForm" action="<?php echo base_url();?>alerta/cadastro/<?php echo $tipoalerta; ?>" method="post">
 		<fieldset>
 			<div class="row text-center">
 				<div class="span12">
@@ -32,47 +32,379 @@
 			<div class="row">
 				<div class="span10">
 					<ul class="nav nav-tabs" id="iTipoAlerta">
-						<?php if ($tipoaunucios) { foreach ($tipoaunucios as $tipoaunucio) {?>
-						<li <?php echo $tipoalerta == $tipoaunucio->tan_id ? "class=\"active\"" : ""; ?>><a
-							href="<?php echo base_url() . "alerta/cadastro/" . $tipoaunucio->tan_id;?>"><?php echo $tipoaunucio->tan_descricao; ?></a></li>
+						<?php if ($tipo_anuncio) { foreach ($tipo_anuncio as $row) {?>
+						<li <?php echo $tipoalerta == $row->tan_id ? "class=\"active\"" : ""; ?>><a
+							href="<?php echo base_url() . "alerta/cadastro/" . $row->tan_id;?>"><?php echo $row->tan_descricao; ?></a></li>
 							<?php }} ?>
 					</ul>
-					<div class="tab-content">
+					<div class="tab-content">						
 						<div
 							class="tab-pane <?php echo $tipoalerta == 1 ? "active" : ""; ?>"
 							id="1">
-							<div class="control-group">
-								<label for="iImocelTipoContrato"><small>Tipo Contrato</small></label>
-								<div class="controls">
-									<select name="iImocelTipoContrato" id="iImocelTipoContrato">
-										<option value="" <?php echo set_select('iImocelTipoContrato', null); ?>>Indiferente</option>
-										<?php if ($pesquisa_tipo_casa) { foreach ($pesquisa_tipo_casa as $row) {?>
-										<option value="<?php echo $row->pct_id; ?>" <?php echo set_select('iImocelTipoContrato', $row->pct_id); ?>><?php echo $row->pct_descricao; ?></option>
-										<?php }} ?>
-									</select>
+							<div class="row-fluid">
+							<div class="span4">
+								<div class="control-group">
+									<label for="iImovelTipoContrato"><small>Tipo Contrato</small></label>
+									<div class="controls">
+										<select name="iImovelTipoContrato" id="iImovelTipoContrato">
+											<option value="" <?php echo set_select('iImovelTipoContrato', null); ?>>Indiferente</option>
+											<?php if ($pesquisa_tipo_casa) { foreach ($pesquisa_tipo_casa as $row) {?>
+											<option value="<?php echo $row->pct_id; ?>" <?php echo set_select('iImovelTipoContrato', $row->pct_id); ?>><?php echo $row->pct_descricao; ?></option>
+											<?php }} ?>
+										</select>
+									</div>
+								</div>
+								<div class="control-group">
+									<label for="iImovelTipoImovel"><small>Tipo Imóvel</small></label>
+									<div class="controls">
+										<select name="iImovelTipoImovel" id="iImovelTipoImovel">
+											<option value="" <?php echo set_select('iImovelTipoImovel', null); ?>>Indiferente</option>
+											<?php if ($propriedade_tipo) { foreach ($propriedade_tipo as $row) {?>
+											<option value="<?php echo $row->pt_id; ?>" <?php echo set_select('iImovelTipoImovel', $row->pt_id); ?>><?php echo $row->pt_descricao; ?></option>
+											<?php }} ?>
+										</select>
+									</div>
 								</div>
 							</div>
-							<div class="control-group">
-								<label for="iImocelTipoImovel"><small>Tipo Imóvel</small></label>
-								<div class="controls">
-									<select name="iImocelTipoImovel" id="iImocelTipoImovel">
-										<option value="" <?php echo set_select('iImocelTipoImovel', null); ?>>Indiferente</option>
-										<?php if ($tipo_imovel) { foreach ($tipo_imovel as $row) {?>
-										<option value="<?php echo $row->pt_id; ?>" <?php echo set_select('iImocelTipoImovel', $row->pt_id); ?>><?php echo $row->pt_descricao; ?></option>
-										<?php }} ?>
-									</select>
+							<div class="span4">
+								<div class="control-group">
+									<label for="iEstado"><small>Estado</small></label>
+									<div class="controls">
+										<select name="iEstado" id="iEstado" onchange="javascript: frmForm.submit();">
+											<option value="" <?php echo set_select('iEstado', null); ?>>Indiferente</option>
+											<?php if ($estado) { foreach ($estado as $row) {?>
+											<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+											<?php }} ?>
+										</select>
+									</div>
 								</div>
+								<div class="control-group">
+									<label for="iImovelEstado"><small>Cidade</small></label>
+									<div class="controls">
+										<select name="iCidade" id="iCidade">
+											<option value="" <?php echo set_select('iCidade', null); ?>>Indiferente</option>
+											<?php if ($cidade) { foreach ($cidade as $row) {?>
+											<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+											<?php }} ?>
+										</select>
+									</div>
+								</div>							
+							</div>
+							<div class="span4">
+								<div class="control-group">
+									<label for="iImovelPreco"><small>Preço</small></label>
+									<div class="controls">
+										<select name="iImovelPreco" id="iImovelPreco">
+											<option value="" <?php echo set_select('iImovelPreco', null); ?>>Indiferente</option>
+											<?php if ($imovel_preco) { foreach ($imovel_preco as $row) {?>
+											<option value="<?php echo $row['prc_id']; ?>" <?php echo set_select('iImovelPreco', $row['prc_id']); ?>><?php echo $row['prc_descricao']; ?></option>
+											<?php }} ?>
+										</select>
+									</div>
+								</div>
+								<div class="control-group">
+									<label for="iImovelQuartos"><small>Quartos</small></label>
+									<div class="controls">
+										<select name="iImovelQuartos" id="iImovelQuartos">
+											<option value="" <?php echo set_select('iImovelQuartos', null); ?>>Indiferente</option>
+											<?php if ($imovel_quartos) { foreach ($imovel_quartos as $row) {?>
+											<option value="<?php echo $row['qrt_id']; ?>" <?php echo set_select('iImovelQuartos', $row['qrt_descricao']); ?>><?php echo $row['qrt_id']; ?></option>
+											<?php }} ?>
+										</select>
+									</div>
+								</div>
+							</div>
 							</div>
 						</div>
 						<div
 							class="tab-pane <?php echo $tipoalerta == 2 ? "active" : ""; ?>"
 							id="2">
-							<p>panel2</p>
+							<div class="row-fluid">
+								<div class="span4">
+									<div class="control-group">
+										<label for="iCarroTipo"><small>Tipo Auto</small></label>
+										<div class="controls">
+											<select name="iCarroTipo" id="iCarroTipo">
+												<option value="" <?php echo set_select('iCarroTipo', null); ?>>Indiferente</option>
+												<?php if ($carro_tipo) { foreach ($carro_tipo as $row) {?>
+												<option value="<?php echo $row->crt_id; ?>" <?php echo set_select('iCarroTipo', $row->crt_id); ?>><?php echo $row->crt_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="iAutoPreco"><small>Preço</small></label>
+										<div class="controls">
+											<select name="iAutoPreco" id="iAutoPreco">
+												<option value="" <?php echo set_select('iAutoPreco', null); ?>>Indiferente</option>
+												<?php if ($carro_preco) { foreach ($carro_preco as $row) {?>
+												<option value="<?php echo $row['prc_id']; ?>" <?php echo set_select('iAutoPreco', $row['prc_id']); ?>><?php echo $row['prc_descricao']; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="iAutoPreco"><small>0 KM</small></label>
+										<div class="controls">
+											<select name="iAuto0KM" id="iAuto0KM">
+												<option value="" <?php echo set_select('iAuto0KM', null); ?>>Indiferente</option>
+												<?php if ($carro_0km) { foreach ($carro_0km as $row) {?>
+												<option value="<?php echo $row['ckm_id']; ?>" <?php echo set_select('iAuto0KM', $row['ckm_id']); ?>><?php echo $row['ckm_descricao']; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="span4">
+									<div class="control-group">
+										<label for="iCarroMarca"><small>Marca</small></label>
+										<div class="controls">
+											<select name="iCarroMarca" id="iCarroMarca" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iCarroMarca', null); ?>>Indiferente</option>
+												<?php if ($carro_marca) { foreach ($carro_marca as $row) {?>
+												<option value="<?php echo $row->cmr_id; ?>" <?php echo set_select('iCarroMarca', $row->cmr_id); ?>><?php echo $row->cmr_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="iCarroModelo"><small>Modelo</small></label>
+										<div class="controls">
+											<select name="iCarroModelo" id="iCarroModelo">
+												<option value="" <?php echo set_select('iCarroModelo', null); ?>>Indiferente</option>
+												<?php if ($carro_modelo) { foreach ($carro_modelo as $row) {?>
+												<option value="<?php echo $row->cmd_id; ?>" <?php echo set_select('iCarroModelo', $row->cmd_id); ?>><?php echo $row->cmd_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="span4">
+									<div class="control-group">
+										<label for="iEstado"><small>Estado</small></label>
+										<div class="controls">
+											<select name="iEstado" id="iEstado" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iEstado', null); ?>>Indiferente</option>
+												<?php if ($estado) { foreach ($estado as $row) {?>
+												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="iImovelEstado"><small>Cidade</small></label>
+										<div class="controls">
+											<select name="iCidade" id="iCidade">
+												<option value="" <?php echo set_select('iCidade', null); ?>>Indiferente</option>
+												<?php if ($cidade) { foreach ($cidade as $row) {?>
+												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>					
+								</div>
+							</div>
 						</div>
 						<div
 							class="tab-pane <?php echo $tipoalerta == 3 ? "active" : ""; ?>"
 							id="3">
-							<p>panel3</p>
+							<div class="row-fluid">
+								<div class="span4">
+									<div class="control-group">
+										<label for="iEmpregoTipoContrato"><small>Tipo Contrato</small></label>
+										<div class="controls">
+											<select name="iEmpregoTipoContrato" id="iEmpregoTipoContrato">
+												<option value="" <?php echo set_select('iEmpregoTipoContrato', null); ?>>Indiferente</option>
+												<?php if ($emprego_contrato) { foreach ($emprego_contrato as $row) {?>
+												<option value="<?php echo $row->emc_id; ?>" <?php echo set_select('iEmpregoTipoContrato', $row->emc_id); ?>><?php echo $row->emc_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="iEmpregoCategoria"><small>Categoria</small></label>
+										<div class="controls">
+											<select name="iEmpregoCategoria" id="iEmpregoCategoria">
+												<option value="" <?php echo set_select('iEmpregoCategoria', null); ?>>Indiferente</option>
+												<?php if ($emprego_categoria) { foreach ($emprego_categoria as $row) {?>
+												<option value="<?php echo $row->ect_id; ?>" <?php echo set_select('iEmpregoCategoria', $row->ect_id); ?>><?php echo $row->ect_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="span4">
+									<div class="control-group">
+										<label for="iEmpregoPeriodo"><small>Período</small></label>
+										<div class="controls">
+											<select name="iEmpregoPeriodo" id="iEmpregoPeriodo">
+												<option value="" <?php echo set_select('iEmpregoPeriodo', null); ?>>Indiferente</option>
+												<?php if ($emprego_periodo) { foreach ($emprego_periodo as $row) {?>
+												<option value="<?php echo $row->emp_id; ?>" <?php echo set_select('iEmpregoPeriodo', $row->emp_id); ?>><?php echo $row->emp_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="span4">
+									<div class="control-group">
+										<label for="iPais"><small>Pais</small></label>
+										<div class="controls">
+											<select name="iPais" id="iPais" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iPais', null); ?>>Indiferente</option>
+												<?php if ($pais) { foreach ($pais as $row) {?>
+												<option value="<?php echo $row->ps_id; ?>" <?php echo set_select('iPais', $row->ps_id); ?>><?php echo $row->ps_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="iEstado"><small>Estado</small></label>
+										<div class="controls">
+											<select name="iEstado" id="iEstado" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iEstado', null); ?>>Indiferente</option>
+												<?php if ($estado) { foreach ($estado as $row) {?>
+												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="iCidade"><small>Cidade</small></label>
+										<div class="controls">
+											<select name="iCidade" id="iCidade">
+												<option value="" <?php echo set_select('iCidade', null); ?>>Indiferente</option>
+												<?php if ($cidade) { foreach ($cidade as $row) {?>
+												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>				
+								</div>								
+							</div>
+						</div>
+						<div
+							class="tab-pane <?php echo $tipoalerta == 4 ? "active" : ""; ?>"
+							id="4">
+							<div class="row-fluid">
+								<div class="span4">
+									<div class="control-group">
+										<label for="iProdutoCategoria"><small>Categoria</small></label>
+										<div class="controls">
+											<select name="iProdutoCategoria" id="iProdutoCategoria">
+												<option value="" <?php echo set_select('iProdutoCategoria', null); ?>>Indiferente</option>
+												<?php if ($produto_categoria) { foreach ($produto_categoria as $row) {?>
+												<option value="<?php echo $row->prc_id; ?>" <?php echo set_select('iProdutoCategoria', $row->prc_id); ?>><?php echo $row->prc_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>		
+								</div>
+								<div class="span4">
+									<div class="control-group">
+										<label for="iProdutoMarca"><small>Marca</small></label>
+										<div class="controls">
+											<select name="iProdutoMarca" id="iProdutoMarca">
+												<option value="" <?php echo set_select('iProdutoMarca', null); ?>>Indiferente</option>
+												<?php if ($produto_marca) { foreach ($produto_marca as $row) {?>
+												<option value="<?php echo $row->pmr_id; ?>" <?php echo set_select('iProdutoMarca', $row->pmr_id); ?>><?php echo $row->pmr_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>		
+									<div class="control-group">
+										<label for="iProdutoModelo"><small>Modelo</small></label>
+										<div class="controls">
+											<select name="iProdutoModelo" id="iProdutoModelo">
+												<option value="" <?php echo set_select('iProdutoModelo', null); ?>>Indiferente</option>
+												<?php if ($produto_modelo) { foreach ($produto_modelo as $row) {?>
+												<option value="<?php echo $row->pmd_id; ?>" <?php echo set_select('iProdutoModelo', $row->pmd_id); ?>><?php echo $row->pmd_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>		
+								</div>
+								<div class="span4">									
+									<div class="control-group">
+										<label for="iEstado"><small>Estado</small></label>
+										<div class="controls">
+											<select name="iEstado" id="iEstado" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iEstado', null); ?>>Indiferente</option>
+												<?php if ($estado) { foreach ($estado as $row) {?>
+												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="iCidade"><small>Cidade</small></label>
+										<div class="controls">
+											<select name="iCidade" id="iCidade">
+												<option value="" <?php echo set_select('iCidade', null); ?>>Indiferente</option>
+												<?php if ($cidade) { foreach ($cidade as $row) {?>
+												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>			
+								</div>
+							</div>
+						</div>
+						<div
+							class="tab-pane <?php echo $tipoalerta == 5 ? "active" : ""; ?>"
+							id="5">
+							<div class="row-fluid">
+								<div class="span4">									
+									<div class="control-group">
+										<label for="iTemporadaTipoImovel"><small>Tipo Imóvel</small></label>
+										<div class="controls">
+											<select name="iTemporadaTipoImovel" id="iTemporadaTipoImovel">
+												<option value="" <?php echo set_select('iTemporadaTipoImovel', null); ?>>Indiferente</option>
+												<?php if ($tipo_imovel) { foreach ($tipo_imovel as $row) {?>
+												<option value="<?php echo $row->tpi_id; ?>" <?php echo set_select('iTemporadaTipoImovel', $row->tpi_id); ?>><?php echo $row->tpi_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>			
+								</div>
+								<div class="span4">
+									<div class="control-group">
+										<label for="iPais"><small>Pais</small></label>
+										<div class="controls">
+											<select name="iPais" id="iPais" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iPais', null); ?>>Indiferente</option>
+												<?php if ($pais) { foreach ($pais as $row) {?>
+												<option value="<?php echo $row->ps_id; ?>" <?php echo set_select('iPais', $row->ps_id); ?>><?php echo $row->ps_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="iEstado"><small>Estado</small></label>
+										<div class="controls">
+											<select name="iEstado" id="iEstado" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iEstado', null); ?>>Indiferente</option>
+												<?php if ($estado) { foreach ($estado as $row) {?>
+												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="iCidade"><small>Cidade</small></label>
+										<div class="controls">
+											<select name="iCidade" id="iCidade">
+												<option value="" <?php echo set_select('iCidade', null); ?>>Indiferente</option>
+												<?php if ($cidade) { foreach ($cidade as $row) {?>
+												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+												<?php }} ?>
+											</select>
+										</div>
+									</div>		
+								</div>
+								<div class="span4">
+								</div>
+							</div>
 						</div>
 					</div>
 					<hr>
