@@ -14,6 +14,18 @@ class Logs extends CI_Controller {
 	
 	public function phpview()
 	{
+		if (!$this->auth->loggedin()) {
+			redirect('admin/login');
+		}
+		
+		// get current user id
+		$id = $this->auth->userid();
+		
+		// get user from database
+		$this->load->model('mbperfil', 'user_model');
+		$user = $this->user_model->BuscaPorID($id);
+		
+		
 		if (@is_file($this->logPath)) {
 			echo nl2br(@file_get_contents($this->logPath));
 		} else {
@@ -30,10 +42,21 @@ class Logs extends CI_Controller {
 	
 	public function view()
 	{
+		if (!$this->auth->loggedin()) {
+			redirect('admin/login');
+		}
+		
+		// get current user id
+		$id = $this->auth->userid();
+		
+		// get user from database
+		$this->load->model('mbperfil', 'user_model');
+		$user = $this->user_model->BuscaPorID($id);
 		
 		$data = array(
 				'ativo' => '',
-			'log_path' => $this->config->item ( 'log_path' ) == '' ? 'application/logs/' : $this->config->item ( 'log_path' )
+			'log_path' => $this->config->item ( 'log_path' ) == '' ? 'application/logs/' : $this->config->item ( 'log_path' ),
+				'user' => $user
 		);		
 		$this->load->view ( 'admin/templates/header', $data );
 		$this->load->view ( 'logs_view', $data);
@@ -42,6 +65,18 @@ class Logs extends CI_Controller {
 	}
 	
 	public function delete(){
+		
+		if (!$this->auth->loggedin()) {
+			redirect('admin/login');
+		}
+		
+		// get current user id
+		$id = $this->auth->userid();
+		
+		// get user from database
+		$this->load->model('mbperfil', 'user_model');
+		$user = $this->user_model->BuscaPorID($id);
+		
 		if (@is_file($this->logPath)) {
 			if (@unlink($this->logPath)) {
 				echo 'PHP Error Log deleted';

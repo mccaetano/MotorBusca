@@ -10,7 +10,7 @@
 					$ff = str_replace ( 'ERROR', '<br />Error<br />', $ff );
 					
 					// show errors
-					echo $ff;
+					echo $ff;					
 					
 				} else {
 					// notification
@@ -18,3 +18,6 @@
 				}
 				?>
   </div>
+<script>
+	window.scrollTo(0, document.body.scrollHeight);
+</script>

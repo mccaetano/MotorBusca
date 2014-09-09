@@ -43,8 +43,10 @@ class Login extends CI_Controller {
 		$this->load->view('admin/login', $data);
 		$this->load->view('admin/templates/footer', $data);
 	}
+	
 	function logout() {
 		$this->load->library('auth');
 		$this->auth->logout();
+		redirect(base_url() . "admin/home");
 	}
 }

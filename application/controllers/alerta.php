@@ -24,6 +24,10 @@ class Alerta extends CI_Controller {
     	$this->load->model('mbperfil', 'user_model');
     	$user = $this->user_model->BuscaPorID($id);
     	
+    	if ($method == "POST" && $this->input->post('btnGravar') == 'ok') {    		
+    		redirect("alerta/lista");	
+    	}
+    	
     	$this->load->model ( "tipo_anuncio" );
     	$this->load->model ( "propriedade_tipo" );
 		$this->load->model ( "pesquisa_tipo_casa" );
@@ -45,6 +49,19 @@ class Alerta extends CI_Controller {
 		$this->load->model ( "estado" );
 		$this->load->model ( "cidade" );
 		
+		$ps_id = "1";
+		$es_id = null;
+		if ($tipoalerta == "1" || $tipoalerta == "2" || $tipoalerta == "4") { $ps_id = "1";}
+		if ($tipoalerta == "3") { $ps_id = $this->input->post('iEmpregoPais') == null ? "1" : $ps_id = $this->input->post('iEmpregoPais'); }
+		if ($tipoalerta == "5") { $ps_id = $this->input->post('iTemporadaPais') == null ? "1" : $ps_id = $this->input->post('iTemporadaPais'); }
+		
+    	if ($tipoalerta == "1") { $es_id = $this->input->post('iImovelEstado'); }
+    	if ($tipoalerta == "2") { $es_id = $this->input->post('iCarroEstado'); }
+    	if ($tipoalerta == "3") { $es_id = $this->input->post('iEmpregoEstado'); }
+    	if ($tipoalerta == "4") { $es_id = $this->input->post('iProdutoEstado'); }
+    	if ($tipoalerta == "5") { $es_id = $this->input->post('iTemporadaEstado'); }
+		
+		
 		$tipo_anuncio = $this->tipo_anuncio->ListaTodos ();
     	$propriedade_tipo = $this->propriedade_tipo->ListaTodos ();
 		$pesquisa_tipo_casa = $this->pesquisa_tipo_casa->ListaTodos ();
@@ -60,8 +77,8 @@ class Alerta extends CI_Controller {
     	$tipo_imovel = $this->tipo_imovel->ListaTodos ();
     	$periodos = $this->alerta_periodo->ListaTodos ();
     	$pais = $this->pais->ListaTodos();
-    	$estado = $this->estado->BuscaPorPais($this->input->post("iPais") == null ? "1": $this->input->post("iPais"));
-    	$cidade = $this->cidade->BuscaPorEstado($this->input->post("iEstado"));
+    	$estado = $this->estado->BuscaPorPais($ps_id);
+    	$cidade = $this->cidade->BuscaPorEstado($es_id);
     	
     	$imovel_preco = array(
     		array(

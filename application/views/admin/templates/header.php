@@ -87,7 +87,23 @@ html,body {
 	<div id="wrap">
 		<div class="container">
 			<div class="masthead">
-				<h3 class="muted">Administração do Motor de Busca</h3>
+				<div class="row">
+					<div class="span8"><h3 class="muted">Administração do Motor de Busca</h3></div>
+					<div class="span4">
+						<?php if (isset($user)) { ?>
+						<div class="btn-group pull-right">
+						  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						    <?php echo $user[0]->email; ?>
+						    <span class="caret"></span>
+						  </a>
+						  <ul class="dropdown-menu">
+						    <li><a href="#">Trocar Senha</a></li>
+						    <li><a href="<?php echo base_url();?>admin/login/logout">Sair</a></li>
+						  </ul>
+						</div>
+						<?php }?>
+					</div>
+				</div>
 				<div class="navbar">
 					<div class="navbar-inner">
 						<div class="container">

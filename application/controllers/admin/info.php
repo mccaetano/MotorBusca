@@ -9,6 +9,17 @@ class Info extends CI_Controller {
 
 	public function index()
 	{
+		if (!$this->auth->loggedin()) {
+			redirect('admin/login');
+		}
+		
+		// get current user id
+		$id = $this->auth->userid();
+		
+		// get user from database
+		$this->load->model('mbperfil', 'user_model');
+		$user = $this->user_model->BuscaPorID($id);
+		
 		echo phpinfo();
 		exit();
 	}

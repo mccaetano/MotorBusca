@@ -12,6 +12,7 @@
 					</div>
 					<div class="span4">
 						<p class="muted credit">
+						<a href="<?php echo base_url(); ?>" >Pesquisa</a>&nbsp;|&nbsp;
 						<a href="<?php echo base_url(); ?>alerta/lista" >Alertas</a>&nbsp;|&nbsp;
 						<a href="#" >Termos</a>&nbsp;|&nbsp;
 						<a href="contato" >Contatos</a>

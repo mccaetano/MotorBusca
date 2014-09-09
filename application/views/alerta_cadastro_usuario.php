@@ -30,7 +30,7 @@
 				<div class="span12">Tipo de Aleta</div>
 			</div>
 			<div class="row">
-				<div class="span10">
+				<div class="span11">
 					<ul class="nav nav-tabs" id="iTipoAlerta">
 						<?php if ($tipo_anuncio) { foreach ($tipo_anuncio as $row) {?>
 						<li <?php echo $tipoalerta == $row->tan_id ? "class=\"active\"" : ""; ?>><a
@@ -68,12 +68,12 @@
 							</div>
 							<div class="span4">
 								<div class="control-group">
-									<label for="iEstado"><small>Estado</small></label>
+									<label for="iImovelEstado"><small>Estado</small></label>
 									<div class="controls">
-										<select name="iEstado" id="iEstado" onchange="javascript: frmForm.submit();">
-											<option value="" <?php echo set_select('iEstado', null); ?>>Indiferente</option>
+										<select name="iImovelEstado" id="iImovelEstado" onchange="javascript: frmForm.submit();">
+											<option value="" <?php echo set_select('iImovelEstado', null); ?>>Indiferente</option>
 											<?php if ($estado) { foreach ($estado as $row) {?>
-											<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+											<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iImovelEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
 											<?php }} ?>
 										</select>
 									</div>
@@ -81,10 +81,10 @@
 								<div class="control-group">
 									<label for="iImovelEstado"><small>Cidade</small></label>
 									<div class="controls">
-										<select name="iCidade" id="iCidade">
-											<option value="" <?php echo set_select('iCidade', null); ?>>Indiferente</option>
+										<select name="iImovelCidade" id="iImovelCidade">
+											<option value="" <?php echo set_select('iImovelCidade', null); ?>>Indiferente</option>
 											<?php if ($cidade) { foreach ($cidade as $row) {?>
-											<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+											<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iImovelCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
 											<?php }} ?>
 										</select>
 									</div>
@@ -181,12 +181,12 @@
 								</div>
 								<div class="span4">
 									<div class="control-group">
-										<label for="iEstado"><small>Estado</small></label>
+										<label for="iCarroEstado"><small>Estado</small></label>
 										<div class="controls">
-											<select name="iEstado" id="iEstado" onchange="javascript: frmForm.submit();">
-												<option value="" <?php echo set_select('iEstado', null); ?>>Indiferente</option>
+											<select name="iCarroEstado" id="iCarroEstado" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iCarroEstado', null); ?>>Indiferente</option>
 												<?php if ($estado) { foreach ($estado as $row) {?>
-												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iCarroEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -194,10 +194,10 @@
 									<div class="control-group">
 										<label for="iImovelEstado"><small>Cidade</small></label>
 										<div class="controls">
-											<select name="iCidade" id="iCidade">
-												<option value="" <?php echo set_select('iCidade', null); ?>>Indiferente</option>
+											<select name="iCarroCidade" id="iCarroCidade">
+												<option value="" <?php echo set_select('iCarroCidade', null); ?>>Indiferente</option>
 												<?php if ($cidade) { foreach ($cidade as $row) {?>
-												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCarroCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -248,34 +248,34 @@
 								</div>
 								<div class="span4">
 									<div class="control-group">
-										<label for="iPais"><small>Pais</small></label>
+										<label for="iEmpregoPais"><small>Pais</small></label>
 										<div class="controls">
-											<select name="iPais" id="iPais" onchange="javascript: frmForm.submit();">
-												<option value="" <?php echo set_select('iPais', null); ?>>Indiferente</option>
+											<select name="iEmpregoPais" id="iEmpregoPais" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iEmpregoPais', null); ?>>Indiferente</option>
 												<?php if ($pais) { foreach ($pais as $row) {?>
-												<option value="<?php echo $row->ps_id; ?>" <?php echo set_select('iPais', $row->ps_id); ?>><?php echo $row->ps_descricao; ?></option>
+												<option value="<?php echo $row->ps_id; ?>" <?php echo set_select('iEmpregoPais', $row->ps_id); ?>><?php echo $row->ps_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="iEstado"><small>Estado</small></label>
+										<label for="iEmpregoEstado"><small>Estado</small></label>
 										<div class="controls">
-											<select name="iEstado" id="iEstado" onchange="javascript: frmForm.submit();">
-												<option value="" <?php echo set_select('iEstado', null); ?>>Indiferente</option>
+											<select name="iEmpregoEstado" id="iEmpregoEstado" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iEmpregoEstado', null); ?>>Indiferente</option>
 												<?php if ($estado) { foreach ($estado as $row) {?>
-												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEmpregoEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="iCidade"><small>Cidade</small></label>
+										<label for="iEmpregoCidade"><small>Cidade</small></label>
 										<div class="controls">
-											<select name="iCidade" id="iCidade">
-												<option value="" <?php echo set_select('iCidade', null); ?>>Indiferente</option>
+											<select name="iEmpregoCidade" id="iEmpregoCidade">
+												<option value="" <?php echo set_select('iEmpregoCidade', null); ?>>Indiferente</option>
 												<?php if ($cidade) { foreach ($cidade as $row) {?>
-												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iEmpregoCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -326,23 +326,23 @@
 								</div>
 								<div class="span4">									
 									<div class="control-group">
-										<label for="iEstado"><small>Estado</small></label>
+										<label for="iProdutoEstado"><small>Estado</small></label>
 										<div class="controls">
-											<select name="iEstado" id="iEstado" onchange="javascript: frmForm.submit();">
-												<option value="" <?php echo set_select('iEstado', null); ?>>Indiferente</option>
+											<select name="iProdutoEstado" id="iProdutoEstado" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iProdutoEstado', null); ?>>Indiferente</option>
 												<?php if ($estado) { foreach ($estado as $row) {?>
-												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iProdutoEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="iCidade"><small>Cidade</small></label>
+										<label for="iProdutoCidade"><small>Cidade</small></label>
 										<div class="controls">
-											<select name="iCidade" id="iCidade">
-												<option value="" <?php echo set_select('iCidade', null); ?>>Indiferente</option>
+											<select name="iProdutoCidade" id="iProdutoCidade">
+												<option value="" <?php echo set_select('iProdutoCidade', null); ?>>Indiferente</option>
 												<?php if ($cidade) { foreach ($cidade as $row) {?>
-												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iProdutoCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -369,34 +369,34 @@
 								</div>
 								<div class="span4">
 									<div class="control-group">
-										<label for="iPais"><small>Pais</small></label>
+										<label for="iTemporadaPais"><small>Pais</small></label>
 										<div class="controls">
-											<select name="iPais" id="iPais" onchange="javascript: frmForm.submit();">
-												<option value="" <?php echo set_select('iPais', null); ?>>Indiferente</option>
+											<select name="iTemporadaPais" id="iTemporadaPais" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iTemporadaPais', null); ?>>Indiferente</option>
 												<?php if ($pais) { foreach ($pais as $row) {?>
-												<option value="<?php echo $row->ps_id; ?>" <?php echo set_select('iPais', $row->ps_id); ?>><?php echo $row->ps_descricao; ?></option>
+												<option value="<?php echo $row->ps_id; ?>" <?php echo set_select('iTemporadaPais', $row->ps_id); ?>><?php echo $row->ps_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="iEstado"><small>Estado</small></label>
+										<label for="iTemporadaEstado"><small>Estado</small></label>
 										<div class="controls">
-											<select name="iEstado" id="iEstado" onchange="javascript: frmForm.submit();">
-												<option value="" <?php echo set_select('iEstado', null); ?>>Indiferente</option>
+											<select name="iTemporadaEstado" id="iTemporadaEstado" onchange="javascript: frmForm.submit();">
+												<option value="" <?php echo set_select('iTemporadaEstado', null); ?>>Indiferente</option>
 												<?php if ($estado) { foreach ($estado as $row) {?>
-												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iTemporadaEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="iCidade"><small>Cidade</small></label>
+										<label for="iTemporadaCidade"><small>Cidade</small></label>
 										<div class="controls">
-											<select name="iCidade" id="iCidade">
-												<option value="" <?php echo set_select('iCidade', null); ?>>Indiferente</option>
+											<select name="iTemporadaCidade" id="iTemporadaCidade">
+												<option value="" <?php echo set_select('iTemporadaCidade', null); ?>>Indiferente</option>
 												<?php if ($cidade) { foreach ($cidade as $row) {?>
-												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iTemporadaCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -423,8 +423,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="span1">
-					<button type="submit" class="btn btn-primary">Adicionar</button>
+				<div class="span2">
+					<button id="btnGravar" name="btnGravar" type="submit" class="btn btn-primary" value="ok">Adicionar</button>
+					<a href="<?php echo base_url();?>alerta/lista" class="btn">Voltar</a>
 				</div>
 			</div>
 		</fieldset>
