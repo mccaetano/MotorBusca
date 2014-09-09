@@ -17,6 +17,17 @@ class Feeds extends CI_Controller {
 		$this->load->view ( 'templates/footer' );
 	}
 	function carregaanuncios() {
+		if (!$this->auth->loggedin()) {
+			redirect('admin/login');
+		}
+		
+		// get current user id
+		$id = $this->auth->userid();
+		
+		// get user from database
+		$this->load->model('mbperfil', 'user_model');
+		$user = $this->user_model->BuscaPorID($id);
+		
 		$this->load->model ( "motor_anuncio" );
 		$this->load->model ( "tipo_anuncio" );
 		log_message('info', 'iniciando carga de anuncios');
@@ -33,7 +44,8 @@ class Feeds extends CI_Controller {
 		}
 		$data = array(
 				'ativo' => '',
-				'log_path' => $this->config->item ( 'log_path' ) == '' ? 'application/logs/' : $this->config->item ( 'log_path' )
+				'log_path' => $this->config->item ( 'log_path' ) == '' ? 'application/logs/' : $this->config->item ( 'log_path' ),
+				'user' => $user
 		);
 		$this->load->view ( 'admin/templates/header', $data );
 		$this->load->view ( 'logs_view', $data);

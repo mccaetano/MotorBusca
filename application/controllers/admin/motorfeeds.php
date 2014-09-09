@@ -12,18 +12,41 @@ class MotorFeeds extends CI_Controller {
 		) );
 	}
 	function lista() {
+		if (!$this->auth->loggedin()) {
+			redirect('admin/login');
+		}
+		
+		// get current user id
+		$id = $this->auth->userid();
+		
+		// get user from database
+		$this->load->model('mbperfil', 'user_model');
+		$user = $this->user_model->BuscaPorID($id);
+		
 		$this->load->model ( "motor_anuncio" );
 		$lista = $this->motor_anuncio->ListaTodos ();
 		
 		$data = array (
 				'ativo' => 'feeds',
-				'motor' => $lista 
+				'motor' => $lista ,
+				'user' => $user
 		);
 		$this->load->view ( 'admin/templates/header', $data );
 		$this->load->view ( 'admin/motor_lista', $data );
 		$this->load->view ( 'admin/templates/footer', $data );
 	}
 	function novo() {
+		if (!$this->auth->loggedin()) {
+			redirect('admin/login');
+		}
+		
+		// get current user id
+		$id = $this->auth->userid();
+		
+		// get user from database
+		$this->load->model('mbperfil', 'user_model');
+		$user = $this->user_model->BuscaPorID($id);
+		
 		$method = ( string ) $_SERVER ["REQUEST_METHOD"];
 		
 		$this->load->helper( "date" );
@@ -50,13 +73,25 @@ class MotorFeeds extends CI_Controller {
 		
 		$data = array (
 				'ativo' => 'feeds',
-				'tipoanuncio' => $lista 
+				'tipoanuncio' => $lista ,
+				'user' => $user
 		);
 		$this->load->view ( 'admin/templates/header', $data );
 		$this->load->view ( 'admin/motor_cadastro', $data );
 		$this->load->view ( 'admin/templates/footer', $data );
 	}
 	function alteracao($id = FALSE) {
+		if (!$this->auth->loggedin()) {
+			redirect('admin/login');
+		}
+		
+		// get current user id
+		$id = $this->auth->userid();
+		
+		// get user from database
+		$this->load->model('mbperfil', 'user_model');
+		$user = $this->user_model->BuscaPorID($id);
+		
 		$method = ( string ) $_SERVER ["REQUEST_METHOD"];
 		
 		$this->load->model ( "motor_anuncio" );
@@ -81,7 +116,8 @@ class MotorFeeds extends CI_Controller {
 		$data = array (
 				'ativo' => 'feeds',
 				'tipoanuncio' => $lista,
-				'anuncio' => $feeds [0] 
+				'anuncio' => $feeds [0],
+				'user' => $user 
 		);
 		$this->load->view ( 'admin/templates/header', $data );
 		$this->load->view ( 'admin/motor_alteracao', $data );
