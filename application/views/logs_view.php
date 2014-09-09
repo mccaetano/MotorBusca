@@ -7,7 +7,7 @@
 					$ff = highlight_file ( $ff, TRUE );
 					
 					// cosmetic
-					$ff = str_replace ( 'ERROR', '<br />Error<br />', $ff );
+					//$ff = str_replace ( 'ERROR', '<br />Error<br />', $ff );
 					
 					// show errors
 					echo $ff;					

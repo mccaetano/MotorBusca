@@ -14,9 +14,9 @@
 | path to your installation.
 |
 */
-#$config['base_url']	= 'http://mccaetano.dev/MotorBusca/';
+$config['base_url']	= 'http://mccaetano.dev/MotorBusca/';
 #$config['base_url']	= 'http://ec2-54-207-103-134.sa-east-1.compute.amazonaws.com/';
-$config['base_url']	= 'http://motorbusca.sytes.net/';
+#$config['base_url']	= 'http://motorbusca.sytes.net/';
 
 /*
 |--------------------------------------------------------------------------
@@ -182,7 +182,7 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 4;
+$config['log_threshold'] = 3;
 
 /*
 |--------------------------------------------------------------------------

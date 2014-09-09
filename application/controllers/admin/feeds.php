@@ -36,9 +36,12 @@ class Feeds extends CI_Controller {
 		if ($lista != FALSE) {
 			foreach ( $lista as $motor ) {
 				$tipoAnuncio = $this->tipo_anuncio->BuscaTipoAnuncio ( $motor->tan_id );
+				log_message('info', 'Carregando(' . $motor->tan_id . '): ' . $motor->man_url_carga);
 				$xmlurl = urlencode ( base64_encode ( $motor->man_url_carga ) );
 				
 				$url = base_url () . $tipoAnuncio [0]->tan_endereco_carga . $xmlurl;
+				
+				
 				$this->curl_post_async ( $url, FALSE );
 			}
 		}
@@ -47,9 +50,7 @@ class Feeds extends CI_Controller {
 				'log_path' => $this->config->item ( 'log_path' ) == '' ? 'application/logs/' : $this->config->item ( 'log_path' ),
 				'user' => $user
 		);
-		$this->load->view ( 'admin/templates/header', $data );
-		$this->load->view ( 'logs_view', $data);
-		$this->load->view ( 'admin/templates/footer', $data );
+		redirect(base_url() . "admin/logs/view");
 		
 	}
 	function curl_post_async($url, $params = array()) {
@@ -101,7 +102,14 @@ class Feeds extends CI_Controller {
 		}
 		
 		try {
-			$dom->schemaValidate ( $xsd_document );
+			if (!@$dom->schemaValidate ( $xsd_document )) {
+				log_message ( 'error', 'XML file did not validate against schema: ' . $xmlFile );
+				$errors = libxml_get_errors();
+				foreach ($errors as $error) {
+					log_message ( 'error', libxml_display_error($error));
+				}
+				libxml_clear_errors();
+			}
 		} catch (Exception $e) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
 			log_message ( 'error', $e->getMessage() );
@@ -264,7 +272,14 @@ class Feeds extends CI_Controller {
 		}
 		
 		try {
-			$dom->schemaValidate ( $xsd_document );
+			if (!@$dom->schemaValidate ( $xsd_document )) {
+				log_message ( 'error', 'XML file did not validate against schema: ' . $xmlFile );
+				$errors = libxml_get_errors();
+				foreach ($errors as $error) {
+					log_message ( 'error', libxml_display_error($error));
+				}
+				libxml_clear_errors();
+			}
 		} catch (Exception $e) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
 			log_message ( 'error', $e->getMessage() );
@@ -438,13 +453,27 @@ class Feeds extends CI_Controller {
 		$xsd_document = base_url () . "assets/xml/emprego.xsd";
 		$dom = new DomDocument ();
 		
-		if (! @$dom->load ( $xmlFile )) {
+		try {
+			$dom->load ( $xmlFile );
+		} catch (Exception $e) {
 			log_message ( 'error', 'Could not load XML file: ' . $xmlFile );
+			log_message ( 'error', $e->getMessage() );
 			die ( 'Could not load XML file: ' . $xmlFile );
 		}
-		if (! @$dom->schemaValidate ( $xsd_document )) {
+		
+		try {
+			if (!@$dom->schemaValidate ( $xsd_document )) {
+				log_message ( 'error', 'XML file did not validate against schema: ' . $xmlFile );
+				$errors = libxml_get_errors();
+				foreach ($errors as $error) {
+					log_message ( 'error', libxml_display_error($error));
+				}
+				libxml_clear_errors();
+			}
+		} catch (Exception $e) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
-			die ( 'XML file did not validate against schema: ' . $xsd_document );
+			log_message ( 'error', $e->getMessage() );
+			die ( 'XML file did not validate against schema: ' . $xsd_document . "/ " . $e->getMessage());
 		}
 		
 		$xmlData = simplexml_load_file ( $xmlFile );
@@ -576,13 +605,27 @@ class Feeds extends CI_Controller {
 		$xsd_document = base_url () . "assets/xml/produto.xsd";
 		$dom = new DomDocument ();
 		
-		if (! @$dom->load ( $xmlFile )) {
+		try {
+			$dom->load ( $xmlFile );
+		} catch (Exception $e) {
 			log_message ( 'error', 'Could not load XML file: ' . $xmlFile );
+			log_message ( 'error', $e->getMessage() );
 			die ( 'Could not load XML file: ' . $xmlFile );
 		}
-		if (! $dom->schemaValidate ( $xsd_document )) {
+		
+		try {
+			if (!@$dom->schemaValidate ( $xsd_document )) {
+				log_message ( 'error', 'XML file did not validate against schema: ' . $xmlFile );
+				$errors = libxml_get_errors();
+				foreach ($errors as $error) {
+					log_message ( 'error', libxml_display_error($error));
+				}
+				libxml_clear_errors();
+			}
+		} catch (Exception $e) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
-			die ( 'XML file did not validate against schema: ' . $xsd_document );
+			log_message ( 'error', $e->getMessage() );
+			die ( 'XML file did not validate against schema: ' . $xsd_document . "/ " . $e->getMessage());
 		}
 		
 		$xmlData = simplexml_load_file ( $xmlFile );
@@ -723,13 +766,27 @@ class Feeds extends CI_Controller {
 		$xsd_document = base_url () . "assets/xml/temporada.xsd";
 		$dom = new DomDocument ();
 		
-		if (! @$dom->load ( $xmlFile )) {
+		try {
+			$dom->load ( $xmlFile );
+		} catch (Exception $e) {
 			log_message ( 'error', 'Could not load XML file: ' . $xmlFile );
+			log_message ( 'error', $e->getMessage() );
 			die ( 'Could not load XML file: ' . $xmlFile );
 		}
-		if (! $dom->schemaValidate ( $xsd_document )) {
+		
+		try {
+			if (!@$dom->schemaValidate ( $xsd_document )) {
+				log_message ( 'error', 'XML file did not validate against schema: ' . $xmlFile );
+				$errors = libxml_get_errors();
+				foreach ($errors as $error) {
+					log_message ( 'error', libxml_display_error($error));
+				}
+				libxml_clear_errors();
+			}
+		} catch (Exception $e) {
 			log_message ( 'error', 'XML file did not validate against schema: ' . $xsd_document );
-			die ( 'XML file did not validate against schema: ' . $xsd_document );
+			log_message ( 'error', $e->getMessage() );
+			die ( 'XML file did not validate against schema: ' . $xsd_document . "/ " . $e->getMessage());
 		}
 		
 		$xmlData = simplexml_load_file ( $xmlFile );

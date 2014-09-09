@@ -1,10 +1,13 @@
 <div class="clear"></div>
 <div class="row">
-	<div class="span8">
+	<div class="span1">
+		<img alt="Logo Empresa" src="<?php echo base_url();?>assets/img/LogoEmpresa_60.png">
+	</div>
+	<div class="span6">
 		<h1>Seu Alerta</h1>
 	</div>
-	<div class="span2 pull-right">
-		<div class="btn-group">
+	<div class="span5">
+		<div class="btn-group pull-right">
 		  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 		    <?php echo $user[0]->email; ?>
 		    <span class="caret"></span>

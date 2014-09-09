@@ -88,8 +88,11 @@ html,body {
 		<div class="container">
 			<div class="masthead">
 				<div class="row">
-					<div class="span8"><h3 class="muted">Administração do Motor de Busca</h3></div>
-					<div class="span4">
+					<div class="span1">
+						<img alt="Logo Empresa" src="<?php echo base_url();?>assets/img/LogoEmpresa_60.png">
+					</div>
+					<div class="span8"><h1>Administração do Motor de Busca</h1></div>
+					<div class="span3">
 						<?php if (isset($user)) { ?>
 						<div class="btn-group pull-right">
 						  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -109,19 +112,19 @@ html,body {
 						<div class="container">
 							<ul class="nav">
 								<li <?php echo  $ativo == "home" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin">Home</a></li>
-								<li <?php echo  $ativo == "perfil" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/perfil/lista">Perfil</a></li>
-								<li <?php echo  $ativo == "feeds" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/motorfeeds/lista">Feeds</a></li>
-								<li <?php echo  $ativo == "alertas" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/alertas/lista">Alertas</a></li>
-								<li class="dropdown">
+								<li <?php echo  $ativo == "perfil" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/perfil/lista">Perfil</a></li>								
+								<li class="dropdown" <?php echo  $ativo == "feeds" ? "class=\"active\"" : "" ?>>
 								    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								      Ações
+								      Feeds
 								      <b class="caret"></b>
 								    </a>
 								    <ul class="dropdown-menu">
-								      <li><a href="<?php echo base_url();?>admin/logs/view">Logs</a></li>
+								      <li><a href="<?php echo base_url();?>admin/motorfeeds/lista">Cadastro</a></li>
 								      <li><a href="<?php echo base_url();?>admin/feeds/carregaanuncios">Rodar Carga de Feeds</a></li>
 								    </ul>
 								 </li>
+								<li <?php echo  $ativo == "alertas" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/alertas/lista">Alertas</a></li>
+								<li <?php echo  $ativo == "logs" ? "class=\"active\"" : "" ?>><a href="<?php echo base_url();?>admin/logs/view">Logs</a></li>								
 							</ul>
 						</div>
 					</div>
