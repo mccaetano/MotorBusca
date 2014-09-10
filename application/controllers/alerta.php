@@ -114,8 +114,7 @@ class Alerta extends CI_Controller {
     			$this->alerta_temporada->Adicionar($row);
     		}
     		
-    		exit();
-    		#redirect("alerta/lista");	
+    		redirect("alerta/lista");	
     	}
     	
     	$this->load->model ( "tipo_anuncio" );
@@ -374,6 +373,28 @@ class Alerta extends CI_Controller {
     	$this->load->view('templates/header', $data);
     	$this->load->view('alerta_lista_usuario', $data);
     	$this->load->view('templates/footer', $data);
+    }
+    
+    function exclusao($alr_id = FALSE) {
+    	$this->load->helper('url');
+    	$this->load->library('auth');
+    
+    	if (!$this->auth->loggedin()) {
+    		redirect('acesso/login/' . base64_encode("alerta/lista"));
+    	}
+    
+    	// get current user id
+    	$id = $this->auth->userid();
+    
+    	// get user from database
+    	$this->load->model('mbperfil', 'user_model');
+    	$user = $this->user_model->BuscaPorID($id);
+    	 
+    	$this->load->model('alertas');
+    	$this->alertas->Excluir($alr_id);
+    	
+    	redirect(base_url() . "alerta/lista", "refresh");
+    	
     }
     
 }

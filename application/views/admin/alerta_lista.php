@@ -1,7 +1,5 @@
 <div class="row-fluid">
 	<div class="span8"><h1>Alertas</h1></div>
-	<div class="span2 pull-right"><a  class="btn btn-inverse" href="<?php echo base_url();?>admin/motorfeeds/lista">voltar</a>
-	</div>
 </div>
 <div class="clear"></div>
 

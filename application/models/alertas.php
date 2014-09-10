@@ -6,7 +6,7 @@ class Alertas extends CI_Model {
 		parent::__construct();
 	}
 	
-function Adicionar($row) {
+	function Adicionar($row) {
 		$this->db->trans_begin();
 		$this->db->insert('t_mb_alerta', $row);
 		$retorno = $this->db->insert_id();
@@ -20,6 +20,25 @@ function Adicionar($row) {
 		$this->db->trans_begin();
 		$this->db->where("alr_id", $id);
 		$retorno = $this->db->update('t_mb_alerta', $row);
+	
+		$this->db->trans_commit();
+		$this->db->cache_delete_all();
+	
+		return $retorno;
+	}
+	
+	function Excluir($id = FALSE) {
+		$tables = array(
+				't_mb_alerta_imovel', 
+				't_mb_alerta_auto',				
+				't_mb_alerta_emprego',			
+				't_mb_alerta_produto',			
+				't_mb_alerta_temporada',			
+				't_mb_alerta'
+		);
+		$this->db->trans_begin();		
+		$this->db->where("alr_id", $id);
+		$retorno = $this->db->delete($tables);
 	
 		$this->db->trans_commit();
 		$this->db->cache_delete_all();

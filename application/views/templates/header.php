@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<title>Adminsitração do Motor de Busca</title>
+<title>Motor de Busca</title>
 <meta name="description" content="Motor de Busca">
 <meta name="keywords" content="Carros, motos, anuncios, camimnhão casa, apartamento, emprego, venda, aluguel, auto">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
