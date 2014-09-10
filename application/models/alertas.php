@@ -64,4 +64,16 @@ function Adicionar($row) {
 			
 		return $retorno;
 	}
+	
+	function ListaAlertaPerfil() {
+		$query = $this->db->get('v_mb_alerta_perfil');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
 }

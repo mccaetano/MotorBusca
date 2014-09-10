@@ -25,19 +25,15 @@ class Logs extends CI_Controller {
 		$this->load->model('mbperfil', 'user_model');
 		$user = $this->user_model->BuscaPorID($id);
 		
-		
-		if (@is_file($this->logPath)) {
-			echo nl2br(@file_get_contents($this->logPath));
-		} else {
-			echo 'The log cannot be found in the specified route '.$this->logPath;
-		}
-		exit;
-		
-		/*
 		$data = array(
+				'ativo' => 'logs',
+				'log_path' => $this->logPath,
+				'user' => $user
 		);
-		$this->load->view('logs_view', $data);
-		*/
+		$this->load->view ( 'admin/templates/header', $data );
+		$this->load->view ( 'admin/php_logs', $data);
+		$this->load->view ( 'admin/templates/footer', $data );
+		
 	}
 	
 	public function view()

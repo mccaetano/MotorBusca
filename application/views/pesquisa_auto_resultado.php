@@ -1,6 +1,6 @@
 <?php if ($pesquisa_resultado) { foreach ($pesquisa_resultado as $row) {?>
 <hr>
-<a href="<?php echo $row->aa_url; ?>">
+<a href="<?php echo  base_url() . 'service/urlex/sender/' . base64_encode($row->aa_url); ?>">
 <div class="row-fluid">
 	<div class="span4">
 		<img alt="<?php echo $row->cft_titulo; ?>" src="<?php echo $row->cft_url; ?>" width="150" height="150">

@@ -136,6 +136,7 @@ class Perfil extends CI_Controller {
     }
     
     function exclusao($id = FALSE) {
+    	
     	if (!$this->auth->loggedin()) {
     		redirect('admin/login');
     	}
@@ -147,6 +148,8 @@ class Perfil extends CI_Controller {
     	$this->load->model('mbperfil', 'user_model');
     	$user = $this->user_model->BuscaPorID($id);
     	
+    	if (!$id) { redirect('admin/perfil/lista'); }
+    		
     	$this->load->model ( "mbperfil", "perfil" );
     	
     	$this->perfil->Excluir ($row, $id);

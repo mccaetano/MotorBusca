@@ -73,4 +73,23 @@ class Motor_anuncio extends CI_Model {
 	
 		return $result;
 	}
+	
+	function SetarDataExecucao($id) {
+		$this->load->helper('date');
+		
+		$data = date('Y-m-d');
+		
+		$row = array(
+			'man_data_ultima_carga' => $data
+		);
+		
+		$this->db->trans_begin();
+		$this->db->where("man_id", $id);
+		$this->db->update('t_mb_motor_anuncio', $row);
+	
+		$this->db->trans_commit();
+		$this->db->cache_delete_all();
+	
+		return $id;
+	}
 }

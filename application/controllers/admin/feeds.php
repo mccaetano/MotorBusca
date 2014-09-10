@@ -39,14 +39,13 @@ class Feeds extends CI_Controller {
 				log_message('info', 'Carregando(' . $motor->tan_id . '): ' . $motor->man_url_carga);
 				$xmlurl = urlencode ( base64_encode ( $motor->man_url_carga ) );
 				
-				$url = base_url () . $tipoAnuncio [0]->tan_endereco_carga . $xmlurl;
-				
+				$url = base_url () . $tipoAnuncio [0]->tan_endereco_carga . $motor->man_id . '/' . $xmlurl;
 				
 				$this->curl_post_async ( $url, FALSE );
 			}
 		}
 		$data = array(
-				'ativo' => '',
+				'ativo' => 'feeds',
 				'log_path' => $this->config->item ( 'log_path' ) == '' ? 'application/logs/' : $this->config->item ( 'log_path' ),
 				'user' => $user
 		);
@@ -79,9 +78,9 @@ class Feeds extends CI_Controller {
 		fwrite ( $fp, $out );
 		fclose ( $fp );
 	}
-	function imovelXML($xmlFile = FALSE) {
+	function imovelXML($id = FALSE, $xmlFile = FALSE) {
 		set_time_limit ( 0 );
-		log_message('info', 'Carregando imoveis para' . base64_decode ( urldecode ( $xmlFile ) ));
+		log_message('info', 'Carregando imoveis para: ' . base64_decode ( urldecode ( $xmlFile ) ));
 		
 		if (! $xmlFile) {
 			log_message ( 'error', "xml não enviado" );
@@ -222,8 +221,8 @@ class Feeds extends CI_Controller {
 					'ac_ano' => mb_convert_encoding ( $ad->year, 'ISO-8859-1', 'auto' ),
 					'ac_2D_tour' => mb_convert_encoding ( $ad->virtual_tour, 'ISO-8859-1', 'auto' ),
 					'ac_perc_eco' => mb_convert_encoding ( $ad->eco_score, 'ISO-8859-1', 'auto' ),
-					'ac_data_inclusao' => $data_inclusao->format ( "Y-m-d H:i:s" ),
-					'ac_data_expiracao' => $data_expiracao->format ( "Y-m-d H:i:s" ),
+					'ac_data_inclusao' => $data_inclusao ? $data_inclusao->format ( "Y-m-d H:i:s" ) : null,
+					'ac_data_expiracao' => $data_expiracao ? $data_expiracao->format ( "Y-m-d H:i:s" ) : null,
 					'ac_diretro_proprietario' => mb_convert_encoding ( $ad->by_owner, 'ISO-8859-1', 'auto' ),
 					'ac_garagem' => mb_convert_encoding ( $ad->parking, 'ISO-8859-1', 'auto' ),
 					'ac_finalizado' => mb_convert_encoding ( $ad->is_furnished, 'ISO-8859-1', 'auto' ),
@@ -238,8 +237,8 @@ class Feeds extends CI_Controller {
 				
 				foreach ( $ad->pictures->picture as $picture ) {
 					$row = array (
-							'acf_titulo' => mb_convert_encoding ( $picture->picture_url, 'ISO-8859-1', 'auto' ),
-							'acf_url' => mb_convert_encoding ( $picture->picture_title, 'ISO-8859-1', 'auto' ),
+							'acf_titulo' => mb_convert_encoding ( $picture->picture_title, 'ISO-8859-1', 'auto' ),
+							'acf_url' => mb_convert_encoding ( $picture->picture_url, 'ISO-8859-1', 'auto' ),
 							'ac_id' => ( string ) $anuncio_casa_id 
 					);
 					$this->anuncio_casa_fotos->Adicionar ( $row );
@@ -247,9 +246,12 @@ class Feeds extends CI_Controller {
 			} else {
 				$this->anuncio_casa->Alterar ( $row, ( string ) $anuncio_casa [0]->ac_id );
 			}
-		}
+		}		
+		$this->load->model ('motor_anuncio');
+		$this->motor_anuncio->SetarDataExecucao($id);
+		log_message('info', 'Termino imoveis para: ' . $xmlFile);
 	}
-	function autoXML($xmlFile = FALSE) {
+	function autoXML($id = FALSE, $xmlFile = FALSE) {
 		set_time_limit ( 0 );
 		log_message('info', 'Carregando autos para' . base64_decode ( urldecode ( $xmlFile ) ));
 		
@@ -426,20 +428,25 @@ class Feeds extends CI_Controller {
 			if ($anuncio_auto === FALSE) {
 				$anuncio_auto_id = $this->anuncio_auto->Adicionar ( $row );
 				
-				foreach ( $ad->pictures->picture as $picture ) {
-					$row = array (
-							'cft_titulo' => mb_convert_encoding ( $picture->picture_url, 'ISO-8859-1', 'auto' ),
-							'cft_url' => mb_convert_encoding ( $picture->picture_title, 'ISO-8859-1', 'auto' ),
-							'aa_id' => ( string ) $anuncio_auto_id 
-					);
-					$this->anuncio_auto_fotos->Adicionar ( $row );
+				if ($ad->pictures != null) {
+					foreach ( $ad->pictures->picture as $picture ) {
+						$row = array (
+								'cft_titulo' => mb_convert_encoding ( $picture->picture_title, 'ISO-8859-1', 'auto' ),
+								'cft_url' => mb_convert_encoding ( $picture->picture_url, 'ISO-8859-1', 'auto' ),
+								'aa_id' => ( string ) $anuncio_auto_id 
+						);
+						$this->anuncio_auto_fotos->Adicionar ( $row );
+					}
 				}
 			} else {
 				$this->anuncio_auto->Alterar ( $row, ( string ) $anuncio_auto [0]->aa_id );
 			}
-		}
+		}		
+		$this->load->model ('motor_anuncio');
+		$this->motor_anuncio->SetarDataExecucao($id);
+		log_message('info', 'Termino auto para: ' . $xmlFile );
 	}
-	function empregoXML($xmlFile = FALSE) {
+	function empregoXML($id = FALSE, $xmlFile = FALSE) {
 		set_time_limit ( 0 );
 		log_message('info', 'Carregando empregos para' . base64_decode ( urldecode ( $xmlFile ) ));
 		
@@ -577,8 +584,8 @@ class Feeds extends CI_Controller {
 					'emc_id' => ( string ) $emprego_contrato [0]->emc_id,
 					'ect_id' => ( string ) $emprego_categoria [0]->ect_id,
 					'aem_empresa' => mb_convert_encoding ( $ad->company, 'ISO-8859-1', 'auto' ),
-					'aem_data_criacao' => $data_inclusao->format ( "Y-m-d H:i:s" ),
-					'aem_data_expiracao' => $data_expiracao->format ( "Y-m-d H:i:s" ),
+					'aem_data_criacao' => $data_inclusao ? $data_inclusao->format ( "Y-m-d H:i:s" ) : null,
+					'aem_data_expiracao' => $data_expiracao ? $data_expiracao->format ( "Y-m-d H:i:s" ) : null,
 					'tan_id' => 3 
 			);
 			
@@ -589,9 +596,12 @@ class Feeds extends CI_Controller {
 			} else {
 				$this->anuncio_emprego->Alterar ( $row, ( string ) $anuncio_emprego [0]->aem_id );
 			}
-		}
+		}		
+		$this->load->model ('motor_anuncio');
+		$this->motor_anuncio->SetarDataExecucao($id);
+		log_message('info', 'Termino Emprego para: ' . $xmlFile);
 	}
-	function produtoXML($xmlFile = FALSE) {
+	function produtoXML($id = FALSE, $xmlFile = FALSE) {
 		set_time_limit ( 0 );
 		log_message('info', 'Carregando produtos para' . base64_decode ( urldecode ( $xmlFile ) ));
 		
@@ -741,8 +751,8 @@ class Feeds extends CI_Controller {
 				
 				foreach ( $ad->pictures->picture as $picture ) {
 					$row = array (
-							'prf_titulo' => mb_convert_encoding ( $picture->picture_url, 'ISO-8859-1', 'auto' ),
-							'prf_url' => mb_convert_encoding ( $picture->picture_title, 'ISO-8859-1', 'auto' ),
+							'prf_titulo' => mb_convert_encoding ( $picture->picture_title, 'ISO-8859-1', 'auto' ),
+							'prf_url' => mb_convert_encoding ( $picture->picture_url, 'ISO-8859-1', 'auto' ),
 							'apr_id' => ( string ) $anuncio_produto_id 
 					);
 					$this->produto_fotos->Adicionar ( $row );
@@ -750,9 +760,12 @@ class Feeds extends CI_Controller {
 			} else {
 				$this->anuncio_produto->Alterar ( $row, ( string ) $anuncio_produto [0]->apr_id );
 			}
-		}
+		}		
+		$this->load->model ('motor_anuncio');
+		$this->motor_anuncio->SetarDataExecucao($id);
+		log_message('info', 'Termino Produto para: ' . $xmlFile);
 	}
-	function temporadaXML($xmlFile = FALSE) {
+	function temporadaXML($id = FALSE, $xmlFile = FALSE) {
 		set_time_limit ( 0 );
 		log_message('info', 'Carregando temporadas para' . base64_decode ( urldecode ( $xmlFile ) ));
 		
@@ -943,8 +956,8 @@ class Feeds extends CI_Controller {
 				
 				foreach ( $ad->pictures->picture as $picture ) {
 					$row = array (
-							'tft_titulo' => mb_convert_encoding ( $picture->picture_url, 'ISO-8859-1', 'auto' ),
-							'tft_url' => mb_convert_encoding ( $picture->picture_title, 'ISO-8859-1', 'auto' ),
+							'tft_titulo' => mb_convert_encoding ( $picture->picture_title, 'ISO-8859-1', 'auto' ),
+							'tft_url' => mb_convert_encoding ( $picture->picture_url, 'ISO-8859-1', 'auto' ),
 							'atm_id' => ( string ) $anuncio_temporada_id 
 					);
 					$this->temporada_fotos->Adicionar ( $row );
@@ -971,6 +984,9 @@ class Feeds extends CI_Controller {
 			} else {
 				$this->anuncio_temporada->Alterar ( $row, ( string ) $anuncio_temporada [0]->atm_id );
 			}
-		}
+		}		
+		$this->load->model ('motor_anuncio');
+		$this->motor_anuncio->SetarDataExecucao($id);
+		log_message('info', 'Termino Temporada para: ' . $xmlFile);
 	}
 }
