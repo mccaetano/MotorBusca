@@ -24,8 +24,98 @@ class Alerta extends CI_Controller {
     	$this->load->model('mbperfil', 'user_model');
     	$user = $this->user_model->BuscaPorID($id);
     	
-    	if ($method == "POST" && $this->input->post('btnGravar') == 'ok') {    		
-    		redirect("alerta/lista");	
+    	if ($method == "POST" && $this->input->post('btnGravar') == 'ok') {    	
+			$row = array(
+				'alr_pesquisa' => mb_convert_encoding($this->input->post('iPesquisa'), 'ISO-8859-1', 'auto'),
+				'tan_id' => $tipoalerta,
+				'apr_id' => mb_convert_encoding($this->input->post('iPeriodo'), 'ISO-8859-1', 'auto'),
+				'alr_data_criacao' => date('Y-m-d'),
+				'id_perfil' => $id
+			);
+    		$this->load->model ( "alertas" );
+    		$alr_id = $this->alertas->Adicionar($row);
+    		
+    		if ($tipoalerta == '1') {
+    			$preco = explode(',',$this->input->post('iImovelPreco'));
+	    		$row = array(
+	    				'alr_id' => $alr_id,
+	    				'pct_id' => mb_convert_encoding($this->input->post('iImovelTipoContrato'), 'ISO-8859-1', 'auto'),
+	    				'pt_id' => mb_convert_encoding($this->input->post('iImovelTipoImovel'), 'ISO-8859-1', 'auto'),
+	    				'cd_id' => mb_convert_encoding($this->input->post('iImovelCidade'), 'ISO-8859-1', 'auto'),
+	    				'es_id' => mb_convert_encoding($this->input->post('iImovelEstado'), 'ISO-8859-1', 'auto'),
+	    				'ali_preco_in' => $preco[0],
+	    				'ali_preco_out' => $preco[1],
+	    				'ali_quartos' => mb_convert_encoding($this->input->post('iImovelQuartos'), 'ISO-8859-1', 'auto')	    				
+	    		);
+    		
+    			$this->load->model ( "alerta_imovel" );
+    			$this->alerta_imovel->Adicionar($row);
+    		}
+    		
+    		if ($tipoalerta == '2') {
+    			$preco = explode(',',$this->input->post('iAutoPreco'));
+    			$row = array(
+    					'alr_id' => $alr_id,
+    					'crt_id' => mb_convert_encoding($this->input->post('iCarroTipo'), 'ISO-8859-1', 'auto'),
+    					'cmr_id' => mb_convert_encoding($this->input->post('iCarroMarca'), 'ISO-8859-1', 'auto'),
+    					'cmd_id' => mb_convert_encoding($this->input->post('iCarroModelo'), 'ISO-8859-1', 'auto'),
+    					'cd_id' => mb_convert_encoding($this->input->post('iCarroCidade'), 'ISO-8859-1', 'auto'),
+    					'es_id' => mb_convert_encoding($this->input->post('iCarroEstado'), 'ISO-8859-1', 'auto'),
+    					'ala_preco_in' => $preco[0],
+    					'ala_preco_out' => $preco[1],
+    					'ala_novo' => mb_convert_encoding($this->input->post('iAuto0KM'), 'ISO-8859-1', 'auto')    					
+    			);
+    		
+    			$this->load->model ( "alerta_auto" );
+    			$this->alerta_auto->Adicionar($row);
+    		}
+    		
+    		if ($tipoalerta == '3') {
+    			$row = array(
+    					'alr_id' => $alr_id,
+    					'ect_id' => mb_convert_encoding($this->input->post('iEmpregoTipoContrato'), 'ISO-8859-1', 'auto'),
+    					'emc_id' => mb_convert_encoding($this->input->post('iEmpregoCategoria'), 'ISO-8859-1', 'auto'),
+    					'emp_id' => mb_convert_encoding($this->input->post('iEmpregoPeriodo'), 'ISO-8859-1', 'auto'),
+    					'ps_id' => mb_convert_encoding($this->input->post('iEmpregoPais'), 'ISO-8859-1', 'auto'),
+    					'es_id' => mb_convert_encoding($this->input->post('iEmpregoEstado'), 'ISO-8859-1', 'auto'),
+    					'cd_id' => mb_convert_encoding($this->input->post('iEmpregoCidade'), 'ISO-8859-1', 'auto')
+    			);
+    		
+    			$this->load->model ( "alerta_emprego" );
+    			$this->alerta_emprego->Adicionar($row);
+    		}
+    		
+    		if ($tipoalerta == '4') {
+    			$row = array(
+    					'alr_id' => $alr_id,
+    					'prc_id' => mb_convert_encoding($this->input->post('iProdutoCategoria'), 'ISO-8859-1', 'auto'),
+    					'pmr_id' => mb_convert_encoding($this->input->post('iProdutoMarca'), 'ISO-8859-1', 'auto'),
+    					'pmd_id' => mb_convert_encoding($this->input->post('iProdutoModelo'), 'ISO-8859-1', 'auto'),
+    					'es_id' => mb_convert_encoding($this->input->post('iProdutoEstado'), 'ISO-8859-1', 'auto'),
+    					'cd_id' => mb_convert_encoding($this->input->post('iProdutoCidade'), 'ISO-8859-1', 'auto')
+    			);
+    		
+    			$this->load->model ( "alerta_produto" );
+    			$this->alerta_produto->Adicionar($row);
+    		}
+    		
+
+
+    		if ($tipoalerta == '5') {
+    			$row = array(
+    					'alr_id' => $alr_id,
+    					'pt_id' => mb_convert_encoding($this->input->post('iTemporadaTipoImovel'), 'ISO-8859-1', 'auto'),
+    					'ps_id' => mb_convert_encoding($this->input->post('iTemporadaPais'), 'ISO-8859-1', 'auto'),
+    					'es_id' => mb_convert_encoding($this->input->post('iTemporadaEstado'), 'ISO-8859-1', 'auto'),
+    					'cd_id' => mb_convert_encoding($this->input->post('iTemporadaCidade'), 'ISO-8859-1', 'auto')
+    			);
+    		
+    			$this->load->model ( "alerta_temporada" );
+    			$this->alerta_temporada->Adicionar($row);
+    		}
+    		
+    		exit();
+    		#redirect("alerta/lista");	
     	}
     	
     	$this->load->model ( "tipo_anuncio" );
