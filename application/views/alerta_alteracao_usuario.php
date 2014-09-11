@@ -61,9 +61,9 @@
 									<label for="iImovelTipoImovel"><small>Tipo Imóvel</small></label>
 									<div class="controls">
 										<select name="iImovelTipoImovel" id="iImovelTipoImovel">
-											<option value="" <?php echo set_select('iImovelTipoImovel', null); ?>>Indiferente</option>
+											<option value="" <?php echo  $alerta_imovel_tipo_imovel == null ? "selected" : ""; ?>>Indiferente</option>
 											<?php if ($propriedade_tipo) { foreach ($propriedade_tipo as $row) {?>
-											<option value="<?php echo $row->pt_id; ?>" <?php echo set_select('iImovelTipoImovel', $row->pt_id); ?>><?php echo $row->pt_descricao; ?></option>
+											<option value="<?php echo $row->pt_id; ?>" <?php echo  $alerta_imovel_tipo_imovel == $row->pt_id ? "selected" : ""; ?>><?php echo $row->pt_descricao; ?></option>
 											<?php }} ?>
 										</select>
 									</div>

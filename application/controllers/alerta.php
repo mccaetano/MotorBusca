@@ -493,6 +493,51 @@ class Alerta extends CI_Controller {
 			}
 		}
 		
+		$alerta_imovel_tipo_imovel = NULL;
+		if ($method == "POST") {
+			$alerta_imovel_tipo_imovel = $this->input->post("iImovelTipoImovel");
+		} else {
+			if ($alerta_imovel != null) {
+				$alerta_imovel_tipo_imovel = $alerta_imovel[0]->pt_id;
+			}
+		}
+		
+		$alerta_imovel_estado = NULL;
+		if ($method == "POST") {
+			$alerta_imovel_estado = $this->input->post("iImovelEstado");
+		} else {
+			if ($alerta_imovel != null) {
+				$alerta_imovel_estado = $alerta_imovel[0]->es_id;
+			}
+		}
+		
+		$alerta_imovel_cidade = NULL;
+		if ($method == "POST") {
+			$alerta_imovel_cidade = $this->input->post("iImovelCidade");
+		} else {
+			if ($alerta_imovel != null) {
+				$alerta_imovel_cidade = $alerta_imovel[0]->cd_id;
+			}
+		}
+		
+		$alerta_imovel_preco = NULL;
+		if ($method == "POST") {
+			$alerta_imovel_preco = $this->input->post("iImovelPreco");
+		} else {
+			if ($alerta_imovel != null) {
+				$alerta_imovel_preco = $alerta_imovel[0]->ali_preco_in . ',' . $alerta_imovel[0]->ali_preco_out;
+			}
+		}
+		
+		$alerta_imovel_quartos = NULL;
+		if ($method == "POST") {
+			$alerta_imovel_quartos = $this->input->post("iImovelQuartos");
+		} else {
+			if ($alerta_imovel != null) {
+				$alerta_imovel_quartos = $alerta_imovel[0]->ali_quartos;
+			}
+		}
+		
 		$ps_id = "1";
 		$es_id = null;
 		if ($tipoalerta == "1" || $tipoalerta == "2" || $tipoalerta == "4") { $ps_id = "1";}
