@@ -19,6 +19,7 @@ class Pesquisa extends CI_Controller {
 		$this->load->model ( "cidade" );
 
 		$pesquisa_resultado = FALSE;
+		$pesquisa_destaque = FALSE;
 		$estado_id = 0;
 		$url = base_url() . "pesquisa/imovel/";
 		if ($method == "POST") {
@@ -39,9 +40,11 @@ class Pesquisa extends CI_Controller {
 				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade'),
 				$preco_in,
 				$preco_out,
-				$this->input->post('iQuartos') == 'null' ? null : $this->input->post('iQuartos')
+				$this->input->post('iQuartos') == 'null' ? null : $this->input->post('iQuartos'),
+				TRUE
 			);
-			
+			$pesquisa_destaque = $this->anuncio_casa->AnuncioPesquisa ($params);
+			$params[8] = FALSE;
 			$pesquisa_resultado = $this->anuncio_casa->AnuncioPesquisa ($params);
 		}
 		
@@ -58,6 +61,7 @@ class Pesquisa extends CI_Controller {
 			'estado' => $estado,
 			'cidade' => $cidade,
 			'pesquisa_resultado' => $pesquisa_resultado,
+			'pesquisa_destaque' => $pesquisa_destaque,
 			'url' => $url
 		); 
 		$this->load->view('templates/header', $data);
@@ -80,6 +84,7 @@ class Pesquisa extends CI_Controller {
 		$this->load->model ( "cidade" );
 
 		$pesquisa_resultado = FALSE;
+		$pesquisa_destaque = FALSE;
 		$estado_id = 0;
 		$url = base_url() . "pesquisa/auto/";
 		if ($method == "POST") {
@@ -101,9 +106,11 @@ class Pesquisa extends CI_Controller {
 				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade'),
 				$preco_in,
 				$preco_out,
-				$this->input->post('iNovo') == 'null' ? null : $this->input->post('iNovo')
+				$this->input->post('iNovo') == 'null' ? null : $this->input->post('iNovo'),
+				TRUE	
 			);
-			
+			$pesquisa_destaque = $this->anuncio_auto->AnuncioPesquisa ($params);
+			$params[8] = FALSE;
 			$pesquisa_resultado = $this->anuncio_auto->AnuncioPesquisa ($params);
 		}
 		
@@ -122,6 +129,7 @@ class Pesquisa extends CI_Controller {
 			'estado' => $estado,
 			'cidade' => $cidade,
 			'pesquisa_resultado' => $pesquisa_resultado,
+			'pesquisa_destaque' => $pesquisa_destaque,
 			'url' => $url
 		); 
 		$this->load->view('templates/header', $data);
@@ -145,6 +153,7 @@ class Pesquisa extends CI_Controller {
 		$this->load->model ( "cidade" );
 
 		$pesquisa_resultado = FALSE;
+		$pesquisa_destaque = FALSE;
 		$estado_id = 0;
 		$url = base_url() . "pesquisa/emprego/";
 		if ($method == "POST") {
@@ -157,9 +166,11 @@ class Pesquisa extends CI_Controller {
 				$this->input->post('iPeriodo') == 'null' ? null : $this->input->post('iPeriodo'),
 				$this->input->post('iPais') == 'null' ? null : $this->input->post('iPais'),
 				$this->input->post('iEstado') == 'null' ? null : $this->input->post('iEstado'),
-				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade')
+				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade'),
+				TRUE
 			);
-			
+			$pesquisa_destaque = $this->anuncio_emprego->AnuncioPesquisa ($params);
+			$params[7] = FALSE;
 			$pesquisa_resultado = $this->anuncio_emprego->AnuncioPesquisa ($params);
 		}
 		
@@ -180,6 +191,7 @@ class Pesquisa extends CI_Controller {
 			'estado' => $estado,
 			'cidade' => $cidade,
 			'pesquisa_resultado' => $pesquisa_resultado,
+			'pesquisa_destaque' => $pesquisa_destaque,
 			'url' => $url
 		); 
 		$this->load->view('templates/header', $data);
@@ -202,6 +214,7 @@ class Pesquisa extends CI_Controller {
 		$this->load->model ( "cidade" );
 
 		$pesquisa_resultado = FALSE;
+		$pesquisa_destaque = FALSE;
 		$estado_id = 0;
 		$url = base_url() . "pesquisa/produto/";
 		if ($method == "POST") {
@@ -213,9 +226,11 @@ class Pesquisa extends CI_Controller {
 				$this->input->post('iMarca') == 'null' ? null : $this->input->post('iMarca'),
 				$this->input->post('iModelo') == 'null' ? null : $this->input->post('iModelo'),
 				$this->input->post('iEstado') == 'null' ? null : $this->input->post('iEstado'),
-				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade')
+				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade'),
+				TRUE
 			);
-			
+			$pesquisa_destaque = $this->anuncio_produto->AnuncioPesquisa ($params);
+			$params[6] = FALSE;
 			$pesquisa_resultado = $this->anuncio_produto->AnuncioPesquisa ($params);
 		}
 		
@@ -234,6 +249,7 @@ class Pesquisa extends CI_Controller {
 			'estado' => $estado,
 			'cidade' => $cidade,
 			'pesquisa_resultado' => $pesquisa_resultado,
+			'pesquisa_destaque' => $pesquisa_destaque,
 			'url' => $url
 		); 
 		$this->load->view('templates/header', $data);
@@ -256,6 +272,7 @@ class Pesquisa extends CI_Controller {
 		$this->load->model ( "cidade" );
 		
 		$pesquisa_resultado = FALSE;
+		$pesquisa_destaque = FALSE;
 		$pais_id = 1;
 		$url = base_url() . "pesquisa/temporada/";
 		$estado_id = FALSE;
@@ -268,9 +285,12 @@ class Pesquisa extends CI_Controller {
 				$this->input->post('iTipoImovel') == 'null' ? null : $this->input->post('iTipoImovel'),
 				$this->input->post('iPais') == 'null' ? null : $this->input->post('iPais'),
 				$this->input->post('iEstado') == 'null' ? null : $this->input->post('iEstado'),
-				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade')
+				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade'),
+				TRUE
 			);
 			
+			$pesquisa_destaque = $this->anuncio_temporada->AnuncioPesquisa ($params);
+			$params[5] = FALSE;
 			$pesquisa_resultado = $this->anuncio_temporada->AnuncioPesquisa ($params);
 		}
 		
@@ -288,6 +308,7 @@ class Pesquisa extends CI_Controller {
 			'estado' => $estado,
 			'cidade' => $cidade,
 			'pesquisa_resultado' => $pesquisa_resultado,
+			'pesquisa_destaque' => $pesquisa_destaque,
 			'url' => $url
 		); 
 		$this->load->view('templates/header', $data);

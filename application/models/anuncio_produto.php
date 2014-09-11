@@ -40,7 +40,7 @@ class Anuncio_produto extends CI_Model {
 	}
 	
 	function AnuncioPesquisa($params) {
-		$query = $this->db->query("CALL p_mb_anuncio_produto_pesquisa(?,?,?,?,?,?)", $params);
+		$query = $this->db->query("CALL p_mb_anuncio_produto_pesquisa(?,?,?,?,?,?,?)", $params);
 		$retorno = $query->result();
 	
 		if (($query) && $query->num_rows() <= 0) {

@@ -46,7 +46,7 @@
 				<td><?php $data = @DateTime::createFromFormat("Y-m-d H:i:s", $alerta->alr_data_criacao);  echo  $data === FALSE ?  '' : $data->format("d/m/Y"); ?></td>
 				<td><?php $data = @DateTime::createFromFormat("Y-m-d H:i:s", $alerta->alr_data_ultima_alteracao);  echo  $data === FALSE ?  '' : $data->format("d/m/Y"); ?></td>
 				<td><a class="btn"
-					href="<?php echo base_url();?>alerta/alteracao/<?php echo $alerta->alr_id; ?>">Alterar</a>&nbsp;<a
+					href="<?php echo base_url();?>alerta/alteracao/<?php echo $alerta->alr_id; ?>/<?php echo $alerta->tan_id; ?>">Alterar</a>&nbsp;<a
 					class="btn btn-danger" href="<?php echo base_url();?>alerta/exclusao/<?php echo $alerta->alr_id; ?>">Excluir</a></td>
 			</tr>
 			<?php } } ?>

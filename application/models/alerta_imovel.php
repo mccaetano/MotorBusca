@@ -40,6 +40,19 @@ class Alerta_Imovel extends CI_Model {
 			
 		return $retorno;
 	}
+	
+	function BuscaPorAlerta($id) {
+		$this->db->where("alr_id", $id);
+		$query = $this->db->get('t_mb_alerta_imovel');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
 
 	function ListaTodos() {
 		$query = $this->db->get('t_mb_alerta_imovel');

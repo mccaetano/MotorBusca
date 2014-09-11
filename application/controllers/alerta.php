@@ -28,7 +28,7 @@ class Alerta extends CI_Controller {
 			$row = array(
 				'alr_pesquisa' => mb_convert_encoding($this->input->post('iPesquisa'), 'ISO-8859-1', 'auto'),
 				'tan_id' => $tipoalerta,
-				'apr_id' => mb_convert_encoding($this->input->post('iPeriodo'), 'ISO-8859-1', 'auto'),
+				'apr_id' => $this->input->post('iPeriodo'),
 				'alr_data_criacao' => date('Y-m-d'),
 				'id_perfil' => $id
 			);
@@ -36,16 +36,19 @@ class Alerta extends CI_Controller {
     		$alr_id = $this->alertas->Adicionar($row);
     		
     		if ($tipoalerta == '1') {
-    			$preco = explode(',',$this->input->post('iImovelPreco'));
+    			$preco = array(null, null);
+    			if ($this->input->post('iImovelPreco') != '') {
+    				$preco = explode(',',$this->input->post('iImovelPreco'));
+    			}
 	    		$row = array(
 	    				'alr_id' => $alr_id,
-	    				'pct_id' => mb_convert_encoding($this->input->post('iImovelTipoContrato'), 'ISO-8859-1', 'auto'),
-	    				'pt_id' => mb_convert_encoding($this->input->post('iImovelTipoImovel'), 'ISO-8859-1', 'auto'),
-	    				'cd_id' => mb_convert_encoding($this->input->post('iImovelCidade'), 'ISO-8859-1', 'auto'),
-	    				'es_id' => mb_convert_encoding($this->input->post('iImovelEstado'), 'ISO-8859-1', 'auto'),
+	    				'pct_id' => $this->input->post('iImovelTipoContrato') == '' ? null : $this->input->post('iImovelTipoContrato'),
+	    				'pt_id' => $this->input->post('iImovelTipoImovel') == '' ? null : $this->input->post('iImovelTipoImovel'),
+	    				'cd_id' => $this->input->post('iImovelCidade') == '' ? null : $this->input->post('iImovelCidade'),
+	    				'es_id' => $this->input->post('iImovelEstado') == '' ? null : $this->input->post('iImovelEstado'),
 	    				'ali_preco_in' => $preco[0],
 	    				'ali_preco_out' => $preco[1],
-	    				'ali_quartos' => mb_convert_encoding($this->input->post('iImovelQuartos'), 'ISO-8859-1', 'auto')	    				
+	    				'ali_quartos' => $this->input->post('iImovelQuartos') == '' ? null : $this->input->post('iImovelQuartos')	    				
 	    		);
     		
     			$this->load->model ( "alerta_imovel" );
@@ -53,17 +56,20 @@ class Alerta extends CI_Controller {
     		}
     		
     		if ($tipoalerta == '2') {
-    			$preco = explode(',',$this->input->post('iAutoPreco'));
+    			$preco = array(null, null);
+    			if ($this->input->post('iAutoPreco') != '') {
+    				$preco = explode(',',$this->input->post('iAutoPreco'));
+    			}
     			$row = array(
     					'alr_id' => $alr_id,
-    					'crt_id' => mb_convert_encoding($this->input->post('iCarroTipo'), 'ISO-8859-1', 'auto'),
-    					'cmr_id' => mb_convert_encoding($this->input->post('iCarroMarca'), 'ISO-8859-1', 'auto'),
-    					'cmd_id' => mb_convert_encoding($this->input->post('iCarroModelo'), 'ISO-8859-1', 'auto'),
-    					'cd_id' => mb_convert_encoding($this->input->post('iCarroCidade'), 'ISO-8859-1', 'auto'),
-    					'es_id' => mb_convert_encoding($this->input->post('iCarroEstado'), 'ISO-8859-1', 'auto'),
+    					'crt_id' => $this->input->post('iCarroTipo') == '' ? null : $this->input->post('iCarroTipo'),
+    					'cmr_id' => $this->input->post('iCarroMarca') == '' ? null : $this->input->post('iCarroMarca'),
+    					'cmd_id' => $this->input->post('iCarroModelo') == '' ? null : $this->input->post('iCarroModelo'),
+    					'cd_id' => $this->input->post('iCarroCidade') == '' ? null : $this->input->post('iCarroCidade'),
+    					'es_id' => $this->input->post('iCarroEstado') == '' ? null : $this->input->post('iCarroEstado'),
     					'ala_preco_in' => $preco[0],
     					'ala_preco_out' => $preco[1],
-    					'ala_novo' => mb_convert_encoding($this->input->post('iAuto0KM'), 'ISO-8859-1', 'auto')    					
+    					'ala_novo' => $this->input->post('iAuto0KM') == '' ? null : $this->input->post('iAuto0KM')    					
     			);
     		
     			$this->load->model ( "alerta_auto" );
@@ -73,12 +79,12 @@ class Alerta extends CI_Controller {
     		if ($tipoalerta == '3') {
     			$row = array(
     					'alr_id' => $alr_id,
-    					'ect_id' => mb_convert_encoding($this->input->post('iEmpregoTipoContrato'), 'ISO-8859-1', 'auto'),
-    					'emc_id' => mb_convert_encoding($this->input->post('iEmpregoCategoria'), 'ISO-8859-1', 'auto'),
-    					'emp_id' => mb_convert_encoding($this->input->post('iEmpregoPeriodo'), 'ISO-8859-1', 'auto'),
-    					'ps_id' => mb_convert_encoding($this->input->post('iEmpregoPais'), 'ISO-8859-1', 'auto'),
-    					'es_id' => mb_convert_encoding($this->input->post('iEmpregoEstado'), 'ISO-8859-1', 'auto'),
-    					'cd_id' => mb_convert_encoding($this->input->post('iEmpregoCidade'), 'ISO-8859-1', 'auto')
+    					'ect_id' => $this->input->post('iEmpregoTipoContrato') == '' ? null : $this->input->post('iEmpregoTipoContrato'),
+    					'emc_id' => $this->input->post('iEmpregoCategoria') == '' ? null : $this->input->post('iEmpregoCategoria'),
+    					'emp_id' => $this->input->post('iEmpregoPeriodo') == '' ? null : $this->input->post('iEmpregoPeriodo'),
+    					'ps_id' => $this->input->post('iEmpregoPais') == '' ? null : $this->input->post('iEmpregoPais'),
+    					'es_id' => $this->input->post('iEmpregoEstado') == '' ? null : $this->input->post('iEmpregoEstado'),
+    					'cd_id' => $this->input->post('iEmpregoCidade') == '' ? null : $this->input->post('iEmpregoCidade')
     			);
     		
     			$this->load->model ( "alerta_emprego" );
@@ -88,11 +94,11 @@ class Alerta extends CI_Controller {
     		if ($tipoalerta == '4') {
     			$row = array(
     					'alr_id' => $alr_id,
-    					'prc_id' => mb_convert_encoding($this->input->post('iProdutoCategoria'), 'ISO-8859-1', 'auto'),
-    					'pmr_id' => mb_convert_encoding($this->input->post('iProdutoMarca'), 'ISO-8859-1', 'auto'),
-    					'pmd_id' => mb_convert_encoding($this->input->post('iProdutoModelo'), 'ISO-8859-1', 'auto'),
-    					'es_id' => mb_convert_encoding($this->input->post('iProdutoEstado'), 'ISO-8859-1', 'auto'),
-    					'cd_id' => mb_convert_encoding($this->input->post('iProdutoCidade'), 'ISO-8859-1', 'auto')
+    					'prc_id' => $this->input->post('iProdutoCategoria') == '' ? null : $this->input->post('iProdutoCategoria'),
+    					'pmr_id' => $this->input->post('iProdutoMarca') == '' ? null : $this->input->post('iProdutoMarca'),
+    					'pmd_id' => $this->input->post('iProdutoModelo') == '' ? null : $this->input->post('iProdutoModelo'),
+    					'es_id' => $this->input->post('iProdutoEstado') == '' ? null : $this->input->post('iProdutoEstado'),
+    					'cd_id' => $this->input->post('iProdutoCidade') == '' ? null : $this->input->post('iProdutoCidade')
     			);
     		
     			$this->load->model ( "alerta_produto" );
@@ -104,10 +110,10 @@ class Alerta extends CI_Controller {
     		if ($tipoalerta == '5') {
     			$row = array(
     					'alr_id' => $alr_id,
-    					'pt_id' => mb_convert_encoding($this->input->post('iTemporadaTipoImovel'), 'ISO-8859-1', 'auto'),
-    					'ps_id' => mb_convert_encoding($this->input->post('iTemporadaPais'), 'ISO-8859-1', 'auto'),
-    					'es_id' => mb_convert_encoding($this->input->post('iTemporadaEstado'), 'ISO-8859-1', 'auto'),
-    					'cd_id' => mb_convert_encoding($this->input->post('iTemporadaCidade'), 'ISO-8859-1', 'auto')
+    					'pt_id' => $this->input->post('iTemporadaTipoImovel') == '' ? null : $this->input->post('iTemporadaTipoImovel'),
+    					'ps_id' => $this->input->post('iTemporadaPais') == '' ? null : $this->input->post('iTemporadaPais'),
+    					'es_id' => $this->input->post('iTemporadaEstado') == '' ? null : $this->input->post('iTemporadaEstado'),
+    					'cd_id' => $this->input->post('iTemporadaCidade') == '' ? null : $this->input->post('iTemporadaCidade')
     			);
     		
     			$this->load->model ( "alerta_temporada" );
@@ -323,28 +329,358 @@ class Alerta extends CI_Controller {
     	$this->load->view('templates/footer', $data);
     }
     
-    function alteracao($tipoalerta = "1", $id = FALSE) {
+	function alteracao($alr_id, $tipoalerta = "1") {
+    	$method =  (string)$_SERVER["REQUEST_METHOD"];
+    	
     	$this->load->library('auth');
     	 
     	if (!$this->auth->loggedin()) {
-    		redirect('acesso/login/' . base64_encode("alerta/alteracao"));
+    		redirect('acesso/login/' . base64_encode("alerta/cadastro"));
     	}
     	 
     	// get current user id
     	$id = $this->auth->userid();
     	 
     	// get user from database
-    	$this->load->model('mbperfil', 'user_model');    	
+    	$this->load->model('mbperfil', 'user_model');
     	$user = $this->user_model->BuscaPorID($id);
     	
-    	$this->load->model('alertas');
+    	if ($method == "POST" && $this->input->post('btnGravar') == 'ok') {    	
+			$row = array(
+				'alr_pesquisa' => mb_convert_encoding($this->input->post('iPesquisa'), 'ISO-8859-1', 'auto'),
+				'tan_id' => $tipoalerta,
+				'apr_id' => mb_convert_encoding($this->input->post('iPeriodo'), 'ISO-8859-1', 'auto'),
+				'alr_data_criacao' => date('Y-m-d'),
+				'id_perfil' => $id
+			);
+    		$this->load->model ( "alertas" );
+    		$this->alertas->Alterar($row, $alr_id);
+    		$this->alertas->LimparTipos($alr_id);
+    		
+    		if ($tipoalerta == '1') {
+    			
+    			$preco = array(null, null);
+    			if ($this->input->post('iImovelPreco') != '') {
+    				$preco = explode(',',$this->input->post('iImovelPreco'));
+    			}
+	    		$row = array(
+	    				'alr_id' => $alr_id,
+	    				'pct_id' => $this->input->post('iImovelTipoContrato') == '' ? null : $this->input->post('iImovelTipoContrato'),
+	    				'pt_id' => $this->input->post('iImovelTipoImovel') == '' ? null : $this->input->post('iImovelTipoImovel'),
+	    				'cd_id' => $this->input->post('iImovelCidade') == '' ? null : $this->input->post('iImovelCidade'),
+	    				'es_id' => $this->input->post('iImovelEstado') == '' ? null : $this->input->post('iImovelEstado'),
+	    				'ali_preco_in' => $preco[0],
+	    				'ali_preco_out' => $preco[1],
+	    				'ali_quartos' => $this->input->post('iTemporadaCidade') == '' ? null : $this->input->post('iImovelQuartos')	    				
+	    		);
+    		
+    			$this->load->model ( "alerta_imovel" );
+    			$this->alerta_imovel->Adicionar($row);
+    		}
+    		
+    		if ($tipoalerta == '2') {
+    			
+    			$preco = array(null, null);
+    			if ($this->input->post('iAutoPreco') != '') {
+    				$preco = explode(',',$this->input->post('iAutoPreco'));
+    			}
+    			$row = array(
+    					'alr_id' => $alr_id,
+    					'crt_id' => $this->input->post('iCarroTipo') == '' ? null : $this->input->post('iCarroTipo'),
+    					'cmr_id' => $this->input->post('iCarroMarca') == '' ? null : $this->input->post('iCarroMarca'),
+    					'cmd_id' => $this->input->post('iCarroModelo') == '' ? null : $this->input->post('iCarroModelo'),
+    					'cd_id' => $this->input->post('iCarroCidade') == '' ? null : $this->input->post('iCarroCidade'),
+    					'es_id' => $this->input->post('iCarroEstado') == '' ? null : $this->input->post('iCarroEstado'),
+    					'ala_preco_in' => $preco[0],
+    					'ala_preco_out' => $preco[1],
+    					'ala_novo' => $this->input->post('iTemporadaCidade') == '' ? null : $this->input->post('iAuto0KM')    					
+    			);
+    		
+    			$this->load->model ( "alerta_auto" );
+    			$this->alerta_auto->Adicionar($row);
+    		}
+    		
+    		if ($tipoalerta == '3') {
+    			$row = array(
+    					'alr_id' => $alr_id,
+    					'ect_id' => $this->input->post('iEmpregoTipoContrato') == '' ? null : $this->input->post('iEmpregoTipoContrato'),
+    					'emc_id' => $this->input->post('iEmpregoCategoria') == '' ? null : $this->input->post('iEmpregoCategoria'),
+    					'emp_id' => $this->input->post('iEmpregoPeriodo') == '' ? null : $this->input->post('iEmpregoPeriodo'),
+    					'ps_id' => $this->input->post('iEmpregoPais') == '' ? null : $this->input->post('iEmpregoPais'),
+    					'es_id' => $this->input->post('iEmpregoEstado') == '' ? null : $this->input->post('iEmpregoEstado'),
+    					'cd_id' => $this->input->post('iEmpregoCidade') == '' ? null : $this->input->post('iEmpregoCidade')
+    			);
+    		
+    			$this->load->model ( "alerta_emprego" );
+    			$this->alerta_emprego->Adicionar($row);
+    		}
+    		
+    		if ($tipoalerta == '4') {
+    			$row = array(
+    					'alr_id' => $alr_id,
+    					'prc_id' => $this->input->post('iProdutoCategoria') == '' ? null : $this->input->post('iProdutoCategoria'),
+    					'pmr_id' => $this->input->post('iProdutoMarca') == '' ? null : $this->input->post('iProdutoMarca'),
+    					'pmd_id' => $this->input->post('iProdutoModelo') == '' ? null : $this->input->post('iProdutoModelo'),
+    					'es_id' => $this->input->post('iProdutoEstado') == '' ? null : $this->input->post('iProdutoEstado'),
+    					'cd_id' => $this->input->post('iProdutoCidade') == '' ? null : $this->input->post('iProdutoCidade')
+    			);
+    		
+    			$this->load->model ( "alerta_produto" );
+    			$this->alerta_produto->Adicionar($row);
+    		}
+    		
+
+
+    		if ($tipoalerta == '5') {
+    			$row = array(
+    					'alr_id' => $alr_id,
+    					'pt_id' => $this->input->post('iTemporadaCidade') == '' ? null : $this->input->post('iTemporadaTipoImovel'),
+    					'ps_id' => $this->input->post('iTemporadaCidade') == '' ? null : $this->input->post('iTemporadaPais'),
+    					'es_id' => $this->input->post('iTemporadaCidade') == '' ? null : $this->input->post('iTemporadaEstado'),
+    					'cd_id' => $this->input->post('iTemporadaCidade') == '' ? null : $this->input->post('iTemporadaCidade')
+    			);
+    		
+    			$this->load->model ( "alerta_temporada" );
+    			$this->alerta_temporada->Adicionar($row);
+    		}
+    		
+    		redirect("alerta/lista");	
+    	}
+    	    	
+    	$this->load->model ( "alertas" );
+    	$this->load->model ( "alerta_imovel" );
+    	$this->load->model ( "alerta_auto" );
+    	$this->load->model ( "alerta_emprego" );
+    	$this->load->model ( "alerta_produto" );
+    	$this->load->model ( "alerta_temporada" );
+    	$this->load->model ( "tipo_anuncio" );
+    	$this->load->model ( "propriedade_tipo" );
+		$this->load->model ( "pesquisa_tipo_casa" );
+		$this->load->model ( "carro_tipo" );
+		$this->load->model ( "carro_marca" );
+		$this->load->model ( "carro_modelo" );
+		$this->load->model ( "anuncio_emprego" );
+		$this->load->model ( "emprego_contrato" );
+		$this->load->model ( "emprego_categoria" );
+		$this->load->model ( "emprego_periodo" );
+		$this->load->model ( "anuncio_produto" );
+		$this->load->model ( "produto_categoria" );
+		$this->load->model ( "produto_marca" );
+		$this->load->model ( "produto_modelo" );
+		$this->load->model ( "anuncio_temporada" );
+		$this->load->model ( "tipo_imovel" );
+		$this->load->model ( "alerta_periodo" );
+		$this->load->model ( "pais" );
+		$this->load->model ( "estado" );
+		$this->load->model ( "cidade" );
+		
+		$alerta = $this->alertas->BuscaPorId($alr_id);
+		if (!isset($tipoalerta)) {
+			$tipoalerta = $alerta[0]->tan_id;
+		} 
+		$alerta_auto = $this->alerta_auto->BuscaPorId($alr_id);
+		$alerta_imovel = $this->alerta_imovel->BuscaPorId($alr_id);
+		$alerta_emprego = $this->alerta_emprego->BuscaPorId($alr_id);
+		$alerta_produto = $this->alerta_produto->BuscaPorId($alr_id);
+		$alerta_temporada = $this->alerta_temporada->BuscaPorId($alr_id);
+		
+		$alerta_imovel_tipo_contrato = NULL;
+		if ($method == "POST") {
+			$alerta_imovel_tipo_contrato = $this->input->post("iImovelTipoContrato");
+		} else {
+			if ($alerta_imovel != null) {
+				$alerta_imovel_tipo_contrato = $alerta_imovel[0]->pct_id;
+			}
+		}
+		
+		$ps_id = "1";
+		$es_id = null;
+		if ($tipoalerta == "1" || $tipoalerta == "2" || $tipoalerta == "4") { $ps_id = "1";}
+		if ($tipoalerta == "3") { $ps_id = $this->input->post('iEmpregoPais') == null ? "1" : $ps_id = $this->input->post('iEmpregoPais'); }
+		if ($tipoalerta == "5") { $ps_id = $this->input->post('iTemporadaPais') == null ? "1" : $ps_id = $this->input->post('iTemporadaPais'); }
+		
+    	if ($tipoalerta == "1") { $es_id = $this->input->post('iImovelEstado'); }
+    	if ($tipoalerta == "2") { $es_id = $this->input->post('iCarroEstado'); }
+    	if ($tipoalerta == "3") { $es_id = $this->input->post('iEmpregoEstado'); }
+    	if ($tipoalerta == "4") { $es_id = $this->input->post('iProdutoEstado'); }
+    	if ($tipoalerta == "5") { $es_id = $this->input->post('iTemporadaEstado'); }
+		
+		
+		$tipo_anuncio = $this->tipo_anuncio->ListaTodos ();
+    	$propriedade_tipo = $this->propriedade_tipo->ListaTodos ();
+		$pesquisa_tipo_casa = $this->pesquisa_tipo_casa->ListaTodos ();
+		$carro_tipo = $this->carro_tipo->ListaTodos ();
+    	$carro_marca = $this->carro_marca->ListaTodos ();
+    	$carro_modelo = $this->carro_modelo->BuscaPorMarcaId ($this->input->post("iCarroMarca"));
+    	$emprego_contrato = $this->emprego_contrato->ListaTodos ();
+    	$emprego_categoria = $this->emprego_categoria->ListaTodos ();
+    	$emprego_periodo = $this->emprego_periodo->ListaTodos ();
+    	$produto_categoria = $this->produto_categoria->ListaTodos ();
+    	$produto_marca = $this->produto_marca->ListaTodos ();
+    	$produto_modelo = $this->produto_modelo->ListaTodos ();
+    	$tipo_imovel = $this->tipo_imovel->ListaTodos ();
+    	$periodos = $this->alerta_periodo->ListaTodos ();
+    	$pais = $this->pais->ListaTodos();
+    	$estado = $this->estado->BuscaPorPais($ps_id);
+    	$cidade = $this->cidade->BuscaPorEstado($es_id);
+    	
+    	$imovel_preco = array(
+    		array(
+    			"prc_id" => "10000,80000",
+    			"prc_descricao" => "10.000 - 80.000"
+    		),
+    		array(
+    			"prc_id" => "80000,100000",
+    			"prc_descricao" => "80.000 - 100.000"
+    		),
+    		array(
+    			"prc_id" => "100000,200000",
+    			"prc_descricao" => "100.000 - 200.000"
+    		),
+    		array(
+    			"prc_id" => "200000,300000",
+    			"prc_descricao" => "200.000 - 300.000"
+    		),
+    		array(
+    			"prc_id" => "300000,400000",
+    			"prc_descricao" => "300.000 - 400.000"
+    		),
+    		array(
+    			"prc_id" => "400000,500000",
+    			"prc_descricao" => "400.000 - 500.000"
+    		),
+    		array(
+    			"prc_id" => "500000,600000",
+    			"prc_descricao" => "500.000 - 600.000"
+    		),
+    		array(
+    			"prc_id" => "600000,700000",
+    			"prc_descricao" => "600.000 - 700.000"
+    		),
+    		array(
+    			"prc_id" => "700000,800000",
+    			"prc_descricao" => "700.000 - 800.000"
+    		),
+    		array(
+    			"prc_id" => "800000,900000",
+    			"prc_descricao" => "800.000 - 900.000"
+    		),
+    		array(
+    			"prc_id" => "100000,1000000",
+    			"prc_descricao" => "900.000 - 1.000.000"
+    		)
+    	);
+    	
+    	$carro_preco = array(
+    			array(
+    					"prc_id" => "10000,80000",
+    					"prc_descricao" => "10.000 - 80.000"
+    			),
+    			array(
+    					"prc_id" => "80000,100000",
+    					"prc_descricao" => "80.000 - 100.000"
+    			),
+    			array(
+    					"prc_id" => "100000,200000",
+    					"prc_descricao" => "100.000 - 200.000"
+    			),
+    			array(
+    					"prc_id" => "200000,300000",
+    					"prc_descricao" => "200.000 - 300.000"
+    			),
+    			array(
+    					"prc_id" => "300000,400000",
+    					"prc_descricao" => "300.000 - 400.000"
+    			),
+    			array(
+    					"prc_id" => "400000,500000",
+    					"prc_descricao" => "400.000 - 500.000"
+    			),
+    			array(
+    					"prc_id" => "500000,600000",
+    					"prc_descricao" => "500.000 - 600.000"
+    			),
+    			array(
+    					"prc_id" => "600000,700000",
+    					"prc_descricao" => "600.000 - 700.000"
+    			),
+    			array(
+    					"prc_id" => "700000,800000",
+    					"prc_descricao" => "700.000 - 800.000"
+    			),
+    			array(
+    					"prc_id" => "800000,900000",
+    					"prc_descricao" => "800.000 - 900.000"
+    			),
+    			array(
+    					"prc_id" => "100000,1000000",
+    					"prc_descricao" => "900.000 - 1.000.000"
+    			)
+    	);
+    	
+    	$carro_0km = array(
+    			array(
+    					"ckm_id" => "1",
+    					"ckm_descricao" => "Usado"
+    			),
+    			array(
+    					"ckm_id" => "2",
+    					"ckm_descricao" => "Novo"
+    			)
+    	);
+    	
+    	$imovel_quartos = array(
+    		array(
+    			"qrt_id" => "1",
+    			"qrt_descricao" => "1 Quarto"
+    		),
+    		array(
+    			"qrt_id" => "2",
+    			"qrt_descricao" => "2 Quarto"
+    		),
+    		array(
+    			"qrt_id" => "3",
+    			"qrt_descricao" => "3 Quarto"
+    		),
+    		array(
+    			"qrt_id" => "4",
+    			"qrt_descricao" => "5 Quarto"
+    		)
+    	);
     	
     	$data = array(
-    			"tipoalerta" => $tipoalerta,
-    			"user" => $user
+    		"alerta" => $alerta[0],
+    		"alerta_auto" => isset($alerta_auto) ? $alerta_auto[0] : null,
+    		"alerta_imovel_tipo_contrato" => $alerta_imovel_tipo_contrato,
+    		"alerta_emprego" => isset($alerta_emprego) ? $alerta_emprego[0] : null,
+    		"alerta_produto" => isset($alerta_produto) ? $alerta_produto[0] : null,
+    		"alerta_temporada" => isset($alerta_temporada) ? $alerta_temporada[0] : null,    		
+    		"tipo_anuncio" => $tipo_anuncio,
+    		"propriedade_tipo" => $propriedade_tipo,
+    		"pesquisa_tipo_casa" => $pesquisa_tipo_casa,
+    		"carro_tipo" => $carro_tipo, 
+    		"carro_marca" => $carro_marca,
+    		"carro_modelo" => $carro_modelo,
+    		"carro_preco" => $carro_preco,
+    		"carro_0km" => $carro_0km,
+    		"emprego_contrato" => $emprego_contrato,
+    		"emprego_categoria" => $emprego_categoria,
+    		"emprego_periodo" => $emprego_periodo,
+    		"produto_categoria" => $produto_categoria,
+    		"produto_marca" => $produto_marca,
+    		"produto_modelo" => $produto_modelo,
+    		"tipo_imovel" => $tipo_imovel,
+    		"pais" => $pais,
+    		"estado" => $estado,
+    		"cidade" => $cidade,    		
+    		"imovel_preco" => $imovel_preco,
+    		"imovel_quartos" => $imovel_quartos,	    			
+    		"tipoalerta" => $tipoalerta,
+    		"periodos" => $periodos,
+    		"user" => $user
     	);
     	$this->load->view('templates/header', $data);
-    	$this->load->view('alerta_altera_usuario', $data);
+    	$this->load->view('alerta_alteracao_usuario', $data);
     	$this->load->view('templates/footer', $data);
     }
     

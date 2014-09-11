@@ -46,6 +46,24 @@ class Alertas extends CI_Model {
 		return $retorno;
 	}
 	
+	function LimparTipos($id = FALSE) {
+		$tables = array(
+				't_mb_alerta_imovel',
+				't_mb_alerta_auto',
+				't_mb_alerta_emprego',
+				't_mb_alerta_produto',
+				't_mb_alerta_temporada'
+		);
+		$this->db->trans_begin();
+		$this->db->where("alr_id", $id);
+		$retorno = $this->db->delete($tables);
+	
+		$this->db->trans_commit();
+		$this->db->cache_delete_all();
+	
+		return $retorno;
+	}
+	
 	function BuscaPorId($id) {
 		$this->db->where("alr_id", $id);
 		$query = $this->db->get('t_mb_alerta');
