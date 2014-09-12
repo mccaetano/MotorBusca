@@ -113,4 +113,19 @@ class Alertas extends CI_Model {
 			
 		return $retorno;
 	}
+	
+	function SetaDataUltimaAlteracao($id) {
+		$row = array(
+			'alr_data_ultima_alteracao' => date('Y-m-d')
+		);
+		$this->db->trans_begin();
+		$this->db->where("alr_id", $id);
+		$retorno = $this->db->update('t_mb_alerta', $row);
+	
+		$this->db->trans_commit();
+		$this->db->cache_delete_all();
+	
+		return $retorno;
+	}
+	
 }

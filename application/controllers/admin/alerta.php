@@ -181,7 +181,8 @@ class Alerta extends CI_Controller {
 					break;
 				}
 			}
-			
+
+			$this->alertas->SetaDataUltimaAlteracao($row->alr_id);			
 		}
 		
 		
@@ -190,7 +191,7 @@ class Alerta extends CI_Controller {
 	function sendmail($html, $email, $subject) {
 		$this->load->library('email');
 			
-		$this->email->from('contato@motorbusca.com.br.com', 'motorbusca.com.br.com');
+		$this->email->from('contato@querocarros.com', 'motorbusca.com.br.com');
 		$this->email->to($email);
 		$this->email->subject($subject);
 		$this->email->message($html);
