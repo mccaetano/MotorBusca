@@ -65,4 +65,16 @@ class Alerta_Auto extends CI_Model {
 		return $retorno;
 	}
 	
+	function ListaTodosCarga() {
+		$query = $this->db->query("CALL p_mb_alerta_auto()");
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
+	
 }

@@ -538,6 +538,69 @@ class Alerta extends CI_Controller {
 			}
 		}
 		
+		$alerta_auto_tipo = NULL;
+		if ($method == "POST") {
+			$alerta_auto_tipo = $this->input->post("iCarroTipo");
+		} else {
+			if ($alerta_auto != null) {
+				$alerta_auto_tipo = $alerta_auto[0]->crt_id;
+			}
+		}
+		
+		$alerta_auto_preco = NULL;
+		if ($method == "POST") {
+			$alerta_imovel_preco = $this->input->post("iAutoPreco");
+		} else {
+			if ($alerta_auto != null) {
+				$alerta_auto_preco = $alerta_auto[0]->ala_preco_in . ',' . $alerta_auto[0]->ala_preco_out;
+			}
+		}
+		
+		$alerta_auto_0km = NULL;
+		if ($method == "POST") {
+			$alerta_auto_0km = $this->input->post("iAuto0KM");
+		} else {
+			if ($alerta_auto != null) {
+				$alerta_auto_0km = $alerta_auto[0]->ala_novo;
+			}
+		}
+		
+		$alerta_auto_marca = NULL;
+		if ($method == "POST") {
+			$alerta_auto_marca = $this->input->post("iCarroMarca");
+		} else {
+			if ($alerta_auto != null) {
+				$alerta_auto_marca = $alerta_auto[0]->cmr_id;
+			}
+		}
+		
+		$alerta_auto_modelo = NULL;
+		if ($method == "POST") {
+			$alerta_auto_modelo = $this->input->post("iCarroModelo");
+		} else {
+			if ($alerta_auto != null) {
+				$alerta_auto_modelo = $alerta_auto[0]->cmd_id;
+			}
+		}
+		
+		$alerta_auto_estado = NULL;
+		if ($method == "POST") {
+			$alerta_auto_estado = $this->input->post("iCarroEstado");
+		} else {
+			if ($alerta_auto != null) {
+				$alerta_auto_estado = $alerta_auto[0]->es_id;
+			}
+		}
+		
+		$alerta_auto_cidade = NULL;
+		if ($method == "POST") {
+			$alerta_auto_cidade = $this->input->post("iCarroCidade");
+		} else {
+			if ($alerta_auto != null) {
+				$alerta_auto_cidade = $alerta_auto[0]->cd_id;
+			}
+		}
+		
 		$ps_id = "1";
 		$es_id = null;
 		if ($tipoalerta == "1" || $tipoalerta == "2" || $tipoalerta == "4") { $ps_id = "1";}
@@ -697,6 +760,18 @@ class Alerta extends CI_Controller {
     		"alerta" => $alerta[0],
     		"alerta_auto" => isset($alerta_auto) ? $alerta_auto[0] : null,
     		"alerta_imovel_tipo_contrato" => $alerta_imovel_tipo_contrato,
+    		"alerta_imovel_tipo_imovel" => $alerta_imovel_tipo_imovel,
+    		"alerta_imovel_estado" => $alerta_imovel_estado,
+    		"alerta_imovel_cidade" => $alerta_imovel_cidade,
+    		"alerta_imovel_preco" => $alerta_imovel_preco,
+    		"alerta_imovel_quartos" => $alerta_imovel_quartos,
+    		"alerta_auto_tipo" => $alerta_auto_tipo,
+    		"alerta_auto_preco" => $alerta_auto_preco,
+    		"alerta_auto_0km" => $alerta_auto_0km,
+    		"alerta_auto_marca" => $alerta_auto_marca,
+    		"alerta_auto_modelo" => $alerta_auto_modelo,
+    		"alerta_auto_estado" => $alerta_auto_estado,
+    		"alerta_auto_cidade" => $alerta_auto_cidade,
     		"alerta_emprego" => isset($alerta_emprego) ? $alerta_emprego[0] : null,
     		"alerta_produto" => isset($alerta_produto) ? $alerta_produto[0] : null,
     		"alerta_temporada" => isset($alerta_temporada) ? $alerta_temporada[0] : null,    		
@@ -723,7 +798,7 @@ class Alerta extends CI_Controller {
     		"tipoalerta" => $tipoalerta,
     		"periodos" => $periodos,
     		"user" => $user
-    	);
+    	); 
     	$this->load->view('templates/header', $data);
     	$this->load->view('alerta_alteracao_usuario', $data);
     	$this->load->view('templates/footer', $data);

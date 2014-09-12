@@ -74,9 +74,9 @@
 									<label for="iImovelEstado"><small>Estado</small></label>
 									<div class="controls">
 										<select name="iImovelEstado" id="iImovelEstado" onchange="javascript: frmForm.submit();">
-											<option value="" <?php echo set_select('iImovelEstado', null); ?>>Indiferente</option>
+											<option value="" <?php echo  $alerta_imovel_estado == null ? "selected" : ""; ?>>Indiferente</option>
 											<?php if ($estado) { foreach ($estado as $row) {?>
-											<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iImovelEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+											<option value="<?php echo $row->es_id; ?>" <?php echo  $alerta_imovel_estado == $row->es_id ? "selected" : ""; ?>><?php echo $row->es_descricao; ?></option>
 											<?php }} ?>
 										</select>
 									</div>
@@ -85,9 +85,9 @@
 									<label for="iImovelEstado"><small>Cidade</small></label>
 									<div class="controls">
 										<select name="iImovelCidade" id="iImovelCidade">
-											<option value="" <?php echo set_select('iImovelCidade', null); ?>>Indiferente</option>
+											<option value="" <?php echo  $alerta_imovel_cidade == null ? "selected" : ""; ?>>Indiferente</option>
 											<?php if ($cidade) { foreach ($cidade as $row) {?>
-											<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iImovelCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+											<option value="<?php echo $row->cd_id; ?>" <?php echo  $alerta_imovel_cidade == $row->cd_id ? "selected" : ""; ?>><?php echo $row->cd_descricao; ?></option>
 											<?php }} ?>
 										</select>
 									</div>
@@ -98,9 +98,9 @@
 									<label for="iImovelPreco"><small>Preço</small></label>
 									<div class="controls">
 										<select name="iImovelPreco" id="iImovelPreco">
-											<option value="" <?php echo set_select('iImovelPreco', null); ?>>Indiferente</option>
+											<option value="" <?php echo  $alerta_imovel_preco == null ? "selected" : ""; ?>>Indiferente</option>
 											<?php if ($imovel_preco) { foreach ($imovel_preco as $row) {?>
-											<option value="<?php echo $row['prc_id']; ?>" <?php echo set_select('iImovelPreco', $row['prc_id']); ?>><?php echo $row['prc_descricao']; ?></option>
+											<option value="<?php echo $row['prc_id']; ?>" <?php echo $alerta_imovel_preco == $row['prc_id'] ? "selected" : ""; ?>><?php echo $row['prc_descricao']; ?></option>
 											<?php }} ?>
 										</select>
 									</div>
@@ -109,9 +109,9 @@
 									<label for="iImovelQuartos"><small>Quartos</small></label>
 									<div class="controls">
 										<select name="iImovelQuartos" id="iImovelQuartos">
-											<option value="" <?php echo set_select('iImovelQuartos', null); ?>>Indiferente</option>
+											<option value="" <?php echo  $alerta_imovel_quartos == null ? "selected" : ""; ?>>Indiferente</option>
 											<?php if ($imovel_quartos) { foreach ($imovel_quartos as $row) {?>
-											<option value="<?php echo $row['qrt_id']; ?>" <?php echo set_select('iImovelQuartos', $row['qrt_descricao']); ?>><?php echo $row['qrt_id']; ?></option>
+											<option value="<?php echo $row['qrt_id']; ?>" <?php echo  $alerta_imovel_quartos == $row['qrt_descricao'] ? "selected" : ""; ?>><?php echo $row['qrt_id']; ?></option>
 											<?php }} ?>
 										</select>
 									</div>
@@ -128,9 +128,9 @@
 										<label for="iCarroTipo"><small>Tipo Auto</small></label>
 										<div class="controls">
 											<select name="iCarroTipo" id="iCarroTipo">
-												<option value="" <?php echo set_select('iCarroTipo', null); ?>>Indiferente</option>
+												<option value="" <?php echo  $alerta_auto_tipo == null ? "selected" : ""; ?>>Indiferente</option>
 												<?php if ($carro_tipo) { foreach ($carro_tipo as $row) {?>
-												<option value="<?php echo $row->crt_id; ?>" <?php echo set_select('iCarroTipo', $row->crt_id); ?>><?php echo $row->crt_descricao; ?></option>
+												<option value="<?php echo $row->crt_id; ?>" <?php echo  $alerta_auto_tipo == $row->crt_id ? "selected" : ""; ?>><?php echo $row->crt_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -139,9 +139,9 @@
 										<label for="iAutoPreco"><small>Preço</small></label>
 										<div class="controls">
 											<select name="iAutoPreco" id="iAutoPreco">
-												<option value="" <?php echo set_select('iAutoPreco', null); ?>>Indiferente</option>
+												<option value="" <?php echo  $alerta_auto_preco == null ? "selected" : ""; ?>>Indiferente</option>
 												<?php if ($carro_preco) { foreach ($carro_preco as $row) {?>
-												<option value="<?php echo $row['prc_id']; ?>" <?php echo set_select('iAutoPreco', $row['prc_id']); ?>><?php echo $row['prc_descricao']; ?></option>
+												<option value="<?php echo $row['prc_id']; ?>" <?php echo  $alerta_auto_preco == $row['prc_id'] ? "selected" : ""; ?>><?php echo $row['prc_descricao']; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -150,9 +150,9 @@
 										<label for="iAutoPreco"><small>0 KM</small></label>
 										<div class="controls">
 											<select name="iAuto0KM" id="iAuto0KM">
-												<option value="" <?php echo set_select('iAuto0KM', null); ?>>Indiferente</option>
+												<option value="" <?php echo  $alerta_auto_0km == null ? "selected" : ""; ?>>Indiferente</option>
 												<?php if ($carro_0km) { foreach ($carro_0km as $row) {?>
-												<option value="<?php echo $row['ckm_id']; ?>" <?php echo set_select('iAuto0KM', $row['ckm_id']); ?>><?php echo $row['ckm_descricao']; ?></option>
+												<option value="<?php echo $row['ckm_id']; ?>" <?php echo  $alerta_auto_0km == $row->ala_novo ? "selected" : ""; ?>><?php echo $row['ckm_descricao']; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -163,9 +163,9 @@
 										<label for="iCarroMarca"><small>Marca</small></label>
 										<div class="controls">
 											<select name="iCarroMarca" id="iCarroMarca" onchange="javascript: frmForm.submit();">
-												<option value="" <?php echo set_select('iCarroMarca', null); ?>>Indiferente</option>
+												<option value="" <?php echo  $alerta_auto_marca == null ? "selected" : ""; ?>>Indiferente</option>
 												<?php if ($carro_marca) { foreach ($carro_marca as $row) {?>
-												<option value="<?php echo $row->cmr_id; ?>" <?php echo set_select('iCarroMarca', $row->cmr_id); ?>><?php echo $row->cmr_descricao; ?></option>
+												<option value="<?php echo $row->cmr_id; ?>" <?php echo  $alerta_auto_marca == $row->cmr_id ? "selected" : ""; ?>><?php echo $row->cmr_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -174,9 +174,9 @@
 										<label for="iCarroModelo"><small>Modelo</small></label>
 										<div class="controls">
 											<select name="iCarroModelo" id="iCarroModelo">
-												<option value="" <?php echo set_select('iCarroModelo', null); ?>>Indiferente</option>
+												<option value="" <?php echo  $alerta_auto_modelo == null ? "selected" : ""; ?>>Indiferente</option>
 												<?php if ($carro_modelo) { foreach ($carro_modelo as $row) {?>
-												<option value="<?php echo $row->cmd_id; ?>" <?php echo set_select('iCarroModelo', $row->cmd_id); ?>><?php echo $row->cmd_descricao; ?></option>
+												<option value="<?php echo $row->cmd_id; ?>" <?php echo  $alerta_auto_modelo == $row->cmd_id ? "selected" : ""; ?>><?php echo $row->cmd_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -187,9 +187,9 @@
 										<label for="iCarroEstado"><small>Estado</small></label>
 										<div class="controls">
 											<select name="iCarroEstado" id="iCarroEstado" onchange="javascript: frmForm.submit();">
-												<option value="" <?php echo set_select('iCarroEstado', null); ?>>Indiferente</option>
+												<option value="" <?php echo  $alerta_auto_estado == null ? "selected" : ""; ?>>Indiferente</option>
 												<?php if ($estado) { foreach ($estado as $row) {?>
-												<option value="<?php echo $row->es_id; ?>" <?php echo set_select('iCarroEstado', $row->es_id); ?>><?php echo $row->es_descricao; ?></option>
+												<option value="<?php echo $row->es_id; ?>" <?php echo  $alerta_auto_estado == $row->es_id ? "selected" : ""; ?>><?php echo $row->es_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
@@ -198,9 +198,9 @@
 										<label for="iImovelEstado"><small>Cidade</small></label>
 										<div class="controls">
 											<select name="iCarroCidade" id="iCarroCidade">
-												<option value="" <?php echo set_select('iCarroCidade', null); ?>>Indiferente</option>
+												<option value="" <?php echo  $alerta_auto_cidade == null ? "selected" : ""; ?>>Indiferente</option>
 												<?php if ($cidade) { foreach ($cidade as $row) {?>
-												<option value="<?php echo $row->cd_id; ?>" <?php echo set_select('iCarroCidade', $row->cd_id); ?>><?php echo $row->cd_descricao; ?></option>
+												<option value="<?php echo $row->cd_id; ?>" <?php echo  $alerta_auto_cidade == $row->cd_id ? "selected" : ""; ?>><?php echo $row->cd_descricao; ?></option>
 												<?php }} ?>
 											</select>
 										</div>
