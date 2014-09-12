@@ -30,7 +30,11 @@ class Alerta extends CI_Controller {
 		$this->load->view('admin/alerta_lista', $data);
 		$this->load->view('admin/templates/footer', $data);
 	}
-	
+	function carrega() {
+		$this->load->helper('url');
+		redirect('admin/alerta/carga');
+		redirect('admin/logs/view');
+	}
 	function carga() {
 		
 		log_message('INFO', 'Iniciando carga de alertas');

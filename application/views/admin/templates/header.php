@@ -130,7 +130,7 @@ html,body {
 								    </a>
 								    <ul class="dropdown-menu">
 								      <li><a href="<?php echo base_url();?>admin/alerta/lista">Alertas</a></li>
-								      <li><a href="<?php echo base_url();?>admin/alerta/carga">Rodar Carga de alertas</a></li>
+								      <li><a href="<?php echo base_url();?>admin/alerta/carrega">Rodar Carga de alertas</a></li>
 								    </ul>
 								</li>									
 								<li class="dropdown" <?php echo  $ativo == "logs" ? "class=\"active\"" : "" ?>>
