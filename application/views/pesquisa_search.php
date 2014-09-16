@@ -28,7 +28,7 @@
 										?>
 									</ul>
 					</div>
-					<input type="text" class="input-xxlarge" name="iPesquisa" value="<?php echo set_value('iPesquisa', ''); ?>">
+					<input type="text" class="input-xxlarge" name="iPesquisa" value="<?php echo set_value('iPesquisa', ''); ?>" tabindex="1">
 					<button type="submit" class="btn">Buscar</button>
 				</div>
 			</div>
