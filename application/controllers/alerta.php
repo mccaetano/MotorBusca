@@ -25,100 +25,7 @@ class Alerta extends CI_Controller {
     	$user = $this->user_model->BuscaPorID($id);
     	
     	if ($method == "POST" && $this->input->post('btnGravar') == 'ok') {    	
-			$row = array(
-				'alr_pesquisa' => mb_convert_encoding($this->input->post('iPesquisa'), 'ISO-8859-1', 'auto'),
-				'tan_id' => $tipoalerta,
-				'apr_id' => $this->input->post('iPeriodo'),
-				'alr_data_criacao' => date('Y-m-d'),
-				'id_perfil' => $id
-			);
-    		$this->load->model ( "alertas" );
-    		$alr_id = $this->alertas->Adicionar($row);
-    		
-    		if ($tipoalerta == '1') {
-    			$preco = array(null, null);
-    			if ($this->input->post('iImovelPreco') != '') {
-    				$preco = explode(',',$this->input->post('iImovelPreco'));
-    			}
-	    		$row = array(
-	    				'alr_id' => $alr_id,
-	    				'pct_id' => $this->input->post('iImovelTipoContrato') == '' ? null : $this->input->post('iImovelTipoContrato'),
-	    				'pt_id' => $this->input->post('iImovelTipoImovel') == '' ? null : $this->input->post('iImovelTipoImovel'),
-	    				'cd_id' => $this->input->post('iImovelCidade') == '' ? null : $this->input->post('iImovelCidade'),
-	    				'es_id' => $this->input->post('iImovelEstado') == '' ? null : $this->input->post('iImovelEstado'),
-	    				'ali_preco_in' => $preco[0],
-	    				'ali_preco_out' => $preco[1],
-	    				'ali_quartos' => $this->input->post('iImovelQuartos') == '' ? null : $this->input->post('iImovelQuartos')	    				
-	    		);
-    		
-    			$this->load->model ( "alerta_imovel" );
-    			$this->alerta_imovel->Adicionar($row);
-    		}
-    		
-    		if ($tipoalerta == '2') {
-    			$preco = array(null, null);
-    			if ($this->input->post('iAutoPreco') != '') {
-    				$preco = explode(',',$this->input->post('iAutoPreco'));
-    			}
-    			$row = array(
-    					'alr_id' => $alr_id,
-    					'crt_id' => $this->input->post('iCarroTipo') == '' ? null : $this->input->post('iCarroTipo'),
-    					'cmr_id' => $this->input->post('iCarroMarca') == '' ? null : $this->input->post('iCarroMarca'),
-    					'cmd_id' => $this->input->post('iCarroModelo') == '' ? null : $this->input->post('iCarroModelo'),
-    					'cd_id' => $this->input->post('iCarroCidade') == '' ? null : $this->input->post('iCarroCidade'),
-    					'es_id' => $this->input->post('iCarroEstado') == '' ? null : $this->input->post('iCarroEstado'),
-    					'ala_preco_in' => $preco[0],
-    					'ala_preco_out' => $preco[1],
-    					'ala_novo' => $this->input->post('iAuto0KM') == '' ? null : $this->input->post('iAuto0KM')    					
-    			);
-    		
-    			$this->load->model ( "alerta_auto" );
-    			$this->alerta_auto->Adicionar($row);
-    		}
-    		
-    		if ($tipoalerta == '3') {
-    			$row = array(
-    					'alr_id' => $alr_id,
-    					'ect_id' => $this->input->post('iEmpregoTipoContrato') == '' ? null : $this->input->post('iEmpregoTipoContrato'),
-    					'emc_id' => $this->input->post('iEmpregoCategoria') == '' ? null : $this->input->post('iEmpregoCategoria'),
-    					'emp_id' => $this->input->post('iEmpregoPeriodo') == '' ? null : $this->input->post('iEmpregoPeriodo'),
-    					'ps_id' => $this->input->post('iEmpregoPais') == '' ? null : $this->input->post('iEmpregoPais'),
-    					'es_id' => $this->input->post('iEmpregoEstado') == '' ? null : $this->input->post('iEmpregoEstado'),
-    					'cd_id' => $this->input->post('iEmpregoCidade') == '' ? null : $this->input->post('iEmpregoCidade')
-    			);
-    		
-    			$this->load->model ( "alerta_emprego" );
-    			$this->alerta_emprego->Adicionar($row);
-    		}
-    		
-    		if ($tipoalerta == '4') {
-    			$row = array(
-    					'alr_id' => $alr_id,
-    					'prc_id' => $this->input->post('iProdutoCategoria') == '' ? null : $this->input->post('iProdutoCategoria'),
-    					'pmr_id' => $this->input->post('iProdutoMarca') == '' ? null : $this->input->post('iProdutoMarca'),
-    					'pmd_id' => $this->input->post('iProdutoModelo') == '' ? null : $this->input->post('iProdutoModelo'),
-    					'es_id' => $this->input->post('iProdutoEstado') == '' ? null : $this->input->post('iProdutoEstado'),
-    					'cd_id' => $this->input->post('iProdutoCidade') == '' ? null : $this->input->post('iProdutoCidade')
-    			);
-    		
-    			$this->load->model ( "alerta_produto" );
-    			$this->alerta_produto->Adicionar($row);
-    		}
-    		
-
-
-    		if ($tipoalerta == '5') {
-    			$row = array(
-    					'alr_id' => $alr_id,
-    					'pt_id' => $this->input->post('iTemporadaTipoImovel') == '' ? null : $this->input->post('iTemporadaTipoImovel'),
-    					'ps_id' => $this->input->post('iTemporadaPais') == '' ? null : $this->input->post('iTemporadaPais'),
-    					'es_id' => $this->input->post('iTemporadaEstado') == '' ? null : $this->input->post('iTemporadaEstado'),
-    					'cd_id' => $this->input->post('iTemporadaCidade') == '' ? null : $this->input->post('iTemporadaCidade')
-    			);
-    		
-    			$this->load->model ( "alerta_temporada" );
-    			$this->alerta_temporada->Adicionar($row);
-    		}
+			
     		
     		redirect("alerta/lista");	
     	}
@@ -851,6 +758,100 @@ class Alerta extends CI_Controller {
     	
     	redirect(base_url() . "alerta/lista", "refresh");
     	
+    }
+    
+    function cadastro_imovel() {
+    	
+    }
+    
+    private function incluir($alerta) {
+    	$row = array(
+    			'alr_pesquisa' => $alerta['alr_pesquisa'],
+    			'tan_id' => $alerta['tan_id'],
+    			'apr_id' => $alerta['apr_id'],
+    			'alr_data_criacao' => date('Y-m-d'),
+    			'id_perfil' => $alerta['id_perfil']
+    	);
+    	$this->load->model ( "alertas" );
+    	$alr_id = $this->alertas->Adicionar($row);
+    	
+    	switch ($alerta->tan_id) {
+    		case 1: {
+    			$row = array(
+    				'alr_id' => $alr_id,
+    				'pct_id' => $alerta['pct_id'],
+    				'pt_id' => $alerta['pt_id'],
+    				'cd_id' => $alerta['cd_id'],
+    				'es_id' => $alerta['es_id'],
+    				'ali_preco_in' => $alerta['ali_preco_in'],
+    				'ali_preco_out' => $alerta['ali_preco_out'],
+    				'ali_quartos' => $alerta['ali_quartos']
+    			);
+    			 
+    			$this->load->model ( "alerta_imovel" );
+    			$this->alerta_imovel->Adicionar($row);
+    			break;
+    		}
+    		case 2: {
+    			$row = array(
+    				'alr_id' => $alr_id,
+    				'crt_id' => $alerta['crt_id'],
+    				'cmr_id' => $alerta['cmr_id'],
+    				'cmd_id' => $alerta['cmd_id'],
+    				'cd_id' => $alerta['cd_id'],
+    				'es_id' => $alerta['es_id'],
+    				'ala_preco_in' => $alerta['ala_preco_in'],
+    				'ala_preco_out' => $alerta['ala_preco_out'],
+    				'ala_novo' => $alerta['ala_novo']
+	    		);
+	    	
+	    		$this->load->model ( "alerta_auto" );
+	    		$this->alerta_auto->Adicionar($row);
+    			break;
+    		}
+    		case 3: {
+    			$row = array(
+    				'alr_id' => $alr_id,
+    				'ect_id' => $alerta['ect_id'],
+    				'emc_id' => $alerta['emc_id'],
+    				'emp_id' => $alerta['emp_id'],
+    				'ps_id' => $alerta['ps_id'],
+    				'es_id' => $alerta['es_id'],
+    				'cd_id' => $alerta['cd_id']
+	    		);
+	    	
+	    		$this->load->model ( "alerta_emprego" );
+	    		$this->alerta_emprego->Adicionar($row);
+    			break;
+    		}
+    		case 4: {
+    			$row = array(
+    				'alr_id' => $alr_id,
+    				'prc_id' => $alerta['prc_id'],
+    				'pmr_id' => $alerta['pmr_id'],
+    				'pmd_id' => $alerta['pmd_id'],
+    				'es_id' => $alerta['es_id'],
+    				'cd_id' => $alerta['cd_id']
+	    		);
+	    	
+	    		$this->load->model ( "alerta_produto" );
+	    		$this->alerta_produto->Adicionar($row);
+    			break;
+    		}
+    		case 5: {
+    			$row = array(
+    				'alr_id' => $alr_id,
+    				'pt_id' => $alerta['pt_id'],
+    				'ps_id' => $alerta['ps_id'],
+    				'es_id' => $alerta['es_id'],
+    				'cd_id' => $alerta['cd_id']
+	    		);
+	    	
+	    		$this->load->model ( "alerta_temporada" );
+	    		$this->alerta_temporada->Adicionar($row);
+    			break;
+    		}
+    	}    	
     }
     
 }
