@@ -7,8 +7,3 @@
 	</div>
 	<hr>
 </div>
-
-<form name="frmPesquisa" id="frmPesquisa" action="<?php echo $url; ?>" method="post" onsubmit="return setFormAction();">
-	<fieldset>
-		<div class="row-fluid">
-			<div class="span2">

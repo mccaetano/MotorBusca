@@ -15,23 +15,3 @@
 		<!-- </div> -->
 	</div>
 </div>
-
-</fieldset>
-</form>
-<script type="text/javascript">
-function setFormAction() {
-	window.alert('OK');
-    var formURL = frmPesquisa.getAttribute("action");
-    for (var i=0; i < frmPesquisa.elements.length; i++)
-    { 
-        var elevalue = frmPesquisa.elements[i].value;
-        if (elevalue != null) {      
-    		formURL = formURL + "/" + frmPesquisa.elements[i].value;
-        }
-    }
-    window.alert(formURL);
-    frmPesquisa.setAttribute("action", formURL);    
-	return true;
-}
-								
-</script>

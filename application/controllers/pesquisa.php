@@ -9,7 +9,40 @@ class Pesquisa extends CI_Controller {
 		redirect(base_url());
 	}
 	
+	function find() {
+		$url = base_url() . "pesquisa/" . $this->input->post('btnPesquisa') . "/";
+		$url = $url . "p1/" . $this->input->post('iPesquisa');
+		
+		redirect($url, 'location');
+	}
+	
 	function imovel() {
+		$pg = 1;
+		if (!$this->uri->segment(3)) {
+			$pg = substr($this->uri->segment(3), 1);					
+		}
+		$iPesquisa = $this->uri->segment(4);
+		$iContratoTipo = $this->uri->segment(5);
+		$iCasaTipo = $this->uri->segment(6);
+		$iEstado = $this->uri->segment(7);
+		$iCidade = $this->uri->segment(8);
+		
+		$data = array(
+				'tipo' => "imovel",
+				'tipo_descricao' => "Imóvel",
+				'pg' => $pg,
+				'iPeqsuisa' => $iPesquisa,
+				'iContratoTipo' => $iContratoTipo,
+				'iCasaTipo' => $iCasaTipo,
+				'iEstado' => $iEstado,
+				'iCidade' => $iCidade
+		);
+		$this->load->view('templates/header', $data);
+		$this->load->view('pesquisa_header', $data);
+		$this->load->view('pesquisa_search', $data);
+	}
+	
+	function imovel_($pg = 0) {
 		$method =  (string)$_SERVER["REQUEST_METHOD"];
 		
 		$this->load->model ( "anuncio_casa" );
@@ -21,7 +54,7 @@ class Pesquisa extends CI_Controller {
 		$pesquisa_resultado = FALSE;
 		$pesquisa_destaque = FALSE;
 		$estado_id = 0;
-		$url = base_url() . "pesquisa/imovel/";
+		$url = base_url() . "pesquisa/imovel/" . $pg;
 		if ($method == "POST") {
 			$estado_id = $this->input->post('iEstado');
 			$preco_in = NULL;
@@ -31,7 +64,21 @@ class Pesquisa extends CI_Controller {
 				$preco_in = $precos[0];
 				$preco_out = $precos[1];
 			}
-			$url = $url . urlencode($this->input->post('iPesquisa'));
+			if ($this->input->post('iPesquisa') != 'null') {
+				$url = $url . "/" . $this->input->post('iPesquisa');
+			}
+			if ($this->input->post('iContratoTipo') != 'null') {
+				$url = $url . "/" . $this->input->post('iContratoTipo');
+			}
+			if ($this->input->post('iCasaTipo') != 'null') {
+				$url = $url . "/" . $this->input->post('iCasaTipo');
+			}
+			if ($this->input->post('iEstado') != 'null') {
+				$url = $url . "/" . $this->input->post('iEstado');
+			}
+			if ($this->input->post('iCidade') != 'null') {
+				$url = $url . "/" . $this->input->post('iCidade');
+			}
 			$params = array(
 				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
 				$this->input->post('iContratoTipo') == 'null' ? null : $this->input->post('iContratoTipo'),
@@ -62,7 +109,8 @@ class Pesquisa extends CI_Controller {
 			'cidade' => $cidade,
 			'pesquisa_resultado' => $pesquisa_resultado,
 			'pesquisa_destaque' => $pesquisa_destaque,
-			'url' => $url
+			'url' => $url,
+			'pg' => $pg
 		); 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pesquisa_header', $data);
@@ -97,6 +145,21 @@ class Pesquisa extends CI_Controller {
 				$preco_out = $precos[1];
 			}
 			$url = $url . urlencode($this->input->post('iPesquisa'));
+			if ($this->input->post('iCarroTipo') != 'null') {
+				$url = $url . "/" . $this->input->post('iCarroTipo');
+			}
+			if ($this->input->post('iCarroMarca') != 'null') {
+				$url = $url . "/" . $this->input->post('iCarroMarca');
+			}
+			if ($this->input->post('iCarroModelo') != 'null') {
+				$url = $url . "/" . $this->input->post('iCarroModelo');
+			}
+			if ($this->input->post('iEstado') != 'null') {
+				$url = $url . "/" . $this->input->post('iEstado');
+			}
+			if ($this->input->post('iCidade') != 'null') {
+				$url = $url . "/" . $this->input->post('iCidade');
+			}
 			$params = array(
 				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
 				$this->input->post('iCarroTipo') == 'null' ? null : $this->input->post('iCarroTipo'),
@@ -159,6 +222,27 @@ class Pesquisa extends CI_Controller {
 		if ($method == "POST") {
 			$estado_id = $this->input->post('iEstado');
 			$url = $url . urlencode($this->input->post('iPesquisa'));
+			if ($this->input->post('iContrato') != 'null') {
+				$url = $url . "/" . $this->input->post('iContrato');
+			}
+			if ($this->input->post('iCidade') != 'null') {
+				$url = $url . "/" . $this->input->post('iCidade');
+			}
+			if ($this->input->post('iCategira') != 'null') {
+				$url = $url . "/" . $this->input->post('iCategira');
+			}
+			if ($this->input->post('iPeriodo') != 'null') {
+				$url = $url . "/" . $this->input->post('iPeriodo');
+			}
+			if ($this->input->post('iPais') != 'null') {
+				$url = $url . "/" . $this->input->post('iPais');
+			}
+			if ($this->input->post('iEstado') != 'null') {
+				$url = $url . "/" . $this->input->post('iEstado');
+			}
+			if ($this->input->post('iCidade') != 'null') {
+				$url = $url . "/" . $this->input->post('iCidade');
+			}
 			$params = array(
 				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
 				$this->input->post('iContrato') == 'null' ? null : $this->input->post('iContrato'),
@@ -220,6 +304,21 @@ class Pesquisa extends CI_Controller {
 		if ($method == "POST") {
 			$estado_id = $this->input->post('iEstado');
 			$url = $url . urlencode($this->input->post('iPesquisa'));
+			if ($this->input->post('iCategoria') != 'null') {
+				$url = $url . "/" . $this->input->post('iCategoria');
+			}
+			if ($this->input->post('iMarca') != 'null') {
+				$url = $url . "/" . $this->input->post('iMarca');
+			}
+			if ($this->input->post('iModelo') != 'null') {
+				$url = $url . "/" . $this->input->post('iModelo');
+			}
+			if ($this->input->post('iEstado') != 'null') {
+				$url = $url . "/" . $this->input->post('iEstado');
+			}
+			if ($this->input->post('iCidade') != 'null') {
+				$url = $url . "/" . $this->input->post('iCidade');
+			}
 			$params = array(
 				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
 				$this->input->post('iCategoria') == 'null' ? null : $this->input->post('iCategoria'),
@@ -280,6 +379,18 @@ class Pesquisa extends CI_Controller {
 			$pais_id = $this->input->post('iPais');
 			$estado_id = $this->input->post('iEstado');
 			$url = $url . urlencode($this->input->post('iPesquisa'));
+			if ($this->input->post('iTipoImovel') != 'null') {
+				$url = $url . "/" . $this->input->post('iTipoImovel');
+			}
+			if ($this->input->post('iPais') != 'null') {
+				$url = $url . "/" . $this->input->post('iPais');
+			}
+			if ($this->input->post('iEstado') != 'null') {
+				$url = $url . "/" . $this->input->post('iEstado');
+			}
+			if ($this->input->post('iCidade') != 'null') {
+				$url = $url . "/" . $this->input->post('iCidade');
+			}
 			$params = array(
 				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
 				$this->input->post('iTipoImovel') == 'null' ? null : $this->input->post('iTipoImovel'),
