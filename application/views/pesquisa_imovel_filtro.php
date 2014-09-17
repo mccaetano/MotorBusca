@@ -1,25 +1,38 @@
-
+<div class="span2">
+	<div class="well">
+<?php
+	if ($iPesquisa != FALSE) {
+		echo "<a href=\"" . base_url() . "pesquisa/imovel/p1\"><i class=\"icon-remove\"></i>" . $iPesquisa . "</a><br>" . PHP_EOL;
+	}
+	if ($iContratoTipo != FALSE) {
+		echo "<a href=\"" . base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "\"><i class=\"icon-remove\"></i>" . $iContratoTipo . "</a><br>" . PHP_EOL;		
+	}
+	if ($iCasaTipo != FALSE) {
+		echo "<a href=\"" . base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "/" . $iContratoTipo . "\"><i class=\"icon-remove\"></i>" . $iCasaTipo . "</a><br>" . PHP_EOL;
+	}
+	if ($iEstado != FALSE) {
+		echo "<a href=\"" . base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "/" . $iContratoTipo . "/" . $iCasaTipo . "\"><i class=\"icon-remove\"></i>" . $iEstado . "</a><br>" . PHP_EOL;
+	}
+	if ($iCidade != FALSE) {
+		echo "<a href=\"" . base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "/" . $iContratoTipo . "/" . $iCasaTipo . "/" . $iEstado . "\"><i class=\"icon-remove\"></i>" . $iCidade . "</a><br>" . PHP_EOL;
+	}		 		 		 
+?>
+	</div>
 	<div class="well">
 		<p><strong>Tipo Contrato</strong></p>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small>Indiferente</small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iContratoTipo" name="iContratoTipo" value="null" <?php echo set_radio('iContratoTipo', 'null', TRUE); ?>>
-				</label>
-			</div>
-		</div>
-		<?php if ($pesquisa_tipo_casa) { foreach ($pesquisa_tipo_casa as $row) {?>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small><?php echo $row->pct_descricao; ?></small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iContratoTipo<?php echo $row->pct_id; ?>" name="iContratoTipo" value="<?php echo $row->pct_id; ?>" <?php echo set_radio('iContratoTipo', $row->pct_id); ?>>
-				</label>
-			</div>
-		</div>
-		<?php }} ?>
+		<ul class="nav nav-list">
+<?php if ($lista_contrato) { foreach ($lista_contrato as $row) {?>
+			<li><a href="<?php echo base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "/" . $row->pct_descricao; ?>"><i class="icon-plus"></i><?php echo $row->pct_descricao;?></a></li>
+<?php }} ?>		
+		</ul>
 	</div>
 	<div class="well">		
 		<p><strong>Tipo de Imóvel</strong></p>
+		<ul class="nav nav-list">
+<?php if ($lista_tipoimovel) { foreach ($lista_tipoimovel as $row) {?>
+			<li><a href="<?php echo base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "/" . $iContratoTipo . "/" . $row->pt_descricao; ?>"><i class="icon-plus"></i><?php echo $row->pt_descricao;?></a></li>
+<?php }} ?>		
+		</ul>		
 		<div class="control-group">
 			<div class="controls">
 				<label class="radio"><small>Indiferente</small>
@@ -172,3 +185,4 @@
 			</div>
 		</div>
 	</div>
+</div>

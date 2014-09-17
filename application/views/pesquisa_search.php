@@ -27,7 +27,7 @@
 								?>
 							</ul>
 			</div>
-			<input type="text" class="input-xxlarge" name="iPesquisa" value="<?php echo $iPeqsuisa; ?>">
+			<input type="text" class="input-xxlarge" name="iPesquisa" value="<?php echo $iPesquisa; ?>">
 			<button name="btnPesquisa"  id="btnPesquisa" type="submit" class="btn" value="<?php echo $tipo; ?>">Buscar</button>					
 		</div>
 		</form>

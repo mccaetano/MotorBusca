@@ -17,29 +17,48 @@ class Pesquisa extends CI_Controller {
 	}
 	
 	function imovel() {
-		$pg = 1;
+		
+		$pg = "1";
 		if (!$this->uri->segment(3)) {
 			$pg = substr($this->uri->segment(3), 1);					
 		}
-		$iPesquisa = $this->uri->segment(4);
-		$iContratoTipo = $this->uri->segment(5);
-		$iCasaTipo = $this->uri->segment(6);
-		$iEstado = $this->uri->segment(7);
-		$iCidade = $this->uri->segment(8);
+		$iPesquisa = $this->uri->segment(4) == NULL ? FALSE: $this->uri->segment(4);
+		$iContratoTipo = $this->uri->segment(5) == NULL ? FALSE: $this->uri->segment(5);
+		var_dump($iContratoTipo);
+		$lista_contrato = FALSE;
+		if ($iContratoTipo === FALSE) {
+			$this->load->model ( "pesquisa_tipo_casa" );
+			$lista_contrato = $this->pesquisa_tipo_casa->ListaTodos ();
+		}
+		$iCasaTipo = $this->uri->segment(6)== NULL ? FALSE: $this->uri->segment(6);
+		$lista_tipoimovel = FALSE;
+		if ($iCasaTipo === FALSE) {
+			$this->load->model ( "propriedade_tipo" );
+			$lista_tipoimovel = $this->propriedade_tipo->ListaTodos ();
+		}
+		$iEstado = $this->uri->segment(7) == NULL ? FALSE: $this->uri->segment(7);
+		$iCidade = $this->uri->segment(8) == NULL ? FALSE: $this->uri->segment(8);
+		 
+		
 		
 		$data = array(
 				'tipo' => "imovel",
 				'tipo_descricao' => "Imóvel",
 				'pg' => $pg,
-				'iPeqsuisa' => $iPesquisa,
+				'iPesquisa' => $iPesquisa,
 				'iContratoTipo' => $iContratoTipo,
 				'iCasaTipo' => $iCasaTipo,
 				'iEstado' => $iEstado,
-				'iCidade' => $iCidade
+				'iCidade' => $iCidade,
+				'lista_contrato' => $lista_contrato,
+				'lista_tipoimovel' => $lista_tipoimovel
 		);
 		$this->load->view('templates/header', $data);
 		$this->load->view('pesquisa_header', $data);
 		$this->load->view('pesquisa_search', $data);
+		$this->load->view('pesquisa_layer_header', $data);
+		$this->load->view('pesquisa_imovel_filtro', $data);
+		$this->load->view('pesquisa_layer_footer', $data);
 	}
 	
 	function imovel_($pg = 0) {
