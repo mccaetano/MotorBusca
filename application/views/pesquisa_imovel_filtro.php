@@ -1,93 +1,110 @@
 <div class="span2">
 	<div class="well">
-<?php
-	if ($iPesquisa != FALSE) {
-		echo "<a href=\"" . base_url() . "pesquisa/imovel/p1\"><i class=\"icon-remove\"></i>" . $iPesquisa . "</a><br>" . PHP_EOL;
+<?php 
+	if ($iPesquisa) {?>
+		<a href="" onclick "javascript: document.form[0].submit();"><i class="icon-remove"></i><?php echo $iPesquisa; ?></a><br>
+<?php 
 	}
-	if ($iContratoTipo != FALSE) {
-		echo "<a href=\"" . base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "\"><i class=\"icon-remove\"></i>" . $iContratoTipo . "</a><br>" . PHP_EOL;		
+	if ($iContratoTipo) {
+?>
+		<a href=""  onclick "javascript: document.form[0].submit();"><i class="icon-remove"></i><?php echo $iContratoTipo; ?></a><br>
+<?php 
 	}
-	if ($iCasaTipo != FALSE) {
-		echo "<a href=\"" . base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "/" . $iContratoTipo . "\"><i class=\"icon-remove\"></i>" . $iCasaTipo . "</a><br>" . PHP_EOL;
+	if ($iCasaTipo) {
+?>
+		<a href=""  onclick "javascript: document.form[0].submit();"><i class="icon-remove"></i><?php echo $iCasaTipo; ?></a><br>
+<?php 
 	}
-	if ($iEstado != FALSE) {
-		echo "<a href=\"" . base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "/" . $iContratoTipo . "/" . $iCasaTipo . "\"><i class=\"icon-remove\"></i>" . $iEstado . "</a><br>" . PHP_EOL;
+	if ($iEstado) {
+?>
+		<a href=""  onclick "javascript: document.form[0].submit();"><i class="icon-remove"></i><?php echo $iEstado; ?></a><br>
+<?php 
 	}
-	if ($iCidade != FALSE) {
-		echo "<a href=\"" . base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "/" . $iContratoTipo . "/" . $iCasaTipo . "/" . $iEstado . "\"><i class=\"icon-remove\"></i>" . $iCidade . "</a><br>" . PHP_EOL;
+	if ($iCidade) {
+?>
+		<a href=""  onclick "javascript: document.form[0].submit();"><i class="icon-remove"></i><?php echo $iCidade; ?></a><br>
+<?php 
 	}		 		 		 
 ?>
 	</div>
+<?php 
+	if ($lista_contrato) {
+?>
 	<div class="well">
 		<p><strong>Tipo Contrato</strong></p>
-		<ul class="nav nav-list">
-<?php if ($lista_contrato) { foreach ($lista_contrato as $row) {?>
-			<li><a href="<?php echo base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "/" . $row->pct_descricao; ?>"><i class="icon-plus"></i><?php echo $row->pct_descricao;?></a></li>
-<?php }} ?>		
-		</ul>
+		<fieldset>		
+ <?php
+ 		foreach ($lista_contrato as $row) {
+ ?>
+			<label>
+ 				<input type="radio" name="iContratoTipo" id="iContratoTipo_<?php echo $row->pct_id; ?>" value="<?php echo $row->pct_id; ?>">
+				<?php echo $row->pct_descricao; ?>
+			</label>
+<?php 
+		}
+?>
+		</select>
+		</fieldset>
 	</div>
+<?php 
+	} 
+	if ($lista_tipoimovel) { 
+?>
 	<div class="well">		
 		<p><strong>Tipo de Imóvel</strong></p>
-		<ul class="nav nav-list">
-<?php if ($lista_tipoimovel) { foreach ($lista_tipoimovel as $row) {?>
-			<li><a href="<?php echo base_url() . "pesquisa/imovel/". $pg . "/" . $iPesquisa . "/" . $iContratoTipo . "/" . $row->pt_descricao; ?>"><i class="icon-plus"></i><?php echo $row->pt_descricao;?></a></li>
-<?php }} ?>		
-		</ul>		
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small>Indiferente</small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCasaTipo" name="iCasaTipo" value="null" <?php echo set_radio('iCasaTipo', "null", TRUE); ?>>
-				</label>
-			</div>
-		</div>		
-		<?php if ($tipo_imovel) { foreach ($tipo_imovel as $row) {?>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small><?php echo $row->pt_descricao; ?></small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCasaTipo<?php echo $row->pt_id; ?>" name="iCasaTipo" value="<?php echo $row->pt_id; ?>" <?php echo set_radio('iCasaTipo', $row->pt_id); ?>>
-				</label>
-			</div>
-		</div>
-		<?php }} ?>
+		<fieldset>
+<?php 
+		foreach ($lista_tipoimovel as $row) {
+?>
+			<label>
+ 				<input type="radio" name="iCasaTipo" id="iCasaTipo_<?php echo $row->pt_id; ?>" value="<?php echo $row->pt_id; ?>">
+				<?php echo $row->pt_descricao; ?>
+			</label>
+<?php 
+		}?>		
+		</fieldset>
 	</div>
+<?php 
+	} 
+	if ($lista_estado) { 
+?>
 	<div class="well">		
 		<p><strong>Estado</strong></p>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small>Indiferente</small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iEstado" name="iEstado" value="null" <?php echo set_radio('iEstado', "null", TRUE); ?>>
-				</label>
-			</div>
-		</div>				
-		<?php if ($estado) { foreach ($estado as $row) {?>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small><?php echo $row->es_descricao; ?></small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iEstado<?php echo $row->es_id; ?>" name="iEstado" value="<?php echo $row->es_id; ?>" <?php echo set_radio('iEstado', $row->es_id); ?>>
-				</label>
-			</div>
-		</div>
-		<?php }} ?>
+		<fieldset>
+<?php 
+		foreach ($lista_estado as $row) {
+?>
+			<label>
+ 				<input type="radio" name="iEstado" id="iEstado_<?php echo $row->es_id; ?>" value="<?php echo $row->es_id; ?>">
+				<?php echo $row->es_descricao; ?>
+			</label>
+<?php 
+		}
+?>		
+		</fieldset>		
 	</div>
+<?php 
+	} 
+	if ($lista_cidade) { 
+?>
 	<div class="well">		
 		<p><strong>Cidade</strong></p>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small>Indiferente</small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCidade" name="iCidade" value="null" <?php echo set_radio('iCidade', "null", TRUE); ?>>
-				</label>
-			</div>
-		</div>			
-		<?php if ($cidade) { foreach ($cidade as $row) {?>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small><?php echo $row->cd_descricao; ?></small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCidade<?php echo $row->cd_id; ?>" name="iCidade" value="<?php echo $row->cd_id; ?>" <?php echo set_radio('iCidade', $row->cd_id); ?>>
-				</label>
-			</div>
-		</div>
-		<?php }} ?>
+		<fieldset>
+<?php 
+		foreach ($lista_cidade as $row) {
+?>
+			<label>
+ 				<input type="radio" name="iCidade" id="iCidade_<?php echo $row->cd_id; ?>" value="<?php echo $row->cd_id; ?>">
+				<?php echo $row->cd_descricao; ?>
+			</label>
+<?php 
+		}
+?>		
+		</fieldset>
 	</div>
+<?php 
+	} 
+?>
 	<div class="well">		
 		<p><strong>Preço</strong></p>
 		<div class="control-group">

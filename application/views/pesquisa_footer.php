@@ -1,6 +1,3 @@
-			</div>
-		</div>
-	</div>
 	<div class="span2">
 		<!-- <div class="well"> -->
 		<script async
@@ -15,3 +12,4 @@
 		<!-- </div> -->
 	</div>
 </div>
+</form>

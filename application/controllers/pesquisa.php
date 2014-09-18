@@ -9,56 +9,76 @@ class Pesquisa extends CI_Controller {
 		redirect(base_url());
 	}
 	
-	function find() {
-		$url = base_url() . "pesquisa/" . $this->input->post('btnPesquisa') . "/";
-		$url = $url . "p1/" . $this->input->post('iPesquisa');
-		
-		redirect($url, 'location');
+	function sch1() {		
+		$url = base_url() . "pesquisa/imovel";
+		if ($this->input->post("pag") != 'null') {
+			$url = $url . "/" . $this->input->post("pag");
+		} else {
+			$url = $url . "/p1";
+		}
+		if ($this->input->post("iPesquisa") != 'null') {
+			$url = $url . "/" . $this->input->post("iPesquisa");
+		}
+		if ($this->input->post("iContratoTipo") != 'null') {
+			$url = $url . "/" . $this->input->post("iContratoTipo");
+		}
+		if ($this->input->post("iCasaTipo") != 'null') {
+			$url = $url . "/" . $this->input->post("iCasaTipo");
+		}
+		if ($this->input->post("iEstado") != 'null') {
+			$url = $url . "/" . $this->input->post("iEstado");
+		}
+		if ($this->input->post("iCidade") != 'null') {
+			$url = $url . "/" . $this->input->post("iCidade");
+		}
+		var_dump($url);
+		#redirect($url);
 	}
 	
-	function imovel() {
-		
-		$pg = "1";
-		if (!$this->uri->segment(3)) {
-			$pg = substr($this->uri->segment(3), 1);					
-		}
-		$iPesquisa = $this->uri->segment(4) == NULL ? FALSE: $this->uri->segment(4);
-		$iContratoTipo = $this->uri->segment(5) == NULL ? FALSE: $this->uri->segment(5);
-		var_dump($iContratoTipo);
+	function imovel() {	
 		$lista_contrato = FALSE;
-		if ($iContratoTipo === FALSE) {
+		if ($this->input->post("iContratoTipo") == 'null' || $this->input->post("iContratoTipo") == FALSE) {
 			$this->load->model ( "pesquisa_tipo_casa" );
-			$lista_contrato = $this->pesquisa_tipo_casa->ListaTodos ();
+			$lista_contrato = $this->pesquisa_tipo_casa->ListaTodos();			
 		}
-		$iCasaTipo = $this->uri->segment(6)== NULL ? FALSE: $this->uri->segment(6);
 		$lista_tipoimovel = FALSE;
-		if ($iCasaTipo === FALSE) {
+		if ($this->input->post("iCasaTipo") == 'null' || $this->input->post("iCasaTipo") == FALSE) {
 			$this->load->model ( "propriedade_tipo" );
-			$lista_tipoimovel = $this->propriedade_tipo->ListaTodos ();
+			$lista_tipoimovel = $this->propriedade_tipo->ListaTodos();
 		}
-		$iEstado = $this->uri->segment(7) == NULL ? FALSE: $this->uri->segment(7);
-		$iCidade = $this->uri->segment(8) == NULL ? FALSE: $this->uri->segment(8);
-		 
-		
+		$lista_estado = FALSE;
+		if ($this->input->post("iEstado") == 'null' || $this->input->post("iEstado") == FALSE) {
+			$this->load->model ( "estado" );
+			$lista_estado = $this->estado->ListaTodos();
+		}
+		$lista_cidade = FALSE;
+		if ($this->input->post("iCidade") == 'null' || $this->input->post("iCidade") == FALSE) {
+			$this->load->model ( "cidade" );
+			$lista_cidade = $this->cidade->ListaTodos();
+		}
 		
 		$data = array(
+				'find' => "sch1",
 				'tipo' => "imovel",
 				'tipo_descricao' => "Imóvel",
-				'pg' => $pg,
-				'iPesquisa' => $iPesquisa,
-				'iContratoTipo' => $iContratoTipo,
-				'iCasaTipo' => $iCasaTipo,
-				'iEstado' => $iEstado,
-				'iCidade' => $iCidade,
+				'pg' => $this->input->post("pag"),
+				'iPesquisa' => $this->input->post("iPesquisa") == 'null' ? FALSE : $this->input->post("iPesquisa"),
+				'iContratoTipo' => $this->input->post("iContratoTipo") == 'null' ? FALSE : $this->input->post("iContratoTipo"),
+				'iCasaTipo' => $this->input->post("iCasaTipo") == 'null' ? FALSE : $this->input->post("iCasaTipo"),
+				'iEstado' => $this->input->post("iEstado") == 'null' ? FALSE : $this->input->post("iEstado"),
+				'iCidade' => $this->input->post("iCidade") == 'null' ? FALSE : $this->input->post("iCidade"),
 				'lista_contrato' => $lista_contrato,
-				'lista_tipoimovel' => $lista_tipoimovel
+				'lista_tipoimovel' => $lista_tipoimovel,
+				'lista_estado' => $lista_estado,
+				'lista_cidade' => $lista_cidade
 		);
+		
 		$this->load->view('templates/header', $data);
 		$this->load->view('pesquisa_header', $data);
 		$this->load->view('pesquisa_search', $data);
-		$this->load->view('pesquisa_layer_header', $data);
 		$this->load->view('pesquisa_imovel_filtro', $data);
-		$this->load->view('pesquisa_layer_footer', $data);
+		$this->load->view('pesquisa_footer', $data);
+		$this->load->view('templates/footer', $data);
 	}
 	
 	function imovel_($pg = 0) {

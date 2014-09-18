@@ -1,9 +1,8 @@
 <div class="row-fluid">	
 	<div class="span12  pull-center">
-		<form name="frmPesquisa" id="frmPesquisa" action="<?php echo base_url(); ?>pesquisa/find" method="post"> 
 		<div class="input-prepend input-append">
 			<div class="btn-group">
-				
+				<fieldset>				
 				<button class="btn dropdown-toggle" data-toggle="dropdown"><?php echo $tipo_descricao ?> <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
@@ -28,8 +27,10 @@
 							</ul>
 			</div>
 			<input type="text" class="input-xxlarge" name="iPesquisa" value="<?php echo $iPesquisa; ?>">
-			<button name="btnPesquisa"  id="btnPesquisa" type="submit" class="btn" value="<?php echo $tipo; ?>">Buscar</button>					
+			<button name="btnPesquisa"  id="btnPesquisa" type="submit" class="btn" value="<?php echo $tipo; ?>">Buscar</button>
+			</fieldset>					
 		</div>
-		</form>
 	</div>
 </div>
+<div class="row-fluid">
+	
