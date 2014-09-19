@@ -1,32 +1,44 @@
 <div class="span2">
 	<div class="well">
 <?php 
-	if ($iPesquisa) {?>
-		<a href="" onclick "javascript: document.form[0].submit();"><i class="icon-remove"></i><?php echo $iPesquisa; ?></a><br>
+	if ($iPesquisa) {
+?>		
+		<button type="button" class="btn btn-link" name="iPesquisa" value="<?php echo $iPesquisa; ?>" onclick="javascript: document.forms[0].submit();"><i class="icon-remove"></i><?php echo $iPesquisa; ?></button><br>		
 <?php 
 	}
 	if ($iContratoTipo) {
 ?>
-		<a href=""  onclick "javascript: document.form[0].submit();"><i class="icon-remove"></i><?php echo $iContratoTipo; ?></a><br>
+		<input type="hidden" id="iContratoTipo" name="iContratoTipo" value="<?php echo $iContratoTipo; ?>">
+		<button type="button" class="btn btn-link" onclick="removeItem('iContratoTipo');"><i class="icon-remove"></i><?php echo $iContratoTipo; ?></button><br>		
 <?php 
 	}
 	if ($iCasaTipo) {
 ?>
-		<a href=""  onclick "javascript: document.form[0].submit();"><i class="icon-remove"></i><?php echo $iCasaTipo; ?></a><br>
+		<input type="hidden" id="iCasaTipo"  name="iCasaTipo" value="<?php echo $iCasaTipo; ?>">
+		<button type="button" class="btn btn-link" onclick="removeItem('iCasaTipo');"><i class="icon-remove" ></i><?php echo $iCasaTipo; ?></button><br>		
 <?php 
 	}
 	if ($iEstado) {
 ?>
-		<a href=""  onclick "javascript: document.form[0].submit();"><i class="icon-remove"></i><?php echo $iEstado; ?></a><br>
+		<input type="hidden" id="iEstado"  name="iEstado" value="<?php echo $iEstado; ?>">
+		<button type="button" class="btn btn-link" onclick="removeItem('iEstado');"><i class="icon-remove" ></i><?php echo $iEstado; ?></button><br>
 <?php 
 	}
 	if ($iCidade) {
 ?>
-		<a href=""  onclick "javascript: document.form[0].submit();"><i class="icon-remove"></i><?php echo $iCidade; ?></a><br>
+		<input type="hidden" id="iCidade"  name="iCidade" value="<?php echo $iEstado; ?>">
+		<button type="button" class="btn btn-link" onclick="removeItem('iCidade');"><i class="icon-remove" ></i><?php echo $iCidade; ?></button><br>
 <?php 
 	}		 		 		 
 ?>
 	</div>
+	<script>
+		function removeItem(item) {
+			document.getElementById(item).removeAttribute('value'); 
+			document.forms[0].submit();
+			return false;
+		}
+	</script>
 <?php 
 	if ($lista_contrato) {
 ?>
@@ -37,7 +49,8 @@
  		foreach ($lista_contrato as $row) {
  ?>
 			<label>
- 				<input type="radio" name="iContratoTipo" id="iContratoTipo_<?php echo $row->pct_id; ?>" value="<?php echo $row->pct_id; ?>">
+ 				<input type="radio" name="iContratoTipo" id="iContratoTipo_<?php echo $row->pct_id; ?>" value="<?php echo $row->pct_id; ?>"
+ 				onclick="document.forms[0].submit();">
 				<?php echo $row->pct_descricao; ?>
 			</label>
 <?php 
@@ -57,7 +70,8 @@
 		foreach ($lista_tipoimovel as $row) {
 ?>
 			<label>
- 				<input type="radio" name="iCasaTipo" id="iCasaTipo_<?php echo $row->pt_id; ?>" value="<?php echo $row->pt_id; ?>">
+ 				<input type="radio" name="iCasaTipo" id="iCasaTipo_<?php echo $row->pt_id; ?>" value="<?php echo $row->pt_id; ?>"
+ 				onclick="document.forms[0].submit();">
 				<?php echo $row->pt_descricao; ?>
 			</label>
 <?php 
@@ -75,7 +89,8 @@
 		foreach ($lista_estado as $row) {
 ?>
 			<label>
- 				<input type="radio" name="iEstado" id="iEstado_<?php echo $row->es_id; ?>" value="<?php echo $row->es_id; ?>">
+ 				<input type="radio" name="iEstado" id="iEstado_<?php echo $row->es_id; ?>" value="<?php echo $row->es_id; ?>"
+ 				onclick="document.forms[0].submit();">
 				<?php echo $row->es_descricao; ?>
 			</label>
 <?php 
@@ -94,7 +109,8 @@
 		foreach ($lista_cidade as $row) {
 ?>
 			<label>
- 				<input type="radio" name="iCidade" id="iCidade_<?php echo $row->cd_id; ?>" value="<?php echo $row->cd_id; ?>">
+ 				<input type="radio" name="iCidade" id="iCidade_<?php echo $row->cd_id; ?>" value="<?php echo $row->cd_id; ?>"
+ 				onclick="document.forms[0].submit();">
 				<?php echo $row->cd_descricao; ?>
 			</label>
 <?php 

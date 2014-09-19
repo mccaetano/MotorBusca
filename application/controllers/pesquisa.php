@@ -2,40 +2,49 @@
 class Pesquisa extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->helper(array('form', 'url', 'date'));
 	}
 	
 	function index() {
 		redirect(base_url());
 	}
 	
-	function sch1() {		
+	function sch1() {	
+		$this->load->helper(array('form', 'url'));
+		
 		$url = base_url() . "pesquisa/imovel";
-		if ($this->input->post("pag") != 'null') {
+		if ($this->input->post("pag")) {
 			$url = $url . "/" . $this->input->post("pag");
 		} else {
 			$url = $url . "/p1";
 		}
-		if ($this->input->post("iPesquisa") != 'null') {
+		if ($this->input->post("iPesquisa")) {
 			$url = $url . "/" . $this->input->post("iPesquisa");
 		}
-		if ($this->input->post("iContratoTipo") != 'null') {
+		if ($this->input->post("iContratoTipo")) {
 			$url = $url . "/" . $this->input->post("iContratoTipo");
 		}
-		if ($this->input->post("iCasaTipo") != 'null') {
+		if ($this->input->post("iCasaTipo")) {
 			$url = $url . "/" . $this->input->post("iCasaTipo");
 		}
-		if ($this->input->post("iEstado") != 'null') {
+		if ($this->input->post("iEstado")) {
 			$url = $url . "/" . $this->input->post("iEstado");
 		}
-		if ($this->input->post("iCidade") != 'null') {
+		if ($this->input->post("iCidade")) {
 			$url = $url . "/" . $this->input->post("iCidade");
 		}
-		var_dump($url);
-		#redirect($url);
+		
+		$this->session->set_userdata('post_data', $_POST);
+		
+		redirect($url, 'location');
 	}
 	
 	function imovel() {	
+
+		$this->load->helper(array('form', 'url', 'date'));
+		
+		$_POST = $this->session->userdata('post_data');
+		$this->session->unset_userdata('post_data');		
+		
 		$lista_contrato = FALSE;
 		if ($this->input->post("iContratoTipo") == 'null' || $this->input->post("iContratoTipo") == FALSE) {
 			$this->load->model ( "pesquisa_tipo_casa" );
