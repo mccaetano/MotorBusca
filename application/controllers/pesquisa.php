@@ -21,6 +21,23 @@ class Pesquisa extends CI_Controller {
 			array('qrt_id' => '5', 'qrt_descricao' => '5 Quartos')
 	);
 	
+	private $preco_auto = array(
+		array('prc_id' => '1000,5000', 'prc_descricao' => '1.000 - 5.000'),
+		array('prc_id' => '5000,10000', 'prc_descricao' => '5.000 - 10.000'),
+		array('prc_id' => '10000,20000', 'prc_descricao' => '10.000 - 20.000'),
+		array('prc_id' => '20000,40000', 'prc_descricao' => '20.000 - 40.000'),
+		array('prc_id' => '40000,60000', 'prc_descricao' => '40.000 - 60.000'),
+		array('prc_id' => '60000,80000', 'prc_descricao' => '60.000 - 80.000'),
+		array('prc_id' => '80000,100000', 'prc_descricao' => '80.000 - 100.000'),
+		array('prc_id' => '100000,200000', 'prc_descricao' => '100.000 - 200.000'),
+		array('prc_id' => '200000,500000', 'prc_descricao' => '200.000 - 5000.000')
+	);
+	
+	private $novo_auto = array(
+		array('nv_id' => '1', 'nvc_descricao' => 'Novo'),
+		array('nv_id' => '2', 'nvc_descricao' => 'Usuado'),
+	);
+	
 	function __construct() {
 		parent::__construct();
 	}
@@ -39,7 +56,6 @@ class Pesquisa extends CI_Controller {
 			$url = $url . "/p1";
 		}
 		if ($this->input->post("iPesquisa")) {
-			$this->load->model('pesquisa_tipo_casa');
 			$url = $url . "/" . $this->input->post("iPesquisa");
 		}
 		if ($this->input->post("iContratoTipo")) {
@@ -67,6 +83,50 @@ class Pesquisa extends CI_Controller {
 		
 		$this->session->set_userdata('post_data', $_POST);
 		
+		redirect($url, 'location');
+	}
+	
+	function sch2() {
+		$this->load->helper(array('form', 'url'));
+	
+		$url = base_url() . "pesquisa/auto";
+		if ($this->input->post("pag")) {
+			$url = $url . "/" . $this->input->post("pag");
+		} else {
+			$url = $url . "/p1";
+		}
+		if ($this->input->post("iPesquisa")) {
+			$url = $url . "/" . $this->input->post("iPesquisa");
+		}
+		if ($this->input->post("iCarroTipo")) {
+			$this->load->model('carro_tipo');
+			$url = $url . "/" . str_replace(" ", "_", $this->carro_tipo->BuscaPorId($this->input->post("iCarroTipo"))[0]->tpc_descricao);
+		}
+		if ($this->input->post("iCarroMarca")) {
+			$this->load->model ( "carro_marca" );
+			$url = $url . "/" . str_replace(" ", "_", $this->carro_marca->BuscaPorId($this->input->post("iCarroMarca"))[0]->cmr_descricao);
+		}
+		if ($this->input->post("iCarroModelo")) {
+			$this->load->model ( "carro_modelo" );
+			$url = $url . "/" . str_replace(" ", "_", $this->carro_modelo->BuscaPorId($this->input->post("iCarroModelo"))[0]->cmd_descricao);
+		}
+		if ($this->input->post("iEstado")) {
+			$this->load->model('estado');
+			$url = $url . "/" . str_replace(" ", "_", $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao);
+		}
+		if ($this->input->post("iCidade")) {
+			$this->load->model('cidade');
+			$url = $url . "/" . str_replace(" ", "_", $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao);
+		}
+		if ($this->input->post("iPreco")) {
+			$url = $url . "/" . str_replace(",", "_", $this->input->post("iPreco"));
+		}
+		if ($this->input->post("iNovo")) {
+			$url = $url . "/" . $this->input->post("iNovo");
+		}
+	
+		$this->session->set_userdata('post_data', $_POST);
+	
 		redirect($url, 'location');
 	}
 	
@@ -146,10 +206,11 @@ class Pesquisa extends CI_Controller {
 				}
 			}
 		}
-		
+		$iPesquisa = $this->input->post('iPesquisa');
+		if ($iPesquisa == '') { $iPesquisa = FALSE; }		
 		$this->load->model ( "anuncio_casa" );
 		$params = array(
-				$this->input->post('iPesquisa') === FALSE ? null : "%" . $this->input->post('iPesquisa') . "%",
+				$iPesquisa === FALSE ? null : "%" . $iPesquisa . "%",
 				$this->input->post('iContratoTipo') === FALSE ? null : $this->input->post('iContratoTipo'),
 				$this->input->post('iCasaTipo') === FALSE ? null : $this->input->post('iCasaTipo'),
 				$this->input->post('iEstado') === FALSE ? null : $this->input->post('iEstado'),
@@ -157,7 +218,7 @@ class Pesquisa extends CI_Controller {
 				$preco_in === FALSE ? null : $preco_in,
 				$preco_out === FALSE ? null : $preco_out,
 				$this->input->post('iQuartos') === FALSE ? null : $this->input->post('iQuartos')
-		);
+		); 
 		$pesquisa_resultado = $this->anuncio_casa->AnuncioPesquisa ($params);
 		
 		$data = array(
@@ -196,8 +257,148 @@ class Pesquisa extends CI_Controller {
 		$this->load->view('templates/footer', $data);
 	}
 	
-	
 	function auto() {
+		$this->load->helper(array('form', 'url', 'date'));
+		
+		$_POST = $this->session->userdata('post_data');
+		$this->session->unset_userdata('post_data');
+		
+		$pg = "p1";
+		if ($this->input->post("pag")) {
+			$pg = $this->input->post("pag");
+		}
+		
+		$lista_tipocarro = FALSE;
+		$iCarroTipo_descricao = FALSE;
+		$this->load->model ( "carro_tipo" );
+		if (!$this->input->post("iCarroTipo")) {
+			$lista_tipocarro = $this->carro_tipo->ListaTodos();
+		} else {
+			$iContratoTipo_descricao = $this->carro_tipo->BuscaPorId($this->input->post("iCarroTipo"))[0]->pct_descricao;
+		}
+		
+		$lista_marca = FALSE;
+		$iCarroMarca_descricao = FALSE;
+		$this->load->model ( "carro_marca" );
+		if (!$this->input->post("iCarroMarca")) {
+			$lista_marca = $this->carro_marca->ListaTodos();
+		} else {
+			$iContratoTipo_descricao = $this->carro_marca->BuscaPorId($this->input->post("iCarroMarca"))[0]->cmr_descricao;
+		}
+		
+		$lista_modelo = FALSE;
+		$iCarroModelo_descricao = FALSE;
+		$this->load->model ( "carro_modelo" );
+		if (!$this->input->post("iCarroModelo")) {
+			$lista_modelo = $this->carro_modelo->ListaTodos();
+		} else {
+			$iContratoTipo_descricao = $this->carro_modelo->BuscaPorId($this->input->post("iCarroModelo"))[0]->cmd_descricao;
+		}
+		
+		$lista_estado = FALSE;
+		$iEstado_descricao = FALSE;
+		$this->load->model ( "estado" );
+		if (!$this->input->post("iEstado")) {
+			$lista_estado = $this->estado->ListaTodos();
+		} else {
+			$iEstado_descricao = $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao;
+		}
+		
+		$lista_cidade = FALSE;
+		$iCidade_descricao = FALSE;
+		$this->load->model ( "cidade" );
+		if (!$this->input->post("iCidade")) {
+			$lista_cidade = $this->cidade->BuscaPorEstado($this->input->post("iEstado"));
+		} else {
+			$iCidade_descricao = $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao;
+		}
+		
+		$preco_in = FALSE;
+		$preco_out = FALSE;
+		$lista_preco = FALSE;
+		$iPreco_descricao = FALSE;
+		if (!$this->input->post("iPreco")) {
+			$lista_preco = $this->preco_auto;
+		} else {
+			$precos = explode(",", $this->input->post('iPreco'));
+			$preco_in = $precos[0];
+			$preco_out = $precos[1];
+			for ($i=0; $i<count($this->preco_imovel);$i++) {
+				if ($this->input->post("iPreco") == $this->preco_imovel[$i]['prc_id']) {
+					$iPreco_descricao = $this->preco_imovel[$i]['prc_descricao'];
+					break;
+				}
+			}
+		}
+		
+		$lista_novo = FALSE;
+		$iNovo_descricao = FALSE;
+		if (!$this->input->post("iNovo")) {
+			$lista_novo = $this->novo_auto;
+		} else {
+			for ($i=0; $i<count($this->novo_auto);$i++) {
+				if ($this->input->post("iNovo") == $this->novo_auto[$i]['nv_id']) {
+					$iNovo_descricao = $this->novo_auto[$i]['nv_descricao'];
+					break;
+				}
+			}
+		}
+		
+		$iPesquisa = $this->input->post('iPesquisa');
+		if ($iPesquisa == '') { $iPesquisa = FALSE; }
+		$params = array(
+				$this->input->post('iPesquisa') === FALSE ? null : "%" . $this->input->post('iPesquisa') . "%",
+				$this->input->post('iCarroTipo') === FALSE ? null : $this->input->post('iCarroTipo'),
+				$this->input->post('iCarroMarca') === FALSE ? null : $this->input->post('iCarroMarca'),
+				$this->input->post('iCarroModelo') === FALSE ? null : $this->input->post('iCarroModelo'),
+				$this->input->post('iEstado') === FALSE ? null : $this->input->post('iEstado'),
+				$this->input->post('iCidade') === FALSE ? null : $this->input->post('iCidade'),
+				$preco_in,
+				$preco_out,
+				$this->input->post('iNovo') === FALSE ? null : $this->input->post('iNovo')
+		);
+		$this->load->model ( "anuncio_auto" );
+		$pesquisa_resultado = $this->anuncio_auto->AnuncioPesquisa ($params);
+		
+		$data = array(
+				'find' => "sch2",
+				'tipo' => "auto",
+				'tipo_descricao' => "Carro",
+				'pg' => $pg,
+				'iPesquisa' => $this->input->post('iPesquisa'),
+				'pesquisa_resultado' => $pesquisa_resultado,
+				'lista_tipocarro' => $lista_tipocarro,
+				'iCarroTipo_descricao' => $iCarroTipo_descricao,
+				'iCarroTipo' => $this->input->post('iCarroTipo'),
+				'lista_marca' => $lista_marca,
+				'iCarroMarca_descricao' => $iCarroMarca_descricao,
+				'iCarroMarca' => $this->input->post('iCarroMarca'),
+				'lista_modelo' => $lista_modelo,
+				'iCarroModelo_descricao' => $iCarroModelo_descricao,
+				'iCarroModelo' => $this->input->post('iCarroModelo'),
+				'lista_estado' => $lista_estado,
+				'iEstado_descricao' => $iEstado_descricao,
+				'iEstado' => $this->input->post('iEstado'),
+				'lista_cidade' => $lista_cidade,
+				'iCidade_descricao' => $iCidade_descricao,
+				'iCidade' => $this->input->post('iCidade'),
+				'lista_preco' => $lista_preco,
+				'iPreco_descricao' => $iPreco_descricao,
+				'lista_novo' => $lista_novo,
+				'iNovo_descricao' => $iNovo_descricao,
+				'iNovo' => $this->input->post('iNovo')
+		);
+		
+		$this->load->view('templates/header', $data);
+		$this->load->view('pesquisa_header', $data);
+		$this->load->view('pesquisa_search', $data);
+		$this->load->view('pesquisa_auto_filtro', $data);
+		$this->load->view('pesquisa_auto_resultado', $data);
+		$this->load->view('pesquisa_footer', $data);
+		$this->load->view('templates/footer', $data);
+	}
+	
+	function auto_() {
 		$method =  (string)$_SERVER["REQUEST_METHOD"];
 		
 		$this->load->model ( "anuncio_auto" );

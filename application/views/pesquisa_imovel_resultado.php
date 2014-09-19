@@ -59,15 +59,15 @@
 	$pgf = $pgi + 10;
 	if (($total_pag - $pgf) < 10) { $pgf = $total_pag - $pgf; }	
 ?>
-			<li><a class="btn-link" onclick="pageSubmit(<?php echo $pgi; ?>);">Prev</a></li>
+			<li><a class="btn-link" onclick="pageSubmit(<?php echo $pgi-1 <= 0 ? $pgi : $pgi-1; ?>);">Prev</a></li>
 <?php 
-	for ($i=$pgi; $i<=$pgf; $i++) {
+	for ($i=$pgi; $i<$pgf; $i++) {
 ?> 
 		    <li><a class="btn-link" onclick="pageSubmit(<?php echo $i; ?>);"><?php echo $i; ?></a></li>
 <?php 
 	}
 ?>
-		    <li><a class="btn-link" onclick="pageSubmit(<?php echo ($pgf+1); ?>);">Next</a></li>
+		    <li><a class="btn-link" onclick="pageSubmit(<?php echo ($pgf); ?>);">Next</a></li>
 		  </ul>
 		</div>
 		<fieldset>
