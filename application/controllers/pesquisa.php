@@ -1,5 +1,26 @@
 <?php if ( ! defined('BASEPATH')) { exit('No direct script access allowed');}
 class Pesquisa extends CI_Controller {
+	private $preco_imovel = array(
+		array('prc_id' => '10000,80000', 'prc_descricao' => '10.000 - 80.000'),
+		array('prc_id' => '80000,100000', 'prc_descricao' => '80.000 - 100.000'),
+		array('prc_id' => '100000,200000', 'prc_descricao' => '100.000 - 200.000'),
+		array('prc_id' => '200000,300000', 'prc_descricao' => '200.000 - 300.000'),
+		array('prc_id' => '300000,400000', 'prc_descricao' => '300.000 - 400.000'),
+		array('prc_id' => '400000,500000', 'prc_descricao' => '400.000 - 500.000'),
+		array('prc_id' => '500000,600000', 'prc_descricao' => '500.000 - 600.000'),
+		array('prc_id' => '600000,800000', 'prc_descricao' => '600.000 - 800.000'),
+		array('prc_id' => '800000,1000000', 'prc_descricao' => '800.000 - 1.000.000'),
+		array('prc_id' => '1000000,10000000', 'prc_descricao' => '1.000.000 - 10.000.000')
+	);
+	
+	private $quarto_imovel = array(
+			array('qrt_id' => '1', 'qrt_descricao' => '1 Quarto'),
+			array('qrt_id' => '2', 'qrt_descricao' => '2 Quartos'),
+			array('qrt_id' => '3', 'qrt_descricao' => '3 Quartos'),
+			array('qrt_id' => '4', 'qrt_descricao' => '4 Quartos'),
+			array('qrt_id' => '5', 'qrt_descricao' => '5 Quartos')
+	);
+	
 	function __construct() {
 		parent::__construct();
 	}
@@ -18,19 +39,30 @@ class Pesquisa extends CI_Controller {
 			$url = $url . "/p1";
 		}
 		if ($this->input->post("iPesquisa")) {
+			$this->load->model('pesquisa_tipo_casa');
 			$url = $url . "/" . $this->input->post("iPesquisa");
 		}
 		if ($this->input->post("iContratoTipo")) {
-			$url = $url . "/" . $this->input->post("iContratoTipo");
+			$this->load->model('pesquisa_tipo_casa');
+			$url = $url . "/" . str_replace(" ", "_", $this->pesquisa_tipo_casa->BuscaPorId($this->input->post("iContratoTipo"))[0]->pct_descricao);
 		}
 		if ($this->input->post("iCasaTipo")) {
-			$url = $url . "/" . $this->input->post("iCasaTipo");
+			$this->load->model ( "propriedade_tipo" );
+			$url = $url . "/" . str_replace(" ", "_", $this->propriedade_tipo->BuscaPorId($this->input->post("iCasaTipo"))[0]->pt_descricao);
 		}
 		if ($this->input->post("iEstado")) {
-			$url = $url . "/" . $this->input->post("iEstado");
+			$this->load->model('estado');
+			$url = $url . "/" . str_replace(" ", "_", $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao);
 		}
 		if ($this->input->post("iCidade")) {
-			$url = $url . "/" . $this->input->post("iCidade");
+			$this->load->model('cidade');
+			$url = $url . "/" . str_replace(" ", "_", $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao);
+		}
+		if ($this->input->post("iPreco")) {
+			$url = $url . "/" . str_replace(",", "_", $this->input->post("iPreco"));
+		}
+		if ($this->input->post("iQuarto")) {
+			$url = $url . "/" . $this->input->post("iQuarto") . "_Quartos";
 		}
 		
 		$this->session->set_userdata('post_data', $_POST);
@@ -45,129 +77,125 @@ class Pesquisa extends CI_Controller {
 		$_POST = $this->session->userdata('post_data');
 		$this->session->unset_userdata('post_data');		
 		
+		$pg = "p1";
+		if ($this->input->post("pag")) {
+			$pg = $this->input->post("pag");
+		}
+		
 		$lista_contrato = FALSE;
-		if ($this->input->post("iContratoTipo") == 'null' || $this->input->post("iContratoTipo") == FALSE) {
-			$this->load->model ( "pesquisa_tipo_casa" );
-			$lista_contrato = $this->pesquisa_tipo_casa->ListaTodos();			
+		$iContratoTipo_descricao = FALSE;
+		$this->load->model ( "pesquisa_tipo_casa" );
+		if (!$this->input->post("iContratoTipo")) {			
+			$lista_contrato = $this->pesquisa_tipo_casa->ListaTodos();
+		} else {			
+			$iContratoTipo_descricao = $this->pesquisa_tipo_casa->BuscaPorId($this->input->post("iContratoTipo"))[0]->pct_descricao;
 		}
 		$lista_tipoimovel = FALSE;
-		if ($this->input->post("iCasaTipo") == 'null' || $this->input->post("iCasaTipo") == FALSE) {
-			$this->load->model ( "propriedade_tipo" );
+		$iCasaTipo_descricao = FALSE;
+		$this->load->model ( "propriedade_tipo" );
+		if (!$this->input->post("iCasaTipo")) {
 			$lista_tipoimovel = $this->propriedade_tipo->ListaTodos();
+		} else {
+			$iCasaTipo_descricao = $this->propriedade_tipo->BuscaPorId($this->input->post("iCasaTipo"))[0]->pt_descricao;
 		}
 		$lista_estado = FALSE;
-		if ($this->input->post("iEstado") == 'null' || $this->input->post("iEstado") == FALSE) {
-			$this->load->model ( "estado" );
+		$iEstado_descricao = FALSE;
+		$this->load->model ( "estado" );
+		if (!$this->input->post("iEstado")) {
 			$lista_estado = $this->estado->ListaTodos();
+		} else {
+			$iEstado_descricao = $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao;
 		}
+		
 		$lista_cidade = FALSE;
-		if ($this->input->post("iCidade") == 'null' || $this->input->post("iCidade") == FALSE) {
-			$this->load->model ( "cidade" );
-			$lista_cidade = $this->cidade->ListaTodos();
+		$iCidade_descricao = FALSE;
+		$this->load->model ( "cidade" );
+		if (!$this->input->post("iCidade")) {
+			$lista_cidade = $this->cidade->BuscaPorEstado($this->input->post("iEstado"));
+		} else {
+			$iCidade_descricao = $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao;
 		}
+		
+		$preco_in = FALSE;
+		$preco_out = FALSE;			
+		$lista_preco = FALSE;
+		$iPreco_descricao = FALSE;
+		if (!$this->input->post("iPreco")) {
+			$lista_preco = $this->preco_imovel;
+		} else {
+			$precos = explode(",", $this->input->post('iPreco'));
+			$preco_in = $precos[0];
+			$preco_out = $precos[1];
+			for ($i=0; $i<count($this->preco_imovel);$i++) {
+				if ($this->input->post("iPreco") == $this->preco_imovel[$i]['prc_id']) {
+					$iPreco_descricao = $this->preco_imovel[$i]['prc_descricao'];
+					break;
+				}
+			}
+		}
+		
+		$lista_quarto = FALSE;
+		$iQuarto_descricao = FALSE;
+		if (!$this->input->post("iQuarto")) {
+			$lista_quarto = $this->quarto_imovel;
+		} else {
+			for ($i=0; $i<count($this->quarto_imovel);$i++) {
+				if ($this->input->post("iQuarto") == $this->quarto_imovel[$i]['qrt_id']) {
+					$iQuarto_descricao = $this->quarto_imovel[$i]['qrt_descricao'];
+					break;
+				}
+			}
+		}
+		
+		$this->load->model ( "anuncio_casa" );
+		$params = array(
+				$this->input->post('iPesquisa') === FALSE ? null : "%" . $this->input->post('iPesquisa') . "%",
+				$this->input->post('iContratoTipo') === FALSE ? null : $this->input->post('iContratoTipo'),
+				$this->input->post('iCasaTipo') === FALSE ? null : $this->input->post('iCasaTipo'),
+				$this->input->post('iEstado') === FALSE ? null : $this->input->post('iEstado'),
+				$this->input->post('iCidade') === FALSE ? null : $this->input->post('iCidade'),
+				$preco_in === FALSE ? null : $preco_in,
+				$preco_out === FALSE ? null : $preco_out,
+				$this->input->post('iQuartos') === FALSE ? null : $this->input->post('iQuartos')
+		);
+		$pesquisa_resultado = $this->anuncio_casa->AnuncioPesquisa ($params);
 		
 		$data = array(
 				'find' => "sch1",
 				'tipo' => "imovel",
 				'tipo_descricao' => "Imóvel",
-				'pg' => $this->input->post("pag"),
+				'pg' => $pg,
 				'iPesquisa' => $this->input->post("iPesquisa") == 'null' ? FALSE : $this->input->post("iPesquisa"),
 				'iContratoTipo' => $this->input->post("iContratoTipo") == 'null' ? FALSE : $this->input->post("iContratoTipo"),
+				'iContratoTipo_descricao' => $iContratoTipo_descricao,
 				'iCasaTipo' => $this->input->post("iCasaTipo") == 'null' ? FALSE : $this->input->post("iCasaTipo"),
+				'iCasaTipo_descricao' => $iCasaTipo_descricao,
 				'iEstado' => $this->input->post("iEstado") == 'null' ? FALSE : $this->input->post("iEstado"),
+				'iEstado_descricao' => $iEstado_descricao,
 				'iCidade' => $this->input->post("iCidade") == 'null' ? FALSE : $this->input->post("iCidade"),
+				'iCidade_descricao' => $iCidade_descricao,
+				'iPreco' => $this->input->post("iPreco") == 'null' ? FALSE : $this->input->post("iPreco"),
+				'iPreco_descricao' => $iPreco_descricao,
+				'iQuarto' => $this->input->post("iQuarto") == 'null' ? FALSE : $this->input->post("iQuarto"),
+				'iQuarto_descricao' => $iQuarto_descricao,
 				'lista_contrato' => $lista_contrato,
 				'lista_tipoimovel' => $lista_tipoimovel,
 				'lista_estado' => $lista_estado,
-				'lista_cidade' => $lista_cidade
+				'lista_cidade' => $lista_cidade,
+				'lista_preco' => $lista_preco,
+				'lista_quarto' => $lista_quarto,
+				'pesquisa_resultado' => $pesquisa_resultado
 		);
 		
 		$this->load->view('templates/header', $data);
 		$this->load->view('pesquisa_header', $data);
 		$this->load->view('pesquisa_search', $data);
 		$this->load->view('pesquisa_imovel_filtro', $data);
-		$this->load->view('pesquisa_footer', $data);
-		$this->load->view('templates/footer', $data);
-	}
-	
-	function imovel_($pg = 0) {
-		$method =  (string)$_SERVER["REQUEST_METHOD"];
-		
-		$this->load->model ( "anuncio_casa" );
-		$this->load->model ( "propriedade_tipo" );
-		$this->load->model ( "pesquisa_tipo_casa" );
-		$this->load->model ( "estado" );
-		$this->load->model ( "cidade" );
-
-		$pesquisa_resultado = FALSE;
-		$pesquisa_destaque = FALSE;
-		$estado_id = 0;
-		$url = base_url() . "pesquisa/imovel/" . $pg;
-		if ($method == "POST") {
-			$estado_id = $this->input->post('iEstado');
-			$preco_in = NULL;
-			$preco_out = NULL;
-			if ($this->input->post('iPreco') != 'null') {
-				$precos = explode(",", $this->input->post('iPreco'));
-				$preco_in = $precos[0];
-				$preco_out = $precos[1];
-			}
-			if ($this->input->post('iPesquisa') != 'null') {
-				$url = $url . "/" . $this->input->post('iPesquisa');
-			}
-			if ($this->input->post('iContratoTipo') != 'null') {
-				$url = $url . "/" . $this->input->post('iContratoTipo');
-			}
-			if ($this->input->post('iCasaTipo') != 'null') {
-				$url = $url . "/" . $this->input->post('iCasaTipo');
-			}
-			if ($this->input->post('iEstado') != 'null') {
-				$url = $url . "/" . $this->input->post('iEstado');
-			}
-			if ($this->input->post('iCidade') != 'null') {
-				$url = $url . "/" . $this->input->post('iCidade');
-			}
-			$params = array(
-				$this->input->post('iPesquisa') == 'null' ? null : "%" . $this->input->post('iPesquisa') . "%",
-				$this->input->post('iContratoTipo') == 'null' ? null : $this->input->post('iContratoTipo'),
-				$this->input->post('iCasaTipo') == 'null' ? null : $this->input->post('iCasaTipo'),
-				$this->input->post('iEstado') == 'null' ? null : $this->input->post('iEstado'),
-				$this->input->post('iCidade') == 'null' ? null : $this->input->post('iCidade'),
-				$preco_in,
-				$preco_out,
-				$this->input->post('iQuartos') == 'null' ? null : $this->input->post('iQuartos'),
-				TRUE
-			);
-			$pesquisa_destaque = $this->anuncio_casa->AnuncioPesquisa ($params);
-			$params[8] = FALSE;
-			$pesquisa_resultado = $this->anuncio_casa->AnuncioPesquisa ($params);
-		}
-		
-		$tipo_imovel = $this->propriedade_tipo->ListaTodos ();
-		$pesquisa_tipo_casa = $this->pesquisa_tipo_casa->ListaTodos ();
-		$estado = $this->estado->ListaTodos ();
-		$cidade = $this->cidade->BuscaPorEstado ($estado_id);
-		
-		$data = array(
-			'tipo' => 1,
-			'tipo_descricao' => "Imóvel",
-			'tipo_imovel' =>	$tipo_imovel,
-			'pesquisa_tipo_casa' =>  $pesquisa_tipo_casa,
-			'estado' => $estado,
-			'cidade' => $cidade,
-			'pesquisa_resultado' => $pesquisa_resultado,
-			'pesquisa_destaque' => $pesquisa_destaque,
-			'url' => $url,
-			'pg' => $pg
-		); 
-		$this->load->view('templates/header', $data);
-		$this->load->view('pesquisa_header', $data);
-		$this->load->view('pesquisa_imovel_filtro', $data);
-		$this->load->view('pesquisa_search', $data);
 		$this->load->view('pesquisa_imovel_resultado', $data);
 		$this->load->view('pesquisa_footer', $data);
 		$this->load->view('templates/footer', $data);
 	}
+	
 	
 	function auto() {
 		$method =  (string)$_SERVER["REQUEST_METHOD"];

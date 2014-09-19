@@ -15,6 +15,19 @@ class Cidade extends CI_Model {
 		return $retorno;
 	}
 	
+	function BuscaPorId($id) {
+		$this->db->where("cd_id", $id);
+		$query = $this->db->get('t_mb_cidade');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
+	
 	function BuscaCiadde($nome_cidade) {
 		$this->db->where("cd_descricao", $nome_cidade);
 		$query = $this->db->get('t_mb_cidade');

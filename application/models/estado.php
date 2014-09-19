@@ -15,6 +15,19 @@ class Estado extends CI_Model {
 		return $retorno;
 	}
 	
+	function BuscaPorId($id) {
+		$this->db->where("es_id", $id);
+		$query = $this->db->get('t_mb_estado');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
+	
 	function BuscaEstado($nome_estado) {
 		$this->db->where("es_descricao", $nome_estado);
 		$query = $this->db->get('t_mb_estado');
