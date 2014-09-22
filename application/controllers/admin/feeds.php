@@ -684,16 +684,19 @@ class Feeds extends CI_Controller {
 			
 			$produto_marca = $this->produto_marca->BuscaPorDescricao ( mb_convert_encoding ( $ad->make, 'ISO-8859-1', 'auto' ) );
 			if ($produto_marca === FALSE) {
-				$this->produto_marca->Adicionar ( array (
+				$pmr_id = $this->produto_marca->Adicionar ( array (
 						'pmr_descricao' => mb_convert_encoding ( $ad->make, 'ISO-8859-1', 'auto' ) 
 				) );
 				$produto_marca = $this->produto_marca->BuscaPorDescricao ( mb_convert_encoding ( $ad->make, 'ISO-8859-1', 'auto' ) );
+			} else {				
+				$pmr_id = $produto_marca[0]->pmr-id;
 			}
 			
 			$produto_modelo = $this->produto_modelo->BuscaPorDescricao ( mb_convert_encoding ( $ad->model, 'ISO-8859-1', 'auto' ) );
 			if ($produto_modelo === FALSE) {
 				$this->produto_modelo->Adicionar ( array (
-						'pmd_descricao' => mb_convert_encoding ( $ad->model, 'ISO-8859-1', 'auto' ) 
+						'pmd_descricao' => mb_convert_encoding ( $ad->model, 'ISO-8859-1', 'auto' ) ,
+						'pmr_id' => $pmr_id
 				) );
 				$produto_modelo = $this->produto_modelo->BuscaPorDescricao ( mb_convert_encoding ( $ad->model, 'ISO-8859-1', 'auto' ) );
 			}

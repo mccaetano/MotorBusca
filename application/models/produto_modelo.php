@@ -15,6 +15,19 @@ class Produto_modelo extends CI_Model {
 		return $retorno;
 	}
 	
+	function BuscaPorId($id) {
+		$this->db->where("pmd_id", $id);
+		$query = $this->db->get('t_mb_produto_modelo');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
+	
 	function BuscaPorDescricao($descricao) {
 		$this->db->where("pmd_descricao", $descricao);
 		$query = $this->db->get('t_mb_produto_modelo');
@@ -32,6 +45,19 @@ class Produto_modelo extends CI_Model {
 		$query = $this->db->get('t_mb_produto_modelo');
 		$retorno = $query->result();
 
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
+	
+	function BuscaPorMarcaId($cmr_id) {
+		$this->db->where("pmr_id", $cmr_id);
+		$query = $this->db->get('t_mb_produto_modelo');
+		$retorno = $query->result();
+	
 		if (($query) && $query->num_rows() <= 0) {
 			$retorno = FALSE;
 		}

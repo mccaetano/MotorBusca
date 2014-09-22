@@ -15,6 +15,19 @@ class Carro_tipo extends CI_Model {
 		return $retorno;
 	}
 	
+	function BuscaPorId($id) {
+		$this->db->where("crt_id", $id);
+		$query = $this->db->get('t_mb_carro_tipo');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
+	
 	function BuscaCarroTipo($nome_tipo) {
 		$this->db->where("crt_descricao", $nome_tipo);
 		$query = $this->db->get('t_mb_carro_tipo');

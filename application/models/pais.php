@@ -16,6 +16,19 @@ class Pais extends CI_Model {
 		return $retorno;
 	}
 	
+	function BuscaPorId($id) {
+		$this->db->where("ps_id", $id);
+		$query = $this->db->get('t_mb_pais');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
+	
 	function BuscaPais($nome_pais) {
 		$this->db->where("ps_descricao", $nome_pais);
 		$query = $this->db->get('t_mb_pais');

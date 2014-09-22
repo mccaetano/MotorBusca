@@ -1,115 +1,176 @@
-
+<div class="span2">
+	<div class="well">
+<?php 
+	if ($iPesquisa) {
+?>	
+		<a class="btn-link" href="<?php echo base_url();?>pesquisa/emprego/p1"><i class="icon-remove"></i><?php echo $iPesquisa; ?></a><br>	
+<?php 
+	}
+	if ($iContrato) {
+?>
+		<input type="hidden" id="iContrato" name="iContrato" value="<?php echo $iContrato; ?>">
+		<a class="btn-link" onclick="removeItem('iContrato');"><i class="icon-remove"></i><?php echo $iContrato_descricao; ?></a><br>		
+<?php 
+	}
+	if ($iCategoria) {
+?>
+		<input type="hidden" id="iCategoria"  name="iCategoria" value="<?php echo $iCategoria; ?>">
+		<a class="btn-link" onclick="removeItem('iCategoria');"><i class="icon-remove"></i><?php echo $iCategoria_descricao; ?></a><br>
+<?php 
+	}
+	if ($iPeriodo) {
+?>
+		<input type="hidden" id="iPeriodo"  name="iPeriodo" value="<?php echo $iPeriodo; ?>">
+		<a class="btn-link" onclick="removeItem('iPeriodo');"><i class="icon-remove"></i><?php echo $iPeriodo_descricao; ?></a><br>
+<?php 
+	}
+	if ($iPais) {
+?>
+		<input type="hidden" id="iPais"  name="iPais" value="<?php echo $iPais; ?>">
+		<a class="btn-link" onclick="removeItem('iPais');"><i class="icon-remove"></i><?php echo $iPais_descricao; ?></a><br>
+<?php 
+	}
+	if ($iEstado) {
+?>
+		<input type="hidden" id="iEstado"  name="iEstado" value="<?php echo $iEstado; ?>">
+		<a class="btn-link" onclick="removeItem('iEstado');"><i class="icon-remove"></i><?php echo $iEstado_descricao; ?></a><br>
+<?php 
+	}
+	if ($iCidade) {
+?>
+		<input type="hidden" id="iCidade"  name="iCidade" value="<?php echo $iCidade; ?>">
+		<a class="btn-link" onclick="removeItem('iCidade');"><i class="icon-remove"></i><?php echo $iCidade_descricao; ?></a><br>
+<?php 
+	}	 		 		 
+?>
+	</div>
+	<script>
+		function removeItem(item) {
+			document.getElementById(item).removeAttribute('value'); 
+			document.forms[0].submit();
+			return false;
+		}
+	</script>
+<?php 
+	if ($lista_contrato) {
+?>
 	<div class="well">
 		<p><strong>Tipo Contrato</strong></p>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small>Indiferente</small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iContrato" name="iContrato" value="null" <?php echo set_radio('iContrato', 'null', TRUE); ?>>
-				</label>
-			</div>
-		</div>
-		<?php if ($emprego_contrato) { foreach ($emprego_contrato as $row) {?>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small><?php echo $row->emc_descricao; ?></small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iContrato<?php echo $row->emc_id; ?>" name="iContrato" value="<?php echo $row->emc_id; ?>" <?php echo set_radio('iContrato', $row->emc_id); ?>>
-				</label>
-			</div>
-		</div>
-		<?php }} ?>
+		<fieldset>		
+ <?php
+ 		foreach ($lista_contrato as $row) {
+ ?>
+			<label>
+ 				<input type="radio" name="iContrato" id="iContrato_<?php echo $row->emc_id; ?>" value="<?php echo $row->emc_id; ?>"
+ 				onclick="document.forms[0].submit();">
+				<small><?php echo $row->emc_descricao; ?></small>
+			</label>
+<?php 
+		}
+?>
+		</select>
+		</fieldset>
 	</div>
+<?php 
+	} 
+	if ($lista_categoria) { 
+?>
 	<div class="well">		
 		<p><strong>Categoria</strong></p>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small>Indiferente</small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCategira" name="iCategira" value="null" <?php echo set_radio('iCategira', "null", TRUE); ?>>
-				</label>
-			</div>
-		</div>		
-		<?php if ($emprego_categoria) { foreach ($emprego_categoria as $row) {?>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small><?php echo $row->ect_descricao; ?></small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCategira<?php echo $row->ect_id; ?>" name="iCategira" value="<?php echo $row->ect_id; ?>" <?php echo set_radio('iCategira', $row->ect_id); ?>>
-				</label>
-			</div>
-		</div>
-		<?php }} ?>
+		<fieldset>
+<?php 
+		foreach ($lista_categoria as $row) {
+?>
+			<label>
+ 				<input type="radio" name="iCategoria" id="iCategoria_<?php echo $row->ect_id; ?>" value="<?php echo $row->ect_id; ?>"
+ 				onclick="document.forms[0].submit();">
+				<small><?php echo $row->ect_descricao; ?></small>
+			</label>
+<?php 
+		}?>		
+		</fieldset>
 	</div>
+<?php 
+	}
+	if ($lista_periodo) { 
+?>
 	<div class="well">		
-		<p><strong>Periodo</strong></p>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small>Indiferente</small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPeriodo" name="iPeriodo" value="null" <?php echo set_radio('iPeriodo', "null", TRUE); ?>>
-				</label>
-			</div>
-		</div>		
-		<?php if ($emprego_periodo) { foreach ($emprego_periodo as $row) {?>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small><?php echo $row->emp_descricao; ?></small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPeriodo<?php echo $row->emp_id; ?>" name="iPeriodo" value="<?php echo $row->emp_id; ?>" <?php echo set_radio('iPeriodo', $row->emp_id); ?>>
-				</label>
-			</div>
-		</div>
-		<?php }} ?>
+		<p><strong>Período</strong></p>
+		<fieldset>
+<?php 
+		foreach ($lista_periodo as $row) {
+?>
+			<label>
+ 				<input type="radio" name="iPeriodo" id=""iPeriodo"_<?php echo $row->emp_id; ?>" value="<?php echo $row->emp_id; ?>"
+ 				onclick="document.forms[0].submit();">
+				<small><?php echo $row->emp_descricao; ?></small>
+			</label>
+<?php 
+		}?>		
+		</fieldset>
 	</div>
+<?php 
+	}
+	if ($lista_pais) { 
+?>
 	<div class="well">		
 		<p><strong>Pais</strong></p>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small>Indiferente</small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPais" name="iPais" value="null" <?php echo set_radio('iPais', "null", TRUE); ?>>
-				</label>
-			</div>
-		</div>		
-		<?php if ($pais) { foreach ($pais as $row) {?>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small><?php echo $row->ps_descricao; ?></small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iPais<?php echo $row->ps_id; ?>" name="iPais" value="<?php echo $row->ps_id; ?>" <?php echo set_radio('iPais', $row->ps_id); ?>>
-				</label>
-			</div>
-		</div>
-		<?php }} ?>
+		<fieldset>
+<?php 
+		foreach ($lista_pais as $row) {
+?>
+			<label>
+ 				<input type="radio" name="iPais" id="iPais_<?php echo $row->ps_id; ?>" value="<?php echo $row->ps_id; ?>"
+ 				onclick="document.forms[0].submit();">
+				<small><?php echo $row->ps_descricao; ?></small>
+			</label>
+<?php 
+		}
+?>		
+		</fieldset>		
 	</div>
+<?php 
+	}  
+	if ($lista_estado) { 
+?>
 	<div class="well">		
 		<p><strong>Estado</strong></p>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small>Indiferente</small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iEstado" name="iEstado" value="null" <?php echo set_radio('iEstado', "null", TRUE); ?>>
-				</label>
-			</div>
-		</div>				
-		<?php if ($estado) { foreach ($estado as $row) {?>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small><?php echo $row->es_descricao; ?></small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iEstado<?php echo $row->es_id; ?>" name="iEstado" value="<?php echo $row->es_id; ?>" <?php echo set_radio('iEstado', $row->es_id); ?>>
-				</label>
-			</div>
-		</div>
-		<?php }} ?>
+		<fieldset>
+<?php 
+		foreach ($lista_estado as $row) {
+?>
+			<label>
+ 				<input type="radio" name="iEstado" id="iEstado_<?php echo $row->es_id; ?>" value="<?php echo $row->es_id; ?>"
+ 				onclick="document.forms[0].submit();">
+				<small><?php echo $row->es_descricao; ?></small>
+			</label>
+<?php 
+		}
+?>		
+		</fieldset>		
 	</div>
+<?php 
+	} 
+	if ($lista_cidade) { 
+?>
 	<div class="well">		
 		<p><strong>Cidade</strong></p>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small>Indiferente</small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCidade" name="iCidade" value="null" <?php echo set_radio('iCidade', "null", TRUE); ?>>
-				</label>
-			</div>
-		</div>			
-		<?php if ($cidade) { foreach ($cidade as $row) {?>
-		<div class="control-group">
-			<div class="controls">
-				<label class="radio"><small><?php echo $row->cd_descricao; ?></small>
-					<input onclick="javascript: frmPesquisa.submit();" type="radio" id="iCidade<?php echo $row->cd_id; ?>" name="iCidade" value="<?php echo $row->cd_id; ?>" <?php echo set_radio('iCidade', $row->cd_id); ?>>
-				</label>
-			</div>
-		</div>
-		<?php }} ?>
+		<fieldset>
+<?php 
+		foreach ($lista_cidade as $row) {
+?>
+			<label>
+ 				<input type="radio" name="iCidade" id="iCidade_<?php echo $row->cd_id; ?>" value="<?php echo $row->cd_id; ?>"
+ 				onclick="document.forms[0].submit();">
+				<small><?php echo $row->cd_descricao; ?></small>
+			</label>
+<?php 
+		}
+?>		
+		</fieldset>
 	</div>
+<?php 
+	}  
+?>
+</div>
+

@@ -15,6 +15,19 @@ class Produto_Categoria extends CI_Model {
 		return $retorno;
 	}
 	
+	function BuscaPorId($id) {
+		$this->db->where("prc_id", $id);
+		$query = $this->db->get('t_mb_produto_categoria');
+		$retorno = $query->result();
+	
+		if (($query) && $query->num_rows() <= 0) {
+			$retorno = FALSE;
+		}
+		$query->free_result();
+			
+		return $retorno;
+	}
+	
 	function BuscaPorDescricao($descricao) {
 		$this->db->where("prc_descricao", $descricao);
 		$query = $this->db->get('t_mb_produto_categoria');
