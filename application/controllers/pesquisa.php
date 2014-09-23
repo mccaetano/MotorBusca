@@ -62,7 +62,7 @@ class Pesquisa extends CI_Controller {
 			$this->load->model('pesquisa_tipo_casa');
 			$tipoimovel =  $this->pesquisa_tipo_casa->BuscaPorId($this->input->post("iContratoTipo"));
 			if ($tipoimovel) { 
-				$url = $url . "/" . str_replace(" ", "_", $this->pesquisa_tipo_casa->BuscaPorId($this->input->post("iContratoTipo")[0]->pct_descricao));
+				$url = $url . "/" . str_replace(" ", "_", $tipoimovel[0]->pct_descricao);
 			}
 		}
 		if ($this->input->post("iCasaTipo")) {
