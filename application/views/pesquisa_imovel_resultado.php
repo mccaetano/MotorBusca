@@ -1,4 +1,5 @@
 	<div class="span8">
+		<hr>
 <?php 
 	if ($pesquisa_resultado) { 
 		$rcount = count($pesquisa_resultado);
@@ -10,40 +11,41 @@
 		} 			
 		for ($row=$rowi;$row < $rowf; $row++) {
 ?>
-		<hr>
 		<a href="<?php echo  base_url() . 'service/urlex/sender/' . base64_encode($pesquisa_resultado[$row]->ac_url); ?>">
 <?php 
 			if ($pesquisa_resultado[$row]->ac_destaque == 1) {
 ?>
-		<div class="row-fluid" style="background-color: #BCDDE6;">
+		<div class="row-fluid" style="background-color: #BCDDE6; border: 1px solid gray;">
+			<div class="span10">
 <?php 
 			} else {	
 ?>
-		<div class="row-fluid">
+		<div class="row-fluid" style="background-color: silver; border: 1px solid gray;">
+			<div class="span10" style="background-color: #E0E0E0; border: 1px solid gray;">
 <?php 
 			}
 ?>
-			<div class="span8">
+			
 				<div class="row-fluid">
-					<div class="span8">
+					<div class="span12">
 						<?php echo $pesquisa_resultado[$row]->ac_title; ?>
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span4">						
+					<div class="span6">						
 						<?php echo $pesquisa_resultado[$row]->cd_descricao; ?>,&nbsp;
 						<?php echo $pesquisa_resultado[$row]->es_descricao; ?>
 					</div>
-					<div class="span4">
+					<div class="span6">
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2">
-						<img alt="<?php echo $pesquisa_resultado[$row]->acf_titulo; ?>" src="<?php echo $pesquisa_resultado[$row]->acf_url; ?>" width="150" height="150">
+					<div class="span4" style="text-align: center;">
+						<img alt="<?php echo $pesquisa_resultado[$row]->acf_titulo; ?>" src="<?php echo $pesquisa_resultado[$row]->acf_url; ?>" width="150" height="150"><br><br>
 					</div>
-					<div class="span6">
+					<div class="span8">
 						<div class="row-fluid">
-							<div class="span6">
+							<div class="span12">
 								<?php echo $pesquisa_resultado[$row]->pt_descricao; ?>,&nbsp;
 								<?php echo $pesquisa_resultado[$row]->pct_descricao; ?>,&nbsp; 
 								<?php echo $pesquisa_resultado[$row]->ac_quartos; ?> Quartos,&nbsp;
@@ -52,27 +54,48 @@
 							</div>
 						</div>
 						<div class="row-fluid">
-							<div class="span6">
+							<div class="span12">
 								<?php echo $pesquisa_resultado[$row]->ac_descricao; ?>
 							</div>
 						</div>
 					</div>
-				</div>
-				
+				</div>				
 			</div>
-			<div class="span2" style="background-color: silver;">
-				<div class="row-fluid">
-					<div class="span2" style="background-color: gray; color: yellow;">
+			<div class="span2">
+				<br>
+				<div class="row-fluid" style="background-color: gray; color: yellow; text-align: center">
+					<div class="span12">
 						<?php echo $pesquisa_resultado[$row]->ac_preco; ?>
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						Atualizado em <?php echo $pesquisa_resultado[$row]->ac_data_inclusao; ?>
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<i class="icon-search"></i>  Ver Fotos.
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<i class="icon-info-sign"></i>  Ver Telefone.
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<div class="btn">Ver Detalhes</div>.
 					</div>
 				</div>
 			</div>
 		</div>
 		</a>
-		<hr>
+		<br>
 <?php 
 		} 
 ?>
+		<hr>
 		<div class="pagination">
 		  <ul>		    
 <?php 

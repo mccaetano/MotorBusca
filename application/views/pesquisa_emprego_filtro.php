@@ -101,7 +101,7 @@
 		foreach ($lista_periodo as $row) {
 ?>
 			<label>
- 				<input type="radio" name="iPeriodo" id=""iPeriodo"_<?php echo $row->emp_id; ?>" value="<?php echo $row->emp_id; ?>"
+ 				<input type="radio" name="iPeriodo" id="iPeriodo_<?php echo $row->emp_id; ?>" value="<?php echo $row->emp_id; ?>"
  				onclick="document.forms[0].submit();">
 				<small><?php echo $row->emp_descricao; ?></small>
 			</label>
