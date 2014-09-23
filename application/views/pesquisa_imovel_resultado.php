@@ -23,24 +23,48 @@
 <?php 
 			}
 ?>
-			<div class="span4">
-				<img alt="<?php echo $pesquisa_resultado[$row]->acf_titulo; ?>" src="<?php echo $pesquisa_resultado[$row]->acf_url; ?>" width="150" height="150">
-			</div>
 			<div class="span8">
-				<div class="row">
-					<div class="span8"><?php echo $pesquisa_resultado[$row]->ac_title; ?></div>
-					<div class="span2"><?php echo $pesquisa_resultado[$row]->ac_preco; ?></div>
+				<div class="row-fluid">
+					<div class="span8">
+						<?php echo $pesquisa_resultado[$row]->ac_title; ?>
+					</div>
 				</div>
-				<div class="row">
-					<div class="span8"><?php echo $pesquisa_resultado[$row]->ac_endereco; ?></div>
-					<div class="span2"><?php echo $pesquisa_resultado[$row]->ac_quartos; ?> Quartos</div>
+				<div class="row-fluid">
+					<div class="span4">						
+						<?php echo $pesquisa_resultado[$row]->cd_descricao; ?>,&nbsp;
+						<?php echo $pesquisa_resultado[$row]->es_descricao; ?>
+					</div>
+					<div class="span4">
+					</div>
 				</div>
-				<div class="row">
-					<div class="span8"><?php echo $pesquisa_resultado[$row]->ac_bairro . ", " . $pesquisa_resultado[$row]->ac_complemento; ?></div>
-					<div class="span2"><?php echo $pesquisa_resultado[$row]->ac_banheiros; ?> Banheiros</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<img alt="<?php echo $pesquisa_resultado[$row]->acf_titulo; ?>" src="<?php echo $pesquisa_resultado[$row]->acf_url; ?>" width="150" height="150">
+					</div>
+					<div class="span6">
+						<div class="row-fluid">
+							<div class="span6">
+								<?php echo $pesquisa_resultado[$row]->pt_descricao; ?>,&nbsp;
+								<?php echo $pesquisa_resultado[$row]->pct_descricao; ?>,&nbsp; 
+								<?php echo $pesquisa_resultado[$row]->ac_quartos; ?> Quartos,&nbsp;
+								<?php echo $pesquisa_resultado[$row]->ac_banheiros; ?> Banheiros,&nbsp;
+								<?php echo $pesquisa_resultado[$row]->ac_area_construida; ?>&nbsp;								
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span6">
+								<?php echo $pesquisa_resultado[$row]->ac_descricao; ?>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="row">
-					<div class="span10"><?php echo $pesquisa_resultado[$row]->cd_descricao . "/" . $pesquisa_resultado[$row]->es_descricao; ?></div>
+				
+			</div>
+			<div class="span2" style="background-color: silver;">
+				<div class="row-fluid">
+					<div class="span2" style="background-color: gray; color: yellow;">
+						<?php echo $pesquisa_resultado[$row]->ac_preco; ?>
+					</div>
 				</div>
 			</div>
 		</div>
