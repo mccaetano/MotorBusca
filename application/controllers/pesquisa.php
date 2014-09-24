@@ -312,7 +312,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iContratoTipo")) {			
 			$lista_contrato = $this->pesquisa_tipo_casa->ListaTodos();
 		} else {			
-			$iContratoTipo_descricao = $this->pesquisa_tipo_casa->BuscaPorId($this->input->post("iContratoTipo"))[0]->pct_descricao;
+			$cotratotipo = $this->pesquisa_tipo_casa->BuscaPorId($this->input->post("iContratoTipo"));
+			$iContratoTipo_descricao = $cotratotipo[0]->pct_descricao;
 		}
 		$lista_tipoimovel = FALSE;
 		$iCasaTipo_descricao = FALSE;
@@ -320,7 +321,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCasaTipo")) {
 			$lista_tipoimovel = $this->propriedade_tipo->ListaTodos();
 		} else {
-			$iCasaTipo_descricao = $this->propriedade_tipo->BuscaPorId($this->input->post("iCasaTipo"))[0]->pt_descricao;
+			$propriedadetipo = $this->propriedade_tipo->BuscaPorId($this->input->post("iCasaTipo"));
+			$iCasaTipo_descricao = $propriedadetipo[0]->pt_descricao;
 		}
 		$lista_estado = FALSE;
 		$iEstado_descricao = FALSE;
@@ -328,7 +330,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iEstado")) {
 			$lista_estado = $this->estado->ListaTodos();
 		} else {
-			$iEstado_descricao = $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao;
+			$estado = $this->estado->BuscaPorId($this->input->post("iEstado"));
+			$iEstado_descricao = $estado[0]->es_descricao;
 		}
 		
 		$lista_cidade = FALSE;
@@ -337,7 +340,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCidade")) {
 			$lista_cidade = $this->cidade->BuscaPorEstado($this->input->post("iEstado"));
 		} else {
-			$iCidade_descricao = $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao;
+			$cidade = $this->cidade->BuscaPorId($this->input->post("iCidade"));
+			$iCidade_descricao = $cidade[0]->cd_descricao;
 		}
 		
 		$preco_in = FALSE;
@@ -438,7 +442,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCarroTipo")) {
 			$lista_tipocarro = $this->carro_tipo->ListaTodos();
 		} else {
-			$iCarroTipo_descricao = $this->carro_tipo->BuscaPorId($this->input->post("iCarroTipo"))[0]->crt_descricao;
+			$carrotipo = $this->carro_tipo->BuscaPorId($this->input->post("iCarroTipo"));
+			$iCarroTipo_descricao = $carrotipo[0]->crt_descricao;
 		}
 		
 		$lista_marca = FALSE;
@@ -447,7 +452,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCarroMarca")) {
 			$lista_marca = $this->carro_marca->ListaTodos();
 		} else {
-			$iCarroMarca_descricao = $this->carro_marca->BuscaPorId($this->input->post("iCarroMarca"))[0]->cmr_descricao;
+			$carromarca = $this->carro_marca->BuscaPorId($this->input->post("iCarroMarca"));
+			$iCarroMarca_descricao = $carromarca[0]->cmr_descricao;
 		}
 		
 		$lista_modelo = FALSE;
@@ -456,7 +462,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCarroModelo")) {
 			$lista_modelo = $this->carro_modelo->BuscaPorMarcaId($this->input->post("iCarroMarca"));
 		} else {
-			$iCarroModelo_descricao = $this->carro_modelo->BuscaPorId($this->input->post("iCarroModelo"))[0]->cmd_descricao;
+			$carromodelo = $this->carro_modelo->BuscaPorId($this->input->post("iCarroModelo"));
+			$iCarroModelo_descricao = $carromodelo[0]->cmd_descricao;
 		}
 		
 		$lista_estado = FALSE;
@@ -465,7 +472,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iEstado")) {
 			$lista_estado = $this->estado->ListaTodos();
 		} else {
-			$iEstado_descricao = $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao;
+			$estado = $this->estado->BuscaPorId($this->input->post("iEstado"));
+			$iEstado_descricao = $estado[0]->es_descricao;
 		}
 		
 		$lista_cidade = FALSE;
@@ -474,7 +482,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCidade")) {
 			$lista_cidade = $this->cidade->BuscaPorEstado($this->input->post("iEstado"));
 		} else {
-			$iCidade_descricao = $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao;
+			$cidade = $this->cidade->BuscaPorId($this->input->post("iCidade"));
+			$iCidade_descricao = $cidade[0]->cd_descricao;
 		}
 		
 		$preco_in = FALSE;
@@ -580,7 +589,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iContrato")) {
 			$lista_contrato = $this->emprego_contrato->ListaTodos();
 		} else {
-			$iContrato_descricao = $this->emprego_contrato->BuscaPorId($this->input->post("iContrato"))[0]->emc_descricao;
+			$contratotipo = $this->emprego_contrato->BuscaPorId($this->input->post("iContrato"));
+			$iContrato_descricao = $contratotipo[0]->emc_descricao;
 		}
 		
 		$lista_categoria = FALSE;
@@ -589,7 +599,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCategoria")) {
 			$lista_categoria = $this->emprego_categoria->ListaTodos();
 		} else {
-			$iCategoria_descricao = $this->emprego_categoria->BuscaPorId($this->input->post("iCategoria"))[0]->ect_descricao;
+			$categoria = $this->emprego_categoria->BuscaPorId($this->input->post("iCategoria"));
+			$iCategoria_descricao = $categoria[0]->ect_descricao;
 		}
 		
 		$lista_periodo = FALSE;
@@ -598,7 +609,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iPeriodo")) {
 			$lista_catgoria = $this->emprego_periodo->ListaTodos();
 		} else {
-			$lista_periodo = $this->emprego_periodo->BuscaPorId($this->input->post("iPeriodo"))[0]->emp_descricao;
+			$periodo = $this->emprego_periodo->BuscaPorId($this->input->post("iPeriodo"));
+			$lista_periodo = $periodo[0]->emp_descricao;
 		}
 		
 		$lista_pais = FALSE;
@@ -607,7 +619,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iPais")) {
 			$lista_pais = $this->pais->ListaTodos();
 		} else {
-			$iPais_descricao = $this->pais->BuscaPorId($this->input->post("iPais"))[0]->ps_descricao;
+			$pais = $this->pais->BuscaPorId($this->input->post("iPais"));
+			$iPais_descricao = $pais[0]->ps_descricao;
 		}
 		
 		$lista_estado = FALSE;
@@ -616,7 +629,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iEstado")) {
 			$lista_estado = $this->estado->BuscaPorPais($this->input->post("iPais"));
 		} else {
-			$iEstado_descricao = $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao;
+			$estado = $this->estado->BuscaPorId($this->input->post("iEstado"));
+			$iEstado_descricao = $estado[0]->es_descricao;
 		}
 		
 		$lista_cidade = FALSE;
@@ -625,7 +639,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCidade")) {
 			$lista_cidade = $this->cidade->BuscaPorEstado($this->input->post("iEstado"));
 		} else {
-			$iCidade_descricao = $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao;
+			$cidade = $this->cidade->BuscaPorId($this->input->post("iCidade"));
+			$iCidade_descricao = $cidade[0]->cd_descricao;
 		}
 		
 		$iPesquisa = $this->input->post('iPesquisa');
@@ -695,7 +710,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCategoria")) {
 			$lista_categoria = $this->produto_categoria->ListaTodos();
 		} else {
-			$iCategoria_descricao = $this->produto_categoria->BuscaPorId($this->input->post("iCategoria"))[0]->prc_descricao;
+			$categoria = $this->produto_categoria->BuscaPorId($this->input->post("iCategoria"));
+			$iCategoria_descricao = $categoria[0]->prc_descricao;
 		}
 		
 		$lista_marca = FALSE;
@@ -704,16 +720,18 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iMarca")) {
 			$lista_marca = $this->produto_marca->ListaTodos();
 		} else {
-			$iMarca_descricao = $this->produto_marca->BuscaPorId($this->input->post("iMarca"))[0]->pmr_descricao;
+			$marca = $this->produto_marca->BuscaPorId($this->input->post("iMarca"));
+			$iMarca_descricao = $marca[0]->pmr_descricao;
 		}
 		
 		$lista_modelo = FALSE;
 		$iModelo_descricao = FALSE;
 		$this->load->model ( "produto_modelo" );
-		if (!$this->input->post("iModelo")) {
+		if (!$this->input->post("iModelo")) {			 
 			$lista_modelo = $this->produto_modelo->BuscaPorMarcaId($this->input->post("iMarca"));
 		} else {
-			$iModelo_descricao = $this->produto_modelo->BuscaPorId($this->input->post("iModelo"))[0]->pmd_descricao;
+			$modelo = $this->produto_modelo->BuscaPorId($this->input->post("iModelo")); 
+			$iModelo_descricao = $modelo[0]->pmd_descricao;
 		}
 	
 		$lista_estado = FALSE;
@@ -722,7 +740,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iEstado")) {
 			$lista_estado = $this->estado->ListaTodos();
 		} else {
-			$iEstado_descricao = $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao;
+			$estado = $this->estado->BuscaPorId($this->input->post("iEstado"));
+			$iEstado_descricao = $estado[0]->es_descricao;
 		}
 	
 		$lista_cidade = FALSE;
@@ -731,7 +750,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCidade")) {
 			$lista_cidade = $this->cidade->BuscaPorEstado($this->input->post("iEstado"));
 		} else {
-			$iCidade_descricao = $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao;
+			$cidade = $this->cidade->BuscaPorId($this->input->post("iCidade"));
+			$iCidade_descricao = $cidade[0]->cd_descricao;
 		}
 	
 		$iPesquisa = $this->input->post('iPesquisa');
@@ -797,7 +817,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iTipoImovel")) {
 			$lista_tipoimovel = $this->tipo_Imovel->ListaTodos();
 		} else {
-			$iTipoImovel_descricao = $this->tipo_Imovel->BuscaPorId($this->input->post("iTipoImovel"))[0]->tpi_descricao;
+			$tipoimovel = $this->tipo_Imovel->BuscaPorId($this->input->post("iTipoImovel"));
+			$iTipoImovel_descricao = $tipoimovel[0]->tpi_descricao;
 		}
 		
 		$lista_pais = FALSE;
@@ -806,7 +827,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iPais")) {
 			$lista_pais = $this->pais->ListaTodos();
 		} else {
-			$iPais_descricao = $this->pais->BuscaPorId($this->input->post("iPais"))[0]->ps_descricao;
+			$pais = $this->pais->BuscaPorId($this->input->post("iPais"));
+			$iPais_descricao = $pais[0]->ps_descricao;
 		}
 		
 		$lista_estado = FALSE;
@@ -815,7 +837,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iEstado")) {
 			$lista_estado = $this->estado->BuscaPorPais($this->input->post("iPais"));
 		} else {
-			$iEstado_descricao = $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao;
+			$estado = $this->estado->BuscaPorId($this->input->post("iEstado"));
+			$iEstado_descricao = $estado[0]->es_descricao;
 		}
 		
 		$lista_cidade = FALSE;
@@ -824,7 +847,8 @@ class Pesquisa extends CI_Controller {
 		if (!$this->input->post("iCidade")) {
 			$lista_cidade = $this->cidade->BuscaPorEstado($this->input->post("iEstado"));
 		} else {
-			$iCidade_descricao = $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao;
+			$cidade = $this->cidade->BuscaPorId($this->input->post("iCidade"));
+			$iCidade_descricao = $cidade[0]->cd_descricao;
 		}
 		
 		$iPesquisa = $this->input->post('iPesquisa');
