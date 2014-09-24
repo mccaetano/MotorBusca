@@ -15,29 +15,71 @@
 <?php 
 			if ($pesquisa_resultado[$row]->aem_destaque == 1) {
 ?>
-		<div class="row-fluid" style="background-color: #BCDDE6;">
+		<div class="row-fluid" style="background-color: #BCDDE6; border: 1px solid gray;">
+			<div class="span10">
 <?php 
 			} else {	
 ?>
-		<div class="row-fluid">
+		<div class="row-fluid" style="background-color: silver; border: 1px solid gray;">
+			<div class="span10" style="background-color: #E0E0E0; border: 1px solid gray;">
 <?php 
 			}
 ?>
-			<div class="span10">
-				<p><strong><?php echo $pesquisa_resultado[$row]->aem_titulo; ?></strong><br/>
-				<small><?php echo $pesquisa_resultado[$row]->ps_descricao . "/" . $pesquisa_resultado[$row]->cd_descricao . "/" . $pesquisa_resultado[$row]->es_descricao; ?><br/>
-				<?php echo $pesquisa_resultado[$row]->aem_descricao; ?><br/>
-				Empresa: <?php echo $pesquisa_resultado[$row]->aem_empresa; ?></small><br/>
-				</p>
-				<p class="muted"><small>desde de <?php echo $pesquisa_resultado[$row]->aem_data_criacao; ?></small>
-				</p>
+			
+				<div class="row-fluid">
+					<div class="span12">
+						<?php echo $pesquisa_resultado[$row]->aem_titulo; ?>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span6">						
+						<?php echo $pesquisa_resultado[$row]->cd_descricao; ?>,&nbsp;
+						<?php echo $pesquisa_resultado[$row]->es_descricao; ?>&nbsp;
+						<?php echo $pesquisa_resultado[$row]->ps_descricao; ?>
+					</div><div class="span6">						
+						<?php echo $pesquisa_resultado[$row]->aem_empresa; ?>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">						
+						<?php echo $pesquisa_resultado[$row]->aa_descricao; ?>
+					</div>
+				</div>				
+			</div>
+			<div class="span2">
+				<br>
+				<div class="row-fluid" style="background-color: gray; color: yellow; text-align: center">
+					<div class="span12">						
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						Atualizado em <?php echo $pesquisa_resultado[$row]->aem_data_criacao; ?>
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<i class="icon-search"></i>  Ver Fotos.
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<i class="icon-info-sign"></i>  Ver Telefone.
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<div class="btn">Ver Detalhes</div>.
+					</div>
+				</div>
 			</div>
 		</div>
 		</a>
-		<hr>
+		<br>
 <?php 
 		} 
 ?>
+		<hr>
 		<div class="pagination">
 		  <ul>		    
 <?php 
@@ -72,3 +114,4 @@
 <?php 
 	} ?>
 	</div>
+

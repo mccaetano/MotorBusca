@@ -15,31 +15,93 @@
 <?php 
 			if ($pesquisa_resultado[$row]->atm_destaque == 1) {
 ?>
-		<div class="row-fluid" style="background-color: #BCDDE6;">
+		<div class="row-fluid" style="background-color: #BCDDE6; border: 1px solid gray;">
+			<div class="span10">
 <?php 
 			} else {	
 ?>
-		<div class="row-fluid">
+		<div class="row-fluid" style="background-color: silver; border: 1px solid gray;">
+			<div class="span10" style="background-color: #E0E0E0; border: 1px solid gray;">
 <?php 
 			}
 ?>
-			<div class="span4">
-				<img alt="<?php echo $row->tft_titulo; ?>" src="<?php echo $row->tft_url; ?>" width="150" height="150">
-			</div>
-			<div class="span8">
-				<div class="row">
-					<div class="span10"><?php echo $row->atm_titulo; ?></div>
+			
+				<div class="row-fluid">
+					<div class="span12">
+						<?php echo $pesquisa_resultado[$row]->atm_titulo; ?>
+					</div>
 				</div>
-				<div class="row">
-					<div class="span10"><?php echo $row->atm_descricao; ?></div>
+				<div class="row-fluid">
+					<div class="span6">						
+						<?php echo $pesquisa_resultado[$row]->cd_descricao; ?>,&nbsp;
+						<?php echo $pesquisa_resultado[$row]->es_descricao; ?>&nbsp;
+						<?php echo $pesquisa_resultado[$row]->ps_descricao; ?>
+					</div>
+					<div class="span6">
+						<?php echo $pesquisa_resultado[$row]->atm_agencia; ?>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span4" style="text-align: center;">
+						<img alt="<?php echo $pesquisa_resultado[$row]->tft_titulo; ?>" src="<?php echo $pesquisa_resultado[$row]->tft_url; ?>" width="150" height="150"><br><br>
+					</div>
+					<div class="span8">
+						<div class="row-fluid">
+							<div class="span12">
+								<?php echo $pesquisa_resultado[$row]->atm_zona_turistica; ?>,&nbsp;	
+								<?php echo $pesquisa_resultado[$row]->atm_descricao_regiao; ?>,&nbsp;
+								<?php echo $pesquisa_resultado[$row]->atm_orientacao; ?>						
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span12">
+								<?php echo $pesquisa_resultado[$row]->atm_descricao; ?>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span12">
+								<?php echo $pesquisa_resultado[$row]->atm_formas_pagamento; ?>
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+			<div class="span2">
+				<br>
+				<div class="row-fluid" style="background-color: gray; color: yellow; text-align: center">
+					<div class="span12">
+						<?php echo $pesquisa_resultado[$row]->atm_preco_moeda; ?>&nbsp;
+						<?php echo $pesquisa_resultado[$row]->atm_preco_periodo; ?>
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						Atualizado em <?php echo $pesquisa_resultado[$row]->atm_data; ?>
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<i class="icon-search"></i>  Ver Fotos.
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<i class="icon-info-sign"></i>  Ver Telefone.
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<div class="btn">Ver Detalhes</div>.
+					</div>
 				</div>
 			</div>
 		</div>
 		</a>
-		<hr>
+		<br>
 <?php 
 		} 
 ?>
+		<hr>
 		<div class="pagination">
 		  <ul>		    
 <?php 
@@ -74,4 +136,5 @@
 <?php 
 	} ?>
 	</div>
+
 
