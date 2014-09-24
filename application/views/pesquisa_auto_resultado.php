@@ -11,44 +11,93 @@
 		for ($row=$rowi;$row < $rowf; $row++) {
 ?>
 		<hr>
-		<a href="<?php echo  base_url() . 'service/urlex/sender/' . base64_encode($pesquisa_resultado[$row]->cft_url); ?>">
+		<a href="<?php echo  base_url() . 'service/urlex/sender/' . base64_encode($pesquisa_resultado[$row]->aa_url); ?>">
 <?php 
-			if ($pesquisa_resultado[$row]->aa_destaque == 1) {
+			if ($pesquisa_resultado[$row]->ac_destaque == 1) {
 ?>
-		<div class="row-fluid" style="background-color: #BCDDE6;">
+		<div class="row-fluid" style="background-color: #BCDDE6; border: 1px solid gray;">
+			<div class="span10">
 <?php 
 			} else {	
 ?>
-		<div class="row-fluid">
+		<div class="row-fluid" style="background-color: silver; border: 1px solid gray;">
+			<div class="span10" style="background-color: #E0E0E0; border: 1px solid gray;">
 <?php 
 			}
 ?>
-			<div class="span4">
-				<img alt="<?php echo $pesquisa_resultado[$row]->cft_titulo; ?>" src="<?php echo $pesquisa_resultado[$row]->cft_url; ?>" width="150" height="150">
+			
+				<div class="row-fluid">
+					<div class="span12">
+						<?php echo $pesquisa_resultado[$row]->aa_title; ?>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span6">						
+						<?php echo $pesquisa_resultado[$row]->cd_descricao; ?>,&nbsp;
+						<?php echo $pesquisa_resultado[$row]->es_descricao; ?>
+					</div>
+					<div class="span6">
+						<?php echo $pesquisa_resultado[$row]->cmr_descricao; ?>,&nbsp;
+						<?php echo $pesquisa_resultado[$row]->cmd_descricao; ?>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span4" style="text-align: center;">
+						<img alt="<?php echo $pesquisa_resultado[$row]->cft_titulo; ?>" src="<?php echo $pesquisa_resultado[$row]->cft_url; ?>" width="150" height="150"><br><br>
+					</div>
+					<div class="span8">
+						<div class="row-fluid">
+							<div class="span12">
+								<?php echo $pesquisa_resultado[$row]->cmr_descricao; ?>&nbsp;
+								<?php echo $pesquisa_resultado[$row]->cmf_descricao; ?>, &nbsp; 
+								Ano <?php echo $pesquisa_resultado[$row]->aa_ano_modelo; ?>,&nbsp;
+								<?php echo $pesquisa_resultado[$row]->ccb_descricao; ?>,&nbsp;
+								<?php echo $pesquisa_resultado[$row]->aa_cor; ?>&nbsp;								
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span12">
+								<?php echo $pesquisa_resultado[$row]->aa_descricao; ?>
+							</div>
+						</div>
+					</div>
+				</div>				
 			</div>
-			<div class="span8">
-				<div class="row">
-					<div class="span8"><?php echo $pesquisa_resultado[$row]->aa_titulo; ?></div>
-					<div class="span2"><?php echo $pesquisa_resultado[$row]->aa_preco; ?></div>
+			<div class="span2">
+				<br>
+				<div class="row-fluid" style="background-color: gray; color: yellow; text-align: center">
+					<div class="span12">
+						<?php echo $pesquisa_resultado[$row]->aa_preco; ?>
+					</div>
 				</div>
-				<div class="row">
-					<div class="span5">Marca: <?php echo $pesquisa_resultado[$row]->cmr_descricao; ?></div>
-					<div class="span5">Modelo: <?php echo $pesquisa_resultado[$row]->cmd_descricao; ?></div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						Atualizado em <?php echo $pesquisa_resultado[$row]->aa_data_inclusao; ?>
+					</div>
 				</div>
-				<div class="row">
-					<div class="span5">Cor: <?php echo $pesquisa_resultado[$row]->aa_cor; ?></div>
-					<div class="span5">Transmissão: <?php echo $pesquisa_resultado[$row]->aa_transmissao; ?></div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<i class="icon-search"></i>  Ver Fotos.
+					</div>
 				</div>
-				<div class="row">
-					<div class="span10"><?php echo $pesquisa_resultado[$row]->cd_descricao . "/" . $pesquisa_resultado[$row]->es_descricao; ?></div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<i class="icon-info-sign"></i>  Ver Telefone.
+					</div>
+				</div>
+				<div class="row-fluid" style="text-align: center; font-size: x-small;">
+					<div class="span12">
+						<div class="btn">Ver Detalhes</div>.
+					</div>
 				</div>
 			</div>
 		</div>
 		</a>
-		<hr>
+		<br>
 <?php 
 		} 
 ?>
+		<hr>
 		<div class="pagination">
 		  <ul>		    
 <?php 
