@@ -99,7 +99,7 @@ class Pesquisa extends CI_Controller {
 		
 		$this->session->set_userdata('post_data', $_POST);
 		
-		#redirect($url, 'location');
+		redirect($url, 'location');
 	}
 	
 	function sch2() {
