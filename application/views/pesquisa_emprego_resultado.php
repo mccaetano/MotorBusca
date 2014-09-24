@@ -42,7 +42,7 @@
 				</div>
 				<div class="row-fluid">
 					<div class="span12">						
-						<?php echo $pesquisa_resultado[$row]->aa_descricao; ?>
+						<?php echo $pesquisa_resultado[$row]->aem_descricao; ?>
 					</div>
 				</div>				
 			</div>

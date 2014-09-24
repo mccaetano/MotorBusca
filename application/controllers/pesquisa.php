@@ -875,6 +875,7 @@ class Pesquisa extends CI_Controller {
 				'iTipoImovel' => $this->input->post('iTipoImovel'),
 				'iPais_descricao' => $iPais_descricao,
 				'iPais' => $this->input->post('iPais'),
+				'lista_pais' => $lista_pais,
 				'lista_estado' => $lista_estado,
 				'iEstado_descricao' => $iEstado_descricao,
 				'iEstado' => $this->input->post('iEstado'),
