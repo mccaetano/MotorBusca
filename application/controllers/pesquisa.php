@@ -197,11 +197,13 @@ class Pesquisa extends CI_Controller {
 		}
 		if ($this->input->post("iEstado")) {
 			$this->load->model('estado');
-			$url = $url . "/" . str_replace(" ", "_", $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao);
+			$estado = $this->estado->BuscaPorId($this->input->post("iEstado"));
+			$url = $url . "/" . str_replace(" ", "_", $estado[0]->es_descricao);
 		}
 		if ($this->input->post("iCidade")) {
 			$this->load->model('cidade');
-			$url = $url . "/" . str_replace(" ", "_", $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao);
+			$cidade =  $this->cidade->BuscaPorId($this->input->post("iCidade"));
+			$url = $url . "/" . str_replace(" ", "_", $cidade[0]->cd_descricao);
 		}
 	
 		$this->session->set_userdata('post_data', $_POST);
