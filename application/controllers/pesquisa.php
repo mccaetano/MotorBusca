@@ -56,7 +56,7 @@ class Pesquisa extends CI_Controller {
 			$url = $url . "/p1";
 		}
 		if ($this->input->post("iPesquisa")) {
-			$url = $url . "/" . $this->input->post("iPesquisa");
+			$url = $url . "/" . str_replace(" ", "_", $this->input->post("iPesquisa"));
 		}
 		if ($this->input->post("iContratoTipo")) {
 			$this->load->model('pesquisa_tipo_casa');
@@ -65,7 +65,8 @@ class Pesquisa extends CI_Controller {
 		}
 		if ($this->input->post("iCasaTipo")) {
 			$this->load->model ( "propriedade_tipo" );
-			$url = $url . "/" . str_replace(" ", "_", $this->propriedade_tipo->BuscaPorId($this->input->post("iCasaTipo"))[0]->pt_descricao);
+			$proptipo = $this->propriedade_tipo->BuscaPorId($this->input->post("iCasaTipo"));
+			$url = $url . "/" . str_replace(" ", "_", $proptipo[0]->pt_descricao);
 		}
 		if ($this->input->post("iEstado")) {
 			$this->load->model('estado');
@@ -93,7 +94,7 @@ class Pesquisa extends CI_Controller {
 					break;
 				}
 			}
-			$url = $url . "/" . $iQuarto_descricao;
+			$url = $url . "/" . str_replace(" ", "_", $iQuarto_descricao);
 		}
 		
 		$this->session->set_userdata('post_data', $_POST);
@@ -111,35 +112,46 @@ class Pesquisa extends CI_Controller {
 			$url = $url . "/p1";
 		}
 		if ($this->input->post("iPesquisa")) {
-			$url = $url . "/" . $this->input->post("iPesquisa");
+			$url = $url . "/" . str_replace(" ", "_", $this->input->post("iPesquisa"));
 		}
 		if ($this->input->post("iCarroTipo")) {
 			$this->load->model('carro_tipo');
-			$url = $url . "/" . str_replace(" ", "_", $this->carro_tipo->BuscaPorId($this->input->post("iCarroTipo"))[0]->tpc_descricao);
+			$carrotipo = $this->carro_tipo->BuscaPorId($this->input->post("iCarroTipo"));
+			$url = $url . "/" . str_replace(" ", "_", $carrotipo[0]->tpc_descricao);
 		}
 		if ($this->input->post("iCarroMarca")) {
 			$this->load->model ( "carro_marca" );
-			$url = $url . "/" . str_replace(" ", "_", $this->carro_marca->BuscaPorId($this->input->post("iCarroMarca"))[0]->cmr_descricao);
+			$carromarca = $this->carro_marca->BuscaPorId($this->input->post("iCarroMarca"));
+			$url = $url . "/" . str_replace(" ", "_", $carromarca[0]->cmr_descricao);
 		}
 		if ($this->input->post("iCarroModelo")) {
 			$this->load->model ( "carro_modelo" );
-			$url = $url . "/" . str_replace(" ", "_", $this->carro_modelo->BuscaPorId($this->input->post("iCarroModelo"))[0]->cmd_descricao);
+			$carromodelo = $this->carro_modelo->BuscaPorId($this->input->post("iCarroModelo"));
+			$url = $url . "/" . str_replace(" ", "_", $carromodelo[0]->cmd_descricao);
 		}
 		if ($this->input->post("iEstado")) {
 			$this->load->model('estado');
-			$url = $url . "/" . str_replace(" ", "_", $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao);
+			$estado = $this->estado->BuscaPorId($this->input->post("iEstado"));
+			$url = $url . "/" . str_replace(" ", "_", $estado[0]->es_descricao);
 		}
 		if ($this->input->post("iCidade")) {
 			$this->load->model('cidade');
-			$url = $url . "/" . str_replace(" ", "_", $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao);
+			$cidade = $this->cidade->BuscaPorId($this->input->post("iCidade"));
+			$url = $url . "/" . str_replace(" ", "_", $cidade[0]->cd_descricao);
 		}
 		if ($this->input->post("iPreco")) {
-			$url = $url . "/" . str_replace(",", "_", $this->input->post("iPreco"));
+			for ($i=0; $i<count($this->preco_auto);$i++) {
+				if ($this->input->post("iPreco") == $this->preco_auto[$i]['prc_id']) {
+					$iPreco_descricao = $this->preco_auto[$i]['prc_descricao'];
+					break;
+				}
+			}
+			$url = $url . "/" . str_replace(" ", "_", $iPreco_descricao);
 		}
 		if ($this->input->post("iNovo")) {
 			for ($i=0; $i<count($this->novo_auto);$i++) {
 				if ($this->input->post("iNovo") == $this->novo_auto[$i]['nv_id']) {
-					$iNovo_descricao = $this->novo_auto[$i]['nv_descricao'];
+					$iNovo_descricao = str_replace(" ", "_", $this->novo_auto[$i]['nv_descricao']);
 					break;
 				}
 			}
@@ -161,23 +173,27 @@ class Pesquisa extends CI_Controller {
 			$url = $url . "/p1";
 		}
 		if ($this->input->post("iPesquisa")) {
-			$url = $url . "/" . $this->input->post("iPesquisa");
+			$url = $url . "/" . str_replace(" ", "_", $this->input->post("iPesquisa"));
 		}
 		if ($this->input->post("iContrato")) {
 			$this->load->model('emprego_contrato');
-			$url = $url . "/" . str_replace(" ", "_", $this->emprego_contrato->BuscaPorId($this->input->post("iContrato"))[0]->emc_descricao);
+			$empregocontrato = $this->emprego_contrato->BuscaPorId($this->input->post("iContrato"));
+			$url = $url . "/" . str_replace(" ", "_", $empregocontrato[0]->emc_descricao);
 		}
 		if ($this->input->post("iCategoria")) {
 			$this->load->model ( "emprego_categoria" );
-			$url = $url . "/" . str_replace(" ", "_", $this->emprego_categoria->BuscaPorId($this->input->post("iCategoria"))[0]->ect_descricao);
+			$categoria = $this->emprego_categoria->BuscaPorId($this->input->post("iCategoria"));
+			$url = $url . "/" . str_replace(" ", "_", $categoria[0]->ect_descricao);
 		}
 		if ($this->input->post("iPeriodo")) {
 			$this->load->model ( "emprego_periodo" );
-			$url = $url . "/" . str_replace(" ", "_", $this->emprego_periodo->BuscaPorId($this->input->post("iPeriodo"))[0]->emp_descricao);
+			$periodo = $this->emprego_periodo->BuscaPorId($this->input->post("iPeriodo"));
+			$url = $url . "/" . str_replace(" ", "_", $periodo[0]->emp_descricao);
 		}
 		if ($this->input->post("iPais")) {
 			$this->load->model('pais');
-			$url = $url . "/" . str_replace(" ", "_", $this->pais->BuscaPorId($this->input->post("iPais"))[0]->ps_descricao);
+			$pais = $this->pais->BuscaPorId($this->input->post("iPais"));
+			$url = $url . "/" . str_replace(" ", "_", $pais[0]->ps_descricao);
 		}
 		if ($this->input->post("iEstado")) {
 			$this->load->model('estado');
@@ -205,27 +221,32 @@ class Pesquisa extends CI_Controller {
 			$url = $url . "/p1";
 		}
 		if ($this->input->post("iPesquisa")) {
-			$url = $url . "/" . $this->input->post("iPesquisa");
+			$url = $url . "/" . str_replace(" ", "_", $this->input->post("iPesquisa"));
 		}
 		if ($this->input->post("iCategoria")) {
 			$this->load->model ( "produto_categoria" );
-			$url = $url . "/" . str_replace(" ", "_", $this->produto_categoria->BuscaPorId($this->input->post("iCategoria"))[0]->prc_descricao);
+			$categoria = $this->produto_categoria->BuscaPorId($this->input->post("iCategoria"));
+			$url = $url . "/" . str_replace(" ", "_", $categoria[0]->prc_descricao);
 		}
 		if ($this->input->post("iMarca")) {
 			$this->load->model ( "produto_marca" );
-			$url = $url . "/" . str_replace(" ", "_", $this->produto_marca->BuscaPorId($this->input->post("iMarca"))[0]->pmr_descricao);
+			$produtomarca = $this->produto_marca->BuscaPorId($this->input->post("iMarca"));
+			$url = $url . "/" . str_replace(" ", "_", $produtomarca[0]->pmr_descricao);
 		}
 		if ($this->input->post("iModelo")) {
 			$this->load->model ( "produto_modelo" );
-			$url = $url . "/" . str_replace(" ", "_", $this->produto_modelo->BuscaPorId($this->input->post("iModelo"))[0]->pmd_descricao);
+			$produtomodelo = $this->produto_modelo->BuscaPorId($this->input->post("iModelo"));
+			$url = $url . "/" . str_replace(" ", "_", $produtomodelo[0]->pmd_descricao);
 		}
 		if ($this->input->post("iEstado")) {
 			$this->load->model('estado');
-			$url = $url . "/" . str_replace(" ", "_", $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao);
+			$estado = $this->estado->BuscaPorId($this->input->post("iEstado"));
+			$url = $url . "/" . str_replace(" ", "_", $estado[0]->es_descricao);
 		}
 		if ($this->input->post("iCidade")) {
 			$this->load->model('cidade');
-			$url = $url . "/" . str_replace(" ", "_", $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao);
+			$cidade = $this->cidade->BuscaPorId($this->input->post("iCidade"));
+			$url = $url . "/" . str_replace(" ", "_", $cidade[0]->cd_descricao);
 		}
 	
 		$this->session->set_userdata('post_data', $_POST);
@@ -243,23 +264,27 @@ class Pesquisa extends CI_Controller {
 			$url = $url . "/p1";
 		}
 		if ($this->input->post("iPesquisa")) {
-			$url = $url . "/" . $this->input->post("iPesquisa");
+			$url = $url . "/" . str_replace(" ", "_", $this->input->post("iPesquisa"));
 		}
 		if ($this->input->post("iTipoImovel")) {
 			$this->load->model ( "tipo_imovel" );
-			$url = $url . "/" . str_replace(" ", "_", $this->tipo_imovel->BuscaPorId($this->input->post("iTipoImovel"))[0]->tpi_descricao);
+			$tipoimovel = $this->tipo_imovel->BuscaPorId($this->input->post("iTipoImovel"));
+			$url = $url . "/" . str_replace(" ", "_", $tipoimovel[0]->tpi_descricao);
 		}
 		if ($this->input->post("iPais")) {
 			$this->load->model('pais');
-			$url = $url . "/" . str_replace(" ", "_", $this->pais->BuscaPorId($this->input->post("iPais"))[0]->ps_descricao);
+			$pais = $this->pais->BuscaPorId($this->input->post("iPais"));
+			$url = $url . "/" . str_replace(" ", "_", $pais[0]->ps_descricao);
 		}
 		if ($this->input->post("iEstado")) {
 			$this->load->model('estado');
-			$url = $url . "/" . str_replace(" ", "_", $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao);
+			$estado = $this->estado->BuscaPorId($this->input->post("iEstado"));
+			$url = $url . "/" . str_replace(" ", "_", $estado[0]->es_descricao);
 		}
 		if ($this->input->post("iCidade")) {
 			$this->load->model('cidade');
-			$url = $url . "/" . str_replace(" ", "_", $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao);
+			$cidade = $this->cidade->BuscaPorId($this->input->post("iCidade"));
+			$url = $url . "/" . str_replace(" ", "_", $cidade[0]->cd_descricao);
 		}
 	
 		$this->session->set_userdata('post_data', $_POST);
