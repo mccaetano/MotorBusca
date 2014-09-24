@@ -69,13 +69,21 @@ class Pesquisa extends CI_Controller {
 		}
 		if ($this->input->post("iEstado")) {
 			$this->load->model('estado');
-			$url = $url . "/" . str_replace(" ", "_", $this->estado->BuscaPorId($this->input->post("iEstado"))[0]->es_descricao);
+			$estado = $this->estado->BuscaPorId($this->input->post("iEstado"));
+			$url = $url . "/" . str_replace(" ", "_", $estado[0]->es_descricao);
 		}
 		if ($this->input->post("iCidade")) {
 			$this->load->model('cidade');
-			$url = $url . "/" . str_replace(" ", "_", $this->cidade->BuscaPorId($this->input->post("iCidade"))[0]->cd_descricao);
+			$cidade = $this->estado->BuscaPorId($this->input->post("iCidade"));
+			$url = $url . "/" . str_replace(" ", "_", $cidade[0]->cd_descricao);
 		}
 		if ($this->input->post("iPreco")) {
+			for ($i=0; $i<count($this->preco_imovel);$i++) {
+				if ($this->input->post("iPreco") == $this->preco_imovel[$i]['prc_id']) {
+					$iQuarto_descricao = $this->preco_imovel[$i]['prc_descricao'];
+					break;
+				}
+			}
 			$url = $url . "/" . str_replace(",", "_", $this->input->post("iPreco"));
 		}
 		if ($this->input->post("iQuarto")) {
@@ -90,7 +98,7 @@ class Pesquisa extends CI_Controller {
 		
 		$this->session->set_userdata('post_data', $_POST);
 		
-		redirect($url, 'location');
+		#redirect($url, 'location');
 	}
 	
 	function sch2() {
