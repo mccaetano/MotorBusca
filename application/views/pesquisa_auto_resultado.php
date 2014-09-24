@@ -13,7 +13,7 @@
 		<hr>
 		<a href="<?php echo  base_url() . 'service/urlex/sender/' . base64_encode($pesquisa_resultado[$row]->aa_url); ?>">
 <?php 
-			if ($pesquisa_resultado[$row]->ac_destaque == 1) {
+			if ($pesquisa_resultado[$row]->aa_destaque == 1) {
 ?>
 		<div class="row-fluid" style="background-color: #BCDDE6; border: 1px solid gray;">
 			<div class="span10">
@@ -28,7 +28,7 @@
 			
 				<div class="row-fluid">
 					<div class="span12">
-						<?php echo $pesquisa_resultado[$row]->aa_title; ?>
+						<?php echo $pesquisa_resultado[$row]->aa_titulo; ?>
 					</div>
 				</div>
 				<div class="row-fluid">
@@ -49,7 +49,7 @@
 						<div class="row-fluid">
 							<div class="span12">
 								<?php echo $pesquisa_resultado[$row]->cmr_descricao; ?>&nbsp;
-								<?php echo $pesquisa_resultado[$row]->cmf_descricao; ?>, &nbsp; 
+								<?php echo $pesquisa_resultado[$row]->cmd_descricao; ?>, &nbsp; 
 								Ano <?php echo $pesquisa_resultado[$row]->aa_ano_modelo; ?>,&nbsp;
 								<?php echo $pesquisa_resultado[$row]->ccb_descricao; ?>,&nbsp;
 								<?php echo $pesquisa_resultado[$row]->aa_cor; ?>&nbsp;								
@@ -72,7 +72,7 @@
 				</div>
 				<div class="row-fluid" style="text-align: center; font-size: x-small;">
 					<div class="span12">
-						Atualizado em <?php echo $pesquisa_resultado[$row]->aa_data_inclusao; ?>
+						Atualizado em <?php echo $pesquisa_resultado[$row]->aa_data_criacao; ?>
 					</div>
 				</div>
 				<div class="row-fluid" style="text-align: center; font-size: x-small;">
